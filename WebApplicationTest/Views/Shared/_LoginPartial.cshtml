@@ -1,6 +1,14 @@
-﻿@using Microsoft.AspNetCore.Identity
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+﻿@using WebApplicationTest.Helpers.Enums;
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+@{
+    string userID = UserManager.GetUserId(@User);
+    AppUser currentUser = UserManager.FindByIdAsync(userID).Result;
+    int userIntID = Convert.ToInt32(userID);
+
+}
 
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))
