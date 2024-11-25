@@ -14,16 +14,16 @@ namespace WebApplicationTest.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly UserService _userService;
         //private readonly ShoppingCartService _shoppingCartService;
-        //private readonly IBlobService _blobService;
+        private readonly IBlobService _blobService;
         private readonly AppUser _currentUser;
 
         public AppUserController(SignInManager<AppUser> signInManager,
-            UserManager<AppUser> userManger, UserService userService /*ShoppingCartService shoppingCartService,  IBlobService blobService */)
+            UserManager<AppUser> userManger, UserService userService /*ShoppingCartService shoppingCartService */,  IBlobService blobService )
         {
             _userManager = userManger;
             _userService = userService;
             //_shoppingCartService = shoppingCartService;
-            //_blobService = blobService;
+            _blobService = blobService;
             _signInManager = signInManager;
             _currentUser = userService.GetCurrentUser();
 
@@ -129,9 +129,9 @@ namespace WebApplicationTest.Controllers
             var files = HttpContext.Request.Form.Files;
             if (files.Count > 0)
             {
-                //bool uploadedBlob = await _blobService.UploadBlob(files[0].FileName, files[0], new Blob());
-                //updatedUser.ProfilePicture = _blobService.GetBlob(files[0].FileName);
-                //_userService.HandleUserProfilePicture(files);
+                bool uploadedBlob = await _blobService.UploadBlob(files[0].FileName, files[0], new Blob());
+                updatedUser.ProfilePicture = _blobService.GetBlob(files[0].FileName);
+                _userService.HandleUserProfilePicture(files);
             }
             else
             {

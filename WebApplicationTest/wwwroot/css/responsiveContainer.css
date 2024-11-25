@@ -1,0 +1,244 @@
+﻿.responsive-container {
+    max-width: 1536px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+@media (max-width: 5040px) {
+    .responsive-container {
+        max-width: 3000px;
+    }
+
+    .products-display-grid {
+        grid-template-columns: 400px 400px 400px 400px 400px 400px;
+    }
+}
+@media (max-width: 3840px) {
+    .responsive-container {
+        max-width: 2200px;
+    }
+
+    .products-display-grid {
+        grid-template-columns: 400px 400px 400px 400px 400px;
+    }
+}
+@media (max-width: 2560px) {
+    .responsive-container {
+        max-width: 1800px;
+    }
+
+    .products-display-grid {
+        grid-template-columns: 400px 400px 400px 400px;
+    }
+
+    
+}
+
+@media (max-width: 2160px) {
+    .responsive-container {
+        max-width: 1536px;
+    }
+
+    .products-display-grid {
+        grid-template-columns: 400px 400px 400px
+    }
+
+    .banner-container .img{
+
+    }
+
+}
+
+/* 2xl */
+@media (max-width: 1750px) {
+    .responsive-container {
+        max-width: 1280px;
+    }
+
+    .products-display-grid{
+        grid-template-columns: 400px 400px;
+    }
+
+    .products-index-grid{
+        grid-template-columns: 400px 400px;
+    }
+
+    .banner{
+        width: 850px;
+    }
+}
+@media(max-width: 1440px){
+    .products-display-grid {
+        grid-template-columns: 400px;
+    }
+}
+@media (max-width: 1100px) {
+    .responsive-container {
+        max-width: 700px;
+    }
+
+    .products-index-grid {
+        grid-template-columns: 300px 300px;
+    }
+
+    .banner {
+        width: 650px;
+    }
+
+    .product-card img {
+        width: 100%;
+        height: 300px;
+    }
+
+    .product-card .product-name{
+        font-size: 20px;
+    }
+
+    .product-card .product-category{
+        font-size: 16px;
+    }
+
+    .product-card .product-price {
+        font-size: 25px;
+    }
+
+    .product-card .product-add-to-cart-button, .details-button {
+        font-size: 16px;
+        padding: 10px 15px;
+    }
+}
+
+@media (max-width: 950px) {
+  
+    .products-index-grid {
+        grid-template-columns: 500px;
+    }
+
+    .banner {
+        width: 500px;
+        height: 230px;
+    }
+
+    .product-card img {
+        width: 100%;
+        height: 500px;
+    }
+
+    .product-card .product-name {
+        font-size: 28px;
+    }
+
+    .product-card .product-category, .product-rating {
+        font-size: 22px;
+    }
+
+    .product-card .product-price {
+        font-size: 32px;
+    }
+
+    .product-card .product-add-to-cart-button, .details-button {
+        font-size: 26px;
+        padding: 10px 25px;
+    }
+}
+
+@media (max-width: 750px) {
+
+    .products-index-grid {
+        grid-template-columns: 400px;
+    }
+
+    .banner {
+        width: 650px;
+    }
+
+    .product-card img {
+        width: 100%;
+        height: 400px;
+    }
+
+    .product-card .product-name {
+        font-size: 20px;
+    }
+
+    .product-card .product-category {
+        font-size: 16px;
+    }
+
+    .product-card .product-price {
+        font-size: 25px;
+    }
+
+    .product-card .product-add-to-cart-button, .details-button {
+        font-size: 16px;
+        padding: 10px 15px;
+    }
+}
+
+@media (max-width: 650px) {
+
+    .products-index-grid {
+        grid-template-columns: 300px;
+    }
+
+    .banner {
+        width: 650px;
+    }
+
+    .product-card img {
+        width: 100%;
+        height: 300px;
+    }
+
+    .product-card .product-name {
+        font-size: 20px;
+    }
+
+    .product-card .product-category {
+        font-size: 16px;
+    }
+
+    .product-card .product-price {
+        font-size: 25px;
+    }
+
+    .product-card .product-add-to-cart-button, .details-button {
+        font-size: 16px;
+        padding: 10px 15px;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .products-index-grid {
+        grid-template-columns: 250px;
+    }
+
+    .banner {
+        width: 650px;
+    }
+
+    .product-card img {
+        width: 100%;
+        height: 250px;
+    }
+
+    .product-card .product-name {
+        font-size: 18px;
+    }
+
+    .product-card .product-category {
+        font-size: 14px;
+    }
+
+    .product-card .product-price {
+        font-size: 23px;
+    }
+
+    .product-card .product-add-to-cart-button, .details-button {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+}

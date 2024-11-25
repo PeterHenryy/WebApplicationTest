@@ -1,7 +1,10 @@
+using Azure.Storage.Blobs;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System.Configuration;
 using WebApplicationTest.Data;
 using WebApplicationTest.Models.Identity;
+using WebApplicationTest.Models.Repositories;
 using WebApplicationTest.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,9 +18,20 @@ builder.Services.AddIdentity<AppUser, AppRole>(options => options.SignIn.Require
                                                     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<UserService>();
+builder.Services.AddTransient<ProductRepository>();
+builder.Services.AddTransient<ProductService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
-
+builder.Services.AddSingleton(u => new BlobServiceClient(
+        builder.Configuration.GetValue<string>("BlobConnection")
+            ));
+builder.Services.AddSingleton<IBlobService, BlobService>();
+builder.Services.AddRazorPages()
+.AddMvcOptions(options =>
+{
+    options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(
+        _ => "");
+});
 
 
 var app = builder.Build();

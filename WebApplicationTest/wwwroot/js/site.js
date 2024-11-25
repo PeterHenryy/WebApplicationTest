@@ -1,4 +1,9 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
-
-// Write your JavaScript code.
+﻿function toggleHeader() {
+    let header = document.querySelector('.header');
+    let printButton = document.querySelector('.print-button');
+    header.style.display = 'none';
+    printButton.style.display = 'none';
+    window.print();
+    header.style.display = 'flex';
+    printButton.style.display = 'inline-block';
+}

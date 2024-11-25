@@ -302,7 +302,7 @@ namespace WebApplicationTest.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("WebApplicationTest.Models.Product", b =>
+            modelBuilder.Entity("WebApplicationTest.Models.Image", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -314,7 +314,64 @@ namespace WebApplicationTest.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("ProductID")
+                        .HasColumnType("int");
+
                     b.HasKey("ID");
+
+                    b.ToTable("Images");
+                });
+
+            modelBuilder.Entity("WebApplicationTest.Models.Product", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("bit");
+
+                    b.Property<double>("AverageRating")
+                        .HasColumnType("float");
+
+                    b.Property<int?>("CategoryID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CompanyID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<string>("ReleaseDate")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Stock")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UserID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("CategoryID");
+
+                    b.HasIndex("CompanyID");
 
                     b.ToTable("Products");
                 });
@@ -368,6 +425,21 @@ namespace WebApplicationTest.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApplicationTest.Models.Product", b =>
+                {
+                    b.HasOne("WebApplicationTest.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryID");
+
+                    b.HasOne("WebApplicationTest.Models.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyID");
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Company");
                 });
 #pragma warning restore 612, 618
         }

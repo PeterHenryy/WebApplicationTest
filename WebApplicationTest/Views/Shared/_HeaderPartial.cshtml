@@ -1,0 +1,106 @@
+﻿@using WebApplicationTest.Helpers.Enums;
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<AppUser> SignInManager
+@inject UserManager<AppUser> UserManager
+
+@{
+    string userID = UserManager.GetUserId(@User);
+    AppUser currentUser = UserManager.FindByIdAsync(userID).Result;
+    int userIntID = Convert.ToInt32(userID);
+
+}
+
+<link rel="stylesheet" href="~/css/header.css" />
+<link href="~/css/productdetails.css" rel="stylesheet" />
+
+<div class="header-items-container">
+    <a href="@Url.Action("Index", "Product")">
+        <img class="shop-logo" src="~/Img/flamingshop.png" />
+    </a>
+    <ul class="header-items-list">
+        <li class="header-item"> <a href="@Url.Action("Index", "Product")">Home</a></li>
+        <li class="header-item"><a href="@Url.Action("ProductsDisplay", "Product")">Products</a></li>
+        <li class="header-item"><a href="@Url.Action("About", "AppUser")">About</a></li>
+        <li class="header-item"><a href="@Url.Action("Contact", "AppUser")">Contact</a></li>
+    </ul>
+    <div class="user-options">
+        @if (User.IsInRole(UserRolesEnum.Admin.ToString()))
+        {
+            <div class="options-menu-dropdown">
+                <p class="options-menu-trigger">Admin Menu</p>
+                <ul class="options-menu">
+                    <li>
+                        <a href="@Url.Action("CompanyRefunds", "Refund", new {companyID = currentUser.CompanyID})">Refund Requests</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("CompanyCoupons", "Coupon", new {companyID = currentUser.CompanyID})">Manage Coupons</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("CompanyProducts", "Product", new {companyID = currentUser.CompanyID})">Company Products</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("CompanyStats", "Company")">Company Stats</a>
+                    </li>
+                </ul>
+            </div>
+        }
+        @if (SignInManager.IsSignedIn(User))
+        {
+
+           @*  @await Component.InvokeAsync("ShoppingCartItems") *@
+            <div class="options-menu-dropdown">
+                <div class="user-profile-and-name">
+                    <img class="user-profile-picture" src="@currentUser.ProfilePicture">
+                    <p>@User.Identity.Name</p>
+                </div>
+                <ul class="options-menu">
+                    <li>
+                        <a href="@Url.Action("Update", "AppUser")">Update Profile</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("UserCards", "CreditCard", new {userID = userIntID})">Credit Cards</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("UserRefunds", "Refund", new {userID = userIntID})">Refunds</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("UserReviews", "Review", new {userID = userIntID})">Your Reviews</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("UserTransactions", "Transaction", new {userID = userIntID})">Activity</a>
+                    </li>
+                    <li>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="reward-points-container">
+                <div class="reward-points-inner-container">
+                    <i class="fa-solid fa-bag-shopping fa-xl" style="color: #db7093;"></i>
+                    <span style="color: #db7093;">@Math.Round(currentUser.UserRewardPoints, 2)</span>
+                </div>
+                <div class="reward-points-exaplanation">
+                    <p class="reward-points">These are your reward points, you gain points each time you purchase products with money!</p>
+                </div>
+            </div>
+
+            <form class="form-inline" asp-controller="AppUser" asp-action="Logout">
+                <button class="logout-button" type="submit">Logout</button>
+            </form>
+        }
+        else
+        {
+            <ul class="header-items-list">
+                <li class="header-item">
+                    <a asp-controller="AppUser" asp-action="Register">Register</a>
+                </li>
+                <li class="header-item">
+                    <a asp-controller="AppUser" asp-action="Login">Login</a>
+                </li>
+            </ul>
+        }
+    </div>
+</div>
+<script src="https://kit.fontawesome.com/8da1ba04bb.js" crossorigin="anonymous"></script>
+
+

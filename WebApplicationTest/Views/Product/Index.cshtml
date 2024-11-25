@@ -1,0 +1,326 @@
+﻿@{
+    Layout = null;
+}
+
+@model ProductIndexViewModel
+
+<link rel="stylesheet" href="~/css/productsIndex.css" />
+<link rel="stylesheet" href="~/css/general.css" />
+<link rel="stylesheet" href="~/css/responsiveContainer.css" />
+<link rel="stylesheet" href="~/css/header.css" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+<link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+<body style="background-color: rgb(220,220,220)">
+
+    <header class="header">
+        <partial name="_HeaderPartial" />
+    </header>
+    <main>
+        <section>
+            <div class="popular-announcement">
+                <i class="fa-solid fa-star fa-xl" style="color: #70832a;"></i>
+                <h1 class="product-h1">MOST POPULAR PRODUCTS</h1>
+                <i class="fa-solid fa-star fa-xl" style="color: #70832a;"></i>
+            </div>
+            <div class="responsive-container">
+                <div class="products-index-grid">
+                    @{
+                        var popularProducts = Model.GetMostPopularProducts();
+                    }
+                    @foreach (var product in popularProducts)
+                    {
+                        <div class="product-card">
+                            <a style="text-decoration: none" class="details-link" href="@Url.Action("Details", "Product", new {productID = product.ID})">
+                                <div class="image-card">
+                                    <img src="@product.Image">
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-name-container">
+                                        <h3 class="product-name">@product.Name</h3>
+                                    </div>
+                                    <div class="product-rating">
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            if (i <= product.AverageRating)
+                                            {
+                                                <i class="fa-solid fa-star fa-sm" style="color: #29db47;"></i>
+                                            }
+                                            else if (product.AverageRating >= (i - 1) + 0.5 && product.AverageRating < i)
+                                            {
+                                                <i class="fa-solid fa-star-half-stroke fa-sm" style="color: #29db47;"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="fa-regular fa-star fa-sm"></i>
+                                            }
+                                        }
+                                    </div>
+                                    <h5 class="product-category">@product.Category.Name</h5>
+                                    <h3 class="product-price">$@product.Price</h3>
+                                </div>
+                            </a>
+                            <div class="product-buttons-flexbox">
+                                @if (Model.User != null)
+                                {
+                                    <select class="product-add-to-cart-button" id="product-add-to-cart-button-@product.ID" onchange="addItemToCart(@product.ID, this.value,'@product.Name', true); updateCartItemQuantity(this.value); resetDropdown(this);">
+                                        <option style="display: none" selected>Add to Cart</option>
+                                        @for (int i = 1; i <= 10; i++)
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
+                                    </select>
+                                }
+                                else
+                                {
+                                    <select class="product-add-to-cart-button" id="product-add-to-cart-button-@product.ID" onchange="redirectToLogin('@Url.Action("Login", "AppUser")', @product.ID, this.value)">
+                                        <option style="display: none" selected>Add to Cart</option>
+                                        @for (int i = 1; i <= 10; i++)
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
+                                    </select>
+                                }
+                                <a style="text-decoration: none" href="@Url.Action("Details", "Product", new {productID = @product.ID})" class="details-button">Details</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="banner-container">
+                <div class="responsive-container">
+                    <a href="@Url.Action("CategoryFilter", "Product", new{categoryID = 3})">
+                        <img class="banner" src="~/Img/phones.png" />
+                    </a>
+                </div>
+            </div>
+
+            <div class="responsive-container">
+                <div class="products-index-grid">
+                    @{
+                        popularProducts = Model.GetMostPopularProducts(3);
+                    }
+                    @foreach (var product in popularProducts)
+                    {
+                        <div class="product-card">
+                            <a style="text-decoration: none" class="details-link" href="@Url.Action("Details", "Product", new {productID = product.ID})">
+                                <div class="image-card">
+                                    <img src="@product.Image">
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-name-container">
+                                        <h3 class="product-name">@product.Name</h3>
+                                    </div>
+                                    <div class="product-rating">
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            if (i <= product.AverageRating)
+                                            {
+                                                <i class="fa-solid fa-star fa-sm" style="color: #29db47;"></i>
+                                            }
+                                            else if (product.AverageRating >= (i - 1) + 0.5 && product.AverageRating < i)
+                                            {
+                                                <i class="fa-solid fa-star-half-stroke fa-sm" style="color: #29db47;"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="fa-regular fa-star fa-sm"></i>
+                                            }
+                                        }
+                                    </div>
+                                    <h5 class="product-category">@product.Category.Name</h5>
+                                    <h3 class="product-price">$@product.Price</h3>
+                                </div>
+                            </a>
+                            <div class="product-buttons-flexbox">
+                                @if (Model.User != null)
+                                {
+                                    <select class="product-add-to-cart-button" id="product-add-to-cart-button-@product.ID" onchange="addItemToCart(@product.ID, this.value,'@product.Name', true); updateCartItemQuantity(this.value); resetDropdown(this);">
+                                        <option style="display: none" selected>Add to Cart</option>
+                                        @for (int i = 1; i <= 10; i++)
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
+                                    </select>
+                                }
+                                else
+                                {
+                                    <select class="product-add-to-cart-button" id="product-add-to-cart-button-@product.ID" onchange="redirectToLogin('@Url.Action("Login", "AppUser")', @product.ID, this.value)">
+                                        <option style="display: none" selected>Add to Cart</option>
+                                        @for (int i = 1; i <= 10; i++)
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
+                                    </select>
+                                }
+                                <a style="text-decoration: none" href="@Url.Action("Details", "Product", new {productID = @product.ID})" class="details-button">Details</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+        </section>
+        <section>
+            <div class="banner-container">
+                <div class="responsive-container">
+                    <a href="@Url.Action("CategoryFilter", "Product", new{categoryID = 2})">
+                        <img class="banner" src="~/Img/leatherjackets.png" />
+                    </a>
+                </div>
+            </div>
+
+            <div class="responsive-container">
+                <div class="products-index-grid">
+                    @{
+                        popularProducts = Model.GetMostPopularProducts(2);
+                    }
+                    @foreach (var product in popularProducts)
+                    {
+                        <div class="product-card">
+                            <a style="text-decoration: none" class="details-link" href="@Url.Action("Details", "Product", new {productID = product.ID})">
+                                <div class="image-card">
+                                    <img src="@product.Image">
+                                </div>
+                                <div class="product-info">
+                                    <div class="product-name-container">
+                                        <h3 class="product-name">@product.Name</h3>
+                                    </div>
+                                    <div class="product-rating">
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            if (i <= product.AverageRating)
+                                            {
+                                                <i class="fa-solid fa-star fa-sm" style="color: #29db47;"></i>
+                                            }
+                                            else if (product.AverageRating >= (i - 1) + 0.5 && product.AverageRating < i)
+                                            {
+                                                <i class="fa-solid fa-star-half-stroke fa-sm" style="color: #29db47;"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="fa-regular fa-star fa-sm"></i>
+                                            }
+                                        }
+                                    </div>
+                                    <h5 class="product-category">@product.Category.Name</h5>
+                                    <h3 class="product-price">$@product.Price</h3>
+                                </div>
+                            </a>
+                            <div class="product-buttons-flexbox">
+                                @if (Model.User != null)
+                                {
+                                    <select class="product-add-to-cart-button" id="product-add-to-cart-button-@product.ID" onchange="addItemToCart(@product.ID, this.value,'@product.Name', true); updateCartItemQuantity(this.value); resetDropdown(this);">
+                                        <option style="display: none" selected>Add to Cart</option>
+                                        @for (int i = 1; i <= 10; i++)
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
+                                    </select>
+                                }
+                                else
+                                {
+                                    <select class="product-add-to-cart-button" id="product-add-to-cart-button-@product.ID" onchange="redirectToLogin('@Url.Action("Login", "AppUser")', @product.ID, this.value)">
+                                        <option style="display: none" selected>Add to Cart</option>
+                                        @for (int i = 1; i <= 10; i++)
+                                        {
+                                            <option value="@i">@i</option>
+                                        }
+                                    </select>
+                                }
+                                <a style="text-decoration: none" href="@Url.Action("Details", "Product", new {productID = @product.ID})" class="details-button">Details</a>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </section>
+        <section>
+            <section>
+                <div class="banner-container">
+                    <div class="responsive-container">
+                        <a href="@Url.Action("CategoryFilter", "Product", new{categoryID = 1})">
+                            <img src="~/Img/gymbanner.jpg">
+                        </a>
+                    </div>
+                </div>
+                <div class="popular-announcement">
+                    <h1 class="product-h1">Popular Gym Equipment</h1>
+                </div>
+                <div class="responsive-container">
+                    <div class="products-index-grid">
+                        @{
+                            popularProducts = Model.GetMostPopularProducts(1);
+                        }
+                        @foreach (var product in popularProducts)
+                        {
+                            <div class="product-card">
+                                <a style="text-decoration: none" class="details-link" href="@Url.Action("Details", "Product", new {productID = product.ID})">
+                                    <div class="image-card">
+                                        <img src="@product.Image">
+                                    </div>
+                                    <div class="product-info">
+                                        <div class="product-name-container">
+                                            <h3 class="product-name">@product.Name</h3>
+                                        </div>
+                                        <div class="product-rating">
+                                            @for (int i = 1; i <= 5; i++)
+                                            {
+                                                if (i <= product.AverageRating)
+                                                {
+                                                    <i class="fa-solid fa-star fa-sm" style="color: #29db47;"></i>
+                                                }
+                                                else if (product.AverageRating >= (i - 1) + 0.5 && product.AverageRating < i)
+                                                {
+                                                    <i class="fa-solid fa-star-half-stroke fa-sm" style="color: #29db47;"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="fa-regular fa-star fa-sm"></i>
+                                                }
+                                            }
+                                        </div>
+                                        <h5 class="product-category">@product.Category.Name</h5>
+                                        <h3 class="product-price">$@product.Price</h3>
+                                    </div>
+                                </a>
+                                <div class="product-buttons-flexbox">
+                                    @if (Model.User != null)
+                                    {
+                                        <select class="product-add-to-cart-button" id="product-add-to-cart-button-@product.ID" onchange="addItemToCart(@product.ID, this.value,'@product.Name', true); updateCartItemQuantity(this.value); resetDropdown(this);">
+                                            <option style="display: none" selected>Add to Cart</option>
+                                            @for (int i = 1; i <= 10; i++)
+                                            {
+                                                <option value="@i">@i</option>
+                                            }
+                                        </select>
+                                    }
+                                    else
+                                    {
+                                        <select class="product-add-to-cart-button" id="product-add-to-cart-button-@product.ID" onchange="redirectToLogin('@Url.Action("Login", "AppUser")', @product.ID, this.value)">
+                                            <option style="display: none" selected>Add to Cart</option>
+                                            @for (int i = 1; i <= 10; i++)
+                                            {
+                                                <option value="@i">@i</option>
+                                            }
+                                        </select>
+                                    }
+                                    <a style="text-decoration: none" href="@Url.Action("Details", "Product", new {productID = @product.ID})" class="details-button">Details</a>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </section>
+        </section>
+    </main>
+
+    <script src="https://kit.fontawesome.com/8da1ba04bb.js" crossorigin="anonymous"></script>
+    <script src="~/js/shoppingCart.js"></script>
+
+</body>
