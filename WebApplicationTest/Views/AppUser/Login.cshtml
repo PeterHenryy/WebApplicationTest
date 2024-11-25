@@ -1,0 +1,22 @@
+﻿@{
+    Layout = null;
+}
+@model AppLogin
+
+<link rel="stylesheet" href="~/css/loginForm.css" />
+<link rel="stylesheet" href="~/css/general.css" />
+
+<div class="login-form-container">
+    <h1>Welcome!</h1>
+    <form asp-controller="AppUser" asp-action="Login">
+      <input type="hidden" name="returnUrl" value="@ViewData["returnUrl"]" />
+      <input type="hidden" name="cartItemQuantity" value="@ViewData["cartItemQuantity"]" />
+      <input type="hidden" name="cartItemProductID" value="@ViewData["cartItemProductID"]" />
+      <input type="text"  placeholder="Username" asp-for="Username" required>
+
+      <input type="password"  placeholder="Password" asp-for="Password" required>
+      <div asp-validation-summary="All"  class="error-login"></div>
+      <button type="submit" >Login</button>
+      <input type="button" class="register-button" value="Register" onclick="@("window.location.href='" + @Url.Action("Register", "AppUser") + "'");" />
+    </form>
+</div>
