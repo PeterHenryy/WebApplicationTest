@@ -90,11 +90,11 @@ namespace WebApplicationTest.Models.Repositories
             return company;
         }
 
-        //public IEnumerable<Review> GetReviews()
-        //{
-        //    var reviews = _context.Reviews.Include(x => x.User);
-        //    return reviews;
-        //}
+        public IEnumerable<Review> GetReviews()
+        {
+            var reviews = _context.Reviews.Include(x => x.User);
+            return reviews;
+        }
 
         //public IEnumerable<Transaction> GetTransactions()
         //{
@@ -102,23 +102,23 @@ namespace WebApplicationTest.Models.Repositories
         //    return transactions;
         //}
 
-        //public IEnumerable<Comment> GetAllComments()
-        //{
-        //    var comments = _context.Comments.Include(x => x.User).ToList();
-        //    return comments;
-        //}
+        public IEnumerable<Comment> GetAllComments()
+        {
+            var comments = _context.Comments.Include(x => x.User).ToList();
+            return comments;
+        }
 
-        //public IEnumerable<Like> GetLikes()
-        //{
-        //    var likes = _context.Likes.ToList();
-        //    return likes;
-        //}
+        public IEnumerable<Like> GetLikes()
+        {
+            var likes = _context.Likes.ToList();
+            return likes;
+        }
 
-        //public IEnumerable<Dislike> GetDislikes()
-        //{
-        //    var dislikes = _context.Dislikes.ToList();
-        //    return dislikes;
-        //}
+        public IEnumerable<Dislike> GetDislikes()
+        {
+            var dislikes = _context.Dislikes.ToList();
+            return dislikes;
+        }
 
         public bool UpdateCompanyProductStock(Company company)
         {

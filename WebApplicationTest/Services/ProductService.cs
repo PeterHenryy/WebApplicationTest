@@ -56,17 +56,17 @@ namespace WebApplicationTest.Services
             return companies;
         }
 
-        //public IEnumerable<Review> GetReviewsOfSpecificProduct(int productID)
-        //{
-        //    var productReviews = _productRepos.GetReviews().Where(x => x.ProductID == productID).OrderByDescending(x => x.Date);
-        //    return productReviews;
-        //}
+        public IEnumerable<Review> GetReviewsOfSpecificProduct(int productID)
+        {
+            var productReviews = _productRepos.GetReviews().Where(x => x.ProductID == productID).OrderByDescending(x => x.Date);
+            return productReviews;
+        }
 
-        //public IEnumerable<Review> GetReviews()
-        //{
-        //    var reviews = _productRepos.GetReviews();
-        //    return reviews;
-        //}
+        public IEnumerable<Review> GetReviews()
+        {
+            var reviews = _productRepos.GetReviews();
+            return reviews;
+        }
 
         //public bool HasUserBoughtProduct(int productID, int userID)
         //{
@@ -75,44 +75,44 @@ namespace WebApplicationTest.Services
         //    return hasBought;
         //}
 
-        //public IEnumerable<Comment> GetAllComments()
-        //{
-        //    var comments = _productRepos.GetAllComments();
-        //    return comments;
-        //}
+        public IEnumerable<Comment> GetAllComments()
+        {
+            var comments = _productRepos.GetAllComments();
+            return comments;
+        }
 
-        //public IEnumerable<Like> GetLikes()
-        //{
-        //    var likes = _productRepos.GetLikes();
-        //    return likes;
-        //}
+        public IEnumerable<Like> GetLikes()
+        {
+            var likes = _productRepos.GetLikes();
+            return likes;
+        }
 
-        //public IEnumerable<Dislike> GetDislikes()
-        //{
-        //    var dislikes = _productRepos.GetDislikes();
-        //    return dislikes;
-        //}
+        public IEnumerable<Dislike> GetDislikes()
+        {
+            var dislikes = _productRepos.GetDislikes();
+            return dislikes;
+        }
 
-        //public bool HasUserReviewedProduct(int productID, int userID)
-        //{
-        //    var userReview = GetReviewsOfSpecificProduct(productID).Where(x => x.UserID == userID);
-        //    return userReview.Any();
-        //}
+        public bool HasUserReviewedProduct(int productID, int userID)
+        {
+            var userReview = GetReviewsOfSpecificProduct(productID).Where(x => x.UserID == userID);
+            return userReview.Any();
+        }
 
-        //public double CalculateProductAverageRating(int productID)
-        //{
-        //    var productReviews = GetReviewsOfSpecificProduct(productID);
-        //    if (productReviews.Any())
-        //    {
-        //        double rating = productReviews.Sum(x => x.Rating) / (double)productReviews.Count();
-        //        double roundedRating = Math.Round(rating, 1);
-        //        return roundedRating;
-        //    }
-        //    else
-        //    {
-        //        return 0;
-        //    }
-        //}
+        public double CalculateProductAverageRating(int productID)
+        {
+            var productReviews = GetReviewsOfSpecificProduct(productID);
+            if (productReviews.Any())
+            {
+                double rating = productReviews.Sum(x => x.Rating) / (double)productReviews.Count();
+                double roundedRating = Math.Round(rating, 1);
+                return roundedRating;
+            }
+            else
+            {
+                return 0;
+            }
+        }
 
         public IEnumerable<Product> GetCompanyProducts(int companyID)
         {

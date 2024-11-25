@@ -114,27 +114,27 @@ namespace WebApplicationTest.Controllers
             return View(productVM.Product);
         }
 
-        //public IActionResult Details(int productID)
-        //{
-        //    Product product = _productService.GetProductByID(productID);
-        //    product.AverageRating = _productService.CalculateProductAverageRating(productID);
-        //    var detailsViewModel = new ProductDetailsViewModel();
-        //    if (_user != null)
-        //    {
-        //        detailsViewModel.HasUserBoughtProduct = _productService.HasUserBoughtProduct(productID, _user.Id);
-        //        detailsViewModel.CurrentUser = _user;
-        //        detailsViewModel.HasUserReviewedProduct = _productService.HasUserReviewedProduct(productID, _user.Id);
-        //    }
-        //    detailsViewModel.Product = product;
-        //    detailsViewModel.Reviews = _productService.GetReviewsOfSpecificProduct(productID).ToList();
-        //    detailsViewModel.Comments = _productService.GetAllComments().ToList();
-        //    detailsViewModel.Likes = _productService.GetLikes().ToList();
-        //    detailsViewModel.Dislikes = _productService.GetDislikes().ToList();
-        //    detailsViewModel.ProductID = productID;
-        //    detailsViewModel.ProductImages = _productService.GetProductImages(productID);
-        //    detailsViewModel.ProductSales = _productService.GetProductSales(productID);
-        //    return View(detailsViewModel);
-        //}
+        public IActionResult Details(int productID)
+        {
+            Product product = _productService.GetProductByID(productID);
+            product.AverageRating = _productService.CalculateProductAverageRating(productID);
+            var detailsViewModel = new ProductDetailsViewModel();
+            if (_user != null)
+            {
+               // detailsViewModel.HasUserBoughtProduct = _productService.HasUserBoughtProduct(productID, _user.Id);
+                detailsViewModel.CurrentUser = _user;
+                detailsViewModel.HasUserReviewedProduct = _productService.HasUserReviewedProduct(productID, _user.Id);
+            }
+            detailsViewModel.Product = product;
+            detailsViewModel.Reviews = _productService.GetReviewsOfSpecificProduct(productID).ToList();
+            detailsViewModel.Comments = _productService.GetAllComments().ToList();
+            detailsViewModel.Likes = _productService.GetLikes().ToList();
+            detailsViewModel.Dislikes = _productService.GetDislikes().ToList();
+            detailsViewModel.ProductID = productID;
+            detailsViewModel.ProductImages = _productService.GetProductImages(productID);
+            //detailsViewModel.ProductSales = _productService.GetProductSales(productID);
+            return View(detailsViewModel);
+        }
 
         public IActionResult CompanyProducts()
         {

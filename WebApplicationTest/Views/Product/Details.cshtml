@@ -1,0 +1,310 @@
+﻿@{
+    Layout = null;
+}
+
+@model ProductDetailsViewModel
+<link rel="stylesheet" href="~/css/header.css" />
+<link rel="stylesheet" href="~/css/general.css" />
+<link rel="stylesheet" href="~/css/responsiveContainer.css" />
+<link rel="stylesheet" href="~/css/productDetails.css" />
+<link rel="stylesheet" href="~/css/productsIndex.css" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+<body style="background-color: rgb(230,230,230);">
+    <header class="header">
+        <partial name="_HeaderPartial" />
+    </header>
+    <main>
+        <section>
+            <div class="master-flexbox">
+                <div class="product-flexbox">
+                    <div class="image-info-container">
+                        <div class="image-container">
+                            <img class="product-image" src="@Model.Product.Image" />
+                        </div>
+                        <div class="product-details-info">
+                            <p class="product-title">@Model.Product.Name</p>
+                            <div class="rating-container">
+                                <p class="average-rating">@Model.Product.AverageRating /5</p>
+                                <div class="stars-container">
+                                    @for (int i = 1; i <= 5; i++)
+                                    {
+                                        if (i <= Model.Product.AverageRating)
+                                        {
+                                            <i class="fa-solid fa-star fa-sm" style="color: #29db47;"></i>
+                                        }
+                                        else if (Model.Product.AverageRating >= (i - 1) + 0.5 && Model.Product.AverageRating < i)
+                                        {
+                                            <i class="fa-solid fa-star-half-stroke fa-sm" style="color: #29db47;"></i>
+                                        }
+                                        else
+                                        {
+                                            <i class="fa-regular fa-star fa-sm"></i>
+                                        }
+                                    }
+                                </div>
+                                @{
+                                    string ratingCount = (Model.Reviews.Count()) > 1 ? "Ratings" : "Rating";
+                                }
+                                <p class="ratings-count">@Model.Reviews.Count() @ratingCount</p>
+                            </div>
+                            <p>Category: <span class="info-text">@Model.Product.Category.Name</span></p>
+                            <p class="product-company">Company: <span class="info-text">@Model.Product.Company.Name</span></p>
+                            <p class="release-date">Release Date: <span class="info-text">@Model.Product.ReleaseDate</span></p>
+                            <p class="product-stock">In Stock: <span class="info-text">@Model.Product.Stock</span></p>
+                            <p class="product-sales">Sold: <span class="info-text">@Model.ProductSales</span></p>
+                            <p class="product-price">$@Model.Product.Price</p>
+                            <button class="product-add-to-cart-button" style="width: 100%" onclick="addItemToCart(@Model.Product.ID, 1, '@Model.Product.Name'); updateCartItemQuantity(1)">Add to Cart</button>
+                        </div>
+                    </div>
+                    <div class="description-container">
+                        <p class="description-announcer">Product Description</p>
+                        <p class="product-description">@Model.Product.Description</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section>
+            @if (Model.Reviews.Any())
+            {
+                <div class="master-flexbox">
+                    <div class="reviews-box">
+                        <h1 class="ratings-and-reviews">Ratings and Reviews</h1>
+                        <div class="review-statistics">
+                            <div class="big-rating-container">
+                                <div class="rating-container">
+                                    <p class="big-average-rating">@Model.Product.AverageRating /5</p>
+                                    <div class="stars-container">
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            if (i <= Model.Product.AverageRating)
+                                            {
+                                                <i class="fa-solid fa-star fa-xl" style="color: #29db47;"></i>
+                                            }
+                                            else if (Model.Product.AverageRating >= (i - 1) + 0.5 && Model.Product.AverageRating < i)
+                                            {
+                                                <i class="fa-solid fa-star-half-stroke fa-xl" style="color: #29db47;"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="fa-regular fa-star fa-xl"></i>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                                @{
+                                    string reviewCounter = (Model.Reviews.Count()) > 1 ? "Reviews" : "Review";
+                                }
+                                <p class="reviews-count">@Model.Reviews.Count() @reviewCounter</p>
+                            </div>
+                            <div class="percentage-bars-container">
+                                @for (int i = 5; i >= 1; i--)
+                                {
+                                    int percentageFilled = @Model.CalculateRatingPercentagePerStar(i);
+                                    int starQuantityOnReview = @Model.GetStarQuantityPerReview(i);
+                                    string starCount = (i != 1) ? "Stars" : "Star";
+                                    <div class="percentage-bar">
+                                        <p class="@starCount-quantity">@i @starCount</p>
+                                        <div class="percentage-empty">
+                                            <span class="percentage-filled" style="width: @percentageFilled%"></span>
+                                        </div>
+                                        <p style="margin: 0;">@starQuantityOnReview</p>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        @if (Model.HasUserBoughtProduct && !Model.HasUserReviewedProduct)
+                        {
+                            <form id="reviewForm" asp-controller="Review" asp-action="Create">
+                                <div class="review-radios">
+                                    <label for="rating">Rate your experience with this product:</label>
+                                    <div class="rating-options">
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            <input type="radio" id="Review.Rating@(i)" name="Review.Rating" value="@i" class="rating-radio" required />
+                                            <label for="Review.Rating@(i)">@i</label>
+                                        }
+                                    </div>
+                                </div>
+                                <input type="hidden" value="@Model.ProductID" asp-for="Review.ProductID" />
+                                <div class="user">
+                                    <img class="user-profile-picture" src="@Model.CurrentUser.ProfilePicture">
+                                    <textarea id="reviewBody" placeholder="Type your review here..." class="add-review-input" asp-for="Review.Body" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary" style="float: right;">Add Review</button>
+                            </form>
+                        }
+                        @foreach (var review in Model.Reviews)
+                        {
+                            var reviewComments = Model.GetCommentsForReview(review.ID);
+                            int reviewLikeCounter = Model.GetLikesPerReview(review.ID);
+                            int reviewDislikeCounter = Model.GetDislikesPerReview(review.ID);
+                            string reviewVibe = (review.Rating > 3) ? "review-container-green" : "review-container-red";
+                            <div class="@reviewVibe" style="margin-top: 70px;">
+                                <div class="rating-container">
+                                    <p class="review-rating">@review.Rating</p>
+                                    <div class="stars-container">
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            if (i <= review.Rating)
+                                            {
+                                                <i class="fa-solid fa-star fa-sm" style="color: #29db47;"></i>
+                                            }
+                                            else if (review.Rating >= (i - 1) + 0.5 && review.Rating < i)
+                                            {
+                                                <i class="fa-solid fa-star-half-stroke fa-sm" style="color: #29db47;"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="fa-regular fa-star fa-sm"></i>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                                <div class="user">
+                                    <img class="user-profile-picture" src="@review.User.ProfilePicture">
+                                    <p class="username">@review.User.UserName</p>
+                                    <p class="review-date">@review.Date.ToString("MM/dd/yyyy")</p>
+                                </div>
+                                <p class="review-body">@review.Body</p>
+                                @if (Model.CurrentUser != null)
+                                {
+                                    Like userLikeInReview = Model.FindUserLikeInReview(Model.CurrentUser.Id, review.ID);
+                                    Dislike userDislikeInReview = Model.FindUserDislikeInReview(Model.CurrentUser.Id, review.ID);
+                                    <div class="rating-buttons-container">
+                                        @if (userLikeInReview != null)
+                                        {
+                                            <a class="btn btn-secondary" href="@Url.Action("Delete", "Rating", new {ratingChoice = 1, ratingID = userLikeInReview.ID, productID = Model.ProductID})"><i class="fa-solid fa-thumbs-up fa-sm"></i> @reviewLikeCounter</a>
+                                            <a class="btn btn-danger"><i class="fa-solid fa-thumbs-down fa-sm"></i> @reviewDislikeCounter</a>
+                                        }
+                                        else if (userDislikeInReview != null)
+                                        {
+                                            <a class="btn btn-success"><i class="fa-solid fa-thumbs-up fa-sm"></i> @reviewLikeCounter</a>
+                                            <a class="btn btn-secondary" href="@Url.Action("Delete", "Rating", new {ratingChoice = 2, ratingID = userDislikeInReview.ID, productID = Model.ProductID})"><i class="fa-solid fa-thumbs-down fa-sm"></i> @reviewDislikeCounter</a>
+                                        }
+                                        else
+                                        {
+                                            <form asp-controller="Rating" asp-action="Create">
+                                                <input type="text" hidden value="@review.ID" asp-for="LikeForm.ReviewID">
+                                                <input type="text" hidden value="@Model.CurrentUser.Id" asp-for="LikeForm.UserID">
+                                                <input type="text" hidden value="@Model.ProductID" asp-for="ProductID">
+                                                <button class="btn btn-success" type="submit"><i class="fa-solid fa-thumbs-up fa-sm"></i> @reviewLikeCounter</button>
+                                            </form>
+                                            <form asp-controller="Rating" asp-action="Create">
+                                                <input type="text" hidden value="@review.ID" asp-for="DislikeForm.ReviewID">
+                                                <input type="text" hidden value="@Model.CurrentUser.Id" asp-for="DislikeForm.UserID">
+                                                <input type="text" hidden value="@Model.ProductID" asp-for="ProductID">
+                                                <button class="btn btn-danger" type="submit"><i class="fa-solid fa-thumbs-down fa-sm"></i> @reviewDislikeCounter</button>
+                                            </form>
+                                        }
+                                    </div>
+                                }
+                                @if (@reviewComments.Any())
+                                {
+                                    <button id="showCommentsButton" class="btn btn-warning" data-comment-count="@reviewComments.Count()">Show Comments (@reviewComments.Count())</button>
+                                    @foreach (var comment in reviewComments)
+                                    {
+                                        int commentLikeCounter = Model.GetLikePerComment(comment.ID);
+                                        int commentDislikeCounter = Model.GetDislikesPerComment(comment.ID);
+                                        <div class="comment-container">
+                                            <div class="user">
+                                                <img class="user-profile-picture" src="@comment.User.ProfilePicture">
+                                                <p class="username">@comment.User.UserName</p>
+                                            </div>
+                                            <p class="comment-body">@comment.Body</p>
+                                            @if (Model.CurrentUser != null)
+                                            {
+                                                Like userLikeInComment = Model.FindUserLikeInComment(Model.CurrentUser.Id, comment.ID);
+                                                Dislike userDislikeInComment = Model.FindUserDislikeInComment(Model.CurrentUser.Id, comment.ID);
+                                                <div class="rating-buttons-container">
+                                                    @if (userLikeInComment != null)
+                                                    {
+                                                        <a class="btn btn-secondary" href="@Url.Action("Delete", "Rating", new {ratingChoice = 1, ratingID = userLikeInComment.ID, productID = Model.ProductID})"><i class="fa-solid fa-thumbs-up fa-sm"></i> @commentLikeCounter</a>
+                                                        <a class="btn btn-danger"><i class="fa-solid fa-thumbs-down fa-sm"></i> @commentDislikeCounter</a>
+                                                    }
+                                                    else if (userDislikeInComment != null)
+                                                    {
+                                                        <a class="btn btn-success"><i class="fa-solid fa-thumbs-up fa-sm"></i> @commentLikeCounter</a>
+                                                        <a class="btn btn-secondary" href="@Url.Action("Delete", "Rating", new {ratingChoice = 2, ratingID = userDislikeInComment.ID, productID = Model.ProductID})"><i class="fa-solid fa-thumbs-down fa-sm"></i> @commentDislikeCounter</a>
+                                                    }
+                                                    else
+                                                    {
+                                                        <form asp-controller="Rating" asp-action="Create">
+                                                            <input type="text" hidden value="@Model.CurrentUser.Id" asp-for="LikeForm.UserID">
+                                                            <input type="text" hidden value="@comment.ID" asp-for="LikeForm.CommentID">
+                                                            <input type="text" hidden value="@Model.ProductID" asp-for="ProductID">
+                                                            <button type="submit" class="btn btn-success"><i class="fa-solid fa-thumbs-up fa-sm"></i> @commentLikeCounter</button>
+                                                        </form>
+
+                                                        <form asp-controller="Rating" asp-action="Create">
+                                                            <input type="text" hidden value="@Model.CurrentUser.Id" asp-for="DislikeForm.UserID">
+                                                            <input type="text" hidden value="@comment.ID" asp-for="DislikeForm.CommentID">
+                                                            <input type="text" hidden value="@Model.ProductID" asp-for="ProductID">
+                                                            <button type="submit" class="btn btn-danger"><i class="fa-solid fa-thumbs-down fa-sm"></i> @commentDislikeCounter</button>
+                                                        </form>
+                                                    }
+                                                </div>
+                                            }
+                                        </div>
+                                    }
+                                }
+                                @if (Model.CurrentUser != null)
+                                {
+                                    <form asp-controller="Comment" asp-action="Create" id="comment-form">
+                                        <input type="text" hidden value="@Model.Product.ID" asp-for="Comment.ProductID">
+                                        <input type="text" hidden value="@review.ID" asp-for="Comment.ReviewID">
+                                        <label>Comment This Review</label>
+                                        <textarea class="form-control" placeholder="Type your comment..." asp-for="Comment.Body" rows="5"></textarea>
+
+                                        <button type="submit" class="btn btn-primary" id="add-comment-button">Add Comment</button>
+                                    </form>
+                                }
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+            else
+            {
+                <div class="no-review-announcement">
+                    @if (Model.HasUserBoughtProduct)
+                    {
+                        <div class="container col-7 shadow p-3 mb-5 bg-white rounded">
+                            <p class="first-review">Be the first to review this product</p>
+                            <form id="reviewForm" asp-controller="Review" asp-action="Create">
+                                <div class="review-radios">
+                                    <label for="rating">Rate your experience with this product:</label>
+                                    <div class="rating-options">
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            <input type="radio" id="Review.Rating@(i)" name="Review.Rating" value="@i" class="rating-radio" required />
+                                            <label for="Review.Rating@(i)">@i</label>
+                                        }
+                                    </div>
+                                </div>
+                                <input type="hidden" value="@Model.ProductID" asp-for="Review.ProductID" />
+                                <div class="user">
+                                    <img class="user-profile-picture" src="@Model.CurrentUser.ProfilePicture">
+                                    <textarea id="reviewBody" placeholder="Type your review here..." class="add-review-input" asp-for="Review.Body" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary" style="float: right;">Add Review</button>
+                            </form>
+                        </div>
+                    }
+                    else
+                    {
+                        <h1>This product has no reviews yet</h1>
+                    }
+                </div>
+            }
+        </section>
+    </main>
+    <script src="https://kit.fontawesome.com/8da1ba04bb.js" crossorigin="anonymous"></script>
+    <script src="~/js/shoppingCart.js"></script>
+    <script src="~/js/productDetails.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+</body>
