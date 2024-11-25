@@ -28,7 +28,7 @@ namespace WebApplicationTest.Controllers
             var productIndexViewModel = new ProductIndexViewModel();
             productIndexViewModel.Products = _productService.GetAllProducts().ToList();
             productIndexViewModel.User = _user;
-            //var reviews = _productService.GetReviews();
+            var reviews = _productService.GetReviews();
             return View(productIndexViewModel);
         }
 

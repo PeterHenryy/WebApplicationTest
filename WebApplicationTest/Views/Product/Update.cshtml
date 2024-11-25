@@ -1,0 +1,49 @@
+﻿@model Product
+
+@{
+    Layout = null;
+}
+<link href="~/css/general.css" rel="stylesheet" />
+<link href="~/css/header.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link href="~/css/create-product.css" rel="stylesheet" />
+
+<header class="header">
+    <partial name="_HeaderPartial" />
+</header>
+<div class="container shadow p-3 mb-5 bg-white rounded">
+    <form asp-controller="Product" asp-action="Update" enctype="multipart/form-data">
+
+        <div class="form-row">
+            <input hidden value="@Model.ID" asp-for="ID" />
+            <input hidden value="@Model.ReleaseDate" asp-for="ReleaseDate" />
+            <input hidden value="@Model.CompanyID" asp-for="CompanyID" />
+            <input hidden value="@Model.CategoryID" asp-for="CategoryID" />
+            <input hidden value="@Model.UserID" asp-for="UserID" />
+            <input hidden value="@Model.Image" asp-for="Image" />
+            <input hidden value="@Model.AverageRating" asp-for="AverageRating" />
+
+            <div class="form-group col-md-6">
+                <label for="inputEmail4">Product Name</label>
+                <input type="text" class="form-control" placeholder="Name" asp-for="Name">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputPassword4">Stock</label>
+                <input type="number" class="form-control" placeholder="Stock" asp-for="Stock">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputAddress2">Price</label>
+            <input type="text" class="form-control" placeholder="Price" asp-for="Price">
+        </div>
+        <div class="form-group">
+            <label for="inputAddress2">Image</label>
+            <input type="file" class="form-control" placeholder="Image" asp-for="Image" multiple>
+        </div>
+        <div class="form-group">
+            <label for="inputAddress2">Description</label>
+            <input type="text" class="form-control" placeholder="Description" asp-for="Description">
+        </div>
+        <button type="submit" class="btn btn-primary create-button">Update Product</button>
+    </form>
+</div>
