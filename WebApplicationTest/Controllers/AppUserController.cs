@@ -42,6 +42,7 @@ namespace WebApplicationTest.Controllers
         {
             await HandleBlob(appUser);
             var role = UserRolesEnum.Customer.ToString();
+            appUser.ProfilePicture = "user-solid.svg";
             var userRegister = await _userManager.CreateAsync(appUser);
             var assignRole = await _userManager.AddToRoleAsync(appUser, role);
 
@@ -60,7 +61,7 @@ namespace WebApplicationTest.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(AppLogin appLogin, string returnUrl, int cartItemQuantity = 0, int cartItemProductID = 0)
+        public async Task<IActionResult> Login(AppLogin appLogin, string returnUrl = "", int cartItemQuantity = 0, int cartItemProductID = 0)
         {
             if (appLogin.Username != null)
             {

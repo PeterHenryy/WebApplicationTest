@@ -1,0 +1,157 @@
+﻿h1 {
+    text-align: center;
+}
+
+
+.company-name {
+    font-size: 33px;
+    font-weight: bold;
+}
+
+.company-logo {
+    width: 300px;
+    height: 300px;
+    border-radius: 8px;
+}
+
+.general-stats {
+    display: flex;
+    column-gap: 25px;
+    align-items: center;
+}
+
+
+.statistics-of-year {
+    font-weight: bold;
+    font-size: 25px;
+    margin-bottom: 20px;
+}
+
+.icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    margin-top: 5px;
+    border-radius: 8px;
+}
+
+.little-diamond {
+    background-color: rgb(0, 186, 157);
+}
+
+.customers {
+    background-color: royalblue;
+}
+
+.orders {
+    background-color: green;
+}
+
+.stats-container {
+    display: flex;
+    align-items: center;
+    column-gap: 50px;
+}
+
+.specific-stat-container {
+    display: flex;
+    column-gap: 20px;
+    align-items: start;
+}
+
+    .specific-stat-container p {
+        margin: 0;
+    }
+
+.stats-display {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+}
+
+.stat-show {
+    font-size: 30px;
+}
+
+.stat-label {
+    color: gray;
+}
+
+.revenue-total-and-image {
+    display: flex;
+    column-gap: 20px;
+    align-items: center;
+    background: linear-gradient(to bottom right, rgb(206, 224, 246), #ffffff);
+    width: 660px;
+    height: 330px;
+    border-radius: 7px;
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+}
+
+.revenue-image {
+    width: 400px;
+    height: 310px;
+}
+
+.revenue-display,
+.total-revenue,
+.reviews-announcement,
+.general-stats p {
+    font-family: 'Cascadia Mono';
+}
+
+.revenue-display {
+    font-size: 35px;
+    margin-bottom: 5px;
+}
+
+.total-revenue {
+    font-size: 23px;
+}
+
+.table-announcement {
+    font-size: 20px;
+}
+
+.table-announcement {
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: bold;
+}
+
+.purchased-products-container {
+    width: 60%;
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.review-adjusted {
+    overflow: hidden;
+    padding: 10px;
+    margin-bottom: 20px;
+    max-width: 610px;
+    height: 220px;
+}
+
+.review-body {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.view-all-container {
+    display: flex;
+    justify-content: center;
+}
+
+
+.latest-reviews-container {
+    width: 35%;
+}
+
+.review-wraper {
+    display: flex;
+    justify-content: center;
+}

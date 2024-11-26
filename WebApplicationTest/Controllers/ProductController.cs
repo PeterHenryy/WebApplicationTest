@@ -127,20 +127,12 @@ namespace WebApplicationTest.Controllers
             return View(detailsViewModel);
         }
 
-        public IActionResult CompanyProducts()
+        public IActionResult CompanyProducts(string filterOption = "", int optionIdentify = 0)
         {
-            var companyProducts = _productService.GetCompanyProducts(_user.CompanyID);
             var companyProductsDisplay = new ProductDisplayViewModel();
             companyProductsDisplay.Categories = _productService.GetAllCategories();
-            if (TempData["FilteredProducts"] != null)
-            {
-                var filteredProductsJson = TempData["FilteredProducts"].ToString();
-                companyProductsDisplay.Products = JsonConvert.DeserializeObject<List<Product>>(filteredProductsJson).Where(x => x.CompanyID == _user.CompanyID);
-            }
-            else
-            {
-                companyProductsDisplay.Products = companyProducts;
-            }
+            companyProductsDisplay.Products = String.IsNullOrEmpty(filterOption) ? _productService.GetCompanyProducts(_user.CompanyID)
+                                                                                    : _productService.GetFilteredProducts(filterOption, optionIdentify, _user.CompanyID);
             return View(companyProductsDisplay);
         }
 

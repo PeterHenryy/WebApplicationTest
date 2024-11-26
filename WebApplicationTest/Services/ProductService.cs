@@ -215,7 +215,7 @@ namespace WebApplicationTest.Services
         //    return productSales;
         //}
 
-        public IEnumerable<Product> GetFilteredProducts(string filterOption, int optionIdentify)
+        public IEnumerable<Product> GetFilteredProducts(string filterOption, int optionIdentify, int companyID = 0)
         {
             IEnumerable<Product> filteredProducts = null;
             switch (filterOption)
@@ -235,7 +235,8 @@ namespace WebApplicationTest.Services
                 default:
                     break;
             }
-            return filteredProducts;
+            
+            return companyID == 0 ? filteredProducts : filteredProducts.Where(x => x.CompanyID == companyID);
         }
 
         public IEnumerable<Product> CategoryFilter(int categoryID)
