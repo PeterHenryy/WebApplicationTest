@@ -215,16 +215,39 @@ namespace WebApplicationTest.Services
         //    return productSales;
         //}
 
+        public IEnumerable<Product> GetFilteredProducts(string filterOption, int optionIdentify)
+        {
+            IEnumerable<Product> filteredProducts = null;
+            switch (filterOption)
+            {
+                case "Company":
+                    filteredProducts = GetCompanyProducts(optionIdentify);
+                    break;
+                case "Category":
+                    filteredProducts = CategoryFilter(optionIdentify);
+                    break;
+                case "Price":
+                    filteredProducts = PriceFilter(optionIdentify);
+                    break;
+                case "Rating":
+                    filteredProducts = RatingFilter(optionIdentify);
+                    break;
+                default:
+                    break;
+            }
+            return filteredProducts;
+        }
+
         public IEnumerable<Product> CategoryFilter(int categoryID)
         {
             var filteredProducts = GetAllProducts().Where(x => x.CategoryID == categoryID);
             return filteredProducts;
         }
 
-        public IEnumerable<Product> PriceFilter(string order)
+        public IEnumerable<Product> PriceFilter(int order)
         {
             IEnumerable<Product> filteredProducts;
-            if (order.Equals("ascending"))
+            if (order == 1)
             {
                 filteredProducts = GetAllProducts().OrderBy(x => x.Price);
                 return filteredProducts;
@@ -233,15 +256,15 @@ namespace WebApplicationTest.Services
             return filteredProducts;
         }
 
-        public IEnumerable<Product> RatingFilter(string order)
+        public IEnumerable<Product> RatingFilter(int order)
         {
             IEnumerable<Product> filteredProducts;
-            if (order.Equals("ascending"))
+            if (order == 1)
             {
-                filteredProducts = GetAllProducts().OrderBy(x => x.AverageRating);
+                filteredProducts = GetAllProducts().OrderByDescending(x => x.AverageRating);
                 return filteredProducts;
             }
-            filteredProducts = GetAllProducts().OrderByDescending(x => x.AverageRating);
+            filteredProducts = GetAllProducts().OrderBy(x => x.AverageRating);
             return filteredProducts;
         }
 

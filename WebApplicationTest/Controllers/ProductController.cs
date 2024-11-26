@@ -32,22 +32,13 @@ namespace WebApplicationTest.Controllers
             return View(productIndexViewModel);
         }
 
-        public IActionResult ProductsDisplay()
+        public IActionResult ProductsDisplay(string filterOption = "", int optionIdentify = 0)
         {
             var productDisplayViewModel = new ProductDisplayViewModel();
             productDisplayViewModel.Companies = _productService.GetAllCompanies();
             productDisplayViewModel.Categories = _productService.GetAllCategories();
-
-            if (TempData["FilteredProducts"] != null)
-            {
-                var filteredProductsJson = TempData["FilteredProducts"].ToString();
-                productDisplayViewModel.Products = JsonConvert.DeserializeObject<List<Product>>(filteredProductsJson);
-            }
-            else
-            {
-                productDisplayViewModel.Products = _productService.GetAllProducts();
-            }
-
+            productDisplayViewModel.Products = String.IsNullOrEmpty(filterOption) ? _productService.GetAllProducts() 
+                                                                                     : _productService.GetFilteredProducts(filterOption, optionIdentify);
             return View(productDisplayViewModel);
         }
 
@@ -159,32 +150,7 @@ namespace WebApplicationTest.Controllers
             return RedirectToAction("CompanyProducts", "Product");
         }
 
-        public IActionResult CategoryFilter(int categoryID, bool companyProductsFilter = false)
-        {
-            var filteredProducts = _productService.CategoryFilter(categoryID);
-            TempData["FilteredProducts"] = JsonConvert.SerializeObject(filteredProducts);
-            return companyProductsFilter ? RedirectToAction("CompanyProducts", "Product") : RedirectToAction("ProductsDisplay", "Product");
-        }
-
-        public IActionResult CompanyFilter(int companyID)
-        {
-            var filteredProducts = _productService.GetCompanyProducts(companyID);
-            TempData["FilteredProducts"] = JsonConvert.SerializeObject(filteredProducts);
-            return RedirectToAction("ProductsDisplay", "Product");
-        }
-
-        public IActionResult PriceFilter(string order, bool companyProductsFilter = false)
-        {
-            var filteredProducts = _productService.PriceFilter(order);
-            TempData["FilteredProducts"] = JsonConvert.SerializeObject(filteredProducts);
-            return companyProductsFilter ? RedirectToAction("CompanyProducts", "Product") : RedirectToAction("ProductsDisplay", "Product");
-        }
-
-        public IActionResult RatingFilter(string order, bool companyProductsFilter = false)
-        {
-            var filteredProducts = _productService.RatingFilter(order);
-            TempData["FilteredProducts"] = JsonConvert.SerializeObject(filteredProducts);
-            return companyProductsFilter ? RedirectToAction("CompanyProducts", "Product") : RedirectToAction("ProductsDisplay", "Product");
-        }
+        
+        
     }
 }
