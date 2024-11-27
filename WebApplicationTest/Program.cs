@@ -17,9 +17,27 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 builder.Services.AddIdentity<AppUser, AppRole>(options => options.SignIn.RequireConfirmedAccount = false)
                                                     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
-builder.Services.AddTransient<UserService>();
+builder.Services.AddTransient<CompanyRepository>();
+builder.Services.AddTransient<CompanyService>();
 builder.Services.AddTransient<ProductRepository>();
 builder.Services.AddTransient<ProductService>();
+builder.Services.AddTransient<UserService>();
+builder.Services.AddTransient<TransactionRepository>();
+builder.Services.AddTransient<TransactionService>();
+builder.Services.AddTransient<CreditCardRepository>();
+builder.Services.AddTransient<CreditCardService>();
+builder.Services.AddTransient<ReviewRepository>();
+builder.Services.AddTransient<ReviewService>();
+builder.Services.AddTransient<CommentRepository>();
+builder.Services.AddTransient<CommentService>();
+builder.Services.AddTransient<RatingRepository>();
+builder.Services.AddTransient<RatingService>();
+builder.Services.AddTransient<RefundRepository>();
+builder.Services.AddTransient<RefundService>();
+builder.Services.AddTransient<CouponRepository>();
+builder.Services.AddTransient<CouponService>();
+builder.Services.AddTransient<ShoppingCartRepository>();
+builder.Services.AddTransient<ShoppingCartService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.AddSingleton(u => new BlobServiceClient(

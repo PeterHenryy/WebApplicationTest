@@ -1,0 +1,8 @@
+﻿@model int
+
+<div class="cart-icon-container">
+    <a href="@Url.Action("DisplayCartItems", "ShoppingCart")">
+        <i class="fa-solid fa-cart-shopping fa-2xl" style="color: #db7093;"></i>
+        <span class="cart-item-quantity">@Model</span>
+    </a>
+</div>

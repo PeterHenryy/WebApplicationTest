@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplicationTest.Data;
 
@@ -11,9 +12,11 @@ using WebApplicationTest.Data;
 namespace WebApplicationTest.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241127180911_transaction")]
+    partial class transaction
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -125,37 +128,6 @@ namespace WebApplicationTest.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("WebApplicationTest.Models.CartItem", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<int>("CartID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<double>("ShippingCost")
-                        .HasColumnType("float");
-
-                    b.Property<string>("ShippingOption")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("ProductID");
-
-                    b.ToTable("CartItems");
-                });
-
             modelBuilder.Entity("WebApplicationTest.Models.Category", b =>
                 {
                     b.Property<int>("ID")
@@ -229,95 +201,6 @@ namespace WebApplicationTest.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Companies");
-                });
-
-            modelBuilder.Entity("WebApplicationTest.Models.Coupon", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<bool>("Active")
-                        .HasColumnType("bit");
-
-                    b.Property<int?>("CategoryID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Code")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("CompanyID")
-                        .HasColumnType("int");
-
-                    b.Property<double>("DiscountPercentage")
-                        .HasColumnType("float");
-
-                    b.Property<int?>("ProductID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("CategoryID");
-
-                    b.HasIndex("ProductID");
-
-                    b.ToTable("Coupons");
-                });
-
-            modelBuilder.Entity("WebApplicationTest.Models.CreditCard", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<int>("CVV")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CardNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Expiry")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("NameOnCard")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("UserID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("CreditCards");
-                });
-
-            modelBuilder.Entity("WebApplicationTest.Models.DeliveryOption", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<double>("Cost")
-                        .HasColumnType("float");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("DeliveryOptions");
                 });
 
             modelBuilder.Entity("WebApplicationTest.Models.Dislike", b =>
@@ -565,47 +448,6 @@ namespace WebApplicationTest.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("WebApplicationTest.Models.Refund", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<int?>("ProductID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Reason")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("TransactionID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TransactionItemID")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("UserID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("ProductID");
-
-                    b.HasIndex("TransactionID");
-
-                    b.HasIndex("TransactionItemID");
-
-                    b.HasIndex("UserID");
-
-                    b.ToTable("Refunds");
-                });
-
             modelBuilder.Entity("WebApplicationTest.Models.Review", b =>
                 {
                     b.Property<int>("ID")
@@ -637,22 +479,6 @@ namespace WebApplicationTest.Migrations
                     b.HasIndex("UserID");
 
                     b.ToTable("Reviews");
-                });
-
-            modelBuilder.Entity("WebApplicationTest.Models.ShoppingCart", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<int>("UserID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("ShoppingCarts");
                 });
 
             modelBuilder.Entity("WebApplicationTest.Models.Transaction", b =>
@@ -720,39 +546,6 @@ namespace WebApplicationTest.Migrations
                     b.ToTable("Transactions");
                 });
 
-            modelBuilder.Entity("WebApplicationTest.Models.TransactionItem", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<int?>("ProductID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.Property<double>("ShippingCost")
-                        .HasColumnType("float");
-
-                    b.Property<string>("ShippingOption")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TransactionID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("ProductID");
-
-                    b.HasIndex("TransactionID");
-
-                    b.ToTable("TransactionItems");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
                     b.HasOne("WebApplicationTest.Models.Identity.AppRole", null)
@@ -804,17 +597,6 @@ namespace WebApplicationTest.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("WebApplicationTest.Models.CartItem", b =>
-                {
-                    b.HasOne("WebApplicationTest.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-                });
-
             modelBuilder.Entity("WebApplicationTest.Models.Comment", b =>
                 {
                     b.HasOne("WebApplicationTest.Models.Identity.AppUser", "User")
@@ -822,21 +604,6 @@ namespace WebApplicationTest.Migrations
                         .HasForeignKey("UserID");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("WebApplicationTest.Models.Coupon", b =>
-                {
-                    b.HasOne("WebApplicationTest.Models.Category", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryID");
-
-                    b.HasOne("WebApplicationTest.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductID");
-
-                    b.Navigation("Category");
-
-                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("WebApplicationTest.Models.Product", b =>
@@ -854,33 +621,6 @@ namespace WebApplicationTest.Migrations
                     b.Navigation("Company");
                 });
 
-            modelBuilder.Entity("WebApplicationTest.Models.Refund", b =>
-                {
-                    b.HasOne("WebApplicationTest.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductID");
-
-                    b.HasOne("WebApplicationTest.Models.Transaction", "Transaction")
-                        .WithMany()
-                        .HasForeignKey("TransactionID");
-
-                    b.HasOne("WebApplicationTest.Models.TransactionItem", "TransactionItem")
-                        .WithMany()
-                        .HasForeignKey("TransactionItemID");
-
-                    b.HasOne("WebApplicationTest.Models.Identity.AppUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserID");
-
-                    b.Navigation("Product");
-
-                    b.Navigation("Transaction");
-
-                    b.Navigation("TransactionItem");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("WebApplicationTest.Models.Review", b =>
                 {
                     b.HasOne("WebApplicationTest.Models.Product", "Product")
@@ -894,23 +634,6 @@ namespace WebApplicationTest.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("WebApplicationTest.Models.TransactionItem", b =>
-                {
-                    b.HasOne("WebApplicationTest.Models.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductID");
-
-                    b.HasOne("WebApplicationTest.Models.Transaction", "Transaction")
-                        .WithMany()
-                        .HasForeignKey("TransactionID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-
-                    b.Navigation("Transaction");
                 });
 #pragma warning restore 612, 618
         }

@@ -30,11 +30,11 @@ namespace WebApplicationTest.Controllers
             Company userCompany = _companyService.GetCompanyByID(_currentUser.CompanyID);
             var companyStatsViewModel = new CompanyStatsViewModel();
             companyStatsViewModel.Company = userCompany;
-           // companyStatsViewModel.YearCustomers = _companyService.GetCompanyYearCustomers(userCompany.ID);
-            //companyStatsViewModel.YearOrders = _companyService.GetCompanyYearOrders(userCompany.ID);
-           // companyStatsViewModel.YearRevenue = _companyService.GetCompanyYearRevenue(userCompany.ID);
+            companyStatsViewModel.YearCustomers = _companyService.GetCompanyYearCustomers(userCompany.ID);
+            companyStatsViewModel.YearOrders = _companyService.GetCompanyYearOrders(userCompany.ID);
+            companyStatsViewModel.YearRevenue = _companyService.GetCompanyYearRevenue(userCompany.ID);
             companyStatsViewModel.CompanyProductsReviews = _companyService.GetCompanyLatestReviews(userCompany.ID);
-            //companyStatsViewModel.CompanyPurchasedItems = _companyService.GetCompanyLatestPurchases(userCompany.ID);
+            companyStatsViewModel.CompanyPurchasedItems = _companyService.GetCompanyLatestPurchases(userCompany.ID);
             return View(companyStatsViewModel);
         }
 
@@ -79,12 +79,12 @@ namespace WebApplicationTest.Controllers
             return RedirectToAction("Index", "Company");
         }
 
-        //[HttpGet]
-        //public IActionResult GetCompanyRevenuesPerMonth()
-        //{
-        //    var revenues = _companyService.GetCompanyRevenuesPerMonth(_currentUser.CompanyID);
-        //    return Json(revenues);
-        //}
+        [HttpGet]
+        public IActionResult GetCompanyRevenuesPerMonth()
+        {
+            var revenues = _companyService.GetCompanyRevenuesPerMonth(_currentUser.CompanyID);
+            return Json(revenues);
+        }
 
         public IActionResult CompanyProductReviews()
         {
@@ -92,10 +92,10 @@ namespace WebApplicationTest.Controllers
             return View(companyProductReviews);
         }
 
-        //public IActionResult CompanyPurchasedProducts()
-        //{
-        //    var companyPurchasedProducts = _companyService.GetCompanyTransactionItems(_currentUser.CompanyID);
-        //    return View(companyPurchasedProducts);
-        //}
+        public IActionResult CompanyPurchasedProducts()
+        {
+            var companyPurchasedProducts = _companyService.GetCompanyTransactionItems(_currentUser.CompanyID);
+            return View(companyPurchasedProducts);
+        }
     }
 }

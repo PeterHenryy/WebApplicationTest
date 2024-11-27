@@ -7,6 +7,6 @@
         public int YearCustomers { get; set; }
         public int YearOrders { get; set; }
         public List<Review> CompanyProductsReviews { get; set; }
-       // public IEnumerable<TransactionItem> CompanyPurchasedItems { get; set; }
+        public IEnumerable<TransactionItem> CompanyPurchasedItems { get; set; }
     }
 }

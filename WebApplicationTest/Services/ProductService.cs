@@ -68,12 +68,12 @@ namespace WebApplicationTest.Services
             return reviews;
         }
 
-        //public bool HasUserBoughtProduct(int productID, int userID)
-        //{
-        //    var transactionItems = _productRepos.GetTransactionItems();
-        //    bool hasBought = transactionItems.Any(x => x.Transaction.UserID == userID && x.ProductID == productID);
-        //    return hasBought;
-        //}
+        public bool HasUserBoughtProduct(int productID, int userID)
+        {
+            var transactionItems = _productRepos.GetTransactionItems();
+            bool hasBought = transactionItems.Any(x => x.Transaction.UserID == userID && x.ProductID == productID);
+            return hasBought;
+        }
 
         public IEnumerable<Comment> GetAllComments()
         {
@@ -208,12 +208,12 @@ namespace WebApplicationTest.Services
             return images;
         }
 
-        //public int GetProductSales(int productID)
-        //{
-        //    List<TransactionItem> transactionItems = _productRepos.GetTransactionItems();
-        //    int productSales = transactionItems.Where(x => x.ProductID == productID).Sum(x => x.Quantity);
-        //    return productSales;
-        //}
+        public int GetProductSales(int productID)
+        {
+            List<TransactionItem> transactionItems = _productRepos.GetTransactionItems();
+            int productSales = transactionItems.Where(x => x.ProductID == productID).Sum(x => x.Quantity);
+            return productSales;
+        }
 
         public IEnumerable<Product> GetFilteredProducts(string filterOption, int optionIdentify, int companyID = 0)
         {

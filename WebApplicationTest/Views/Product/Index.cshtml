@@ -36,7 +36,7 @@
                         <div class="product-card">
                             <a style="text-decoration: none" class="details-link" href="@Url.Action("Details", "Product", new {productID = product.ID})">
                                 <div class="image-card">
-                                    <img src="@product.Image">
+                                    <img class="product-card-image" src="@product.Image">
                                 </div>
                                 <div class="product-info">
                                     <div class="product-name-container">
@@ -47,15 +47,15 @@
                                         {
                                             if (i <= product.AverageRating)
                                             {
-                                                <i class="fa-solid fa-star fa-sm" style="color: #29db47;"></i>
+                                                <img class="star-icon" src="~/icons/star-solid.svg">
                                             }
                                             else if (product.AverageRating >= (i - 1) + 0.5 && product.AverageRating < i)
                                             {
-                                                <i class="fa-solid fa-star-half-stroke fa-sm" style="color: #29db47;"></i>
+                                                <img class="star-icon" src="~/icons/star-half-stroke-solid.svg" />
                                             }
                                             else
                                             {
-                                                <i class="fa-regular fa-star fa-sm"></i>
+                                                <img class="star-icon" src="/icons/star-regular.svg" />
                                             }
                                         }
                                     </div>

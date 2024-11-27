@@ -47,7 +47,7 @@
         @if (SignInManager.IsSignedIn(User))
         {
 
-           @*  @await Component.InvokeAsync("ShoppingCartItems") *@
+            @await Component.InvokeAsync("ShoppingCartItems")
             <div class="options-menu-dropdown">
                 <div class="user-profile-and-name">
                     <img class="user-profile-picture" src="~/icons/@currentUser.ProfilePicture">

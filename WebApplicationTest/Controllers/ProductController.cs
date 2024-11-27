@@ -61,7 +61,7 @@ namespace WebApplicationTest.Controllers
             await HandleBlob(product);
             _productService.CheckProductStockChange(product.ID, product.Stock);
             bool updatedProduct = _productService.Update(product);
-            // _productService.HandleProductImages(product, files);
+            //_productService.HandleProductImages(product, files);
             if (updatedProduct)
             {
                 return RedirectToAction("CompanyProducts", "Product");
@@ -112,7 +112,7 @@ namespace WebApplicationTest.Controllers
             var detailsViewModel = new ProductDetailsViewModel();
             if (_user != null)
             {
-               // detailsViewModel.HasUserBoughtProduct = _productService.HasUserBoughtProduct(productID, _user.Id);
+                detailsViewModel.HasUserBoughtProduct = _productService.HasUserBoughtProduct(productID, _user.Id);
                 detailsViewModel.CurrentUser = _user;
                 detailsViewModel.HasUserReviewedProduct = _productService.HasUserReviewedProduct(productID, _user.Id);
             }
@@ -123,7 +123,7 @@ namespace WebApplicationTest.Controllers
             detailsViewModel.Dislikes = _productService.GetDislikes().ToList();
             detailsViewModel.ProductID = productID;
             detailsViewModel.ProductImages = _productService.GetProductImages(productID);
-            //detailsViewModel.ProductSales = _productService.GetProductSales(productID);
+            detailsViewModel.ProductSales = _productService.GetProductSales(productID);
             return View(detailsViewModel);
         }
 

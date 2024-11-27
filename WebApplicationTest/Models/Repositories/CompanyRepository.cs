@@ -70,16 +70,16 @@ namespace WebApplicationTest.Models.Repositories
             }
         }
 
-        //public List<Transaction> GetTransactions()
-        //{
-        //    return _context.Transactions.ToList();
-        //}
+        public List<Transaction> GetTransactions()
+        {
+            return _context.Transactions.ToList();
+        }
 
-        //public List<TransactionItem> GetTransactionItems()
-        //{
-        //    return _context.TransactionItems.Include(x => x.Product)
-        //                                        .Include(x => x.Transaction).ToList();
-        //}
+        public List<TransactionItem> GetTransactionItems()
+        {
+            return _context.TransactionItems.Include(x => x.Product)
+                                                .Include(x => x.Transaction).ToList();
+        }
 
         public List<Review> GetReviews()
         {

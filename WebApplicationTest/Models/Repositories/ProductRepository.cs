@@ -96,11 +96,11 @@ namespace WebApplicationTest.Models.Repositories
             return reviews;
         }
 
-        //public IEnumerable<Transaction> GetTransactions()
-        //{
-        //    var transactions = _context.Transactions.ToList();
-        //    return transactions;
-        //}
+        public IEnumerable<Transaction> GetTransactions()
+        {
+            var transactions = _context.Transactions.ToList();
+            return transactions;
+        }
 
         public IEnumerable<Comment> GetAllComments()
         {
@@ -154,10 +154,10 @@ namespace WebApplicationTest.Models.Repositories
             return images;
         }
 
-        //public List<TransactionItem> GetTransactionItems()
-        //{
-        //    var transactionItems = _context.TransactionItems.Include(x => x.Transaction).ToList();
-        //    return transactionItems;
-        //}
+        public List<TransactionItem> GetTransactionItems()
+        {
+            var transactionItems = _context.TransactionItems.Include(x => x.Transaction).ToList();
+            return transactionItems;
+        }
     }
 }
