@@ -4,7 +4,7 @@ namespace WebApplicationTest.Models.ViewModels
 {
     public class ProductIndexViewModel
     {
-        public List<Product> Products { get; set; }
+        public IEnumerable<Product> Products { get; set; }
 
         public IEnumerable<Product> GetMostPopularProducts(int categoryID = 0)
         {

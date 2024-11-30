@@ -1,0 +1,24 @@
+﻿@model Review
+
+<form asp-controller="Review" asp-action="Update">
+    <input type="hidden" asp-for="ID" />
+    <input type="hidden" asp-for="ProductID" />
+    <input type="hidden" asp-for="UserID" />
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputEmail4">Your Review</label>
+            <input type="text" class="form-control" placeholder="Type here" asp-for="Body">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputPassword4">Rating</label>
+            <select asp-for="Rating">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Update Review</button>
+</form>

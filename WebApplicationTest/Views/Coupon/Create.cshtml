@@ -1,0 +1,51 @@
+﻿@model CouponCreateViewModel
+
+@{
+    Layout = null;
+}
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+<link href="~/css/general.css" rel="stylesheet" />
+<link href="~/css/create-coupon.css" rel="stylesheet" />
+
+
+<header class="header">
+    <partial name="_HeaderPartial" />
+</header>
+
+<div class="container shadow p-3 mb-5 bg-white rounded">
+    <form asp-controller="Coupon" asp-action="Create">
+        <input type="text" hidden value="true" asp-for="Coupon.Active" />
+
+        <div class="form-group col-md-12">
+            <label for="inputEmail4">Code</label>
+            <input type="text" class="form-control" placeholder="Code" asp-for="Coupon.Code" required>
+        </div>
+        <div class="form-group col-md-12">
+            <label for="inputPassword4">Percentage Discount</label>
+            <input type="number" value="1" min="1" class="form-control" placeholder="Discount Percentage" asp-for="Coupon.DiscountPercentage">
+        </div>
+        <div class="form-group col-md-12">
+            <label for="inputPassword4">Quantity</label>
+            <input type="number" value="1" min="1" class="form-control" placeholder="Quantity" asp-for="Coupon.Quantity">
+        </div>
+
+        <div class="buttons-box">
+            <select style="font-size: 20px;" class="btn btn-info" asp-for="Coupon.ProductID"
+                    asp-items="@(new SelectList(Model.Products, nameof(Product.ID), nameof(Product.Name)))">
+                <option>Add Coupon to a Product</option>
+            </select>
+            <select style="font-size: 20px;" class="btn btn-primary" asp-for="Coupon.CategoryID"
+                    asp-items="@(new SelectList(Model.Categories, nameof(Category.ID), nameof(Category.Name)))">
+                <option>Add Coupon to a Category</option>
+            </select>
+        </div>
+        <div class="create-button-container">
+            <button type="submit" class="btn btn-success create-coupon">Create Coupon</button>
+        </div>
+    </form>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+

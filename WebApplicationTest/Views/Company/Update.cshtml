@@ -1,0 +1,19 @@
+﻿@model Company
+
+<form asp-controller="Company" asp-action="Update">
+
+    <div class="form-row">
+        <input hidden value="@Model.ID" asp-for="ID" />
+        <input hidden value="@Model.TotalSales" asp-for="TotalSales" />
+        <input hidden value="@Model.Revenue" asp-for="Revenue" />
+        <div class="form-group col-md-6">
+            <label for="inputEmail4">Company Name</label>
+            <input type="text" class="form-control" placeholder="Name" asp-for="Name">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputPassword4">Logo</label>
+            <input type="text" class="form-control" placeholder="Logo" asp-for="Logo">
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Update Company</button>
+</form>

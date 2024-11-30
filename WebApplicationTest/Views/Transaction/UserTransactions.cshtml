@@ -1,0 +1,71 @@
+﻿@model UserTransactionsViewModel
+
+@{
+    Layout = null;
+}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+<link href="~/css/general.css" rel="stylesheet" />
+<header class="header">
+    <partial name="_HeaderPartial" />
+</header>
+<div class="print-button-container">
+    <button class="btn btn-success print-button" onclick="toggleHeader()">Print this page</button>
+</div>
+<div class="container shadow p-3 mb-5 bg-white rounded">
+    <div class="row">
+        <div class="col-lg-12 col-12">
+            <h1 style="text-align:center">Your Transactions</h1>
+            <div class="row">
+                <div class="col-12">
+                    <table id="user-transactions-table" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>TransactionID</th>
+                                <th>Total</th>
+                                <th>Email</th>
+                                <th>Phone Number</th>
+                                <th>Transaction Date</th>
+                                <th>Items Bought</th>
+                                <th>Payment Type</th>
+                                <th>Purchased Items</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var transaction in @Model.UserTransactions)
+                            {
+                                <tr>
+                                    <td>@transaction.ID</td>
+                                    <td>$@transaction.Total.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture)</td>
+                                    <td>@transaction.Email</td>
+                                    <td>@transaction.PhoneNumber</td>
+                                    <td>@transaction.TransactionDate</td>
+                                    <td>@transaction.ItemsBought</td>
+                                    <td>@transaction.PaymentType</td>
+                                    <td> <a class="btn btn-primary" href="@Url.Action("TransactionItems", "Transaction", new{transactionID = transaction.ID})">View Items</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $.noConflict();
+    jQuery(document).ready(function ($) {
+        $('#user-transactions-table').DataTable();
+    });
+</script>
+<script src="~/js/site.js"></script>
+
+
+
+
+

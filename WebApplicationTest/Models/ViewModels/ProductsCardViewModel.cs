@@ -2,11 +2,10 @@
 
 namespace WebApplicationTest.Models.ViewModels
 {
-    public class ProductDisplayViewModel
+    public class ProductsCardViewModel
     {
         public IEnumerable<Product> Products { get; set; }
-        public List<Category> Categories { get; set; }
-        public List<Company> Companies { get; set; }
         public AppUser User { get; set; }
+        public bool CompanyProducts { get; set; }
     }
 }

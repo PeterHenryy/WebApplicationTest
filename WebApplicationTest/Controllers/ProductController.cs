@@ -39,6 +39,7 @@ namespace WebApplicationTest.Controllers
             productDisplayViewModel.Categories = _productService.GetAllCategories();
             productDisplayViewModel.Products = String.IsNullOrEmpty(filterOption) ? _productService.GetAllProducts() 
                                                                                      : _productService.GetFilteredProducts(filterOption, optionIdentify);
+            productDisplayViewModel.User = _user;
             return View(productDisplayViewModel);
         }
 

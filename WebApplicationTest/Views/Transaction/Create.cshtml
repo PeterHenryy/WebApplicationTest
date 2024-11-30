@@ -1,0 +1,155 @@
+﻿@model TransactionViewModel
+@{
+    Layout = null;
+}
+
+<link href="~/css/header.css" rel="stylesheet" />
+<link href="~/css/general.css" rel="stylesheet" />
+<link href="~/css/transactioncreate.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link href="~/css/general.css" rel="stylesheet" />
+
+<body style="background-color: rgb(230,230,230)">
+    <header class="header">
+        <partial name="_HeaderPartial" />
+    </header>
+
+    <main class="main-container">
+
+        <div class="form-and-product-container">
+            <div class="purchase-summary">
+                <p class="purchase-announcement">You are purchasing:</p>
+                <div class="summary-products">
+                    @foreach (CartItem item in Model.CartItems)
+                    {
+                        <div class="summary-product-container">
+                            <div class="summary-product-category-container">
+                                @{
+                                    string categoryIcon = Model.GetSummaryProductCategory(item.Product.CategoryID) + "Icon.svg";
+                                }
+                                <img class="summary-product-category" src="~/icons/@categoryIcon" />
+                            </div>
+                            <div class="summary-product-info">
+                                @{
+                                    string summaryItemCost = (item.Product.Price * item.Quantity).ToString("C2", System.Globalization.CultureInfo.GetCultureInfo("en-us"));
+                                    string itemQuantity = $"(x{@item.Quantity})";
+                                }
+                                <p class="summary-product-name-quantity">@item.Product.Name @itemQuantity</p>
+                                <p class="summary-product-price">@summaryItemCost</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div class="summary-product-container">
+                    <div class="summary-product-tax-container">
+                        <img class="money-bag" src="~/icons/moneybag.png" />
+                    </div>
+                    <div class="summary-product-info">
+                        <p class="products-tax">Tax</p>
+                        <p class="summary-product-tax">@Model.TransactionTax.ToString("C2", System.Globalization.CultureInfo.GetCultureInfo("en-us"))</p>
+                    </div>
+                </div>
+                <p class="summary-product-total">Total: </p>
+                <div class="transaction-total-display">
+                    <p class="transaction-total">@Model.Transaction.Total.ToString("C2", System.Globalization.CultureInfo.GetCultureInfo("en-us"))</p>
+                    <p class="transaction-total">or</p>
+                    @{
+                        double transactionPointsCost = Model.Transaction.Total * 5;
+                    }
+                    <p class="transaction-total">@transactionPointsCost Points</p>
+
+                </div>
+            </div>
+            <div class="transaction-form-container">
+
+                <form class="transaction-form" asp-controller="Transaction" asp-action="Create" id="transactionForm">
+                    <input type="hidden" asp-for="@Model.Transaction.CouponCode" />
+                    <input type="hidden" asp-for="@Model.Transaction.Total" id="transactionTotal" value="@Model.Transaction.Total" />
+                    <div class="info-row">
+                        <input asp-for="Transaction.FirstName" class="transaction-form-input" id="firstname" placeholder="First Name" required />
+                        <input asp-for="Transaction.LastName" class="transaction-form-input" id="lastname" placeholder="Last Name" required />
+                    </div>
+
+                    <div class="info-row">
+                        <input asp-for="Transaction.Email" class="transaction-form-input" type="email" id="email" placeholder="Email" required />
+                    </div>
+                    <div class="info-row">
+                        <input asp-for="Transaction.PhoneNumber" class="transaction-form-input" id="phonenumber" placeholder="Phone Number" required />
+                    </div>
+                    <div class="info-row">
+                        <input asp-for="Transaction.Address" class="transaction-form-input" id="address" placeholder="Address" required />
+                    </div>
+                    <div class="info-row">
+                        <input asp-for="Transaction.City" class="transaction-form-input" id="city" placeholder="City" required />
+                    </div>
+                    <div class="info-row">
+                        <input asp-for="Transaction.State" class="transaction-form-input" id="state" placeholder="State" required />
+                        <input asp-for="Transaction.Zip" class="transaction-form-input" id="zip" placeholder="Zip" required />
+                    </div>
+                    @{
+                        var hasCreditCards = Model.UserCards.Count() > 0;
+                    }
+                    <div class="payment-methods-container">
+                        <label id="payment-method-label" for="Transaction.PaymentType">Choose Payment Method</label>
+
+                        <div class="payment-options">
+                            <div class="card-payment-option">
+                                <input type="radio" class="payment-method-radio js-credit-card-radio" id="creditcard" name="Transaction.PaymentType" value="CreditCard" />
+                                <label class="payment-method" for="creditcard">Credit Card</label>
+                            </div>
+                            <div class="credit-card-options">
+                                @if (Model.UserCards.Count() > 0)
+                                {
+                                    <select class="credit-card-selector" id="creditCardSelect" asp-for="ChosenCardID" asp-items="@(new SelectList(Model.UserCards, nameof(CreditCard.ID), nameof(CreditCard.CardNumber)))">
+                                        <option value="" style="display: none;">Select Credit Card</option>
+                                    </select>
+                                }
+                            </div>
+                        </div>
+
+                        <div class="payment-options">
+                            <div class="points-payment-option">
+                                @*FIXX update reward points failed purchase message*@
+                                <input type="radio" class="payment-method-radio js-points-radio" id="rewardpoints" name="Transaction.PaymentType" value="RewardPoints" />
+                                <label class="payment-method" for="rewardpoints">Reward Points</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="transaction-purchase-button" type="submit">Purchase</button>
+                </form>
+
+            </div>
+
+        </div>
+    </main>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://kit.fontawesome.com/8da1ba04bb.js" crossorigin="anonymous"></script>
+    <script src="~/js/transaction.js"></script>
+    <script>
+        document.getElementById('transactionForm').addEventListener('submit', function (event) {
+            const paymentType = document.querySelector('input[name="Transaction.PaymentType"]:checked');
+            const creditCardSelect = document.getElementById('creditCardSelect');
+
+            // Check if a payment method is selected
+            if (!paymentType) {
+                alert('Please select a payment method.');
+                event.preventDefault(); // Prevent form submission
+                return false;
+            }
+
+            // If Credit Card is selected, ensure a card is chosen
+            if (paymentType.value === 'CreditCard') {
+                if (!creditCardSelect || creditCardSelect.value === '') {
+                    alert('Please select a credit card from the dropdown.');
+                    event.preventDefault(); // Prevent form submission
+                    return false;
+                }
+            }
+
+            // If everything is correct, allow form submission
+            return true;
+        });
+    </script>
+</body>
+

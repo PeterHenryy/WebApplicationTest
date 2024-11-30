@@ -269,5 +269,10 @@ namespace WebApplicationTest.Services
             return filteredProducts;
         }
 
+        //public IEnumerable<Product> MostSoldFilter()
+        //{
+        //    IEnumerable<Product> filteredProducts = GetAllProducts().OrderByDescending();
+
+        //}
     }
 }

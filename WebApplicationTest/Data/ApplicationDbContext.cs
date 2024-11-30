@@ -27,6 +27,7 @@ namespace WebApplicationTest.Data
         public DbSet<ShoppingCart> ShoppingCarts { get; set; }
         public DbSet<CartItem> CartItems { get; set; }
         public DbSet<DeliveryOption> DeliveryOptions { get; set; }
+        public DbSet<Contact> ContactRequests { get; set; }
 
     }
 }

@@ -38,8 +38,11 @@ builder.Services.AddTransient<CouponRepository>();
 builder.Services.AddTransient<CouponService>();
 builder.Services.AddTransient<ShoppingCartRepository>();
 builder.Services.AddTransient<ShoppingCartService>();
+builder.Services.AddTransient<ContactRepository>();
+builder.Services.AddTransient<ContactService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+builder.Services.ConfigureApplicationCookie(x => x.LoginPath = "/AppUser/Login");
 builder.Services.AddSingleton(u => new BlobServiceClient(
         builder.Configuration.GetValue<string>("BlobConnection")
             ));
@@ -71,6 +74,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

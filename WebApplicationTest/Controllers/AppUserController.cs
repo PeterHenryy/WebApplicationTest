@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection.Metadata;
 using WebApplicationTest.Helpers.Enums;
+using WebApplicationTest.Models;
 using WebApplicationTest.Models.Identity;
 using WebApplicationTest.Services;
 
@@ -13,16 +14,16 @@ namespace WebApplicationTest.Controllers
         private readonly SignInManager<AppUser> _signInManager;
         private readonly UserManager<AppUser> _userManager;
         private readonly UserService _userService;
-        //private readonly ShoppingCartService _shoppingCartService;
+        private readonly ShoppingCartService _shoppingCartService;
         private readonly IBlobService _blobService;
         private readonly AppUser _currentUser;
 
         public AppUserController(SignInManager<AppUser> signInManager,
-            UserManager<AppUser> userManger, UserService userService /*ShoppingCartService shoppingCartService */,  IBlobService blobService )
+            UserManager<AppUser> userManger, UserService userService ,ShoppingCartService shoppingCartService ,  IBlobService blobService )
         {
             _userManager = userManger;
             _userService = userService;
-            //_shoppingCartService = shoppingCartService;
+            _shoppingCartService = shoppingCartService;
             _blobService = blobService;
             _signInManager = signInManager;
             _currentUser = userService.GetCurrentUser();
@@ -61,7 +62,7 @@ namespace WebApplicationTest.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(AppLogin appLogin, string returnUrl = "", int cartItemQuantity = 0, int cartItemProductID = 0)
+        public async Task<IActionResult> Login(AppLogin appLogin, string returnUrl, int cartItemQuantity = 0, int cartItemProductID = 0)
         {
             if (appLogin.Username != null)
             {
@@ -79,13 +80,13 @@ namespace WebApplicationTest.Controllers
                     if (correctPassword)
                     {
                         await _signInManager.SignInAsync(user, false);
-                        //if (cartItemProductID != 0 && cartItemQuantity != 0)
-                        //{
-                        //    bool addedItemToCart = _shoppingCartService.AddItemToCart(cartItemProductID, cartItemQuantity, user.Id);
-                        //}
+                        if (cartItemProductID != 0 && cartItemQuantity != 0)
+                        {
+                            bool addedItemToCart = _shoppingCartService.AddItemToCart(cartItemProductID, cartItemQuantity, user.Id);
+                        }
                         if (!String.IsNullOrEmpty(returnUrl))
                         {
-                            return Redirect("https://localhost:44338/" + returnUrl);
+                            return Redirect("https://localhost:44369/" + returnUrl);
                         }
                         return RedirectToAction("Index", "Product");
                     }
@@ -162,9 +163,6 @@ namespace WebApplicationTest.Controllers
             return View();
         }
 
-        public IActionResult Contact()
-        {
-            return View();
-        }
+        
     }
 }

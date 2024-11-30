@@ -21,6 +21,7 @@
     </header>
     <nav class="sidebar-filter">
         <p id="filter-announcement">Filter By:</p>
+        @*FIXX FILTERING OPTIONS FOR COMPANY (MOST SOLD PRODUCTS FROM THE COMPANY, PRODUCTS FROM THE COMPANY THAT BROUGHT THE MOST REVENUE)*@
         <p class="filter-option">Category</p>
         @foreach (var filterOption in Model.Categories)
         {
@@ -68,55 +69,17 @@
                     <a class="btn btn-success" style="font-size: 24px;" href="@Url.Action("Create", "Product")">Add Product</a>
                 </div>
                 <div class="products-display-grid">
-
-                    @foreach (var product in Model.Products)
-                    {
-                        <div class="product-card">
-                            <a style="text-decoration: none" class="details-link" href="@Url.Action("Details", "Product", new {productID = product.ID})">
-                                <img src="@product.Image">
-                                <div class="product-info">
-                                    <div class="product-rating">
-                                        @for (int i = 1; i <= 5; i++)
-                                        {
-                                            if (i <= product.AverageRating)
-                                            {
-                                                <i class="fa-solid fa-star fa-sm" style="color: #29db47;"></i>
-                                            }
-                                            else if (product.AverageRating >= (i - 1) + 0.5 && product.AverageRating < i)
-                                            {
-                                                <i class="fa-solid fa-star-half-stroke fa-sm" style="color: #29db47;"></i>
-                                            }
-                                            else
-                                            {
-                                                <i class="fa-regular fa-star fa-sm"></i>
-                                            }
-                                        }
-                                    </div>
-                                    <div class="product-name-container">
-                                        <h3 class="product-name">@product.Name</h3>
-                                    </div>
-                                    <h5 class="product-category">@product.Category.Name</h5>
-                                    <h3 class="product-price">$@product.Price</h3>
-                                </div>
-                            </a>
-                            <div class="product-buttons-column-box">
-                                <div class="product-buttons-flexbox">
-                                    <a style="font-size: 18px; padding: 10px 30px; border-radius: 7px;" class="btn btn-primary" href="@Url.Action("Update", "Product", new {productID = @product.ID})">Update</a>
-                                    <a style="text-decoration: none" href="@Url.Action("Details", "Product", new {productID = @product.ID})" class="details-button">Details</a>
-                                </div>
-                                <div class="product-buttons-flexbox">
-                                    @if (!product.Archived)
-                                    {
-                                        <a style="font-size: 18px; padding: 10px 30px; border-radius: 7px;" class="btn btn-info" href="@Url.Action("ManageProductArchiving", "Product", new {productID = product.ID, option = 1})">Archive</a>
-                                    }
-                                    else
-                                    {
-                                        <a style="font-size: 18px; padding: 10px 30px; border-radius: 7px;" class="btn btn-success" href="@Url.Action("ManageProductArchiving", "Product", new {productID = product.ID, option = 2})">Un-Archive</a>
-                                    }
-                                </div>
-                            </div>
-
-                        </div>
+                    
+                    @{
+                        var products = Model.Products;
+                        var currentUser = Model.User;
+                        ProductsCardViewModel productsViewModel = new ProductsCardViewModel
+                        {
+                            Products = products,
+                            User = currentUser,
+                            CompanyProducts = true
+                        };
+                        Html.RenderPartial("_ProductsGridPartial", productsViewModel);
                     }
                 </div>
             </div>

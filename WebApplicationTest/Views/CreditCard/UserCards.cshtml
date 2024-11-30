@@ -1,0 +1,59 @@
+﻿@model IEnumerable<CreditCard>
+
+@{
+    Layout = null;
+}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+<link href="~/css/general.css" rel="stylesheet" />
+
+<header class="header">
+    <partial name="_HeaderPartial" />
+</header>
+<div class="add-card-button-container">
+    <a style="margin-bottom: 15px;" class="btn btn-outline-primary add-card-button" href="@Url.Action("Create", "CreditCard")">Add a Credit Card</a>
+</div>
+<div class="container shadow p-3 mb-5 bg-white rounded">
+    <div class="row">
+        <div class="col-lg-12 col-12">
+            <div class="row">
+                <div class="col-12">
+                    <table id="credit-cards-table" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Card Number</th>
+                                <th>Name On Card</th>
+                                <th>CVV</th>
+                                <th>Expiry</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var card in @Model)
+                            {
+                                <tr>
+                                    <td>@card.CardNumber</td>
+                                    <td>@card.NameOnCard</td>
+                                    <td>@card.CVV</td>
+                                    <td>@card.Expiry</td>
+                                    <td> <a class="btn btn-danger" href="@Url.Action("Delete", "CreditCard", new {cardID = card.ID})">Remove</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $.noConflict();
+    jQuery(document).ready(function ($) {
+        $('#credit-cards-table').DataTable();
+    });
+</script>

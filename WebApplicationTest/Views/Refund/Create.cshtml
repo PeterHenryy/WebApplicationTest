@@ -1,0 +1,37 @@
+﻿@model Refund
+
+<form asp-controller="Refund" asp-action="Create">
+    <input type="hidden" asp-for="TransactionID" />
+    <input type="hidden" asp-for="UserID" />
+    <input type="hidden" asp-for="ProductID" />
+    <input type="hidden" asp-for="TransactionItemID" />
+    <p>Select a reason for your refund</p>
+    <select asp-for="Reason" id="reasonSelect">
+        @{
+            var refundReasons = RefundReasons.Reasons;
+        }
+        @for (int i = 0; i < refundReasons.Count(); i++)
+        {
+            <option value="@refundReasons[i]">@refundReasons[i]</option>
+        }
+    </select>
+
+    <div id="customReasonInput" class="form-row" style="display:none;">
+        <input type="text" asp-for="Reason" placeholder="Enter your custom reason" />
+    </div>
+    <button type="submit" class="btn btn-primary">Request Refund</button>
+</form>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#reasonSelect").change(function () {
+            if ($(this).val() === "Other") {
+                $("#customReasonInput").show();
+            } else {
+                $("#customReasonInput").hide();
+            }
+        });
+    });
+</script>

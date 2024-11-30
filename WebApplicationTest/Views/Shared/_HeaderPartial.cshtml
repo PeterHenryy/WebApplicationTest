@@ -21,7 +21,7 @@
         <li class="header-item"> <a href="@Url.Action("Index", "Product")">Home</a></li>
         <li class="header-item"><a href="@Url.Action("ProductsDisplay", "Product")">Products</a></li>
         <li class="header-item"><a href="@Url.Action("About", "AppUser")">About</a></li>
-        <li class="header-item"><a href="@Url.Action("Contact", "AppUser")">Contact</a></li>
+        <li class="header-item"><a href="@Url.Action("Create", "Contact")">Contact</a></li>
     </ul>
     <div class="user-options">
         @if (User.IsInRole(UserRolesEnum.Admin.ToString()))

@@ -119,6 +119,9 @@ namespace WebApplicationTest.Services
         }
         public void UpdateUserRewardPoints(double transactionTotal, AppUser _currentUser, bool paidWithPoints = false)
         {
+            //FIXX -> User needs to lose reward points if he refunds product bought with money
+            // if user bought refunded product with points, he needs to gain back the points after refund
+            
             if (paidWithPoints)
             {
                 _currentUser.UserRewardPoints -= transactionTotal * 5;

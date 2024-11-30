@@ -1,0 +1,82 @@
+﻿@model IEnumerable<Review>
+
+@{
+    Layout = null;
+}
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.js"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/jquery.dataTables.css" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+<link href="~/css/general.css" rel="stylesheet" />
+
+<header class="header">
+    <partial name="_HeaderPartial" />
+</header>
+
+<body style="background-color: rgb(230,230,230)">
+    <div class="container shadow p-3 mb-5 bg-white rounded">
+        <div class="row">
+            <div class="col-lg-12 col-12">
+                <div class="row">
+                    <div class="col-12">
+                        <table id="reviews-table" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Product Reviewed</th>
+                                    <th>Rating</th>
+                                    <th>Body</th>
+                                    <th>Date</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var review in @Model)
+                                {
+                                    <tr>
+                                        <td>@review.Product.Name</td>
+                                        <td>
+                                            <div class="rating-container">
+                                                <p class="review-rating">@review.Rating</p>
+                                                <div class="stars-container">
+                                                    @for (int i = 1; i <= 5; i++)
+                                                    {
+                                                        if (i <= review.Rating)
+                                                        {
+                                                            <i class="fa-solid fa-star fa-sm" style="color: #29db47;"></i>
+                                                        }
+                                                        else if (review.Rating >= (i - 1) + 0.5 && review.Rating < i)
+                                                        {
+                                                            <i class="fa-solid fa-star-half-stroke fa-sm" style="color: #29db47;"></i>
+                                                        }
+                                                        else
+                                                        {
+                                                            <i class="fa-regular fa-star fa-sm"></i>
+                                                        }
+                                                    }
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>@review.Body</td>
+                                        <td>@review.Date.ToString("MM/dd/yyyy")</td>
+                                        <td><a class="btn btn-danger" href="@Url.Action("Delete", "Review", new {reviewID = @review.ID})">Delete</a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+<script>
+    $.noConflict();
+    jQuery(document).ready(function ($) {
+        $('#reviews-table').DataTable();
+    });
+</script>
+

@@ -1,0 +1,12 @@
+﻿.print-button-container,
+.add-card-button-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.print-button,
+.add-card-button {
+    text-align: center;
+    font-size: 24px;
+}
