@@ -1,0 +1,189 @@
+﻿@model CompanyStatsViewModel
+
+@{
+    Layout = null;
+}
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/site.css" />
+<link href="~/css/general.css" rel="stylesheet" />
+<link href="~/css/company-stats.css" rel="stylesheet" />
+<link href="~/css/shoppingcart.css" rel="stylesheet" />
+<link href="~/css/productdetails.css" rel="stylesheet" />
+
+<body style="background-color: rgb(230,230,230)">
+
+    <header class="header">
+        <partial name="_HeaderPartial" />
+    </header>
+    <div class="container col-8">
+        <div class="row justify-content-between">
+            <div class="col-7 shadow p-3 mb-5 bg-white rounded">
+                <div class="general-stats">
+                    <div class="company-logo-container">
+                        <img class="company-logo" src="@Model.Company.Logo" />
+                    </div>
+                    <div class="company-statistics-container">
+                        <p class="company-name">@Model.Company.Name</p>
+                        <p class="statistics-of-year">Current statistics of @DateTime.Now.Year:</p>
+                        <div class="stats-container">
+                            <div class="specific-stat-container">
+                                <div class="icon-container little-diamond">
+                                    <i class="fa-sharp fa-regular fa-gem fa-2xl" style="color: #ffffff;"></i>
+                                </div>
+                                <div class="stats-display">
+                                    <p class="stat-show">$@Model.YearRevenue.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture)</p>
+                                    <p class="stat-label">Income</p>
+                                </div>
+                            </div>
+                            <div class="specific-stat-container">
+                                <div class="icon-container customers">
+                                    <i class="fa-solid fa-users fa-2xl"></i>
+                                </div>
+                                <div class="stats-display">
+                                    <p class="stat-show">@Model.YearCustomers</p>
+                                    <p class="stat-label">Customers</p>
+                                </div>
+                            </div>
+                            <div class="specific-stat-container">
+                                <div class="icon-container orders">
+                                    <i class="fa-solid fa-cart-shopping fa-2xl" style="color: rgb(0,0,0)" aria-hidden="true"></i>
+                                </div>
+                                <div class="stats-display">
+                                    <p class="stat-show">@Model.YearOrders</p>
+                                    <p class="stat-label">Orders</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="revenue-total-and-image">
+                <div class="revenue-image-container">
+                    <img class="revenue-image" src="~/Img/company-balance.webp" />
+                </div>
+                <div class="revenue-total-container">
+                    <p class="revenue-display">$@Model.Company.Revenue.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture)</p>
+                    <p class="total-revenue">Total Revenue</p>
+                </div>
+            </div>
+
+            <div class="col-12 shadow p-3 mb-5 bg-white rounded">
+                <div>
+                    <canvas id="company-chart"></canvas>
+                </div>
+            </div>
+        </div>
+        @if (Model.Company.TotalSales > 0)
+        {
+
+            <div class="row justify-content-between">
+                <div class="purchased-products-container" style="height: 1100px;">
+                    <p class="table-announcement">Latest Purchased Company Products</p>
+                    <div class="cart-products-container">
+                        @foreach (var item in Model.CompanyPurchasedItems)
+                        {
+                            <div class="cart-product js-cart-product-@item.ProductID">
+                                <img src="@item.Product.Image" style="width: 200px;height: 200px;" class="cart-product-image">
+                                <div class="cart-product-info">
+                                    <p class="cart-product-name">@item.Product.Name</p>
+                                    <div class="cart-product-rating">
+                                        @for (int i = 1; i <= 5; i++)
+                                        {
+                                            if (i <= @item.Product.AverageRating)
+                                            {
+                                                <i class="fa-solid fa-star fa-sm" style="color: #29db47;"></i>
+                                            }
+                                            else if (@item.Product.AverageRating >= (i - 1) + 0.5 && @item.Product.AverageRating < i)
+                                            {
+                                                <i class="fa-solid fa-star-half-stroke fa-sm" style="color: #29db47;"></i>
+                                            }
+                                            else
+                                            {
+                                                <i class="fa-regular fa-star fa-sm"></i>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <p style="margin-bottom: 10px;">Delivery Chosen:</p>
+                                    <p>@item.ShippingOption</p>
+                                </div>
+
+                                <div class="item-quantity-and-price">
+                                    <div class="quantity-container">
+                                        <p style="margin-bottom: 5px;">Quantity Bought: @item.Quantity</p>
+                                    </div>
+
+                                    <div class="prices-container">
+                                        @{
+                                            double productTotalPrice = @item.Product.Price * @item.Quantity;
+                                            string formattedTotalPrice = productTotalPrice.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
+                                            double productPrice = item.Product.Price;
+                                            string formattedPrice = productPrice.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
+                                        }
+                                        <span class="cart-product-price">$@formattedPrice each</span>
+                                    </div>
+                                    <span class="cart-product-total-price ">Total: $<span class="product-total js-product-total-@item.ProductID">@formattedTotalPrice</span></span>
+                                </div>
+                            </div>
+                        }
+                        <a class="btn btn-primary" style="font-size: 20px;" href="@Url.Action("CompanyPurchasedProducts", "Company")">View All</a>
+                    </div>
+
+                </div>
+                @if (Model.CompanyProductsReviews.Count > 0)
+                {
+                    <div class="latest-reviews-container p-3 mb-5 bg-white rounded">
+                        <p class="table-announcement">Latest Reviews on Company Products</p>
+                        @foreach (var review in Model.CompanyProductsReviews)
+                        {
+                            string reviewVibe = (review.Rating > 3) ? "review-container-green" : "review-container-red";
+                            <div class="review-wraper">
+
+                                <div class="@reviewVibe review-adjusted review-height" style="margin-bottom: 20px; padding: 10px;">
+                                    <p style="font-weight: bold; font-size: 20px;">@review.Product.Name</p>
+                                    <div class="rating-container">
+                                        <p class="review-rating">@review.Rating</p>
+                                        <div class="stars-container">
+                                            @for (int i = 1; i <= 5; i++)
+                                            {
+                                                if (i <= review.Rating)
+                                                {
+                                                    <i class="fa-solid fa-star fa-sm" style="color: #29db47;"></i>
+                                                }
+                                                else if (review.Rating >= (i - 1) + 0.5 && review.Rating < i)
+                                                {
+                                                    <i class="fa-solid fa-star-half-stroke fa-sm" style="color: #29db47;"></i>
+                                                }
+                                                else
+                                                {
+                                                    <i class="fa-regular fa-star fa-sm"></i>
+                                                }
+                                            }
+                                        </div>
+                                    </div>
+                                    <div class="user">
+                                        <img class="user-profile-picture" src="@review.User.ProfilePicture">
+                                        <p class="username">@review.User.UserName</p>
+                                    </div>
+                                    <p class="review-body">@review.Body</p>
+                                </div>
+                            </div>
+
+                        }
+                        <div class="view-all-container">
+                            <a class="btn btn-primary" style="font-size: 20px;" href="@Url.Action("CompanyProductReviews", "Company")">View All</a>
+                        </div>
+                    </div>
+                }
+
+            </div>
+        }
+
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="~/js/company-stats.js"></script>
+</body>
