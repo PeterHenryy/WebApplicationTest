@@ -43,7 +43,7 @@ $(document).ready(function () {
                         // Proceed with form submission
                         $('#transactionForm').off('submit').submit();
                     } else {
-                        alert('Reward Points are not valid.');
+                        alert('You do not have enough reward points for this purchase! You can check how many reward points you have by looking to the right of your name in the website header!');
                     }
                 },
                 error: function () {

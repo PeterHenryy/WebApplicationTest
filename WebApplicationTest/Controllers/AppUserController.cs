@@ -62,7 +62,7 @@ namespace WebApplicationTest.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(AppLogin appLogin, string returnUrl, int cartItemQuantity = 0, int cartItemProductID = 0)
+        public async Task<IActionResult> Login(AppLogin appLogin, string returnUrl = "", int cartItemQuantity = 0, int cartItemProductID = 0)
         {
             if (appLogin.Username != null)
             {
@@ -86,7 +86,7 @@ namespace WebApplicationTest.Controllers
                         }
                         if (!String.IsNullOrEmpty(returnUrl))
                         {
-                            return Redirect("https://localhost:44369/" + returnUrl);
+                            return Redirect("https://the-flaming-shop-c7c312b11357.herokuapp.com/" + returnUrl);
                         }
                         return RedirectToAction("Index", "Product");
                     }

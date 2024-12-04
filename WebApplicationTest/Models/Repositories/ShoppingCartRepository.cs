@@ -174,5 +174,11 @@ namespace WebApplicationTest.Models.Repositories
             List<DeliveryOption> options = _context.DeliveryOptions.ToList();
             return options;
         }
+
+        public IEnumerable<Product> GetPopularProducts()
+        {
+            var products = _context.Products.Include(x => x.Category).OrderByDescending(x => x.AverageRating).Take(3);
+            return products;
+        }
     }
 }

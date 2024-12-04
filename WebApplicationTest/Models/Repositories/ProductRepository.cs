@@ -50,7 +50,7 @@ namespace WebApplicationTest.Models.Repositories
             return products;
         }
 
-        public Product GetProductByID(int productID)
+        public Product GetProductByID(int? productID)
         {
             var product = GetAllProducts().SingleOrDefault(x => x.ID == productID);
             return product;
@@ -156,7 +156,7 @@ namespace WebApplicationTest.Models.Repositories
 
         public List<TransactionItem> GetTransactionItems()
         {
-            var transactionItems = _context.TransactionItems.Include(x => x.Transaction).ToList();
+            var transactionItems = _context.TransactionItems.Include(x => x.Transaction).Include(x => x.Product).ToList();
             return transactionItems;
         }
     }

@@ -45,7 +45,7 @@
         <section>
             <div class="banner-container">
                 <div class="responsive-container">
-                    <a href="@Url.Action("CategoryFilter", "Product", new{categoryID = 3})">
+                    <a href="@Url.Action("ProductsDisplay", "Product", new {filterOption = "Category", optionIdentify = 3})">
                         <img class="banner" src="~/Img/phones.png" />
                     </a>
                 </div>
@@ -71,7 +71,7 @@
         <section>
             <div class="banner-container">
                 <div class="responsive-container">
-                    <a href="@Url.Action("CategoryFilter", "Product", new{categoryID = 2})">
+                    <a href="@Url.Action("ProductsDisplay", "Product", new {filterOption = "Category", optionIdentify = 2})">
                         <img class="banner" src="~/Img/leatherjackets.png" />
                     </a>
                 </div>
@@ -97,8 +97,7 @@
             <section>
                 <div class="banner-container">
                     <div class="responsive-container">
-                        @*FIXX THIS, NEED TO DIRECT TO PRODUCTS DISPLAY *@
-                        <a href="@Url.Action("CategoryFilter", "Product", new{categoryID = 1})">
+                        <a href="@Url.Action("ProductsDisplay", "Product", new {filterOption = "Category", optionIdentify = 1})">
                             <img src="~/Img/gymbanner.jpg">
                         </a>
                     </div>

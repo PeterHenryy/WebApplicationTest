@@ -32,11 +32,11 @@
         </div>
 
         <div class="buttons-box">
-            <select style="font-size: 20px;" class="btn btn-info" asp-for="Coupon.ProductID"
+            <select style="font-size: 20px;" class="btn btn-info" id="coupon-button"  asp-for="Coupon.ProductID"
                     asp-items="@(new SelectList(Model.Products, nameof(Product.ID), nameof(Product.Name)))">
                 <option>Add Coupon to a Product</option>
             </select>
-            <select style="font-size: 20px;" class="btn btn-primary" asp-for="Coupon.CategoryID"
+            <select style="font-size: 20px;" class="btn btn-primary" id="coupon-button" asp-for="Coupon.CategoryID"
                     asp-items="@(new SelectList(Model.Categories, nameof(Category.ID), nameof(Category.Name)))">
                 <option>Add Coupon to a Category</option>
             </select>

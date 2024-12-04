@@ -17,3 +17,7 @@ label {
 select:hover {
     cursor: pointer;
 }
+
+.coupon-button{
+    width: 400px;
+}

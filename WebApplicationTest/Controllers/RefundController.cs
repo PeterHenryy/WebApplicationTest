@@ -64,7 +64,10 @@ namespace WebApplicationTest.Controllers
             {
                 user.UserRewardPoints -= transactionItemTotal / 2;
             }
-            user.UserRewardPoints += transactionItemTotal * 5;
+            else
+            {
+                user.UserRewardPoints += transactionItemTotal * 5;
+            }
             await _userManager.UpdateAsync(user);
         }
     }

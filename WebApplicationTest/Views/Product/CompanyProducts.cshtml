@@ -21,20 +21,24 @@
     </header>
     <nav class="sidebar-filter">
         <p id="filter-announcement">Filter By:</p>
-        @*FIXX FILTERING OPTIONS FOR COMPANY (MOST SOLD PRODUCTS FROM THE COMPANY, PRODUCTS FROM THE COMPANY THAT BROUGHT THE MOST REVENUE)*@
-        <p class="filter-option">Category</p>
-        @foreach (var filterOption in Model.Categories)
-        {
-            <a style="text-decoration: none;" class="option" href="@Url.Action("ProductsDisplay", "Product", new {filterOption = "Category", optionIdentify = filterOption.ID })">
-                <div class="option-container">
-                    @{
-                        string iconName = filterOption.Name + "Icon.svg";
-                    }
-                    <img class="filter-icon" src="~/icons/@iconName">
-                    @filterOption.Name
-                </div>
-            </a>
-        }
+        <a style="text-decoration: none;" class="option" href="@Url.Action("CompanyProducts", "Product")">
+            <p class="filter-option">All Products</p>
+        </a>
+        <p class="filter-option">Sales</p>
+        <a style="text-decoration: none;" class="option" href="@Url.Action("CompanyProducts", "Product", new {filterOption = "Most Sold"})">
+            <div class="option-container">
+
+                <i class="fa-solid fa-money-bill-trend-up" style="color: #000000;"></i>
+                <p class="option">Most Sold</p>
+            </div>
+        </a>
+        <a style="text-decoration: none;" class="option" href="@Url.Action("CompanyProducts", "Product", new {filterOption = "Most Revenue"})">
+            <div class="option-container">
+
+                <i class="fa-solid fa-money-bill-trend-up" style="color: #000000;"></i>
+                <p class="option">Most Revenue</p>
+            </div>
+        </a>
         <p class="filter-option">Price</p>
         <a style="text-decoration: none;" class="option" href="@Url.Action("CompanyProducts", "Product", new {filterOption = "Price", optionIdentify = 1 })">
             <div class="option-container">

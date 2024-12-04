@@ -76,5 +76,11 @@ namespace WebApplicationTest.Services
             int itemsBought = cartItems.Sum(x => x.Quantity);
             return itemsBought;
         }
+
+        public IEnumerable<Product> GetPopularProducts()
+        {
+            var products = _shoppingCartRepository.GetPopularProducts();
+            return products;
+        }
     }
 }

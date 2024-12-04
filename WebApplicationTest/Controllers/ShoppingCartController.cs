@@ -27,6 +27,8 @@ namespace WebApplicationTest.Controllers
             shoppingCartViewModel.CartItems = _shoppingCartService.GetCartItems();
             shoppingCartViewModel.DeliveryOptions = _shoppingCartService.GetDeliveryOptions();
             shoppingCartViewModel.UserHasCreditCard = _currentUser.HasCreditCard;
+            shoppingCartViewModel.PopularProducts = _shoppingCartService.GetPopularProducts();
+            shoppingCartViewModel.User = _currentUser;
             return View(shoppingCartViewModel);
         }
         [HttpPost]

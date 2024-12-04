@@ -32,7 +32,7 @@ namespace WebApplicationTest.Services
             return products;
         }
 
-        public Product GetProductByID(int productID)
+        public Product GetProductByID(int? productID)
         {
             var product = _productRepos.GetProductByID(productID);
             return product;
@@ -232,6 +232,12 @@ namespace WebApplicationTest.Services
                 case "Rating":
                     filteredProducts = RatingFilter(optionIdentify);
                     break;
+                case "Most Sold":
+                    filteredProducts = SalesFilter();
+                    break;
+                case "Most Revenue":
+                    filteredProducts = SalesFilter("Most Revenue");
+                    break;
                 default:
                     break;
             }
@@ -269,10 +275,24 @@ namespace WebApplicationTest.Services
             return filteredProducts;
         }
 
-        //public IEnumerable<Product> MostSoldFilter()
-        //{
-        //    IEnumerable<Product> filteredProducts = GetAllProducts().OrderByDescending();
+        public List<Product> SalesFilter(string saleOption = "Most Sold")
+        {
+            var mostSoldProductsQuery = _productRepos.GetTransactionItems()
+                                                        .GroupBy(item => item.ProductID)
+                                                        .Select(group => new
+                                                        {
+                                                            ProductID = group.Key,
+                                                            QuantitySold = group.Sum(item => saleOption == "Most Sold" ? item.Quantity : item.Quantity * item.Product.Price)
+                                                        })
+                                                        .OrderByDescending(result => result.QuantitySold);
 
-        //}
+            List<Product> mostSoldProducts = new List<Product>();
+            foreach(var item in mostSoldProductsQuery)
+            {
+                var product = GetProductByID(item.ProductID);
+                mostSoldProducts.Add(product);
+            }
+            return mostSoldProducts;
+        }
     }
 }

@@ -3,6 +3,7 @@
     Layout = null;
 }
 
+<link href="~/css/productsindex.css" rel="stylesheet" />
 <link rel="stylesheet" href="~/css/general.css" />
 <link rel="stylesheet" href="~/css/header.css" />
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -136,8 +137,26 @@
     }
     else
     {
-        @*FIXX Improve this *@
         <h1 class="no-items-header" style="text-align: center;">You have no items in your cart!!</h1>
+        <h2 style="text-align: center;">Suggested Items to Add to Your Cart (our most popular products):</h2>
+        <div class="cart-wrapper">
+
+            <div class="products-wrapper">
+                @{
+
+                    var popularProducts = Model.PopularProducts;
+                    var currentUser = Model.User;
+                    ProductsCardViewModel viewModel = new ProductsCardViewModel
+                    {
+                        Products = popularProducts,
+                        User = currentUser
+                
+                    };
+                    Html.RenderPartial("_ProductsGridPartial", viewModel);
+                }
+            </div>
+        </div>
+        
     }
     <script src="~/js/shoppingCart.js"></script>
     <script src="https://kit.fontawesome.com/8da1ba04bb.js" crossorigin="anonymous"></script>

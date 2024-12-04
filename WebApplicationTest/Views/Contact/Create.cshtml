@@ -15,7 +15,6 @@
     <header class="header">
         <partial name="_HeaderPartial" />
     </header>
-    @*FIXX this contact form so its submited, create model for contact form to be stored in database*@
     <div class="container d-flex justify-content-center align-items-center">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 790 563" fill="none">
             <g id="Image">
@@ -313,7 +312,7 @@
             </g>
         </svg>
 
-        <form asp-controller="Contact" asp-action="Create">
+        <form asp-controller="Contact" asp-action="Create" onsubmit="onFormSubmitSuccess()" id="contact-form">
             <h1 class="title text-center mb-4">Talk to Us</h1>
             <!-- Name -->
             <div class="form-group position-relative">
@@ -339,4 +338,10 @@
             </div>
         </form>
     </div>
+    <script>
+        function onFormSubmitSuccess() {
+            alert('Thank you for contacting us, we will send you an email regarding your inquiry in 1-3 business days!');
+            document.getElementById('contact-form').reset(); 
+        }
+    </script>
 </body>

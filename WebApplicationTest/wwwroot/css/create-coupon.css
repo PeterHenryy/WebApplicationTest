@@ -2,11 +2,9 @@
 .create-button-container {
     display: flex;
     justify-content: center;
-}
-
-.buttons-box {
     column-gap: 30px;
 }
+
 
 .create-coupon {
     font-size: 24px;
@@ -20,4 +18,8 @@ label {
 
 select:hover {
     cursor: pointer;
+}
+
+#coupon-button{
+    width: 100%;
 }

@@ -22,6 +22,9 @@
     </header>
     <nav class="sidebar-filter">
         <p id="filter-announcement">Filter By:</p>
+        <a style="text-decoration: none;" class="option" href="@Url.Action("ProductsDisplay", "Product")">
+            <p class="filter-option">All Products</p>
+        </a>
         <p class="filter-option">Category</p>
         @foreach (var filterOption in Model.Categories)
         {
@@ -36,6 +39,14 @@
             </a>
         }
 
+        <p class="filter-option">Sales</p>
+        <a style="text-decoration: none;" class="option" href="@Url.Action("ProductsDisplay", "Product", new {filterOption = "Most Sold"})">
+            <div class="option-container">
+
+                <i class="fa-solid fa-money-bill-trend-up" style="color: #000000;"></i>
+                <p class="option">Most Sold</p>
+            </div>
+        </a>
         <p class="filter-option">Company</p>
         @foreach (var filterOption in Model.Companies)
         {
