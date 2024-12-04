@@ -7,3 +7,7 @@
 .review-rating{
     margin: 0;
 }
+
+.stars-container{
+    display: flex;
+}
