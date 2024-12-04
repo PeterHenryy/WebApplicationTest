@@ -1,0 +1,256 @@
+﻿
+.form-and-product-container {
+    display: flex;
+    font-family: Arial;
+}
+
+.main-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+}
+
+
+.purchase-announcement {
+    font-size: 24px;
+    text-align: center;
+    width: 100%;
+}
+
+.form-and-product-container {
+    display: flex;
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+    border-radius: 8px;
+    background-color: white;
+    overflow: hidden;
+    width: 50%;
+}
+
+.transaction-form-container {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+}
+
+.transaction-form {
+    width: 100%;
+}
+
+.info-row {
+    display: flex;
+    column-gap: 20px;
+    align-items: center;
+}
+
+.transaction-form-input {
+    margin-top: 20px;
+    padding: 10px;
+    flex: 1;
+    font-size: 20px;
+    width: 100%;
+}
+
+    .transaction-form-input::placeholder {
+        font-size: 20px;
+    }
+
+.payment-methods-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    margin-bottom: 30px;
+    row-gap: 10px;
+}
+
+#payment-method-label {
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.payment-method {
+    font-size: 20px;
+    margin: 0;
+}
+
+.product-picture {
+    width: 650px;
+    height: 650px;
+}
+
+.transaction-purchase-button {
+    border: none;
+    margin-top: 50px;
+    border-radius: 7px;
+    padding: 10px 100px;
+    width: 100%;
+    background-color: limegreen;
+    color: white;
+    font-size: 30px;
+    font-family: Arial;
+}
+
+    .transaction-purchase-button:hover {
+        cursor: pointer;
+    }
+
+.quantity-chosen {
+    font-size: 20px;
+}
+
+.transaction-total {
+    margin-top: 10px;
+    font-size: 26px;
+}
+
+.total-price {
+    color: green;
+}
+
+.dollar-sign {
+    color: green;
+}
+
+.add-card-button {
+    padding: 10px;
+    background-color: royalblue;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    text-decoration: none;
+}
+
+.purchase-summary,
+.summary-products {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.purchase-summary {
+    padding: 15px;
+    background-color: rgb(52, 73, 94);
+}
+
+.summary-products {
+    overflow: auto;
+    padding-right: 20px;
+    max-height: 360px;
+    scrollbar-width: thin;
+}
+
+    .summary-products::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .summary-products::-webkit-scrollbar-thumb {
+        background-color: rgb(219, 112, 147);
+    }
+
+    .summary-products::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+
+.summary-product-container p {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 20px;
+    max-width: 300px;
+}
+
+.summary-product-container {
+    display: flex;
+    column-gap: 15px;
+    align-items: center;
+    color: white;
+}
+
+.summary-product-category,
+.money-bag {
+    width: 50px;
+    height: 50px;
+}
+
+.summary-product-price,
+.transaction-total,
+.summary-product-tax {
+    color: rgb(137, 149, 162);
+}
+
+.summary-product-name-quantity,
+.purchase-announcement,
+.summary-product-total {
+    color: white;
+}
+
+.summary-product-total {
+    font-size: 25px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.transaction-total {
+    font-size: 28px;
+    margin: 0;
+}
+
+.payment-method-radio {
+    transform: scale(1.5);
+    padding: 5px;
+}
+
+.transaction-total-display {
+    row-gap: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+}
+
+.credit-card-options {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+
+
+.credit-card-selector {
+    border-radius: 4px;
+    font-size: 16px;
+    padding: 8px 12px;
+    background-color: royalblue;
+    color: white;
+}
+
+    .credit-card-selector:hover {
+        cursor: pointer;
+    }
+
+.payment-options {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+
+.card-payment-option,
+.points-payment-option {
+    display: flex;
+    column-gap: 10px;
+}
+
+.add-card-form-container {
+    display: none;
+}
+
+.js-add-card-button:hover {
+    cursor: pointer;
+}
+
+#submitBtn {
+    cursor: pointer;
+    color: white;
+}
