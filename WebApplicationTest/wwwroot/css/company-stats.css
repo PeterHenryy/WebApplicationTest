@@ -348,7 +348,7 @@
 .rating-container {
     display: flex;
     align-items: center;
-    column-gap: 5px;
+    column-gap: 8px;
 }
 
 .review-rating {
@@ -359,12 +359,34 @@
     display: flex;
 }
 
-.user{
+.user {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
     align-items: center;
     column-gap: 10px;
 }
 
 .username{
     margin: 0;
+}
+
+.review-body{
+    margin-left: 15px;
+}
+
+.review-container-green,
+.review-container-red {
+    border-radius: 8px;
+    padding: 30px;
+    margin-bottom: 50px;
+}
+
+.review-container-red {
+    box-shadow: 0px 0px 5px rgb(255, 0, 0, 0.9);
+}
+
+.review-container-green {
+    box-shadow: 0px 0px 5px rgb(128, 128, 0, 0.9);
 }
 
