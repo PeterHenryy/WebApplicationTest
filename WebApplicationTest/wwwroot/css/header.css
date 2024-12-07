@@ -34,15 +34,15 @@
     color: palevioletred;
 }
 
-    .header-items-list a {
-        text-decoration: none;
-        color: palevioletred;
-        cursor: pointer;
-    }
+.header-items-list a {
+    text-decoration: none;
+    color: palevioletred;
+    cursor: pointer;
+}
 
-        .header-items-list a:hover {
-            color: red;
-        }
+.header-items-list a:hover {
+    color: red;
+}
 
 .header-item:hover {
     color: red;
@@ -53,15 +53,15 @@
     position: relative;
 }
 
-    .options-menu-dropdown:hover {
-        cursor: pointer;
-    }
+.options-menu-dropdown:hover {
+    cursor: pointer;
+}
 
-    .options-menu-dropdown p {
-        margin: 0;
-        color: palevioletred;
-        display: inline-block;
-    }
+.options-menu-dropdown p {
+    margin: 0;
+    color: palevioletred;
+    display: inline-block;
+}
 
 
 .options-menu {
@@ -78,14 +78,14 @@
     white-space: nowrap;
 }
 
-    .options-menu a {
-        text-decoration: none;
-        color: black;
-    }
+.options-menu a {
+    text-decoration: none;
+    color: black;
+}
 
-        .options-menu a:hover {
-            color: palevioletred;
-        }
+.options-menu a:hover {
+    color: palevioletred;
+}
 
 .options-menu-dropdown:hover .options-menu {
     display: inline-block;
@@ -98,10 +98,10 @@
     font-size: 18px;
 }
 
-    .logout-button:hover {
-        cursor: pointer;
-        color: red;
-    }
+.logout-button:hover {
+    cursor: pointer;
+    color: red;
+}
 
 .shop-logo {
     width: 100px;
@@ -113,9 +113,10 @@
     align-items: center;
 }
 
-.user-profile-picture{
+.user-profile-picture {
     width: 36px;
     height: 36px;
+    border-radius: 50%;
 }
 
 .cart-icon-container {
