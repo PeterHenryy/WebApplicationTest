@@ -341,6 +341,30 @@
     column-gap: 40px;
 }
 
-    .products-wrapper div {
-        width: 400px;
-    }
+.products-wrapper div {
+    width: 400px;
+}
+
+.rating-container {
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+}
+
+.review-rating {
+    margin: 0;
+}
+
+.stars-container, .user {
+    display: flex;
+}
+
+.user{
+    align-items: center;
+    column-gap: 10px;
+}
+
+.username{
+    margin: 0;
+}
+
