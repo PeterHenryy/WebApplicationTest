@@ -35,5 +35,17 @@ namespace WebApplicationTest.Services
             bool deletedDislike = _ratingRepos.DeleteDislike(dislikeID);
             return deletedDislike;
         }
+
+        public IEnumerable<Like> GetLikes()
+        {
+            var likes = _ratingRepos.GetLikes();
+            return likes;
+        }
+
+        public IEnumerable<Dislike> GetDislikes()
+        {
+            var dislikes = _ratingRepos.GetDislikes();
+            return dislikes;
+        }
     }
 }

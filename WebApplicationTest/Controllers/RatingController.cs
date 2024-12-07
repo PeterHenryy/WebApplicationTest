@@ -33,18 +33,42 @@ namespace WebApplicationTest.Controllers
             return RedirectToAction("Details", "Product", new { productID = viewModel.ProductID });
         }
 
+        [HttpPost]
         public IActionResult Delete(int ratingChoice, int ratingID, int productID)
         {
+            bool success;
+
             if (ratingChoice == 1)
             {
-                bool deletedLike = _ratingService.DeleteLike(ratingID);
+                success = _ratingService.DeleteLike(ratingID);
             }
             else
             {
-                bool deletedDislike = _ratingService.DeleteDislike(ratingID);
+                success = _ratingService.DeleteDislike(ratingID);
             }
-            return RedirectToAction("Details", "Product", new { productID = productID });
 
+            if (success)
+            {
+                return Json(new { success = true });
+            }
+            else
+            {
+                return Json(new { success = false, message = "Failed to delete rating." });
+            }
+        }
+
+        [HttpGet]
+        public IActionResult GetReviewInformation(int reviewID)
+        {
+            int likes = _ratingService.GetLikes()?.Where(x => x.ReviewID == reviewID).Count() ?? 0;
+            int dislikes = _ratingService.GetDislikes()?.Where(x => x.ReviewID == reviewID).Count() ?? 0;
+
+            return Json(new
+            {
+                success = true,
+                likeCount = likes,
+                dislikeCount = dislikes
+            });
         }
     }
 }

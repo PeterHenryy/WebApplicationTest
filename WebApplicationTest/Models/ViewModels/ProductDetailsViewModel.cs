@@ -25,15 +25,15 @@ namespace WebApplicationTest.Models.ViewModels
             return comments;
         }
 
-        public int GetLikesPerReview(int reviewID)
+        public int GetLikesPerReview(int? reviewID)
         {
-            int likeCount = Likes.Where(x => x.ReviewID == reviewID).Count();
+            int likeCount = Likes?.Where(x => x.ReviewID == reviewID).Count() ?? 0;
             return likeCount;
         }
 
         public int GetDislikesPerReview(int reviewID)
         {
-            int dislikeCount = Dislikes.Where(x => x.ReviewID == reviewID).Count();
+            int dislikeCount = Dislikes?.Where(x => x.ReviewID == reviewID).Count() ?? 0;
             return dislikeCount;
         }
 

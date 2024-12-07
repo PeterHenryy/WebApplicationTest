@@ -71,5 +71,16 @@ namespace WebApplicationTest.Models.Repositories
             }
         }
 
+        public IEnumerable<Like> GetLikes()
+        {
+            var likes = _context.Likes.ToList();
+            return likes;
+        }
+
+        public IEnumerable<Dislike> GetDislikes()
+        {
+            var dislikes = _context.Dislikes.ToList();
+            return dislikes;
+        }
     }
 }

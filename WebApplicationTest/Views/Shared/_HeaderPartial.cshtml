@@ -50,7 +50,14 @@
             @await Component.InvokeAsync("ShoppingCartItems")
             <div class="options-menu-dropdown">
                 <div class="user-profile-and-name">
-                    <img class="user-profile-picture" src="~/icons/@currentUser.ProfilePicture">
+                    @if(currentUser.ProfilePicture == "user-solid.svg"){
+
+                        <img class="user-profile-picture" src="icons/user-solid.svg">
+                    }
+                    else{
+                        <img class="user-profile-picture" src="@currentUser.ProfilePicture">
+
+                    }
                     <p>@User.Identity.Name</p>
                 </div>
                 <ul class="options-menu">

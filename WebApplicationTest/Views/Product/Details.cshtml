@@ -4,6 +4,7 @@
 
 
 @*FIXX Add ajax to this page, user does something it appears on screen immediately*@
+@*FIXX User profile picture issues*@
 @model ProductDetailsViewModel
 <link rel="stylesheet" href="~/css/header.css" />
 <link rel="stylesheet" href="~/css/general.css" />
@@ -14,6 +15,7 @@
 <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <body style="background-color: rgb(230,230,230);">
     <header class="header">
@@ -133,7 +135,13 @@
                                 </div>
                                 <input type="hidden" value="@Model.ProductID" asp-for="Review.ProductID" />
                                 <div class="user">
-                                    <img class="user-profile-picture" src="@Model.CurrentUser.ProfilePicture">
+                                    @if (@Model.CurrentUser.ProfilePicture == "user-solid.svg"){
+                                        <img class="user-profile-picture" src="~/icons/user-solid.svg">
+
+                                    }
+                                    else{
+                                        <img class="user-profile-picture" src="@Model.CurrentUser.ProfilePicture">
+                                    }
                                     <textarea id="reviewBody" placeholder="Type your review here..." class="add-review-input" asp-for="Review.Body" required></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-primary" style="float: right;">Add Review</button>
@@ -167,7 +175,13 @@
                                     </div>
                                 </div>
                                 <div class="user">
-                                    <img class="user-profile-picture" src="@review.User.ProfilePicture">
+                                    @if (@review.User.ProfilePicture == "user-solid.svg"){
+                                        <img class="user-profile-picture" src="~/icons//user-solid.svg">
+
+                                    }
+                                    else{
+                                        <img class="user-profile-picture" src="@review.User.ProfilePicture">
+                                    }
                                     <p class="username">@review.User.UserName</p>
                                     <p class="review-date">@review.Date.ToString("MM/dd/yyyy")</p>
                                 </div>
@@ -179,90 +193,43 @@
                                     <div class="rating-buttons-container">
                                         @if (userLikeInReview != null)
                                         {
-                                            <a class="btn btn-secondary" href="@Url.Action("Delete", "Rating", new {ratingChoice = 1, ratingID = userLikeInReview.ID, productID = Model.ProductID})"><i class="fa-solid fa-thumbs-up fa-sm"></i> @reviewLikeCounter</a>
-                                            <a class="btn btn-danger"><i class="fa-solid fa-thumbs-down fa-sm"></i> @reviewDislikeCounter</a>
+                                            <button class="btn btn-success" disabled>
+                                                <i class="fa-solid fa-thumbs-up fa-sm"></i> @reviewLikeCounter
+                                            </button>
+                                            <button class="btn btn-danger" disabled>
+                                                <i class="fa-solid fa-thumbs-down fa-sm"></i> @reviewDislikeCounter
+                                            </button>
                                         }
                                         else if (userDislikeInReview != null)
                                         {
-                                            <a class="btn btn-success"><i class="fa-solid fa-thumbs-up fa-sm"></i> @reviewLikeCounter</a>
-                                            <a class="btn btn-secondary" href="@Url.Action("Delete", "Rating", new {ratingChoice = 2, ratingID = userDislikeInReview.ID, productID = Model.ProductID})"><i class="fa-solid fa-thumbs-down fa-sm"></i> @reviewDislikeCounter</a>
+                                            <button class="btn btn-success" disabled>
+                                                <i class="fa-solid fa-thumbs-up fa-sm"></i> @reviewLikeCounter
+                                            </button>
+                                            <button class="btn btn-danger" disabled>
+                                                <i class="fa-solid fa-thumbs-down fa-sm"></i> @reviewDislikeCounter
+                                            </button>
                                         }
                                         else
                                         {
-                                            <form asp-controller="Rating" asp-action="Create">
+                                            <form id="likeForm" asp-controller="Rating" asp-action="Create">
                                                 <input type="text" hidden value="@review.ID" asp-for="LikeForm.ReviewID">
                                                 <input type="text" hidden value="@Model.CurrentUser.Id" asp-for="LikeForm.UserID">
                                                 <input type="text" hidden value="@Model.ProductID" asp-for="ProductID">
-                                                <button class="btn btn-success" type="submit"><i class="fa-solid fa-thumbs-up fa-sm"></i> @reviewLikeCounter</button>
+                                                <button class="btn btn-success" type="button" id="likeButton">
+                                                    <i class="fa-solid fa-thumbs-up fa-sm"></i> @reviewLikeCounter
+                                                </button>
                                             </form>
-                                            <form asp-controller="Rating" asp-action="Create">
+
+                                            <form id="dislikeForm" asp-controller="Rating" asp-action="Create">
                                                 <input type="text" hidden value="@review.ID" asp-for="DislikeForm.ReviewID">
                                                 <input type="text" hidden value="@Model.CurrentUser.Id" asp-for="DislikeForm.UserID">
                                                 <input type="text" hidden value="@Model.ProductID" asp-for="ProductID">
-                                                <button class="btn btn-danger" type="submit"><i class="fa-solid fa-thumbs-down fa-sm"></i> @reviewDislikeCounter</button>
+                                                <button class="btn btn-danger" type="button" id="dislikeButton">
+                                                    <i class="fa-solid fa-thumbs-down fa-sm"></i> @reviewDislikeCounter
+                                                </button>
                                             </form>
                                         }
                                     </div>
-                                }
-                                @if (@reviewComments.Any())
-                                {
-                                    <button id="showCommentsButton" class="btn btn-warning" data-comment-count="@reviewComments.Count()">Show Comments (@reviewComments.Count())</button>
-                                    @foreach (var comment in reviewComments)
-                                    {
-                                        int commentLikeCounter = Model.GetLikePerComment(comment.ID);
-                                        int commentDislikeCounter = Model.GetDislikesPerComment(comment.ID);
-                                        <div class="comment-container">
-                                            <div class="user">
-                                                <img class="user-profile-picture" src="@comment.User.ProfilePicture">
-                                                <p class="username">@comment.User.UserName</p>
-                                            </div>
-                                            <p class="comment-body">@comment.Body</p>
-                                            @if (Model.CurrentUser != null)
-                                            {
-                                                Like userLikeInComment = Model.FindUserLikeInComment(Model.CurrentUser.Id, comment.ID);
-                                                Dislike userDislikeInComment = Model.FindUserDislikeInComment(Model.CurrentUser.Id, comment.ID);
-                                                <div class="rating-buttons-container">
-                                                    @if (userLikeInComment != null)
-                                                    {
-                                                        <a class="btn btn-secondary" href="@Url.Action("Delete", "Rating", new {ratingChoice = 1, ratingID = userLikeInComment.ID, productID = Model.ProductID})"><i class="fa-solid fa-thumbs-up fa-sm"></i> @commentLikeCounter</a>
-                                                        <a class="btn btn-danger"><i class="fa-solid fa-thumbs-down fa-sm"></i> @commentDislikeCounter</a>
-                                                    }
-                                                    else if (userDislikeInComment != null)
-                                                    {
-                                                        <a class="btn btn-success"><i class="fa-solid fa-thumbs-up fa-sm"></i> @commentLikeCounter</a>
-                                                        <a class="btn btn-secondary" href="@Url.Action("Delete", "Rating", new {ratingChoice = 2, ratingID = userDislikeInComment.ID, productID = Model.ProductID})"><i class="fa-solid fa-thumbs-down fa-sm"></i> @commentDislikeCounter</a>
-                                                    }
-                                                    else
-                                                    {
-                                                        <form asp-controller="Rating" asp-action="Create">
-                                                            <input type="text" hidden value="@Model.CurrentUser.Id" asp-for="LikeForm.UserID">
-                                                            <input type="text" hidden value="@comment.ID" asp-for="LikeForm.CommentID">
-                                                            <input type="text" hidden value="@Model.ProductID" asp-for="ProductID">
-                                                            <button type="submit" class="btn btn-success"><i class="fa-solid fa-thumbs-up fa-sm"></i> @commentLikeCounter</button>
-                                                        </form>
-
-                                                        <form asp-controller="Rating" asp-action="Create">
-                                                            <input type="text" hidden value="@Model.CurrentUser.Id" asp-for="DislikeForm.UserID">
-                                                            <input type="text" hidden value="@comment.ID" asp-for="DislikeForm.CommentID">
-                                                            <input type="text" hidden value="@Model.ProductID" asp-for="ProductID">
-                                                            <button type="submit" class="btn btn-danger"><i class="fa-solid fa-thumbs-down fa-sm"></i> @commentDislikeCounter</button>
-                                                        </form>
-                                                    }
-                                                </div>
-                                            }
-                                        </div>
-                                    }
-                                }
-                                @if (Model.CurrentUser != null)
-                                {
-                                    <form asp-controller="Comment" asp-action="Create" id="comment-form">
-                                        <input type="text" hidden value="@Model.Product.ID" asp-for="Comment.ProductID">
-                                        <input type="text" hidden value="@review.ID" asp-for="Comment.ReviewID">
-                                        <label>Comment This Review</label>
-                                        <textarea class="form-control" placeholder="Type your comment..." asp-for="Comment.Body" rows="5"></textarea>
-
-                                        <button type="submit" class="btn btn-primary" id="add-comment-button">Add Comment</button>
-                                    </form>
                                 }
                             </div>
                         }
@@ -289,6 +256,7 @@
                                 </div>
                                 <input type="hidden" value="@Model.ProductID" asp-for="Review.ProductID" />
                                 <div class="user">
+                                    
                                     <img class="user-profile-picture" src="@Model.CurrentUser.ProfilePicture">
                                     <textarea id="reviewBody" placeholder="Type your review here..." class="add-review-input" asp-for="Review.Body" required></textarea>
                                 </div>
