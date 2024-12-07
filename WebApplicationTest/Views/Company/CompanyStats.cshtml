@@ -166,7 +166,13 @@
                                         </div>
                                     </div>
                                     <div class="user">
-                                        <img class="user-profile-picture" src="@review.User.ProfilePicture">
+                                        @if (@review.User.ProfilePicture == "user-solid.svg"){
+                                            <img class="user-profile-picture" src="~/icons/user-solid.svg">
+                                        }
+                                        else{
+
+                                            <img class="user-profile-picture" src="@review.User.ProfilePicture">
+                                        }
                                         <p class="username">@review.User.UserName</p>
                                     </div>
                                     <p class="review-body">@review.Body</p>

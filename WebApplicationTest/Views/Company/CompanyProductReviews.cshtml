@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="~/css/site.css" />
 <link href="~/css/general.css" rel="stylesheet" />
+<link href="~/css/user-reviews.css" rel="stylesheet" />
 
 <header class="header">
     <partial name="_HeaderPartial" />
@@ -37,7 +38,16 @@
                                 {
                                     <tr>
                                         <td>@review.Product.Name</td>
-                                        <td> <img style="width: 40px; height: 40px; border-radius: 50%;" src="@review.User.ProfilePicture"></td>
+                                        <td>
+                                            @if (@review.User.ProfilePicture == "user-solid.svg"){
+                                                <img style="width: 40px; height: 40px; border-radius: 50%;" src="~/icons/user-solid.svg " />
+
+                                            }
+                                            else{
+
+                                                <img style="width: 40px; height: 40px; border-radius: 50%;" src="@review.User.ProfilePicture">
+                                            }
+                                        </td>
                                         <td>@review.User.UserName</td>
                                         <td>
                                             <div class="rating-container">
