@@ -8,5 +8,6 @@ namespace WebApplicationTest.Models.ViewModels
         public List<Category> Categories { get; set; }
         public List<Company> Companies { get; set; }
         public AppUser User { get; set; }
+
     }
 }

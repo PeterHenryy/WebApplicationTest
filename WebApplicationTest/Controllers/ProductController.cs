@@ -37,8 +37,13 @@ namespace WebApplicationTest.Controllers
             var productDisplayViewModel = new ProductDisplayViewModel();
             productDisplayViewModel.Companies = _productService.GetAllCompanies();
             productDisplayViewModel.Categories = _productService.GetAllCategories();
-            productDisplayViewModel.Products = String.IsNullOrEmpty(filterOption) ? _productService.GetAllProducts() 
+            int maxProductsPerPage = 12;
+            productDisplayViewModel.Products = String.IsNullOrEmpty(filterOption) ? _productService.GetAllProducts().Take(maxProductsPerPage)
                                                                                      : _productService.GetFilteredProducts(filterOption, optionIdentify);
+            double numberOfPages = (double)_productService.GetAllProducts().Count() / maxProductsPerPage;
+            int roundedPages = (int)Math.Ceiling(numberOfPages);
+            ViewBag.NumberOfPages = roundedPages;
+            ViewBag.CurrentPageNumber = optionIdentify == 0 ? 1 : optionIdentify;
             productDisplayViewModel.User = _user;
             return View(productDisplayViewModel);
         }
@@ -106,7 +111,7 @@ namespace WebApplicationTest.Controllers
             return View(productVM.Product);
         }
 
-        public IActionResult Details(int productID)
+        public IActionResult Details(int productID, int pageNumber)
         {
             Product product = _productService.GetProductByID(productID);
             product.AverageRating = _productService.CalculateProductAverageRating(productID);
@@ -118,7 +123,13 @@ namespace WebApplicationTest.Controllers
                 detailsViewModel.HasUserReviewedProduct = _productService.HasUserReviewedProduct(productID, _user.Id);
             }
             detailsViewModel.Product = product;
-            detailsViewModel.Reviews = _productService.GetReviewsOfSpecificProduct(productID).ToList();
+            int maxReviewsPerPage = 5;
+            detailsViewModel.Reviews = pageNumber == 0 ? _productService.GetReviewsOfSpecificProduct(productID).Take(maxReviewsPerPage).ToList()
+                                                         : _productService.FilterReviews(pageNumber).ToList();
+            double numberOfPages = (double)_productService.GetReviewsOfSpecificProduct(productID).Count() / maxReviewsPerPage;
+            int roundedPages = (int)Math.Ceiling(numberOfPages);
+            ViewBag.NumberOfPages = roundedPages;
+            ViewBag.CurrentPageNumber = pageNumber == 0 ? 1 : pageNumber;
             detailsViewModel.Comments = _productService.GetAllComments().ToList();
             detailsViewModel.Likes = _productService.GetLikes().ToList();
             detailsViewModel.Dislikes = _productService.GetDislikes().ToList();
@@ -132,8 +143,13 @@ namespace WebApplicationTest.Controllers
         {
             var companyProductsDisplay = new ProductDisplayViewModel();
             companyProductsDisplay.Categories = _productService.GetAllCategories();
-            companyProductsDisplay.Products = String.IsNullOrEmpty(filterOption) ? _productService.GetCompanyProducts(_user.CompanyID)
+            int maxProductsPerPage = 12;
+            companyProductsDisplay.Products = String.IsNullOrEmpty(filterOption) ? _productService.GetCompanyProducts(_user.CompanyID).Take(maxProductsPerPage)
                                                                                     : _productService.GetFilteredProducts(filterOption, optionIdentify, _user.CompanyID);
+            double numberOfPages = (double)_productService.GetCompanyProducts(_user.CompanyID).Count() / maxProductsPerPage;
+            int roundedPages = (int)Math.Ceiling(numberOfPages);
+            ViewBag.NumberOfPages = roundedPages;
+            ViewBag.CurrentPageNumber = optionIdentify == 0 ? 1 : optionIdentify;
             return View(companyProductsDisplay);
         }
 

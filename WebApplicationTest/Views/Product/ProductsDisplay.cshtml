@@ -102,6 +102,25 @@
                         Html.RenderPartial("_ProductsGridPartial", productsViewModel);
                     }
                 </div>
+                <div class="pagination-container">
+
+                    <nav aria-label="...">
+                        <ul class="pagination">
+                            @for(int i = 1; i <= @ViewBag.NumberOfPages; i++){
+
+                                @if(@ViewBag.CurrentPageNumber == i){
+
+                                    <li class="page-item active">
+                                        <a class="page-link" href="#">@i<span class="sr-only">(current)</span></a>
+                                    </li>
+                                }
+                                else{
+                                    <li class="page-item"><a class="page-link" href="@Url.Action("CompanyProducts", "Product", new {filterOption = "Page", optionIdentify = @i})">@i</a></li>
+                                }
+                            }
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </section>
     </main>

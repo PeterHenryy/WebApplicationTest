@@ -238,6 +238,9 @@ namespace WebApplicationTest.Services
                 case "Most Revenue":
                     filteredProducts = SalesFilter("Most Revenue");
                     break;
+                case "Page":
+                    filteredProducts = PageFilter(optionIdentify);
+                    break;
                 default:
                     break;
             }
@@ -293,6 +296,42 @@ namespace WebApplicationTest.Services
                 mostSoldProducts.Add(product);
             }
             return mostSoldProducts;
+        }
+
+        public List<Product> PageFilter(int pageNumber)
+        {
+            List<Product> filteredProducts = new List<Product>();
+            List<Product> allProducts = GetAllProducts().ToList();
+            int productsPerPage = 12;
+            if(pageNumber == 1 | pageNumber == 0)
+            {
+                filteredProducts = GetAllProducts().Take(productsPerPage).ToList();
+                return filteredProducts;
+            }
+            for(int i = (pageNumber - 1) * productsPerPage; i < allProducts.Count; i++)
+            {
+                filteredProducts.Add(allProducts[i]);
+
+            }
+            return filteredProducts;
+        }
+
+        public IEnumerable<Review> FilterReviews(int pageNumber)
+        {
+            List<Review> filteredReviews = new List<Review>();
+            List<Review> allReviews = GetReviews().OrderByDescending(x => x.Date).ToList();
+            int reviewsPerPage = 5;
+            if (pageNumber == 1 | pageNumber == 0)
+            {
+                filteredReviews = GetReviews().OrderByDescending(x => x.Date).Take(reviewsPerPage).ToList();
+                return filteredReviews;
+            }
+            for (int i = (pageNumber - 1) * reviewsPerPage; i < allReviews.Count; i++)
+            {
+                filteredReviews.Add(allReviews[i]);
+
+            }
+            return filteredReviews;
         }
     }
 }

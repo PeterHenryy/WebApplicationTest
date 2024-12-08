@@ -285,3 +285,8 @@
     font-weight: bold;
     font-size: 18px;
 }
+
+.pagination-container {
+    display: flex;
+    justify-content: center;
+}
