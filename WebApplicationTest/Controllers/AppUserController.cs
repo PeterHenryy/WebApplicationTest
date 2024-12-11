@@ -39,8 +39,21 @@ namespace WebApplicationTest.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<RedirectToActionResult> Register(AppUser appUser)
+        public async Task<IActionResult> Register(AppUser appUser)
         {
+            var userByName = await _userManager.FindByNameAsync(appUser.UserName);
+            if (userByName != null)
+            {
+                ModelState.AddModelError(string.Empty, "Username already exists!");
+                return View(appUser);
+            }
+            var userByEmail = await _userManager.FindByEmailAsync(appUser.Email);
+            if (userByEmail != null)
+            {
+                ModelState.AddModelError(string.Empty, "Email already exists!");
+                return View(appUser);
+
+            }
             await HandleBlob(appUser);
             var role = UserRolesEnum.Customer.ToString();
             appUser.ProfilePicture = "user-solid.svg";

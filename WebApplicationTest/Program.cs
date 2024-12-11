@@ -43,6 +43,7 @@ builder.Services.AddTransient<ContactService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
 builder.Services.ConfigureApplicationCookie(x => x.LoginPath = "/AppUser/Login");
+
 builder.Services.AddSingleton(u => new BlobServiceClient(
         builder.Configuration.GetValue<string>("BlobConnection")
             ));
@@ -52,6 +53,11 @@ builder.Services.AddRazorPages()
 {
     options.ModelBindingMessageProvider.SetValueMustNotBeNullAccessor(
         _ => "");
+});
+builder.Services.Configure<IdentityOptions>(options =>
+{
+    options.User.AllowedUserNameCharacters = " abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+!*";
+    options.User.RequireUniqueEmail = true;
 });
 
 

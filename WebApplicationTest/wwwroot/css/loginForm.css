@@ -85,4 +85,5 @@ button, .register-button {
     font-weight: bold;
     font-size: 18px;
     font-family: Arial;
+    width: 100%;
 }

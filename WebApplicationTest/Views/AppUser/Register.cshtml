@@ -13,6 +13,7 @@
       <input type="text"  placeholder="Username" asp-for="UserName" required>
       <input type="email" placeholder="Email" asp-for="Email" required/>
       <input type="password"  placeholder="Password" asp-for="Password" required>
+      <div asp-validation-summary="All" class="error-login"></div>
 
       <button type="submit">Register</button>
       <input type="button" class="register-button" value="Login" onclick="@("window.location.href='" + @Url.Action("Login", "AppUser") + "'");" />
