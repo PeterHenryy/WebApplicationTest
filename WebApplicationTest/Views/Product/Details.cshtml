@@ -174,7 +174,7 @@
                                 </div>
                                 <div class="user">
                                     @if (@review.User.ProfilePicture == "user-solid.svg"){
-                                        <img class="user-profile-picture" src="~/icons//user-solid.svg">
+                                        <img class="user-profile-picture" src="~/icons/user-solid.svg">
 
                                     }
                                     else{
@@ -279,8 +279,16 @@
                                 </div>
                                 <input type="hidden" value="@Model.ProductID" asp-for="Review.ProductID" />
                                 <div class="user">
-                                    
-                                    <img class="user-profile-picture" src="@Model.CurrentUser.ProfilePicture">
+
+                                    @if (@Model.CurrentUser.ProfilePicture == "user-solid.svg")
+                                    {
+                                        <img class="user-profile-picture" src="~/icons/user-solid.svg">
+
+                                    }
+                                    else
+                                    {
+                                        <img class="user-profile-picture" src="@Model.CurrentUser.ProfilePicture">
+                                    }
                                     <textarea id="reviewBody" placeholder="Type your review here..." class="add-review-input" asp-for="Review.Body" required></textarea>
                                 </div>
                                 <button type="submit" class="btn btn-primary" style="float: right;">Add Review</button>
