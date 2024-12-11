@@ -143,6 +143,38 @@
     padding: 20px;
 }
 
+.sidebar-filter {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    background-color: rgb(25,39,52);
+    padding: 10px 20px;
+    position: fixed;
+    left: 0;
+    top: 75px;
+    font-family: Arial;
+    overflow: auto;
+    scrollbar-width: thin;
+    max-height: 95vh;
+}
+
+    .sidebar-filter::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    .sidebar-filter::-webkit-scrollbar-thumb {
+        background-color: rgb(219, 112, 147);
+    }
+
+    .sidebar-filter::-webkit-scrollbar-track {
+        background-color: transparent;
+    }
+
+    .sidebar-filter p {
+        margin-bottom: 0;
+        margin-top: 10px;
+    }
+
 
 #filter-announcement {
     font-size: 30px;
