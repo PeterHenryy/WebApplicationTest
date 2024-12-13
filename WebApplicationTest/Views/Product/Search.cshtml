@@ -1,0 +1,38 @@
+﻿@model ProductSearchViewModel
+@{
+    Layout = null;
+}
+<link rel="stylesheet" href="~/css/shoppingCart.css" />
+<link href="~/css/productsindex.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/css/general.css" />
+<link rel="stylesheet" href="~/css/responsiveContainer.css" />
+<link rel="stylesheet" href="~/css/header.css" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+<body style="background-color: rgb(230,230,230)">
+
+    <header class="header">
+        <partial name="_HeaderPartial" />
+    </header>
+
+    <h1 class="no-items-header" style="text-align: center;">No products found for your search: @ViewBag.SearchMessage</h1>
+    <h2 style="text-align: center;">But here are our most popular products!</h2>
+    <div class="cart-wrapper">
+
+        <div class="products-wrapper">
+            @{
+
+                var popularProducts = Model.PopularProducts;
+                var currentUser = Model.User;
+                ProductsCardViewModel viewModel = new ProductsCardViewModel
+                {
+                    Products = popularProducts,
+                    User = currentUser
+
+                };
+                Html.RenderPartial("_ProductsGridPartial", viewModel);
+            }
+        </div>
+    </div>
+    <partial name="_FooterPartial" />
+</body>

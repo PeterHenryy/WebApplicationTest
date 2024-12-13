@@ -7,7 +7,8 @@
 }
 
 .header-items-container {
-    width: 60%;
+    width: 100%;
+    max-width: 1700px; /* Adjusted to 2000px */
     position: relative;
     height: 75px;
     display: flex;
@@ -34,15 +35,15 @@
     color: palevioletred;
 }
 
-.header-items-list a {
-    text-decoration: none;
-    color: palevioletred;
-    cursor: pointer;
-}
+    .header-items-list a {
+        text-decoration: none;
+        color: palevioletred;
+        cursor: pointer;
+    }
 
-.header-items-list a:hover {
-    color: red;
-}
+        .header-items-list a:hover {
+            color: red;
+        }
 
 .header-item:hover {
     color: red;
@@ -53,16 +54,15 @@
     position: relative;
 }
 
-.options-menu-dropdown:hover {
-    cursor: pointer;
-}
+    .options-menu-dropdown:hover {
+        cursor: pointer;
+    }
 
-.options-menu-dropdown p {
-    margin: 0;
-    color: palevioletred;
-    display: inline-block;
-}
-
+    .options-menu-dropdown p {
+        margin: 0;
+        color: palevioletred;
+        display: inline-block;
+    }
 
 .options-menu {
     border-radius: 6px;
@@ -78,14 +78,14 @@
     white-space: nowrap;
 }
 
-.options-menu a {
-    text-decoration: none;
-    color: black;
-}
+    .options-menu a {
+        text-decoration: none;
+        color: black;
+    }
 
-.options-menu a:hover {
-    color: palevioletred;
-}
+        .options-menu a:hover {
+            color: palevioletred;
+        }
 
 .options-menu-dropdown:hover .options-menu {
     display: inline-block;
@@ -98,10 +98,10 @@
     font-size: 18px;
 }
 
-.logout-button:hover {
-    cursor: pointer;
-    color: red;
-}
+    .logout-button:hover {
+        cursor: pointer;
+        color: red;
+    }
 
 .shop-logo {
     width: 100px;
@@ -160,4 +160,89 @@
     display: flex;
     align-items: center;
     column-gap: 7px;
+}
+
+/* Search bar responsiveness */
+.search-container {
+    display: flex;
+    align-items: stretch;
+    column-gap: 10px;
+    flex-grow: 1; /* Allow the search bar to take up available space */
+    width: 100%; /* Make container take full width */
+    justify-content: center;
+    margin: 0;
+}
+
+.search-input {
+    width: 60%; /* Makes input responsive and fill the container */
+    max-width: 60%; /* Removes max-width to let the search input stretch fully */
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    box-sizing: border-box; /* Include padding in the element's total width */
+}
+
+.search-button {
+    background-color: palevioletred;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+    .search-button:hover {
+        background-color: rgb(110, 116, 225);
+    }
+
+/* Responsive Design for small screens */
+@media (max-width: 768px) {
+    .header-items-container {
+        width: 90%;
+        font-size: 16px;
+        flex-wrap: wrap; /* Allow items to wrap */
+    }
+
+    .header-items-list {
+        display: flex;
+        flex-direction: column;
+        width: 100%; /* Stack items vertically */
+        gap: 10px;
+    }
+
+    .user-options {
+        flex-wrap: wrap;
+        width: 100%; /* Stack items vertically on small screens */
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+
+    .search-container {
+        width: 100%;
+        margin-top: 10px; /* Push search bar to new line */
+        justify-content: space-between;
+    }
+
+    .search-input {
+        max-width: 100%; /* Full width for small screens */
+    }
+
+    .shop-logo {
+        width: 80px; /* Smaller logo on small screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .shop-logo {
+        width: 70px; /* Further decrease logo size */
+    }
+
+    .search-button {
+        padding: 8px 16px; /* Adjust button size */
+    }
+
+    .search-input {
+        padding: 8px; /* Adjust input padding */
+    }
 }

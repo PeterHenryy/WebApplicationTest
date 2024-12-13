@@ -18,65 +18,53 @@
         <img class="shop-logo" src="~/Img/flamingshop.png" />
     </a>
     <ul class="header-items-list">
-        <li class="header-item"> <a href="@Url.Action("Index", "Product")">Home</a></li>
+        <li class="header-item"><a href="@Url.Action("Index", "Product")">Home</a></li>
         <li class="header-item"><a href="@Url.Action("ProductsDisplay", "Product")">Products</a></li>
         <li class="header-item"><a href="@Url.Action("About", "AppUser")">About</a></li>
         <li class="header-item"><a href="@Url.Action("Create", "Contact")">Contact</a></li>
     </ul>
+
+    <form class="search-container" asp-controller="Product" asp-action="ProductsDisplay" method="get">
+        <input type="hidden" name="filterOption" value="Search"/>
+        <input type="text" name="searchedProduct" class="search-input" placeholder="Search for products..." required>
+        <button class="search-button" type="submit"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i></button>
+    </form>
+
+
     <div class="user-options">
         @if (User.IsInRole(UserRolesEnum.Admin.ToString()))
         {
             <div class="options-menu-dropdown">
-                <p class="options-menu-trigger">Admin Menu</p>
+                <p class="options-menu-trigger">Admin</p>
                 <ul class="options-menu">
-                    <li>
-                        <a href="@Url.Action("CompanyRefunds", "Refund", new {companyID = currentUser.CompanyID})">Refund Requests</a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("CompanyCoupons", "Coupon", new {companyID = currentUser.CompanyID})">Manage Coupons</a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("CompanyProducts", "Product", new {companyID = currentUser.CompanyID})">Company Products</a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("CompanyStats", "Company")">Company Stats</a>
-                    </li>
+                    <li><a href="@Url.Action("CompanyRefunds", "Refund", new {companyID = currentUser.CompanyID})">Refund Requests</a></li>
+                    <li><a href="@Url.Action("CompanyCoupons", "Coupon", new {companyID = currentUser.CompanyID})">Manage Coupons</a></li>
+                    <li><a href="@Url.Action("CompanyProducts", "Product", new {companyID = currentUser.CompanyID})">Company Products</a></li>
+                    <li><a href="@Url.Action("CompanyStats", "Company")">Company Stats</a></li>
                 </ul>
             </div>
         }
         @if (SignInManager.IsSignedIn(User))
         {
-
             @await Component.InvokeAsync("ShoppingCartItems")
             <div class="options-menu-dropdown">
                 <div class="user-profile-and-name">
-                    @if(currentUser.ProfilePicture == "user-solid.svg"){
-
+                    @if (currentUser.ProfilePicture == "user-solid.svg")
+                    {
                         <img class="user-profile-picture" src="~/icons/user-solid.svg">
                     }
-                    else{
+                    else
+                    {
                         <img class="user-profile-picture" src="@currentUser.ProfilePicture">
                     }
                     <p>@User.Identity.Name</p>
                 </div>
                 <ul class="options-menu">
-                    <li>
-                        <a href="@Url.Action("Update", "AppUser")">Update Profile</a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("UserCards", "CreditCard", new {userID = userIntID})">Credit Cards</a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("UserRefunds", "Refund", new {userID = userIntID})">Refunds</a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("UserReviews", "Review", new {userID = userIntID})">Your Reviews</a>
-                    </li>
-                    <li>
-                        <a href="@Url.Action("UserTransactions", "Transaction", new {userID = userIntID})">Activity</a>
-                    </li>
-                    <li>
-                    </li>
+                    <li><a href="@Url.Action("Update", "AppUser")">Update Profile</a></li>
+                    <li><a href="@Url.Action("UserCards", "CreditCard", new {userID = userIntID})">Credit Cards</a></li>
+                    <li><a href="@Url.Action("UserRefunds", "Refund", new {userID = userIntID})">Refunds</a></li>
+                    <li><a href="@Url.Action("UserReviews", "Review", new {userID = userIntID})">Your Reviews</a></li>
+                    <li><a href="@Url.Action("UserTransactions", "Transaction", new {userID = userIntID})">Activity</a></li>
                 </ul>
             </div>
 
@@ -97,16 +85,19 @@
         else
         {
             <ul class="header-items-list">
-                <li class="header-item">
-                    <a asp-controller="AppUser" asp-action="Register">Register</a>
-                </li>
-                <li class="header-item">
-                    <a asp-controller="AppUser" asp-action="Login">Login</a>
-                </li>
+                <li class="header-item"><a asp-controller="AppUser" asp-action="Register">Register</a></li>
+                <li class="header-item"><a asp-controller="AppUser" asp-action="Login">Login</a></li>
             </ul>
         }
     </div>
-</div>
-<script src="https://kit.fontawesome.com/8da1ba04bb.js" crossorigin="anonymous"></script>
+</div>  
 
+<script src="https://kit.fontawesome.com/8da1ba04bb.js" crossorigin="anonymous"></script>
+@if (TempData["NoProductsFoundMessage"] != null)
+{
+    <script type="text/javascript">
+        let message = '@Html.Raw(TempData["NoProductsFoundMessage"].ToString())';
+        alert(message);
+    </script>
+}
 

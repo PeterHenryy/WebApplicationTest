@@ -177,7 +177,7 @@ namespace WebApplicationTest.Models.Repositories
 
         public IEnumerable<Product> GetPopularProducts()
         {
-            var products = _context.Products.Include(x => x.Category).OrderByDescending(x => x.AverageRating).Take(3);
+            var products = _context.Products.Include(x => x.Category).OrderByDescending(x => x.AverageRating).Take(4);
             return products;
         }
     }

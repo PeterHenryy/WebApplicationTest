@@ -32,19 +32,50 @@ namespace WebApplicationTest.Controllers
             return View(productIndexViewModel);
         }
 
-        public IActionResult ProductsDisplay(string filterOption = "", int optionIdentify = 0)
+        public IActionResult ProductsDisplay(string filterOption = "", int optionIdentify = 0, int pageNumber = 1,string searchedProduct = "")
         {
+            //FIXX 
+
+            // After making a transaction, user will see his transactions, or after making a review , user sees his reviews, he needs to be able to click
+            // the product he reviewed or bought and be taken to its details page
+            // DIRECT THE USER TO SPECIAL VIEW TELLING HIM WE FOUND NO RESULTS
+
+            
             var productDisplayViewModel = new ProductDisplayViewModel();
             productDisplayViewModel.Companies = _productService.GetAllCompanies();
             productDisplayViewModel.Categories = _productService.GetAllCategories();
             int maxProductsPerPage = 12;
-            productDisplayViewModel.Products = String.IsNullOrEmpty(filterOption) ? _productService.GetAllProducts().Take(maxProductsPerPage)
-                                                                                     : _productService.GetFilteredProducts(filterOption, optionIdentify);
-            double numberOfPages = (double)_productService.GetAllProducts().Count() / maxProductsPerPage;
+            double numberOfPages = 0;
+            if (String.IsNullOrEmpty(filterOption))
+            {
+                var allProducts = _productService.GetAllProducts();
+                productDisplayViewModel.Products = allProducts.Take(maxProductsPerPage);
+                numberOfPages = (double)allProducts.Count() / maxProductsPerPage;
+            }
+            else
+            {
+                var filteredProducts = _productService.GetFilteredProducts(filterOption, optionIdentify, searchedProduct);
+                if(filteredProducts == null)
+                {
+                    filteredProducts = _productService.GetAllProducts();
+                }
+                productDisplayViewModel.Products = filteredProducts;
+                numberOfPages = (double)filteredProducts.Count() / maxProductsPerPage;
+            }
+
             int roundedPages = (int)Math.Ceiling(numberOfPages);
             ViewBag.NumberOfPages = roundedPages;
-            ViewBag.CurrentPageNumber = optionIdentify == 0 ? 1 : optionIdentify;
+            ViewBag.CurrentPageNumber = pageNumber;
+            ViewBag.OptionIdentify = optionIdentify;
+            ViewBag.FilterOption = filterOption;
+            ViewBag.SearchedProduct = searchedProduct;
             productDisplayViewModel.User = _user;
+            var productsFiltering = _productService.PageFilter(pageNumber, productDisplayViewModel.Products);
+            productDisplayViewModel.Products = productsFiltering;
+            if (!productDisplayViewModel.Products.Any())
+            {
+                return RedirectToAction("Search", new { search = searchedProduct });
+            }
             return View(productDisplayViewModel);
         }
 
@@ -139,13 +170,13 @@ namespace WebApplicationTest.Controllers
             return View(detailsViewModel);
         }
 
-        public IActionResult CompanyProducts(string filterOption = "", int optionIdentify = 0)
+        public IActionResult CompanyProducts(string filterOption = "", int optionIdentify = 0, string searchedProduct = "")
         {
             var companyProductsDisplay = new ProductDisplayViewModel();
             companyProductsDisplay.Categories = _productService.GetAllCategories();
             int maxProductsPerPage = 12;
             companyProductsDisplay.Products = String.IsNullOrEmpty(filterOption) ? _productService.GetCompanyProducts(_user.CompanyID).Take(maxProductsPerPage)
-                                                                                    : _productService.GetFilteredProducts(filterOption, optionIdentify, _user.CompanyID);
+                                                                                    : _productService.GetFilteredProducts(filterOption, optionIdentify, searchedProduct, _user.CompanyID);
             double numberOfPages = (double)_productService.GetCompanyProducts(_user.CompanyID).Count() / maxProductsPerPage;
             int roundedPages = (int)Math.Ceiling(numberOfPages);
             ViewBag.NumberOfPages = roundedPages;
@@ -159,7 +190,14 @@ namespace WebApplicationTest.Controllers
             return RedirectToAction("CompanyProducts", "Product");
         }
 
-        
+        public IActionResult Search(string search)
+        {
+            ViewBag.SearchMessage = search;
+            var productSearchVM = new ProductSearchViewModel();
+            productSearchVM.PopularProducts = _productService.GetPopularProducts();
+            productSearchVM.User = _user;
+            return View(productSearchVM);
+        }
         
     }
 }

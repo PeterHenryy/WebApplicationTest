@@ -159,5 +159,11 @@ namespace WebApplicationTest.Models.Repositories
             var transactionItems = _context.TransactionItems.Include(x => x.Transaction).Include(x => x.Product).ToList();
             return transactionItems;
         }
+
+        public IEnumerable<Product> GetPopularProducts()
+        {
+            var products = _context.Products.Include(x => x.Category).OrderByDescending(x => x.AverageRating).Take(4);
+            return products;
+        }
     }
 }

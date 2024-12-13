@@ -1,5 +1,7 @@
 ﻿using WebApplicationTest.Models.Repositories;
 using WebApplicationTest.Models;
+using NuGet.Protocol.Core.Types;
+using Microsoft.EntityFrameworkCore;
 
 namespace WebApplicationTest.Services
 {
@@ -215,7 +217,7 @@ namespace WebApplicationTest.Services
             return productSales;
         }
 
-        public IEnumerable<Product> GetFilteredProducts(string filterOption, int optionIdentify, int companyID = 0)
+        public IEnumerable<Product> GetFilteredProducts(string filterOption, int optionIdentify,  string searchedProduct, int companyID = 0)
         {
             IEnumerable<Product> filteredProducts = null;
             switch (filterOption)
@@ -238,8 +240,8 @@ namespace WebApplicationTest.Services
                 case "Most Revenue":
                     filteredProducts = SalesFilter("Most Revenue");
                     break;
-                case "Page":
-                    filteredProducts = PageFilter(optionIdentify);
+                case "Search":
+                    filteredProducts = SearchFilter(searchedProduct);
                     break;
                 default:
                     break;
@@ -298,19 +300,23 @@ namespace WebApplicationTest.Services
             return mostSoldProducts;
         }
 
-        public List<Product> PageFilter(int pageNumber)
+        public List<Product> PageFilter(int pageNumber, IEnumerable<Product> products = null)
         {
+            
             List<Product> filteredProducts = new List<Product>();
-            List<Product> allProducts = GetAllProducts().ToList();
+
             int productsPerPage = 12;
             if(pageNumber == 1 | pageNumber == 0)
             {
-                filteredProducts = GetAllProducts().Take(productsPerPage).ToList();
+                filteredProducts = products.Take(productsPerPage).ToList();
                 return filteredProducts;
             }
-            for(int i = (pageNumber - 1) * productsPerPage; i < allProducts.Count; i++)
+            int startingIndex = (pageNumber - 1) * productsPerPage;
+            for (int i = startingIndex; i < startingIndex + productsPerPage; i++)
             {
-                filteredProducts.Add(allProducts[i]);
+                if (i == products.Count()) break;
+
+                filteredProducts.Add(products.ElementAt(i));
 
             }
             return filteredProducts;
@@ -329,9 +335,31 @@ namespace WebApplicationTest.Services
             for (int i = (pageNumber - 1) * reviewsPerPage; i < allReviews.Count; i++)
             {
                 filteredReviews.Add(allReviews[i]);
-
             }
             return filteredReviews;
+        }
+
+        public IEnumerable<Product> SearchFilter(string searchedProduct)
+        {
+            IEnumerable<Product> products;
+            var categorySearched = GetAllCategories().Where(x => x.Name.Contains(searchedProduct, StringComparison.OrdinalIgnoreCase));
+            if (categorySearched.Count() != 0)
+            {
+                var categoryFound = categorySearched.First();
+                products = GetAllProducts().Where(x => x.CategoryID == categoryFound.ID);
+            }
+            else
+            {
+                products = GetAllProducts().Where(x => x.Name.Contains(searchedProduct, StringComparison.OrdinalIgnoreCase));
+            }
+           
+            return products;
+
+        }
+        public IEnumerable<Product> GetPopularProducts()
+        {
+            var products = _productRepos.GetPopularProducts();
+            return products;
         }
     }
 }
