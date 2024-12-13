@@ -67,6 +67,7 @@ namespace WebApplicationTest.Services
                 bool isCouponValid = couponValidator.Validate(coupon, item.Product);
                 if (isCouponValid)
                 {
+                    transaction.CouponCode = couponCode;
                     transaction.Total -= (transaction.Total * (coupon.DiscountPercentage / 100)) * 100 / 100;
                     couponValidator.CouponValid = isCouponValid;
                     couponValidator.CouponPercentage = coupon.DiscountPercentage;
@@ -86,7 +87,6 @@ namespace WebApplicationTest.Services
                 {
                     coupon.Quantity--;
                     UpdateCoupon(coupon);
-                    if (coupon.Quantity == 0) _couponRepos.Delete(coupon.ID);
                     return true;
                 }
             }

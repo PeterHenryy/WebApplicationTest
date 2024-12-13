@@ -44,7 +44,6 @@ namespace WebApplicationTest.Controllers
             var transactionViewModel = new TransactionViewModel();
             transactionViewModel.Transaction = new Transaction();
             Transaction currentTransaction = transactionViewModel.Transaction;
-            currentTransaction.CouponCode = couponCode;
             double cartTotal = _shoppingCartService.CalculateCartTotal();
             IEnumerable<CartItem> cartItems = _shoppingCartService.GetCartItems();
             _transactionService.CalculateTransactionTotal(cartTotal, currentTransaction, cartItems);
@@ -118,6 +117,9 @@ namespace WebApplicationTest.Controllers
             transactionItemsVM.TransactionTotal = "$" + transaction.Total.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
             transactionItemsVM.Refunds = _transactionService.GetAllUserRefunds(_currentUser.Id);
             transactionItemsVM.TransactionQuantityBought = transaction.ItemsBought;
+            if(!String.IsNullOrEmpty(transaction.CouponCode)) {
+                transactionItemsVM.Discount = _transactionService.GetCouponDiscount(transaction.CouponCode, transaction.Total);
+            }
             return View(transactionItemsVM);
         }
 

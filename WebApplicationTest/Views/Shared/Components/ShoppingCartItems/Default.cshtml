@@ -1,8 +1,15 @@
 ﻿@model int
 
-<div class="cart-icon-container">
-    <a href="@Url.Action("DisplayCartItems", "ShoppingCart")">
-        <i class="fa-solid fa-cart-shopping fa-2xl" style="color: #db7093;"></i>
-        <span class="cart-item-quantity">@Model</span>
-    </a>
-</div>
+<a href="@Url.Action("DisplayCartItems", "ShoppingCart")" style="text-decoration: none;">
+    <div class="cart-icon-container">
+        @if(Model < 100){
+            <span class="cart-item-quantity">@Model</span>
+        }
+        else{
+            <span class="cart-item-quantity">99+</span>
+        }
+        <i class="fa-solid fa-cart-shopping fa-2xl cart-icon" ></i>
+    </div>
+
+
+</a>

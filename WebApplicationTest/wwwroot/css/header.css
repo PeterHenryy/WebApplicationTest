@@ -119,16 +119,25 @@
     border-radius: 50%;
 }
 
+
 .cart-icon-container {
+    display: flex;
+    align-items: center;
     position: relative;
+    justify-content: center;
+    width: 40px;
+}
+
+.cart-icon {
+    position: absolute;
+    color: #db7093;
 }
 
 .cart-item-quantity {
-    font-size: 16px;
-    color: rgb(177,176,241);
-    position: absolute;
-    left: 47%;
-    bottom: -5px;
+    color: rgb(255, 255, 255);
+     position: relative; 
+    z-index: 2;
+    bottom: 5px;
 }
 
 .reward-points-container {

@@ -24,27 +24,33 @@
             @foreach (var item in Model.Transactionitems)
             {
                 <div class="cart-product js-cart-product-@item.ProductID">
-                    <img src="@item.Product.Image" class="cart-product-image">
-                    <div class="cart-product-info">
-                        <p class="cart-product-name">@item.Product.Name</p>
-                        <div class="cart-product-rating">
-                            @for (int i = 1; i <= 5; i++)
-                            {
-                                if (i <= @item.Product.AverageRating)
+                    <a href="@Url.Action("Details", "Product", new {productID = item.ProductID})" style="text-decoration: none; color: black">
+
+                        <img src="@item.Product.Image" class="cart-product-image">
+                    </a>
+                    <a href="@Url.Action("Details", "Product", new {productID = item.ProductID})" style="text-decoration: none; color: black">
+
+                        <div class="cart-product-info">
+                            <p class="cart-product-name">@item.Product.Name</p>
+                            <div class="cart-product-rating">
+                                @for (int i = 1; i <= 5; i++)
                                 {
-                                    <i class="fa-solid fa-star fa-sm" style="color: #29db47;"></i>
+                                    if (i <= @item.Product.AverageRating)
+                                    {
+                                        <i class="fa-solid fa-star fa-sm" style="color: #29db47;"></i>
+                                    }
+                                    else if (@item.Product.AverageRating >= (i - 1) + 0.5 && @item.Product.AverageRating < i)
+                                    {
+                                        <i class="fa-solid fa-star-half-stroke fa-sm" style="color: #29db47;"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fa-regular fa-star fa-sm"></i>
+                                    }
                                 }
-                                else if (@item.Product.AverageRating >= (i - 1) + 0.5 && @item.Product.AverageRating < i)
-                                {
-                                    <i class="fa-solid fa-star-half-stroke fa-sm" style="color: #29db47;"></i>
-                                }
-                                else
-                                {
-                                    <i class="fa-regular fa-star fa-sm"></i>
-                                }
-                            }
+                            </div>
                         </div>
-                    </div>
+                    </a>
 
                     <div>
                         <p style="margin-bottom: 10px;">Delivery Chosen:</p>
@@ -112,6 +118,10 @@
                         <p>Subtotal (@Model.TransactionQuantityBought @itemCount):</p>
                         <p class="shipping-handling">Shipping & Handling:</p>
                         <p class="estimated-tax">Estimated Tax:</p>
+                        @if(!String.IsNullOrEmpty(Model.Discount)){
+
+                            <p>Coupon Discount:</p>
+                        }
                     </div>
                     <div class="summary-column">
                         <p>$<span class="js-subtotal-price js-summary-price"></span></p>
@@ -120,6 +130,11 @@
                         }
                         <p>$@shippingTotalPrice</p>
                         <p>$<span class="tax-cost js-summary-price"></span></p>
+                        @if (!String.IsNullOrEmpty(Model.Discount))
+                        {
+
+                            <p>-$@Model.Discount</p>
+                        }
                     </div>
                 </div>
                 <hr class="summary-hr">

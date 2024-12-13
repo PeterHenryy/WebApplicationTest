@@ -36,7 +36,13 @@ function updateCartItemQuantity(quantity) {
     const cartItemQuantityElement = document.querySelector('.cart-item-quantity');
     let itemQuantity = Number(cartItemQuantityElement.innerHTML);
     itemQuantity += Number(quantity);
-    cartItemQuantityElement.innerHTML = itemQuantity;
+    if (itemQuantity < 100) {
+
+        cartItemQuantityElement.innerHTML = itemQuantity;
+    }
+    else {
+        cartItemQuantityElement.innerHTML = '99+';
+    }
 }
 
 function updateItemQuantityHTML(productID) {

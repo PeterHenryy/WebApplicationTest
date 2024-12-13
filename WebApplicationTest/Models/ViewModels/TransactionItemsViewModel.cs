@@ -12,5 +12,6 @@
             bool refundExists = Refunds.Any(x => x.TransactionItemID == transactionItemID);
             return refundExists;
         }
+        public string Discount { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using WebApplicationTest.Models.Identity;
 using WebApplicationTest.Models.Repositories;
 using WebApplicationTest.Models;
+using System.Globalization;
 
 namespace WebApplicationTest.Services
 {
@@ -134,6 +135,13 @@ namespace WebApplicationTest.Services
             return userRewardPoints >= transactionTotal * 5;
         }
 
-
+        public string GetCouponDiscount(string couponCode, double transactionTotal )
+        {
+            var discount = _transactionRepos.GetCoupons().FirstOrDefault(x => x.Code == couponCode).DiscountPercentage;
+            var transactionDiscount = transactionTotal * (discount / 100);
+            var roundedDiscount = Math.Round(transactionDiscount, 2);
+            var formattedDiscount = roundedDiscount.ToString("F2", CultureInfo.InvariantCulture);
+            return formattedDiscount;
+        }
     }
 }

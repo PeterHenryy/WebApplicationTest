@@ -37,7 +37,7 @@
                                 @foreach (var review in @Model)
                                 {
                                     <tr>
-                                        <td>@review.Product.Name</td>
+                                        <td> <a href="@Url.Action("Details", "Product", new {productID = review.ProductID})" style="text-decoration: none; color: black">@review.Product.Name</a></td>
                                         <td>
                                             <div class="rating-container">
                                                 <p class="review-rating">@review.Rating</p>

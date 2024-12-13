@@ -34,13 +34,6 @@ namespace WebApplicationTest.Controllers
 
         public IActionResult ProductsDisplay(string filterOption = "", int optionIdentify = 0, int pageNumber = 1,string searchedProduct = "")
         {
-            //FIXX 
-
-            // After making a transaction, user will see his transactions, or after making a review , user sees his reviews, he needs to be able to click
-            // the product he reviewed or bought and be taken to its details page
-            // DIRECT THE USER TO SPECIAL VIEW TELLING HIM WE FOUND NO RESULTS
-
-            
             var productDisplayViewModel = new ProductDisplayViewModel();
             productDisplayViewModel.Companies = _productService.GetAllCompanies();
             productDisplayViewModel.Categories = _productService.GetAllCategories();
