@@ -178,9 +178,11 @@
     margin-top: 50px;
 }
 
-.products-wrapper{
-    display: flex;
+.products-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     column-gap: 40px;
+    row-gap: 40px;
 }
 
 .products-wrapper div{
