@@ -246,8 +246,8 @@ namespace WebApplicationTest.Services
                 default:
                     break;
             }
-            
-            return companyID == 0 ? filteredProducts : filteredProducts.Where(x => x.CompanyID == companyID);
+           
+            return companyID == 0 ? filteredProducts : filteredProducts?.Where(x => x.CompanyID == companyID);
         }
 
         public IEnumerable<Product> CategoryFilter(int categoryID)

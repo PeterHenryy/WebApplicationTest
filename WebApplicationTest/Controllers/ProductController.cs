@@ -163,17 +163,46 @@ namespace WebApplicationTest.Controllers
             return View(detailsViewModel);
         }
 
-        public IActionResult CompanyProducts(string filterOption = "", int optionIdentify = 0, string searchedProduct = "")
+        public IActionResult CompanyProducts(string filterOption = "", int optionIdentify = 0, int pageNumber = 1, string searchedProduct = "")
         {
             var companyProductsDisplay = new ProductDisplayViewModel();
             companyProductsDisplay.Categories = _productService.GetAllCategories();
             int maxProductsPerPage = 12;
-            companyProductsDisplay.Products = String.IsNullOrEmpty(filterOption) ? _productService.GetCompanyProducts(_user.CompanyID).Take(maxProductsPerPage)
-                                                                                    : _productService.GetFilteredProducts(filterOption, optionIdentify, searchedProduct, _user.CompanyID);
-            double numberOfPages = (double)_productService.GetCompanyProducts(_user.CompanyID).Count() / maxProductsPerPage;
+            double numberOfPages = 0;
+            if (String.IsNullOrEmpty(filterOption))
+            {
+                var allProducts = _productService.GetCompanyProducts(_user.CompanyID);
+                companyProductsDisplay.Products = allProducts.Take(maxProductsPerPage);
+                numberOfPages = (double)allProducts.Count() / maxProductsPerPage;
+            }
+            else
+            {
+                var filteredProducts = _productService.GetFilteredProducts(filterOption, optionIdentify, searchedProduct, _user.CompanyID);
+                if (filteredProducts == null)
+                {
+                    filteredProducts = _productService.GetCompanyProducts(_user.CompanyID);
+                }
+                companyProductsDisplay.Products = filteredProducts;
+                numberOfPages = (double)filteredProducts.Count() / maxProductsPerPage;
+            }
+
             int roundedPages = (int)Math.Ceiling(numberOfPages);
             ViewBag.NumberOfPages = roundedPages;
-            ViewBag.CurrentPageNumber = optionIdentify == 0 ? 1 : optionIdentify;
+            ViewBag.CurrentPageNumber = pageNumber;
+            ViewBag.OptionIdentify = optionIdentify;
+            ViewBag.FilterOption = filterOption;
+            ViewBag.SearchedProduct = searchedProduct;
+            ViewBag.SearchNotFound = false;
+            var productsFiltering = _productService.PageFilter(pageNumber, companyProductsDisplay.Products);
+            companyProductsDisplay.Products = productsFiltering;
+            //FIXX
+            // direct admin to same page and do if statement if no products then display message and button
+            if (!companyProductsDisplay.Products.Any())
+            {
+                ViewBag.SearchNotFound = true;
+                companyProductsDisplay.Products = _productService.GetCompanyProducts(_user.CompanyID);
+            }
+
             return View(companyProductsDisplay);
         }
 
