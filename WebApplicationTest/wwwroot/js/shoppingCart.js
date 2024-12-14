@@ -100,9 +100,9 @@ function removeFromCart(itemID, productName) {
     cartProductElement.remove();
     const cartProducts = document.querySelectorAll('.cart-product');
     if (cartProducts.length === 0) {
-        clearCart();
-        updateItemQuantityHTML(itemID);
-        window.location.href = "https://the-flaming-shop-c7c312b11357.herokuapp.com/ShoppingCart/DisplayCartItems";
+        setTimeout(() => {
+            window.location.href = "https://the-flaming-shop-c7c312b11357.herokuapp.com/ShoppingCart/DisplayCartItems";
+        }, 2000);
     }
     else {
         updateItemQuantityHTML(itemID);
