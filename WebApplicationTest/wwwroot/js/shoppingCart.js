@@ -100,6 +100,7 @@ function removeFromCart(itemID, productName) {
     cartProductElement.remove();
     const cartProducts = document.querySelectorAll('.cart-product');
     if (cartProducts.length === 0) {
+        window.location.href = "https://the-flaming-shop-c7c312b11357.herokuapp.com/ShoppingCart/DisplayCartItems";
         clearCart();
         updateItemQuantityHTML(itemID);
     }

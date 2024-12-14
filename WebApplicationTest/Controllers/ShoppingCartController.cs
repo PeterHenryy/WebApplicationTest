@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
+using WebApplicationTest.Models;
 using WebApplicationTest.Models.Identity;
 using WebApplicationTest.Models.ViewModels;
 using WebApplicationTest.Services;
@@ -43,9 +44,9 @@ namespace WebApplicationTest.Controllers
             return RedirectToAction("DisplayCartItems");
         }
 
-        public IActionResult DeleteCartItem(int itemID)
+        public IActionResult DeleteCart()
         {
-            bool deletedItem = _shoppingCartService.DeleteCartItem(itemID);
+            bool deletedCart = _shoppingCartService.ClearCart();
             return RedirectToAction("DisplayCartItems");
         }
 
@@ -59,6 +60,11 @@ namespace WebApplicationTest.Controllers
         public void RemoveFromCart(int itemID)
         {
             bool removedItem = _shoppingCartService.DeleteCartItem(itemID);
+            IEnumerable<CartItem> cartItems = _shoppingCartService.GetCartItems();
+            if(cartItems.Count() == 0)
+            {
+                DeleteCart();
+            }
         }
 
         [HttpPost]

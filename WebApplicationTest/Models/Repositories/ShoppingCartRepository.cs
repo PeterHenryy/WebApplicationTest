@@ -92,11 +92,7 @@ namespace WebApplicationTest.Models.Repositories
                 CartItem item = GetCartItemByID(itemID, _currentUser.Id);
                 _context.CartItems.Remove(item);
                 _context.SaveChanges();
-                IEnumerable<CartItem> cartItems = GetCartItems();
-                if (cartItems.Count() == 0)
-                {
-                    DeleteCart();
-                }
+                
                 return true;
             }
             catch (System.Exception)
