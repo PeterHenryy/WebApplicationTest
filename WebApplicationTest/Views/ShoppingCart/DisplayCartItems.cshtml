@@ -1,4 +1,5 @@
-﻿@model ShoppingCartViewModel
+﻿@using System.Web
+@model ShoppingCartViewModel
 @{
     Layout = null;
 }
@@ -88,7 +89,7 @@
                             </div>
 
                             <span class="cart-product-total-price ">Total: $<span class="product-total js-product-total-@item.ProductID">@formattedTotalPrice</span></span>
-                            <button class="btn btn-danger" style="font-size: 16px;" onclick="removeFromCart(@item.Product.ID, '@item.Product.Name')" id="js-remove-item-button">Remove Item</button>
+                            <button class="btn btn-danger" style="font-size: 16px;" onclick="removeFromCart(@item.Product.ID, '@(HttpUtility.JavaScriptStringEncode(@item.Product.Name))')" id="js-remove-item-button">Remove Item</button>
 
                         </div>
                     </div>

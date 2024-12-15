@@ -17,8 +17,8 @@ $(document).ready(function () {
 });
 
 function submitForm() {
-    var selectedReason = document.getElementById('reasonSelect').value;
-    var customReason = document.querySelector('#customReasonInput textarea').value;
+    let selectedReason = document.getElementById('reasonSelect').value;
+    let customReason = document.querySelector('#customReasonInput textarea').value;
 
     document.getElementById('reasonSelect').value = selectedReason === 'Other' ? customReason : selectedReason;
 

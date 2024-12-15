@@ -18,26 +18,21 @@
 
 $(document).ready(function () {
     $('#transactionForm').on('submit', function (event) {
-        var selectedPaymentMethod = $('input[name="Transaction.PaymentType"]:checked').val();
-        var transactionTotalRaw = $('#transactionTotal').val();
+        let selectedPaymentMethod = $('input[name="Transaction.PaymentType"]:checked').val();
+        let transactionTotalRaw = $('#transactionTotal').val();
 
-        // Replace comma with period
-        var transactionTotal = transactionTotalRaw.replace(',', '.');
+        let transactionTotal = transactionTotalRaw.replace(',', '.');
 
-        console.log('Raw Transaction Total:', transactionTotalRaw);
-        console.log('Transaction Total with Period:', transactionTotal);
 
-        // Ensure it's parsed as float
-        var parsedTransactionTotal = parseFloat(transactionTotal);
-        console.log('Parsed Transaction Total:', parsedTransactionTotal);
+        let parsedTransactionTotal = parseFloat(transactionTotal);
 
         if (selectedPaymentMethod === 'RewardPoints') {
-            event.preventDefault(); // Prevent the default form submission
+            event.preventDefault(); 
 
             $.ajax({
-                url: '/Transaction/CheckRewardPoints', // URL to your controller action
+                url: '/Transaction/CheckRewardPoints', 
                 type: 'GET',
-                data: { transactionTotal: parsedTransactionTotal }, // Send the TransactionTotal as a query parameter
+                data: { transactionTotal: parsedTransactionTotal }, 
                 success: function (response) {
                     if (response.success) {
                         // Proceed with form submission
