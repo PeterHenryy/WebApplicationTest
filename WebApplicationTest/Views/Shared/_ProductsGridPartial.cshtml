@@ -1,4 +1,5 @@
-﻿@model ProductsCardViewModel
+﻿@using System.Web
+@model ProductsCardViewModel
 
 
 @foreach (var product in Model.Products)
@@ -38,7 +39,15 @@
             <div class="product-buttons-flexbox">
                 @if (Model.User != null)
                 {
-                    <select class="product-add-to-cart-button" id="product-add-to-cart-button-@product.ID" onchange="addItemToCart(@product.ID, this.value,'@product.Name', true); updateCartItemQuantity(this.value); resetDropdown(this);">
+@*                     <select class="product-add-to-cart-button" id="product-add-to-cart-button-@product.ID" onchange="addItemToCart(@product.ID, this.value,'@product.Name', true); updateCartItemQuantity(this.value); resetDropdown(this);">
+                        <option style="display: none" selected>Add to Cart</option>
+                        @for (int i = 1; i <= 10; i++)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    </select> *@
+                    <select class="product-add-to-cart-button" id="product-add-to-cart-button-@product.ID"
+                            onchange="addItemToCart(@product.ID, this.value, '@(HttpUtility.JavaScriptStringEncode(product.Name))', true); updateCartItemQuantity(this.value); resetDropdown(this);">
                         <option style="display: none" selected>Add to Cart</option>
                         @for (int i = 1; i <= 10; i++)
                         {

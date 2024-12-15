@@ -9,8 +9,8 @@ namespace WebApplicationTest.Helpers
         public double CouponPercentage { get; set; }
         public bool Validate(Coupon coupon, Product product)
         {
-            if (coupon.Quantity == 0) return false;
             if (coupon == null) return false;
+            if (coupon.Quantity == 0) return false;
 
             if (coupon.ProductID == null && coupon.CategoryID == null) return true;
             if (coupon.ProductID == product.ID) return true;

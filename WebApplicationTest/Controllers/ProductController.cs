@@ -195,8 +195,7 @@ namespace WebApplicationTest.Controllers
             ViewBag.SearchNotFound = false;
             var productsFiltering = _productService.PageFilter(pageNumber, companyProductsDisplay.Products);
             companyProductsDisplay.Products = productsFiltering;
-            //FIXX
-            // direct admin to same page and do if statement if no products then display message and button
+
             if (!companyProductsDisplay.Products.Any())
             {
                 ViewBag.SearchNotFound = true;
