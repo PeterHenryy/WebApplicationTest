@@ -68,6 +68,7 @@ namespace WebApplicationTest.Services
                 if (isCouponValid)
                 {
                     transaction.CouponCode = couponCode;
+                    transaction.CouponPercentage = coupon.DiscountPercentage;
                     transaction.Total -= (transaction.Total * (coupon.DiscountPercentage / 100)) * 100 / 100;
                     couponValidator.CouponValid = isCouponValid;
                     couponValidator.CouponPercentage = coupon.DiscountPercentage;

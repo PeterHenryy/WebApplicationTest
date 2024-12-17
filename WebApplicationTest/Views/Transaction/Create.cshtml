@@ -63,6 +63,7 @@
 
                 <form class="transaction-form" asp-controller="Transaction" asp-action="Create" id="transactionForm">
                     <input type="hidden" asp-for="@Model.Transaction.CouponCode" />
+                    <input type="hidden" asp-for="@Model.Transaction.CouponPercentage" />
                     <input type="hidden" asp-for="@Model.Transaction.Total" id="transactionTotal" value="@Model.Transaction.Total" />
                     <div class="info-row">
                         <input asp-for="Transaction.FirstName" class="transaction-form-input" id="firstname" placeholder="First Name" required />

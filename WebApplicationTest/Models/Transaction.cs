@@ -16,6 +16,7 @@ namespace WebApplicationTest.Models
         public string Email { get; set; }
         public string PaymentType { get; set; }
         public string? CouponCode { get; set; }
+        public double CouponPercentage { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
         public string State { get; set; }

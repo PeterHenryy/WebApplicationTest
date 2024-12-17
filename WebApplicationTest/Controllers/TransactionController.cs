@@ -7,6 +7,7 @@ using WebApplicationTest.Services;
 using WebApplicationTest.Models.ViewModels;
 using WebApplicationTest.Helpers.Enums;
 using WebApplicationTest.Helpers;
+using System.Globalization;
 
 namespace WebApplicationTest.Controllers
 {
@@ -121,8 +122,9 @@ namespace WebApplicationTest.Controllers
             transactionItemsVM.TransactionTotal = "$" + transaction.Total.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
             transactionItemsVM.Refunds = _transactionService.GetAllUserRefunds(_currentUser.Id);
             transactionItemsVM.TransactionQuantityBought = transaction.ItemsBought;
-            if(!String.IsNullOrEmpty(transaction.CouponCode)) {
-                transactionItemsVM.Discount = _transactionService.GetCouponDiscount(transaction.CouponCode, transaction.Total);
+            if (!String.IsNullOrEmpty(transaction.CouponCode))
+            {
+                transactionItemsVM.Discount = _transactionService.GetCouponDiscount(transaction.CouponPercentage, transaction.Total);
             }
             return View(transactionItemsVM);
         }
