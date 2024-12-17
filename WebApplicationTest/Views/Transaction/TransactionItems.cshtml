@@ -75,16 +75,15 @@
                         @if (!Model.HasRequestedRefund(item.ID))
                         {
                             <div>
-                                <button id="refund-button" class="btn btn-danger">Refund Item</button>
+                                <button id="refund-button-@item.ID" class="refund-button btn btn-danger">Refund Item</button>
                             </div>
-                            <div id="refund-reason-select" style="display: none;">
-
-                                <form asp-controller="Refund" asp-action="Create">
+                            <div class="refund-reason-select" style="display: none;" id="refund-reason-select-@item.ID">
+                                <form asp-controller="Refund" asp-action="Create" class="refund-reason-form">
                                     <input type="hidden" value="@item.TransactionID" asp-for="@Model.Refund.TransactionID" />
                                     <input type="hidden" value="@item.ProductID" asp-for="@Model.Refund.ProductID" />
                                     <input type="hidden" value="@item.ID" asp-for="@Model.Refund.TransactionItemID" />
                                     <p>Select a reason for your refund</p>
-                                    <select asp-for="@Model.Refund.Reason" id="reasonSelect">
+                                    <select asp-for="@Model.Refund.Reason" class="reasonSelect">
                                         @{
                                             var refundReasons = RefundReasons.Reasons;
                                         }
@@ -94,11 +93,11 @@
                                         }
                                     </select>
 
-                                    <div id="customReasonInput" class="form-row" style="display:none;">
-                                        <textarea style="width: 100%; margin-top: 15px; padding: 15px;" type="text" asp-for="@Model.Refund.Reason" placeholder="Enter your custom reason"></textarea>
+                                    <div class="customReasonInput form-row" style="display:none;">
+                                        <textarea style="width: 100%; margin-top: 15px; padding: 15px;" asp-for="@Model.Refund.Reason" placeholder="Enter your custom reason"></textarea>
                                     </div>
                                     <div>
-                                        <button style="margin-top: 15px;" type="submit" class="btn btn-primary" onclick="submitForm()">Request Refund</button>
+                                        <button style="margin-top: 15px;" type="submit" class="btn btn-primary" onclick="submitForm(this)">Request Refund</button>
                                     </div>
                                 </form>
                             </div>

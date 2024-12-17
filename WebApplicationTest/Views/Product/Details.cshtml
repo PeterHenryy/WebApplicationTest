@@ -1,4 +1,5 @@
-﻿@{
+﻿@using System.Web
+@{
     Layout = null;
 }
 
@@ -59,7 +60,7 @@
                             <p class="product-stock">In Stock: <span class="info-text">@Model.Product.Stock</span></p>
                             <p class="product-sales">Sold: <span class="info-text">@Model.ProductSales</span></p>
                             <p class="product-price">$@Model.Product.Price</p>
-                            <button class="product-add-to-cart-button" style="width: 100%" onclick="addItemToCart(@Model.Product.ID, 1, '@Model.Product.Name'); updateCartItemQuantity(1)">Add to Cart</button>
+                            <button class="product-add-to-cart-button" style="width: 100%" onclick="addItemToCart(@Model.Product.ID, 1, '@(HttpUtility.JavaScriptStringEncode(Model.Product.Name))'); updateCartItemQuantity(1)">Add to Cart</button>
                         </div>
                     </div>
                     <div class="description-container">
@@ -209,20 +210,20 @@
                                         }
                                         else
                                         {
-                                            <form id="likeForm" asp-controller="Rating" asp-action="Create">
+                                            <form id="likeForm_@review.ID" asp-controller="Rating" asp-action="Create">
                                                 <input type="text" hidden value="@review.ID" asp-for="LikeForm.ReviewID">
                                                 <input type="text" hidden value="@Model.CurrentUser.Id" asp-for="LikeForm.UserID">
                                                 <input type="text" hidden value="@Model.ProductID" asp-for="ProductID">
-                                                <button class="btn btn-success" type="button" id="likeButton">
+                                                <button class="btn btn-success likeButton" type="button" data-review-id="@review.ID">
                                                     <i class="fa-solid fa-thumbs-up fa-sm"></i> @reviewLikeCounter
                                                 </button>
                                             </form>
 
-                                            <form id="dislikeForm" asp-controller="Rating" asp-action="Create">
+                                            <form id="dislikeForm_@review.ID" asp-controller="Rating" asp-action="Create">
                                                 <input type="text" hidden value="@review.ID" asp-for="DislikeForm.ReviewID">
                                                 <input type="text" hidden value="@Model.CurrentUser.Id" asp-for="DislikeForm.UserID">
                                                 <input type="text" hidden value="@Model.ProductID" asp-for="ProductID">
-                                                <button class="btn btn-danger" type="button" id="dislikeButton">
+                                                <button class="btn btn-danger dislikeButton" type="button" data-review-id="@review.ID">
                                                     <i class="fa-solid fa-thumbs-down fa-sm"></i> @reviewDislikeCounter
                                                 </button>
                                             </form>

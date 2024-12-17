@@ -319,18 +319,18 @@
                 <label for="formName" class="d-block">
                     <i class="icon" data-feather="user"></i>
                 </label>
-                <input type="text" id="formName" class="form-control form-control-lg thick" placeholder="Name" asp-for="@Model.Name">
+                <input type="text" id="formName" class="form-control form-control-lg thick" placeholder="Name" asp-for="@Model.Name" required>
             </div>
             <!-- E-mail -->
             <div class="form-group position-relative">
                 <label for="formEmail" class="d-block">
                     <i class="icon" data-feather="mail"></i>
                 </label>
-                <input type="email" id="formEmail" class="form-control form-control-lg thick" placeholder="E-mail" asp-for="@Model.Email">
+                <input type="email" id="formEmail" class="form-control form-control-lg thick" placeholder="E-mail" asp-for="@Model.Email" required>
             </div>
             <!-- Message -->
             <div class="form-group message">
-                <textarea id="formMessage" class="form-control form-control-lg" rows="7" placeholder="Message" asp-for="@Model.Message"></textarea>
+                <textarea id="formMessage" class="form-control form-control-lg" rows="7" placeholder="Message" asp-for="@Model.Message" required></textarea>
             </div>
             <!-- Submit btn -->
             <div class="text-center">

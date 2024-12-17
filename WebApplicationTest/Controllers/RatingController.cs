@@ -24,15 +24,23 @@ namespace WebApplicationTest.Controllers
         {
             if (viewModel.LikeForm != null)
             {
+                // Create a like
                 bool createdLike = _ratingService.CreateLike(viewModel.LikeForm);
             }
-            else
+            else if (viewModel.DislikeForm != null)
             {
+                // Create a dislike
                 bool createdDislike = _ratingService.CreateDislike(viewModel.DislikeForm);
             }
-            return RedirectToAction("Details", "Product", new { productID = viewModel.ProductID });
-        }
+            viewModel.Likes = _ratingService.GetLikes().ToList();
+            viewModel.Dislikes = _ratingService.GetDislikes().ToList();
+            // After creating like or dislike, fetch the updated counts
+            int likeCount = viewModel.GetLikesPerReview(viewModel.LikeForm?.ReviewID ?? viewModel.DislikeForm.ReviewID);
+            int dislikeCount = viewModel.GetDislikesPerReview(viewModel.LikeForm?.ReviewID ?? viewModel.DislikeForm.ReviewID);
 
+            // Return JSON response with updated counts
+            return Json(new { likeCount = likeCount, dislikeCount = dislikeCount });
+        }
         [HttpPost]
         public IActionResult Delete(int ratingChoice, int ratingID, int productID)
         {

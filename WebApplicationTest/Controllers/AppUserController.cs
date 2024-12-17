@@ -148,10 +148,7 @@ namespace WebApplicationTest.Controllers
                 updatedUser.ProfilePicture = _blobService.GetBlob(files[0].FileName);
                 _userService.HandleUserProfilePicture(files);
             }
-            else
-            {
-                updatedUser.ProfilePicture = "user-solid.svg";
-            }
+
         }
 
         [HttpGet]

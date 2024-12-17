@@ -57,7 +57,7 @@
                     {
                         <img class="user-profile-picture" src="@currentUser.ProfilePicture">
                     }
-                    <p>@User.Identity.Name</p>
+                    <p>@currentUser.UserName</p>
                 </div>
                 <ul class="options-menu">
                     <li><a href="@Url.Action("Update", "AppUser")">Update Profile</a></li>

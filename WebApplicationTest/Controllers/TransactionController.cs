@@ -43,12 +43,16 @@ namespace WebApplicationTest.Controllers
         {
             var transactionViewModel = new TransactionViewModel();
             transactionViewModel.Transaction = new Transaction();
+            transactionViewModel.UserCards = _transactionService.GetSpecificUserCards(_currentUser.Id);
+            if (!_currentUser.HasCreditCard)
+            {
+                return RedirectToAction("Create", "CreditCard", new {redirectToTransaction = true});
+            }
             Transaction currentTransaction = transactionViewModel.Transaction;
             double cartTotal = _shoppingCartService.CalculateCartTotal();
             IEnumerable<CartItem> cartItems = _shoppingCartService.GetCartItems();
             _transactionService.CalculateTransactionTotal(cartTotal, currentTransaction, cartItems);
             _couponService.ValidateCoupon(currentTransaction, cartItems, couponCode);
-            transactionViewModel.UserCards = _transactionService.GetSpecificUserCards(_currentUser.Id);
             transactionViewModel.CartItems = cartItems;
             transactionViewModel.Categories = _transactionService.GetCategories();
             transactionViewModel.ItemsBought = _shoppingCartService.GetItemsBoughtQuantity();
@@ -62,12 +66,12 @@ namespace WebApplicationTest.Controllers
         {
             Transaction currentTransaction = transactionViewModel.Transaction;
             currentTransaction.UserID = _currentUser.Id;
+            currentTransaction.ItemsBought = _shoppingCartService.GetItemsBoughtQuantity();
             transactionViewModel.UserCards = _transactionService.GetSpecificUserCards(_currentUser.Id);
             if (!_currentUser.HasCreditCard)
             {
-                return RedirectToAction("Create", "CreditCard");
+                return RedirectToAction("Create", "CreditCard", new { redirectToTransaction = true });
             }
-            currentTransaction.ItemsBought = _shoppingCartService.GetItemsBoughtQuantity();
             bool createdTransaction = _transactionService.Create(currentTransaction);
             if (createdTransaction)
             {

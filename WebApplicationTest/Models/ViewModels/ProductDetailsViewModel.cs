@@ -31,7 +31,7 @@ namespace WebApplicationTest.Models.ViewModels
             return likeCount;
         }
 
-        public int GetDislikesPerReview(int reviewID)
+        public int GetDislikesPerReview(int? reviewID)
         {
             int dislikeCount = Dislikes?.Where(x => x.ReviewID == reviewID).Count() ?? 0;
             return dislikeCount;
