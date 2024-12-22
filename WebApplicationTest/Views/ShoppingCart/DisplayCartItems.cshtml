@@ -16,14 +16,12 @@
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
 <body style="background-color: rgb(230,230,230)">
-    <header class="header">
+    <header class="header" style="margin-bottom: 70px;">
         <partial name="_HeaderPartial" />
     </header>
     @if (Model.CartItems != null)
     {
-        <div class="clear-cart">
-            <a class="btn btn-danger" style="font-size: 25px;" href="@Url.Action("ClearCart", "ShoppingCart")">Clear Cart</a>
-        </div>
+
         <div class="products-and-order-container">
             <div class="cart-products-container">
                 @foreach (var item in Model.CartItems)
@@ -121,17 +119,19 @@
 
                     @if (Model.UserHasCreditCard)
                     {
-                        <a class="checkout-button btn btn-success" style="color: white; font-size: 18px;" href="@Url.Action("Create","Transaction")" id="checkout-link">Proceed to Checkout</a>
+                        <a class="checkout-button btn btn-success" style="color: white; font-size: 18px; background-color: deepskyblue; border: none;" href="@Url.Action("Create","Transaction")" id="checkout-link">Proceed to Checkout</a>
                     }
                     else
                     {
-                        <a class="checkout-button btn btn-success" style="color: white; font-size: 18px;" href="@Url.Action("Create","CreditCard", new {redirectToTransaction = true})" id="checkout-link">Proceed to Checkout</a>
+                        <a class="checkout-button btn btn-success" style="color: white; font-size: 18px; background-color: deepskyblue; border: none;" href="@Url.Action("Create","CreditCard", new {redirectToTransaction = true})" id="checkout-link">Proceed to Checkout</a>
                     }
-                    <button class="coupon-button btn btn-primary" style="font-size: 18px;">Enter Coupon Code</button>
+                    <button class="coupon-button btn btn-primary" style="font-size: 18px; background-color: black; border: none;">Enter Coupon Code</button>
                     <div class="coupon-input">
                         <input type="text" id="coupon-code">
                     </div>
                     <button id="submit-coupon">Submit Code</button>
+                    <a class="btn btn-danger" style="font-size: 18px; width: 100%;" href="@Url.Action("ClearCart", "ShoppingCart")">Clear Cart</a>
+
                 </div>
 
             </div>

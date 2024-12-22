@@ -1,5 +1,5 @@
 ﻿header {
-    background-color: rgb(25,39,52);
+    background-color: rgb(0,0,0);
     display: flex;
     justify-content: center;
     margin-bottom: 30px;
@@ -32,21 +32,21 @@
     margin: 0;
     list-style: none;
     column-gap: 20px;
-    color: palevioletred;
+    color: white;
 }
 
-    .header-items-list a {
-        text-decoration: none;
-        color: palevioletred;
-        cursor: pointer;
-    }
+.header-items-list a {
+    text-decoration: none;
+    color: white;
+    cursor: pointer;
+}
 
-        .header-items-list a:hover {
-            color: red;
-        }
+.header-items-list a:hover {
+    color: rgb(0,191,255);
+}
 
 .header-item:hover {
-    color: red;
+    color: rgb(0,191,255);
 }
 
 .options-menu-dropdown {
@@ -54,15 +54,15 @@
     position: relative;
 }
 
-    .options-menu-dropdown:hover {
-        cursor: pointer;
-    }
+.options-menu-dropdown:hover {
+    cursor: pointer;
+}
 
-    .options-menu-dropdown p {
-        margin: 0;
-        color: palevioletred;
-        display: inline-block;
-    }
+.options-menu-dropdown p {
+    margin: 0;
+    color: white;
+    display: inline-block;
+}
 
 .options-menu {
     border-radius: 6px;
@@ -78,14 +78,14 @@
     white-space: nowrap;
 }
 
-    .options-menu a {
-        text-decoration: none;
-        color: black;
-    }
+.options-menu a {
+    text-decoration: none;
+    color: black;
+}
 
-        .options-menu a:hover {
-            color: palevioletred;
-        }
+    .options-menu a:hover {
+        color: rgb(0,191,255);
+    }
 
 .options-menu-dropdown:hover .options-menu {
     display: inline-block;
@@ -94,14 +94,14 @@
 .logout-button {
     border: none;
     background: none;
-    color: palevioletred;
+    color: rgb(255,255,255);
     font-size: 18px;
 }
 
-    .logout-button:hover {
-        cursor: pointer;
-        color: red;
-    }
+.logout-button:hover {
+    cursor: pointer;
+    color: rgb(0,191,255);
+}
 
 .shop-logo {
     width: 100px;
@@ -134,7 +134,7 @@
 }
 
 .cart-item-quantity {
-    color: rgb(255, 255, 255);
+    color: rgb(0,0,0);
      position: relative; 
     z-index: 2;
     bottom: 5px;
@@ -154,11 +154,12 @@
     display: none;
     position: absolute;
     top: 100%;
-    background-color: rgb(25,39,52);
-    color: palevioletred;
+    background-color: rgb(0, 191, 255);
+    color: rgb(255, 255, 255);
     border-radius: 7px;
     font-size: 16px;
     padding: 10px;
+    margin-top: 25px;
 }
 
 .reward-points-container:hover .reward-points-exaplanation {
@@ -190,21 +191,28 @@
     border: 1px solid #ccc;
     font-size: 16px;
     box-sizing: border-box; /* Include padding in the element's total width */
+    font-family: Arial;
 }
 
 .search-button {
-    background-color: palevioletred;
-    color: white;
+    background-color: rgb(255,255,255);
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
     cursor: pointer;
 }
 
-    .search-button:hover {
-        background-color: rgb(110, 116, 225);
-    }
+.search-button:hover {
+    background-color: rgb(0,191,255);
+}
 
+.glass-icon{
+    color: black;
+}
+
+.search-button:hover .glass-icon {
+    color: white;
+}
 /* Responsive Design for small screens */
 @media (max-width: 768px) {
     .header-items-container {

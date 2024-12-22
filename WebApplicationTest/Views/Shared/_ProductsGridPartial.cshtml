@@ -9,6 +9,7 @@
             <div class="image-card">
                 <img class="product-card-image" src="@product.Image">
             </div>
+            <hr style="width: 90%; background-color: black;" />
             <div class="product-info">
                 <div class="product-name-container">
                     <h3 class="product-name">@product.Name</h3>
@@ -18,7 +19,8 @@
                     {
                         if (i <= product.AverageRating)
                         {
-                            <img class="star-icon" src="~/icons/star-solid.svg">
+                             <img class="star-icon" src="~/icons/star-solid.svg"> 
+
                         }
                         else if (product.AverageRating >= (i - 1) + 0.5 && product.AverageRating < i)
                         {
@@ -71,11 +73,11 @@
                 <div class="product-buttons-flexbox">
                     @if (!product.Archived)
                     {
-                        <a style="font-size: 18px; padding: 10px 30px; border-radius: 7px;" class="btn btn-info" href="@Url.Action("ManageProductArchiving", "Product", new {productID = product.ID, option = 1})">Archive</a>
+                        <a style="font-size: 18px; padding: 10px 30px; border-radius: 7px; background: black" class="btn btn-info" href="@Url.Action("ManageProductArchiving", "Product", new {productID = product.ID, option = 1})">Archive</a>
                     }
                     else
                     {
-                        <a style="font-size: 18px; padding: 10px 30px; border-radius: 7px;" class="btn btn-success" href="@Url.Action("ManageProductArchiving", "Product", new {productID = product.ID, option = 2})">Un-Archive</a>
+                        <a style="font-size: 18px; padding: 10px 30px; border-radius: 7px; background-color: black;" class="btn btn-success" href="@Url.Action("ManageProductArchiving", "Product", new {productID = product.ID, option = 2})">Un-Archive</a>
                     }
                 </div>
             </div>

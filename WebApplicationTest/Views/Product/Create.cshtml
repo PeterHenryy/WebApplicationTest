@@ -46,13 +46,13 @@
             <textarea id="description" class="form-control" placeholder="Description" asp-for="@Model.Product.Description"></textarea>
         </div>
         <div class="category-select-container">
-            <select style="font-size: 20px; height: 50px;" class="btn btn-primary" asp-for="Product.CategoryID" id="product-category"
+            <select  class="product-category-button" asp-for="Product.CategoryID" id="product-category"
                     asp-items="@(new SelectList(Model.Categories, nameof(Category.ID), nameof(Category.Name)))">
                 <option value="">Select a Category</option>
             </select>
         </div>
         <div class="create-button-container">
-            <button type="submit" class="btn btn-success create-button" style="font-size: 24px;">Add Product</button>
+            <button type="submit" class="btn btn-success create-button" style="font-size: 24px; background-color: deepskyblue; border: none;">Add Product</button>
         </div>
     </form>
 </div>

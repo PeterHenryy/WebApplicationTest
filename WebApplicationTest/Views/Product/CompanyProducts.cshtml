@@ -34,7 +34,7 @@
 
         <div class="header-items-container">
             <a href="@Url.Action("Index", "Product")">
-                <img class="shop-logo" src="~/Img/flamingshop.png" />
+                <img class="shop-logo" src="~/Img/flaminglogo.png" />
             </a>
             <ul class="header-items-list">
                 <li class="header-item"><a href="@Url.Action("Index", "Product")">Home</a></li>
@@ -46,7 +46,7 @@
             <form class="search-container" asp-controller="Product" asp-action="CompanyProducts" method="get">
                 <input type="hidden" name="filterOption" value="Search" />
                 <input type="text" name="searchedProduct" class="search-input" placeholder="Search for products..." required>
-                <button class="search-button" type="submit"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i></button>
+                <button class="search-button" type="submit"><i class="fa-solid fa-magnifying-glass glass-icon"></i></button>
             </form>
 
 
@@ -89,8 +89,8 @@
 
                     <div class="reward-points-container">
                         <div class="reward-points-inner-container">
-                            <i class="fa-solid fa-bag-shopping fa-xl" style="color: #db7093;"></i>
-                            <span style="color: #db7093;">@Math.Round(currentUser.UserRewardPoints, 2)</span>
+                            <i class="fa-solid fa-bag-shopping fa-xl" style="color: white;"></i>
+                            <span style="color: white">@Math.Round(currentUser.UserRewardPoints, 2)</span>
                         </div>
                         <div class="reward-points-exaplanation">
                             <p class="reward-points">These are your reward points, you gain points each time you purchase products with money!</p>
@@ -131,27 +131,27 @@
         <a style="text-decoration: none;" class="option" href="@Url.Action("CompanyProducts", "Product", new {filterOption = "Most Sold"})">
             <div class="option-container">
 
-                <i class="fa-solid fa-money-bill-trend-up" style="color: #000000;"></i>
+                <i class="fa-solid fa-money-bill-trend-up" style="color: #ffffff;"></i>
                 <p class="option">Most Sold</p>
             </div>
         </a>
         <a style="text-decoration: none;" class="option" href="@Url.Action("CompanyProducts", "Product", new {filterOption = "Most Revenue"})">
             <div class="option-container">
 
-                <i class="fa-solid fa-money-bill-trend-up" style="color: #000000;"></i>
+                <i class="fa-solid fa-money-bill-trend-up" style="color: #ffffff;"></i>
                 <p class="option">Most Revenue</p>
             </div>
         </a>
         <p class="filter-option">Price</p>
         <a style="text-decoration: none;" class="option" href="@Url.Action("CompanyProducts", "Product", new {filterOption = "Price", optionIdentify = 1 })">
             <div class="option-container">
-                <i class="fa-solid fa-money-bill" style="color: #000000;"></i>
+                <i class="fa-solid fa-money-bill" style="color: #ffffff;"></i>
                 <p class="option">Lowest</p>
             </div>
         </a>
         <a style="text-decoration: none;" class="option" href="@Url.Action("CompanyProducts", "Product", new {filterOption = "Price", optionIdentify = 2 })">
             <div class="option-container">
-                <i class="fa-solid fa-sack-dollar" style="color: #000000;"></i>
+                <i class="fa-solid fa-sack-dollar" style="color: #ffffff;"></i>
                 <p class="option">Highest</p>
             </div>
         </a>
@@ -178,7 +178,7 @@
                     <h1 style="text-align: center;">No Products found for your search: @ViewBag.SearchedProduct</h1>
                 }
                 <div class="add-product-container">
-                    <a class="btn btn-success" style="font-size: 24px;" href="@Url.Action("Create", "Product")">Add Product</a>
+                    <a class="btn btn-success" style="font-size: 24px; background-color: deepskyblue; border: none;" href="@Url.Action("Create", "Product")">Add Product</a>
                 </div>
                 <div class="products-display-grid">
                     

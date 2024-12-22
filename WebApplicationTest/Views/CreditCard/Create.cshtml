@@ -9,7 +9,7 @@
 
 <header class="header">
     <partial name="_HeaderPartial" />
-</header>
+</header>   
 
 <div class="container shadow p-3 mb-5 bg-white rounded" style="font-size: 20px;">
     <form asp-controller="CreditCard" asp-action="Create">
@@ -33,7 +33,7 @@
             <input type="number" class="form-control" placeholder="CVV" asp-for="@Model.CreditCard.CVV" required>
         </div>
         <div style="display: flex; justify-content: center;">
-            <button style="font-size: 24px;width: 100%;" type="submit" class="btn btn-primary">Add Credit Card</button>
+            <button style="font-size: 24px;width: 100%; background-color: deepskyblue; border: none;" type="submit" class="btn btn-primary">Add Credit Card</button>
         </div>
 
     </form>

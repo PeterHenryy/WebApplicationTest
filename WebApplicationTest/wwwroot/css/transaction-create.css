@@ -53,6 +53,8 @@
     flex: 1;
     font-size: 20px;
     width: 100%;
+    border: 2px solid black;
+    border-radius: 10px;
 }
 
     .transaction-form-input::placeholder {
@@ -88,10 +90,11 @@
     border-radius: 7px;
     padding: 10px 100px;
     width: 100%;
-    background-color: limegreen;
+    background-color: rgb(0, 191, 255);
     color: white;
     font-size: 30px;
     font-family: Arial;
+    background-image: linear-gradient(131deg, #8692efeb, #50caf3, #00BFFF, #026789);
 }
 
     .transaction-purchase-button:hover {
@@ -133,7 +136,7 @@
 
 .purchase-summary {
     padding: 15px;
-    background-color: rgb(52, 73, 94);
+    background-color: rgb(0,0,0);
 }
 
 .summary-products {
@@ -178,13 +181,13 @@
 .summary-product-price,
 .transaction-total,
 .summary-product-tax {
-    color: rgb(137, 149, 162);
+    color: rgb(0, 191, 255);
 }
 
 .summary-product-name-quantity,
 .purchase-announcement,
 .summary-product-total {
-    color: white;
+    color: rgb(0, 191, 255);
 }
 
 .summary-product-total {
@@ -222,7 +225,7 @@
     border-radius: 4px;
     font-size: 16px;
     padding: 8px 12px;
-    background-color: royalblue;
+    background-color: rgb(0, 191, 255);
     color: white;
 }
 

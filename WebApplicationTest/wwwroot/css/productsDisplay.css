@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     row-gap: 20px;
-    background-color: rgb(25,39,52);
+    background-color: rgb(0,0,0);
     padding: 60px 20px;
     position: fixed;
     left: 0;
@@ -11,6 +11,7 @@
     overflow: auto;
     scrollbar-width: thin;
     height: 100%;
+    border-right: 2px solid white;
 }
 
     .sidebar-filter::-webkit-scrollbar {
@@ -38,7 +39,7 @@
 
 .filter-option {
     font-size: 25px;
-    color: palevioletred;
+    color: rgb(0,191,255);
 }
 
 .option-container {
@@ -58,11 +59,12 @@
 
         .option:hover {
             cursor: pointer;
-            color: cornflowerblue;
+            color: rgb(0,191,255);
         }
 
 .filter-icon {
     width: 30px;
+    height: 30px;
 }
 
 .product-buttons-column-box {

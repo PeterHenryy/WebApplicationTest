@@ -15,7 +15,7 @@
 
 <div class="header-items-container">
     <a href="@Url.Action("Index", "Product")">
-        <img class="shop-logo" src="~/Img/flamingshop.png" />
+        <img class="shop-logo" src="~/Img/flaminglogo.png" />
     </a>
     <ul class="header-items-list">
         <li class="header-item"><a href="@Url.Action("Index", "Product")">Home</a></li>
@@ -27,7 +27,7 @@
     <form class="search-container" asp-controller="Product" asp-action="ProductsDisplay" method="get">
         <input type="hidden" name="filterOption" value="Search"/>
         <input type="text" name="searchedProduct" class="search-input" placeholder="Search for products..." required>
-        <button class="search-button" type="submit"><i class="fa-solid fa-magnifying-glass" style="color: #ffffff;"></i></button>
+        <button class="search-button" type="submit"><i class="fa-solid fa-magnifying-glass glass-icon" ></i></button>
     </form>
 
 
@@ -70,8 +70,8 @@
 
             <div class="reward-points-container">
                 <div class="reward-points-inner-container">
-                    <i class="fa-solid fa-bag-shopping fa-xl" style="color: #db7093;"></i>
-                    <span style="color: #db7093;">@Math.Round(currentUser.UserRewardPoints, 2)</span>
+                    <i class="fa-solid fa-bag-shopping fa-xl" style="color: #ffffff;"></i>
+                    <span style="color: #ffffff;">@Math.Round(currentUser.UserRewardPoints, 2)</span>
                 </div>
                 <div class="reward-points-exaplanation">
                     <p class="reward-points">These are your reward points, you gain points each time you purchase products with money!</p>

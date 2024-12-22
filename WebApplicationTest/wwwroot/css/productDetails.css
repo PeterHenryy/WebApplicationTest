@@ -121,7 +121,7 @@
 .percentage-filled {
     display: inline-block;
     height: 100%;
-    background-color: royalblue;
+    background-color: deepskyblue;
 }
 
 .rating-container {
@@ -159,7 +159,7 @@
 .ratings-and-reviews {
     font-size: 28px;
     text-align: center;
-    color: lightgray;
+    color: deepskyblue;
 }
 
 .ratings-count {
@@ -172,7 +172,7 @@
 }
 
 .info-text {
-    color: lightgray;
+    color: deepskyblue;
 }
 
 .big-rating-container {

@@ -94,6 +94,8 @@ function removeFromCart(itemID, productName) {
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
         data
     })
+
+
     toastr.warning(`Removed ${productName} from cart!`);
 
     const cartProductElement = document.querySelector(`.js-cart-product-${itemID}`)

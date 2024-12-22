@@ -13,8 +13,24 @@ body {
 }
 
 footer {
-    background-color: #212529; /* Footer background */
+    background-color: rgb(0,0,0); /* Footer background */
     color: white; /* Footer text color */
     text-align: center; /* Footer text alignment */
     padding: 20px; /* Padding for the footer */
 }
+
+.footer button {
+    background-color: rgb(0,191,255);
+}
+
+
+
+.app-form-input{
+    border: 2px solid black;
+}
+
+.toast-success, .toast-warning{
+    background-color: deepskyblue !important;
+    color: white !important;
+}
+
