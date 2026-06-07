@@ -52,7 +52,12 @@
                         </select>
                     }
                     else{
-                        <button class="product-add-to-cart-button-disabled" disabled>Add to Cart</button>
+                        <div class="disabled-add-to-card-container">
+                            <button class="product-add-to-cart-button-disabled">Add to Cart</button>
+                            <div class="out-of-stock-message-container">
+                                <p class="out-of-stock-message">Product out of stock!</p>
+                            </div>
+                        </div>
                     }
                 }
                 else

@@ -67,7 +67,7 @@
                             {
                                 @if (productHasStock)
                                 {
-                                    <select class="product-add-to-cart-button" id="product-add-to-cart-button-@Model.Product.ID"
+                                    <select style="width:100%;height:55px; text-align:center;" class="product-add-to-cart-button" id="product-add-to-cart-button-@Model.Product.ID"
                                             onchange="addItemToCart(@Model.Product.ID, this.value, '@(HttpUtility.JavaScriptStringEncode(@Model.Product.Name))', true); updateCartItemQuantity(this.value); resetDropdown(this);">
                                         <option style="display: none" selected>Add to Cart</option>
                                         @for (int i = 1; i <= 10; i++)
@@ -78,7 +78,7 @@
                                 }
                                 else
                                 {
-                                    <button class="product-add-to-cart-button-disabled" disabled>Add to Cart</button>
+                                    <button class="product-add-to-cart-button-disabled">Product out of stock!</button>
                                 }
                             }
                             else
@@ -95,12 +95,7 @@
                                 }
                                 else
                                 {
-                                    <div class="disabled-add-to-card-container">
-                                        <button class="product-add-to-cart-button-disabled">Add to Cart</button>
-                                        <div class="out-of-stock-message-container">
-                                            <p class="out-of-stock-message">Product out of stock!</p>
-                                        </div>
-                                    </div>
+                                    <button class="product-add-to-cart-button-disabled">Product out of stock!</button>
                                 }
                             }
                         </div>

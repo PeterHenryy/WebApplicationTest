@@ -180,27 +180,18 @@ namespace WebApplicationTest.Services
         {
             string fileName;
             string path;
-
-            if (files.Count > 0)
+            var extension = Path.GetExtension(files[0].FileName);
+            fileName = Guid.NewGuid().ToString() + extension;
+            product.Image = fileName;
+            path = Path.Combine(_environment.WebRootPath, "Img") + "/" + fileName;
+            Image img = new Image();
+            img.Name = fileName;
+            img.ProductID = product.ID;
+            bool createdImage = CreateImage(img);
+            using (FileStream fs = System.IO.File.Create(path))
             {
-                for (int i = 0; i < files.Count; i++)
-                {
-                    var extension = Path.GetExtension(files[i].FileName);
-                    fileName = (i == 0) ? product.Image : Guid.NewGuid().ToString() + extension;
-                    path = Path.Combine(_environment.WebRootPath, "Img") + "/" + fileName;
-
-                    Image img = new Image();
-                    img.Name = fileName;
-                    img.ProductID = product.ID;
-
-                    bool createdImage = CreateImage(img);
-
-                    using (FileStream fs = System.IO.File.Create(path))
-                    {
-                        files[i].CopyTo(fs);
-                        fs.Flush();
-                    }
-                }
+                files[0].CopyTo(fs);
+                fs.Flush();
             }
         }
 

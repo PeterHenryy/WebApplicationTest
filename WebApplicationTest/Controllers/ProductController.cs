@@ -91,11 +91,11 @@ namespace WebApplicationTest.Controllers
             //await HandleBlob(product);
             var files = HttpContext.Request.Form.Files;
             _productService.CheckProductStockChange(product.ID, product.Stock);
-            bool updatedProduct = _productService.Update(product);
             if (files.Count > 0)
             {
                 _productService.HandleProductImages(product, files);
             }
+            bool updatedProduct = _productService.Update(product);
             if (updatedProduct)
             {
                 return RedirectToAction("CompanyProducts", "Product");

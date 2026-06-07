@@ -60,7 +60,6 @@
 .product-card-image {
     width: 100%;
     height: 400px;
-    object-fit: contain;
 }
 
 .details-link {
@@ -131,9 +130,6 @@
     border: none;
 }
 
-.product-add-to-cart-button-disabled{
-    width: 100%;
-}
 
 .details-button:hover,
 .product-add-to-cart-button:hover {
