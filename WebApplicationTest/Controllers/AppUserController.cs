@@ -105,7 +105,7 @@ namespace WebApplicationTest.Controllers
                         }
                         if (!String.IsNullOrEmpty(returnUrl))
                         {
-                            return Redirect("https://the-flaming-shop-c7c312b11357.herokuapp.com/" + returnUrl);
+                            return Redirect("https://localhost:44369/" + returnUrl);
                         }
                         return RedirectToAction("Index", "Product");
                     }
@@ -150,8 +150,8 @@ namespace WebApplicationTest.Controllers
             var files = HttpContext.Request.Form.Files;
             if (files.Count > 0)
             {
-                bool uploadedBlob = await _blobService.UploadBlob(files[0].FileName, files[0], new Blob());
-                updatedUser.ProfilePicture = _blobService.GetBlob(files[0].FileName);
+                //bool uploadedBlob = await _blobService.UploadBlob(files[0].FileName, files[0], new Blob());
+                //updatedUser.ProfilePicture = _blobService.GetBlob(files[0].FileName);
                 _userService.HandleUserProfilePicture(files);
             }
 

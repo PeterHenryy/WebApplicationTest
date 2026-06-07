@@ -27,7 +27,7 @@
                 @foreach (var item in Model.CartItems)
                 {
                     <div class="cart-product js-cart-product-@item.ProductID">
-                        <img src="@item.Product.Image" class="cart-product-image">
+                        <img src="~/Img/@item.Product.Image" class="cart-product-image">
                         <div class="cart-product-info">
                             <p class="cart-product-name">@item.Product.Name</p>
                             <div class="cart-product-rating">
@@ -142,7 +142,6 @@
         <h1 class="no-items-header" style="text-align: center;">You have no items in your cart!!</h1>
         <h2 style="text-align: center;">Suggested Items to Add to Your Cart (our most popular products):</h2>
         <div class="cart-wrapper">
-
             <div class="products-wrapper">
                 @{
 

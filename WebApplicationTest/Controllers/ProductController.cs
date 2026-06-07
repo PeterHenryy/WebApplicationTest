@@ -88,10 +88,14 @@ namespace WebApplicationTest.Controllers
         [HttpPost]
         public async Task<IActionResult> Update(Product product)
         {
-            await HandleBlob(product);
+            //await HandleBlob(product);
+            var files = HttpContext.Request.Form.Files;
             _productService.CheckProductStockChange(product.ID, product.Stock);
             bool updatedProduct = _productService.Update(product);
-            //_productService.HandleProductImages(product, files);
+            if (files.Count > 0)
+            {
+                _productService.HandleProductImages(product, files);
+            }
             if (updatedProduct)
             {
                 return RedirectToAction("CompanyProducts", "Product");
@@ -99,16 +103,16 @@ namespace WebApplicationTest.Controllers
             return View(product);
         }
 
-        public async Task HandleBlob(Product product)
-        {
-            var files = HttpContext.Request.Form.Files;
-            if (files.Count > 0)
-            {
-                //product.Image = Guid.NewGuid().ToString() + Path.GetExtension(files[0].FileName);
-                bool uploadedBlob = await _blobService.UploadBlob(files[0].FileName, files[0], new Blob());
-                product.Image = _blobService.GetBlob(files[0].FileName);
-            }
-        }
+        //public async Task HandleBlob(Product product)
+        //{
+        //    var files = HttpContext.Request.Form.Files;
+        //    if (files.Count > 0)
+        //    {
+        //        //product.Image = Guid.NewGuid().ToString() + Path.GetExtension(files[0].FileName);
+        //        bool uploadedBlob = await _blobService.UploadBlob(files[0].FileName, files[0], new Blob());
+        //        product.Image = _blobService.GetBlob(files[0].FileName);
+        //    }
+        //}
 
         [HttpGet]
         public IActionResult Create()
@@ -124,7 +128,11 @@ namespace WebApplicationTest.Controllers
         {
             var files = HttpContext.Request.Form.Files;
             productVM.Product.UserID = _user.Id;
-            await HandleBlob(productVM.Product);
+            if(files.Count > 0)
+            {
+                _productService.HandleProductImages(productVM.Product, files);
+            }
+            //await HandleBlob(productVM.Product);
             bool createdProduct = _productService.Create(productVM.Product);
             if (createdProduct)
             {

@@ -19,7 +19,11 @@ namespace WebApplicationTest.Services
         public AppUser GetCurrentUser()
         {
             var userID = _userManager.GetUserId(_httpContext.HttpContext.User);
-            var user = _userManager.FindByIdAsync(userID).Result;
+            var user = new AppUser();
+            if (!string.IsNullOrEmpty(userID))
+            {
+                user = _userManager.FindByIdAsync(userID).Result;
+            }
             return user;
         }
 

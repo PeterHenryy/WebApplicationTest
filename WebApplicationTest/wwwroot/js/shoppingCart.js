@@ -95,16 +95,19 @@ function removeFromCart(itemID, productName) {
         data
     })
 
-
     toastr.warning(`Removed ${productName} from cart!`);
 
     const cartProductElement = document.querySelector(`.js-cart-product-${itemID}`)
     cartProductElement.remove();
     const cartProducts = document.querySelectorAll('.cart-product');
     if (cartProducts.length === 0) {
+        const orderElement = document.querySelector('.order-summary-container');
+        if (orderElement) {
+            orderElement.remove();
+        }
         setTimeout(() => {
-            window.location.href = "https://the-flaming-shop-c7c312b11357.herokuapp.com/ShoppingCart/DisplayCartItems";
-        }, 1000);
+            window.location.href = "https://localhost:44369/ShoppingCart/DisplayCartItems";
+        }, 1500);
     }
     else {
         updateItemQuantityHTML(itemID);
@@ -278,6 +281,5 @@ function redirectToLogin(loginUrl, productId, quantity) {
     var url = loginUrl + '?returnUrl=' + encodeURIComponent(returnUrl) +
         '&cartItemQuantity=' + encodeURIComponent(quantity) +
         '&cartItemProductID=' + encodeURIComponent(productId);
-
     window.location.href = url;
 }

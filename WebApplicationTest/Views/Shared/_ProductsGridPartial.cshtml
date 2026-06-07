@@ -7,7 +7,7 @@
     <div class="product-card">
         <a style="text-decoration: none" class="details-link" href="@Url.Action("Details", "Product", new {productID = product.ID})">
             <div class="image-card">
-                <img class="product-card-image" src="@product.Image">
+                <img class="product-card-image" src="~/Img/@product.Image">
             </div>
             <hr style="width: 90%; background-color: black;" />
             <div class="product-info">
@@ -19,7 +19,7 @@
                     {
                         if (i <= product.AverageRating)
                         {
-                             <img class="star-icon" src="~/icons/star-solid.svg"> 
+                            <img class="star-icon" src="~/icons/star-solid.svg"> 
 
                         }
                         else if (product.AverageRating >= (i - 1) + 0.5 && product.AverageRating < i)
@@ -37,29 +37,43 @@
             </div>
         </a>
         @if(!Model.CompanyProducts){
-
+            bool productHasStock = product.Stock > 0;
             <div class="product-buttons-flexbox">
-                @if (Model.User != null)
+                @if (Model.User.Id != 0)
                 {
-
-                    <select class="product-add-to-cart-button" id="product-add-to-cart-button-@product.ID"
-                            onchange="addItemToCart(@product.ID, this.value, '@(HttpUtility.JavaScriptStringEncode(product.Name))', true); updateCartItemQuantity(this.value); resetDropdown(this);">
-                        <option style="display: none" selected>Add to Cart</option>
-                        @for (int i = 1; i <= 10; i++)
-                        {
-                            <option value="@i">@i</option>
-                        }
-                    </select>
+                    @if(productHasStock){
+                        <select class="product-add-to-cart-button" id="product-add-to-cart-button-@product.ID"
+                                onchange="addItemToCart(@product.ID, this.value, '@(HttpUtility.JavaScriptStringEncode(product.Name))', true); updateCartItemQuantity(this.value); resetDropdown(this);">
+                            <option style="display: none" selected>Add to Cart</option>
+                            @for (int i = 1; i <= 10; i++)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+                    }
+                    else{
+                        <button class="product-add-to-cart-button-disabled" disabled>Add to Cart</button>
+                    }
                 }
                 else
                 {
-                    <select class="product-add-to-cart-button" id="product-add-to-cart-button-@product.ID" onchange="redirectToLogin('@Url.Action("Login", "AppUser")', @product.ID, this.value)">
-                        <option style="display: none" selected>Add to Cart</option>
-                        @for (int i = 1; i <= 10; i++)
-                        {
-                            <option value="@i">@i</option>
-                        }
-                    </select>
+                    @if(productHasStock){
+                        <select class="product-add-to-cart-button" id="product-add-to-cart-button-@product.ID" onchange="redirectToLogin('@Url.Action("Login", "AppUser")', @product.ID, this.value)">
+                            <option style="display: none" selected>Add to Cart</option>
+                            @for (int i = 1; i <= 10; i++)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                        </select>
+                    }
+                    else{
+                        <div class="disabled-add-to-card-container">
+                            <button class="product-add-to-cart-button-disabled">Add to Cart</button>
+                            <div class="out-of-stock-message-container">
+                                <p class="out-of-stock-message">Product out of stock!</p>
+                            </div>
+                        </div>
+                    }
                 }
                 <a style="text-decoration: none" href="@Url.Action("Details", "Product", new {productID = @product.ID})" class="details-button">Details</a>
             </div>
