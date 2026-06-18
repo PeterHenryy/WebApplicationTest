@@ -3,11 +3,6 @@
     margin: 0; /* Remove default margin */
 }
 
-body {
-    display: flex; /* Flexbox layout */
-    flex-direction: column; /* Stack elements vertically */
-}
-
 .container {
     flex: 1; /* Allow the container to take up available space */
 }

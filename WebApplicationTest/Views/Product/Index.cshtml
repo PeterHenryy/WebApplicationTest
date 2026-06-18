@@ -14,19 +14,23 @@
 <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<body style="background-color: #121212">
 
-<body style="background-color: rgb(220,220,220)">
-
-    <header class="header">
+    <header class="header" style="margin-bottom: 0;">
         <partial name="_HeaderPartial" />
     </header>
+    <picture>
+        <source media="(max-width: 768px)"
+                srcset="~/Img/MainBanner-Mobile.png">
+
+        <img class="main-banner"
+             src="~/Img/TopRatedBanner.png"
+             alt="Banner">
+    </picture>
     <main>
+
         <section>
-            <div class="popular-announcement">
-                <i class="fa-solid fa-star fa-xl" style="color: #00BFFF;"></i>
-                <h1 class="product-h1">MOST POPULAR PRODUCTS</h1>
-                <i class="fa-solid fa-star fa-xl" style="color: #00BFFF;"></i>
-            </div>
+
             <div class="responsive-container">
                 <div class="products-index-grid">
                     @{
@@ -44,13 +48,20 @@
             </div>
         </section>
         <section>
-            <div class="banner-container">
-                <div class="responsive-container">
+       
+
                     <a href="@Url.Action("ProductsDisplay", "Product", new {filterOption = "Category", optionIdentify = 3})">
-                        <img class="banner" src="~/Img/modernPhonesBanner.png" />
+                        <picture>
+                            <source media="(max-width: 768px)"
+                                    srcset="~/Img/MainBanner-Mobile.png">
+
+                            <img class="main-banner"
+                                 src="~/Img/PhonesBanner.png"
+                                 alt="Banner">
+                        </picture>
                     </a>
-                </div>
-            </div>
+
+ 
 
             <div class="responsive-container">
                 <div class="products-index-grid">
@@ -70,13 +81,18 @@
 
         </section>
         <section>
-            <div class="banner-container">
-                <div class="responsive-container">
-                    <a href="@Url.Action("ProductsDisplay", "Product", new {filterOption = "Category", optionIdentify = 2})">
-                        <img class="banner" src="~/Img/jacketsImages.jpg" />
-                    </a>
-                </div>
-            </div>
+           
+            <a href="@Url.Action("ProductsDisplay", "Product", new {filterOption = "Category", optionIdentify = 2})">
+                <picture>
+                    <source media="(max-width: 768px)"
+                            srcset="~/Img/MainBanner-Mobile.png">
+
+                    <img class="main-banner"
+                            src="~/Img/JacketsBanner.png"
+                            alt="Banner">
+                </picture>
+            </a>
+            
 
             <div class="responsive-container">
                 <div class="products-index-grid">
