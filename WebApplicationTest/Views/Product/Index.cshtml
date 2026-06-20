@@ -32,7 +32,7 @@
         <section>
 
             <div class="responsive-container">
-                <div class="products-index-grid">
+                <div class="products-index-flex">
                     @{
                         var popularProducts = Model.GetMostPopularProducts();
                         var currentUser = Model.User;
@@ -64,7 +64,7 @@
  
 
             <div class="responsive-container">
-                <div class="products-index-grid">
+                <div class="products-index-flex">
                     @{
                         var popularCellphones = Model.GetMostPopularProducts(3);
                         currentUser = Model.User;
@@ -95,7 +95,7 @@
             
 
             <div class="responsive-container">
-                <div class="products-index-grid">
+                <div class="products-index-flex">
                     @{
                         var popularClothes = Model.GetMostPopularProducts(2);
                         currentUser = Model.User;
@@ -120,7 +120,7 @@
                     </div>
                 </div>
                 <div class="responsive-container">
-                    <div class="products-index-grid">
+                    <div class="products-index-flex">
                         @{
                             var popularGymEquipment = Model.GetMostPopularProducts(1);
                             currentUser = Model.User;

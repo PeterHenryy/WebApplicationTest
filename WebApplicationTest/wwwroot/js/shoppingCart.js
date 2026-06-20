@@ -1,4 +1,5 @@
-﻿function addItemToCart(itemID, quantity, productName) {
+﻿
+function addItemToCart(itemID, quantity, productName) {
     const data = {
         itemID,
         quantity
@@ -10,7 +11,18 @@
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
         data
     });
-    toastr.success(`Added ${productName} to Cart! (x${quantity})`);
+    if (productName.length > 35) {
+        let truncated = productName.substring(0, 35);
+
+        const lastSpace = truncated.lastIndexOf(" ");
+
+        if (lastSpace > 0) {
+            truncated = truncated.substring(0, lastSpace);
+        }
+
+        productName = truncated + "...";
+    }
+    toastr.success(`Added ${productName} to Cart!`);
 }
 
 let couponDiscount = 0;

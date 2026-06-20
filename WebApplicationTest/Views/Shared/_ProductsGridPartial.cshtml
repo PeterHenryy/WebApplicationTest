@@ -1,6 +1,6 @@
 ﻿@using System.Web
 @model ProductsCardViewModel
-
+<script src="~/js/site.js"></script>
 
 @foreach (var product in Model.Products)
 {
@@ -42,14 +42,10 @@
                 @if (Model.User.Id != 0)
                 {
                     @if(productHasStock){
-                        <select class="product-add-to-cart-button" id="product-add-to-cart-button-@product.ID"
-                                onchange="addItemToCart(@product.ID, this.value, '@(HttpUtility.JavaScriptStringEncode(product.Name))', true); updateCartItemQuantity(this.value); resetDropdown(this);">
-                            <option style="display: none" selected>Add to Cart</option>
-                            @for (int i = 1; i <= 10; i++)
-                            {
-                                <option value="@i">@i</option>
-                            }
-                        </select>
+                        <button class="product-add-to-cart-button" id="product-add-to-cart-button-@product.ID"
+                                onclick="addItemToCart(@product.ID, 1, '@(HttpUtility.JavaScriptStringEncode(product.Name))', true); updateCartItemQuantity(1);">
+                           Add to Cart
+                        </button>
                     }
                     else{
                         <div class="disabled-add-to-card-container">
@@ -63,13 +59,10 @@
                 else
                 {
                     @if(productHasStock){
-                        <select class="product-add-to-cart-button" id="product-add-to-cart-button-@product.ID" onchange="redirectToLogin('@Url.Action("Login", "AppUser")', @product.ID, this.value)">
-                            <option style="display: none" selected>Add to Cart</option>
-                            @for (int i = 1; i <= 10; i++)
-                            {
-                                <option value="@i">@i</option>
-                            }
-                        </select>
+                        <button class="product-add-to-cart-button" id="product-add-to-cart-button-@product.ID" onclick="redirectToLogin('@Url.Action("Login", "AppUser")', @product.ID,1)">
+                           Add to Cart
+                            
+                        </button>
                     }
                     else{
                         <div class="disabled-add-to-card-container">

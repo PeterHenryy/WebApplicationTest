@@ -24,8 +24,8 @@ footer {
     border: 2px solid black;
 }
 
-.toast-success, .toast-warning{
-    background-color: deepskyblue !important;
-    color: white !important;
+.toast-success, .toast-warning {
+    background-color: rgb(231, 196, 123) !important;
+    color: black !important;
 }
 
