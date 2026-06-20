@@ -31,9 +31,7 @@
 
     <main>
 
-        <!-- ===================== -->
-        <!-- SECTION 1 -->
-        <!-- ===================== -->
+  
         <section class="container-section">
 
             <div class="carousel-container">
@@ -46,10 +44,10 @@
                         var popularProducts = Model.GetMostPopularProducts();
 
                         ProductsCardViewModel popularProductsViewModel = new ProductsCardViewModel
-            {
-                Products = popularProducts,
-                User = Model.User
-            };
+                        {
+                            Products = popularProducts,
+                            User = Model.User
+                        };
 
                         Html.RenderPartial("_ProductsGridPartial", popularProductsViewModel);
                     }
@@ -63,9 +61,7 @@
         </section>
 
 
-        <!-- ===================== -->
-        <!-- SECTION 2 -->
-        <!-- ===================== -->
+ 
         <section>
 
             <a href="@Url.Action("ProductsDisplay", "Product", new { filterOption = "Category", optionIdentify = 3 })">
@@ -102,9 +98,6 @@
         </section>
 
 
-        <!-- ===================== -->
-        <!-- SECTION 3 -->
-        <!-- ===================== -->
         <section>
 
             <a href="@Url.Action("ProductsDisplay", "Product", new { filterOption = "Category", optionIdentify = 2 })">
@@ -140,10 +133,6 @@
 
         </section>
 
-
-        <!-- ===================== -->
-        <!-- SECTION 4 -->
-        <!-- ===================== -->
         <section>
 
             <div class="banner-container">

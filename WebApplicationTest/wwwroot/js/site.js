@@ -38,7 +38,6 @@ function scrollCarousel(button, direction) {
 
     const scrollLeft = container.scrollLeft;
 
-    // Find the card closest to current scroll position
     let currentIndex = 0;
 
     for (let i = 0; i < cards.length; i++) {
@@ -48,7 +47,6 @@ function scrollCarousel(button, direction) {
         }
     }
 
-    // Move index safely in BOTH directions
     const targetIndex = Math.max(0, Math.min(cards.length - 1, currentIndex + direction));
 
     cards[targetIndex].scrollIntoView({
