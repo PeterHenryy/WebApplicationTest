@@ -4,142 +4,188 @@
 
 @model ProductIndexViewModel
 
-<link rel="stylesheet" href="~/css/productsIndex.css" />
-<link rel="stylesheet" href="~/css/general.css" />
-<link rel="stylesheet" href="~/css/containerResponsive.css" />
+<link rel="stylesheet" href="~/css/productsIndex.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/general.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/containerResponsive.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/header.css" />
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 <link href="~/css/footer.css" rel="stylesheet" />
 
 <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script src="~/js/site.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <body style="background-color: #121212">
 
     <header class="header" style="margin-bottom: 0;">
         <partial name="_HeaderPartial" />
     </header>
-    <picture>
-        <source media="(max-width: 768px)"
-                srcset="~/Img/MainBanner-Mobile.png">
 
-        <img class="main-banner"
-             src="~/Img/TopRatedBanner.png"
-             alt="Banner">
+    <picture>
+        <source media="(max-width: 768px)" srcset="~/Img/MainBanner-Mobile.png">
+        <img class="main-banner" src="~/Img/TopRatedBanner.png" alt="Banner">
     </picture>
+
     <main>
 
-        <section>
+        <!-- ===================== -->
+        <!-- SECTION 1 -->
+        <!-- ===================== -->
+        <section class="container-section">
 
-            <div class="responsive-container">
-                <div class="products-index-flex">
+            <div class="carousel-container">
+
+                <button class="carousel-btn left" onclick="scrollCarousel(this, -1)">‹</button>
+
+                <div class="products-index-flex carousel-track">
+
                     @{
                         var popularProducts = Model.GetMostPopularProducts();
-                        var currentUser = Model.User;
+
                         ProductsCardViewModel popularProductsViewModel = new ProductsCardViewModel
-                        {
-                            Products = popularProducts,
-                            User = currentUser
-                        };
+            {
+                Products = popularProducts,
+                User = Model.User
+            };
+
                         Html.RenderPartial("_ProductsGridPartial", popularProductsViewModel);
                     }
-                   
+
                 </div>
-            </div>
-        </section>
-        <section>
-       
 
-                    <a href="@Url.Action("ProductsDisplay", "Product", new {filterOption = "Category", optionIdentify = 3})">
-                        <picture>
-                            <source media="(max-width: 768px)"
-                                    srcset="~/Img/MainBanner-Mobile.png">
+                <button class="carousel-btn right" onclick="scrollCarousel(this, 1)">›</button>
 
-                            <img class="main-banner"
-                                 src="~/Img/PhonesBanner.png"
-                                 alt="Banner">
-                        </picture>
-                    </a>
-
- 
-
-            <div class="responsive-container">
-                <div class="products-index-flex">
-                    @{
-                        var popularCellphones = Model.GetMostPopularProducts(3);
-                        currentUser = Model.User;
-                        ProductsCardViewModel popularCellphonesViewModel = new ProductsCardViewModel
-                        {
-                            Products = popularCellphones,
-                            User = currentUser
-                        };
-                        Html.RenderPartial("_ProductsGridPartial", popularCellphonesViewModel);
-                    }
-                    
-                </div>
             </div>
 
         </section>
+
+
+        <!-- ===================== -->
+        <!-- SECTION 2 -->
+        <!-- ===================== -->
         <section>
-           
-            <a href="@Url.Action("ProductsDisplay", "Product", new {filterOption = "Category", optionIdentify = 2})">
+
+            <a href="@Url.Action("ProductsDisplay", "Product", new { filterOption = "Category", optionIdentify = 3 })">
                 <picture>
-                    <source media="(max-width: 768px)"
-                            srcset="~/Img/MainBanner-Mobile.png">
-
-                    <img class="main-banner"
-                            src="~/Img/JacketsBanner.png"
-                            alt="Banner">
+                    <source media="(max-width: 768px)" srcset="~/Img/MainBanner-Mobile.png">
+                    <img class="main-banner" src="~/Img/PhonesBanner.png" alt="Banner">
                 </picture>
             </a>
-            
 
-            <div class="responsive-container">
-                <div class="products-index-flex">
+            <div class="carousel-container">
+
+                <button class="carousel-btn left" onclick="scrollCarousel(this, -1)">‹</button>
+
+                <div class="products-index-flex carousel-track">
+
+                    @{
+                        var popularCellphones = Model.GetMostPopularProducts(3);
+
+                        ProductsCardViewModel popularCellphonesViewModel = new ProductsCardViewModel
+            {
+                Products = popularCellphones,
+                User = Model.User
+            };
+
+                        Html.RenderPartial("_ProductsGridPartial", popularCellphonesViewModel);
+                    }
+
+                </div>
+
+                <button class="carousel-btn right" onclick="scrollCarousel(this, 1)">›</button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ===================== -->
+        <!-- SECTION 3 -->
+        <!-- ===================== -->
+        <section>
+
+            <a href="@Url.Action("ProductsDisplay", "Product", new { filterOption = "Category", optionIdentify = 2 })">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="~/Img/MainBanner-Mobile.png">
+                    <img class="main-banner" src="~/Img/JacketsBanner.png" alt="Banner">
+                </picture>
+            </a>
+
+            <div class="carousel-container">
+
+                <button class="carousel-btn left" onclick="scrollCarousel(this, -1)">‹</button>
+
+                <div class="products-index-flex carousel-track">
+
                     @{
                         var popularClothes = Model.GetMostPopularProducts(2);
-                        currentUser = Model.User;
+
                         ProductsCardViewModel popularClothesViewModel = new ProductsCardViewModel
-                        {
-                            Products = popularClothes,
-                            User = currentUser
-                        };
+            {
+                Products = popularClothes,
+                User = Model.User
+            };
+
                         Html.RenderPartial("_ProductsGridPartial", popularClothesViewModel);
                     }
-                    
+
+                </div>
+
+                <button class="carousel-btn right" onclick="scrollCarousel(this, 1)">›</button>
+
+            </div>
+
+        </section>
+
+
+        <!-- ===================== -->
+        <!-- SECTION 4 -->
+        <!-- ===================== -->
+        <section>
+
+            <div class="banner-container">
+                <div class="responsive-container">
+                    <a href="@Url.Action("ProductsDisplay", "Product", new { filterOption = "Category", optionIdentify = 1 })">
+                        <img class="banner" src="~/Img/bannergym-removebg.png">
+                    </a>
                 </div>
             </div>
-        </section>
-        <section>
-            <section>
-                <div class="banner-container">
-                    <div class="responsive-container">
-                        <a href="@Url.Action("ProductsDisplay", "Product", new {filterOption = "Category", optionIdentify = 1})">
-                            <img class="banner" src="~/Img/bannergym-removebg.png">
-                        </a>
-                    </div>
+
+            <div class="carousel-container">
+
+                <button class="carousel-btn left" onclick="scrollCarousel(this, -1)">‹</button>
+
+                <div class="products-index-flex carousel-track">
+
+                    @{
+                        var popularGymEquipment = Model.GetMostPopularProducts(1);
+
+                        ProductsCardViewModel popularGymEquipmentViewModel = new ProductsCardViewModel
+            {
+                Products = popularGymEquipment,
+                User = Model.User
+            };
+
+                        Html.RenderPartial("_ProductsGridPartial", popularGymEquipmentViewModel);
+                    }
+
                 </div>
-                <div class="responsive-container">
-                    <div class="products-index-flex">
-                        @{
-                            var popularGymEquipment = Model.GetMostPopularProducts(1);
-                            currentUser = Model.User;
-                            ProductsCardViewModel popularGymEquipmentViewModel = new ProductsCardViewModel
-                            {
-                                Products = popularGymEquipment,
-                                User = currentUser
-                            };
-                            Html.RenderPartial("_ProductsGridPartial", popularGymEquipmentViewModel);
-                        }
-                    </div>
-                </div>
-            </section>
+
+                <button class="carousel-btn right" onclick="scrollCarousel(this, 1)">›</button>
+
+            </div>
+
         </section>
 
     </main>
+
     <partial name="_FooterPartial" />
 
     <script src="https://kit.fontawesome.com/8da1ba04bb.js" crossorigin="anonymous"></script>
     <script src="~/js/shoppingCart.js"></script>
+
 
 </body>

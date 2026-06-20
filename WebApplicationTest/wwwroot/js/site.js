@@ -29,3 +29,31 @@ function truncateProductNames(maxLength = 35) {
 document.addEventListener("DOMContentLoaded", () => {
     truncateProductNames();
 });
+
+function scrollCarousel(button, direction) {
+    const container = button.parentElement.querySelector('.carousel-track');
+    const cards = Array.from(container.querySelectorAll('.product-card'));
+
+    if (!cards.length) return;
+
+    const scrollLeft = container.scrollLeft;
+
+    // Find the card closest to current scroll position
+    let currentIndex = 0;
+
+    for (let i = 0; i < cards.length; i++) {
+        if (cards[i].offsetLeft >= scrollLeft) {
+            currentIndex = i;
+            break;
+        }
+    }
+
+    // Move index safely in BOTH directions
+    const targetIndex = Math.max(0, Math.min(cards.length - 1, currentIndex + direction));
+
+    cards[targetIndex].scrollIntoView({
+        behavior: "smooth",
+        inline: "start",
+        block: "nearest"
+    });
+}

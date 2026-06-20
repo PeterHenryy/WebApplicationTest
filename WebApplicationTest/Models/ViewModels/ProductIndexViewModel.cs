@@ -11,17 +11,17 @@ namespace WebApplicationTest.Models.ViewModels
             if (categoryID == 0)
             {
                 var products = Products.OrderByDescending(x => x.AverageRating);
-                if (products.Count() > 5)
-                {
-                    return products.Take(6);
-                }
+                //if (products.Count() >= 5)
+                //{
+                //    return products.Take(5);
+                //}
                 return products;
             }
             var popularProducts = Products.Where(x => x.CategoryID == categoryID).OrderByDescending(x => x.AverageRating);
-            if (popularProducts.Count() > 5)
-            {
-                return popularProducts.Take(6);
-            }
+            //if (popularProducts.Count() >= 5)
+            //{
+            //    return popularProducts.Take(5);
+            //}
             return popularProducts;
         }
         public AppUser User { get; set; }
