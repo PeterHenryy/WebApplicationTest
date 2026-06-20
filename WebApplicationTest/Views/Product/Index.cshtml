@@ -59,17 +59,15 @@
             </div>
 
         </section>
-
-
  
-        <section>
+        <a href="@Url.Action("ProductsDisplay", "Product", new { filterOption = "Category", optionIdentify = 3 })">
+            <picture>
+                <source media="(max-width: 768px)" srcset="~/Img/MainBanner-Mobile.png">
+                <img class="main-banner" src="~/Img/PhonesBanner.png" alt="Banner">
+            </picture>
+        </a>
+        <section class="container-section">
 
-            <a href="@Url.Action("ProductsDisplay", "Product", new { filterOption = "Category", optionIdentify = 3 })">
-                <picture>
-                    <source media="(max-width: 768px)" srcset="~/Img/MainBanner-Mobile.png">
-                    <img class="main-banner" src="~/Img/PhonesBanner.png" alt="Banner">
-                </picture>
-            </a>
 
             <div class="carousel-container">
 
@@ -81,10 +79,10 @@
                         var popularCellphones = Model.GetMostPopularProducts(3);
 
                         ProductsCardViewModel popularCellphonesViewModel = new ProductsCardViewModel
-            {
-                Products = popularCellphones,
-                User = Model.User
-            };
+                    {
+                        Products = popularCellphones,
+                        User = Model.User
+                    };
 
                         Html.RenderPartial("_ProductsGridPartial", popularCellphonesViewModel);
                     }
@@ -97,15 +95,15 @@
 
         </section>
 
+        <a href="@Url.Action("ProductsDisplay", "Product", new { filterOption = "Category", optionIdentify = 2 })">
+            <picture>
+                <source media="(max-width: 768px)" srcset="~/Img/MainBanner-Mobile.png">
+                <img class="main-banner" src="~/Img/JacketsBanner.png" alt="Banner">
+            </picture>
+        </a>
 
-        <section>
+        <section class="container-section">
 
-            <a href="@Url.Action("ProductsDisplay", "Product", new { filterOption = "Category", optionIdentify = 2 })">
-                <picture>
-                    <source media="(max-width: 768px)" srcset="~/Img/MainBanner-Mobile.png">
-                    <img class="main-banner" src="~/Img/JacketsBanner.png" alt="Banner">
-                </picture>
-            </a>
 
             <div class="carousel-container">
 
@@ -133,7 +131,7 @@
 
         </section>
 
-        <section>
+        <section class="container-section">
 
             <div class="banner-container">
                 <div class="responsive-container">

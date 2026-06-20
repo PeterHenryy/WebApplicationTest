@@ -126,7 +126,7 @@ namespace WebApplicationTest.Controllers
         public async Task<RedirectToActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Login", "AppUser");
+            return RedirectToAction("Index", "Product");
         }
 
         [HttpGet]
