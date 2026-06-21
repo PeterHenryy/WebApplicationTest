@@ -7,17 +7,190 @@
     string userID = UserManager.GetUserId(@User);
     AppUser currentUser = UserManager.FindByIdAsync(userID).Result;
     int userIntID = Convert.ToInt32(userID);
-
+    bool isUserAdmin = User.IsInRole(UserRolesEnum.Admin.ToString());
+    bool isUserSignedIn = SignInManager.IsSignedIn(User);
 }
 
 <link rel="stylesheet" href="~/css/header.css" />
 <link href="~/css/productdetails.css" rel="stylesheet" />
 
 <div class="header-items-container">
+    <div class="mobile-menu" id="mobileMenu">
+
+        <button class="mobile-menu-close"
+        onclick="toggleMobileMenu()">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        @if (isUserSignedIn)
+        {
+            <div class="mobile-user-card">
+
+                @if (currentUser.ProfilePicture == "user-solid.svg")
+                {
+                    <img class="mobile-user-picture"
+                    src="~/icons/user-solid.svg">
+                }
+                else
+                {
+                    <img class="mobile-user-picture"
+                    src="@currentUser.ProfilePicture">
+                }
+                <div>
+                    <h5>@currentUser.UserName</h5>
+
+                    @if (!isUserAdmin){
+                        <div class="reward-points-container">
+                            <div class="reward-points-inner-container">
+                                <i class="fa-solid fa-bag-shopping fa-xl" style="color: #ffffff;"></i>
+                                <span style="color: #ffffff;">@Math.Round(currentUser.UserRewardPoints, 2)</span>
+                            </div>
+                            <div class="reward-points-explanation">
+                                <p class="reward-points">These are your reward points, you gain points each time you purchase products with money!</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+
+            </div>
+
+            <hr class="mobile-divider" />
+        }
+        @if (isUserSignedIn)
+        {
+            @if (!isUserAdmin)
+            {
+
+                <div class="mobile-menu-section">
+
+                    <h6>Menu</h6>
+
+                    <a href="@Url.Action("Index", "Product")">Home</a>
+
+                    <a href="@Url.Action("ProductsDisplay", "Product")">Products</a>
+
+                    <a href="@Url.Action("About", "AppUser")">About</a>
+
+                    <a href="@Url.Action("Create", "Contact")">Contact</a>
+
+                </div>
+                <hr class="mobile-divider" />
+
+                <div class="mobile-menu-section">
+
+                    <h6>My Account</h6>
+
+                    <a href="@Url.Action("Update", "AppUser")">
+                        Update Profile
+                    </a>
+
+                    <a href="@Url.Action("UserCards", "CreditCard", new { userID = userIntID })">
+                        Credit Cards
+                    </a>
+
+                    <a href="@Url.Action("UserRefunds", "Refund", new { userID = userIntID })">
+                        Refunds
+                    </a>
+
+                    <a href="@Url.Action("UserReviews", "Review", new { userID = userIntID })">
+                        Your Reviews
+                    </a>
+
+                    <a href="@Url.Action("UserTransactions", "Transaction", new { userID = userIntID })">
+                        Activity
+                    </a>
+
+                </div>
+
+                <hr class="mobile-divider" />
+
+            }
+            else
+            {
+                <div class="mobile-menu-section">
+
+                    <h6>Admin Menu</h6>
+
+                    <a href="@Url.Action("CompanyRefunds", "Refund", new { companyID = currentUser.CompanyID })">
+                        Refund Requests
+                    </a>
+
+                    <a href="@Url.Action("CompanyCoupons", "Coupon", new { companyID = currentUser.CompanyID })">
+                        Manage Coupons
+                    </a>
+
+                    <a href="@Url.Action("CompanyProducts", "Product", new { companyID = currentUser.CompanyID })">
+                        Company Products
+                    </a>
+
+                    <a href="@Url.Action("CompanyStats", "Company")">
+                        Company Stats
+                    </a>
+
+                </div>
+
+                <hr class="mobile-divider" />
+                <div class="mobile-menu-section">
+
+                    <h6>My Account</h6>
+
+                    <a href="@Url.Action("Update", "AppUser")">
+                        Update Profile
+                    </a>
+
+                </div>
+            }
+            <a asp-controller="AppUser" asp-action="Logout">
+                Logout
+            </a>
+        }
+
+        else
+        {
+            <div class="mobile-menu-section">
+
+                <h6>Menu</h6>
+
+                <a href="@Url.Action("Index", "Product")">Home</a>
+
+                <a href="@Url.Action("ProductsDisplay", "Product")">Products</a>
+
+                <a href="@Url.Action("About", "AppUser")">About</a>
+
+                <a href="@Url.Action("Create", "Contact")">Contact</a>
+
+            </div>
+            <hr class="mobile-divider" />
+            <a asp-controller="AppUser"
+            asp-action="Login">
+                Login
+            </a>
+
+            <a asp-controller="AppUser"
+            asp-action="Register">
+                Register
+            </a>
+        }
+    </div>
+    <div class="mobile-menu-overlay"
+    id="mobileMenuOverlay"
+    onclick="toggleMobileMenu()">
+    </div>
+    <button class="burger-menu" onclick="toggleMobileMenu()">
+        <i class="fa-solid fa-bars"></i>
+    </button>
     <a href="@Url.Action("Index", "Product")">
         <img class="shop-logo" src="~/Img/flaminglogo.png" />
     </a>
-    <ul class="header-items-list">
+    @if (isUserSignedIn)
+    {
+        @if (!isUserAdmin) {
+            <div class="mobile-cart">
+                @await Component.InvokeAsync("ShoppingCartItems")
+            </div>
+        }
+    }
+    <ul class="header-items-list desktop-nav">
         <li class="header-item"><a href="@Url.Action("Index", "Product")">Home</a></li>
         <li class="header-item"><a href="@Url.Action("ProductsDisplay", "Product")">Products</a></li>
         <li class="header-item"><a href="@Url.Action("About", "AppUser")">About</a></li>
@@ -31,8 +204,8 @@
     </form>
 
 
-    <div class="user-options">
-        @if (User.IsInRole(UserRolesEnum.Admin.ToString()))
+    <div class="user-options desktop-user-options">
+        @if (isUserAdmin)
         {
             <div class="options-menu-dropdown">
                 <p class="options-menu-trigger">Admin</p>
@@ -44,7 +217,7 @@
                 </ul>
             </div>
         }
-        @if (SignInManager.IsSignedIn(User))
+        @if (isUserSignedIn)
         {
             @await Component.InvokeAsync("ShoppingCartItems")
             <div class="options-menu-dropdown">
@@ -73,7 +246,7 @@
                     <i class="fa-solid fa-bag-shopping fa-xl" style="color: #ffffff;"></i>
                     <span style="color: #ffffff;">@Math.Round(currentUser.UserRewardPoints, 2)</span>
                 </div>
-                <div class="reward-points-exaplanation">
+                <div class="reward-points-explanation">
                     <p class="reward-points">These are your reward points, you gain points each time you purchase products with money!</p>
                 </div>
             </div>
@@ -100,4 +273,19 @@
         alert(message);
     </script>
 }
+
+<script>
+        function toggleMobileMenu() {
+
+        document
+            .getElementById("mobileMenu")
+            .classList
+            .toggle("show");
+
+        document
+            .getElementById("mobileMenuOverlay")
+            .classList
+            .toggle("show");
+    }
+</script>
 
