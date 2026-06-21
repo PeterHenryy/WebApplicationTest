@@ -83,9 +83,9 @@
     color: black;
 }
 
-    .options-menu a:hover {
-        color: rgb(0,191,255);
-    }
+.options-menu a:hover {
+    color: rgb(231, 196, 123);
+}
 
 .options-menu-dropdown:hover .options-menu {
     display: inline-block;
@@ -100,7 +100,7 @@
 
 .logout-button:hover {
     cursor: pointer;
-    color: rgb(0,191,255);
+    color: rgb(231, 196, 123);
 }
 
 .shop-logo {
@@ -154,8 +154,8 @@
     display: none;
     position: absolute;
     top: 100%;
-    background-color: rgb(0, 191, 255);
-    color: rgb(255, 255, 255);
+    background-color: rgb(231, 196, 123);
+    color: black;
     border-radius: 7px;
     font-size: 16px;
     padding: 10px;

@@ -1,17 +1,18 @@
 ﻿html, body {
-    height: 100%; /* Full height */
-    margin: 0; /* Remove default margin */
+    height: 100%; 
+    margin: 0; 
+    background-color: #121212
 }
 
 .container {
-    flex: 1; /* Allow the container to take up available space */
+    flex: 1; 
 }
 
 footer {
-    background-color: rgb(0,0,0); /* Footer background */
-    color: white; /* Footer text color */
-    text-align: center; /* Footer text alignment */
-    padding: 20px; /* Padding for the footer */
+    background-color: rgb(0,0,0); 
+    color: white; 
+    text-align: center; 
+    padding: 20px; 
 }
 
 .footer button {
