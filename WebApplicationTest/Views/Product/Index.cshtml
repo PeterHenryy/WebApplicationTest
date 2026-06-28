@@ -38,7 +38,7 @@
 
                 <button class="carousel-btn left" onclick="scrollCarousel(this, -1)">‹</button>
 
-                <div class="products-index-flex carousel-track">
+                <div class="carousel-track">
 
                     @{
                         var popularProducts = Model.GetMostPopularProducts();
@@ -115,10 +115,10 @@
                         var popularClothes = Model.GetMostPopularProducts(2);
 
                         ProductsCardViewModel popularClothesViewModel = new ProductsCardViewModel
-            {
-                Products = popularClothes,
-                User = Model.User
-            };
+                        {
+                            Products = popularClothes,
+                            User = Model.User
+                        };
 
                         Html.RenderPartial("_ProductsGridPartial", popularClothesViewModel);
                     }
@@ -130,7 +130,7 @@
             </div>
 
         </section>
-
+@* 
         <section class="container-section">
 
             <div class="banner-container">
@@ -151,10 +151,10 @@
                         var popularGymEquipment = Model.GetMostPopularProducts(1);
 
                         ProductsCardViewModel popularGymEquipmentViewModel = new ProductsCardViewModel
-            {
-                Products = popularGymEquipment,
-                User = Model.User
-            };
+                        {
+                            Products = popularGymEquipment,
+                            User = Model.User
+                        };
 
                         Html.RenderPartial("_ProductsGridPartial", popularGymEquipmentViewModel);
                     }
@@ -165,7 +165,7 @@
 
             </div>
 
-        </section>
+        </section> *@
 
     </main>
 

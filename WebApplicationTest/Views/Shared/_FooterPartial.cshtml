@@ -1,85 +1,132 @@
-﻿<footer class="text-center text-lg-start text-white" style="margin-top: 50px;">
-    <div class="container p-4 pb-0" style="max-height: 310px;">
-        <section class="">
-            <div class="row">
-                <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
-                    <h6 class="text-uppercase mb-4 font-weight-bold">
-                        The Flaming Shop
-                    </h6>
-                    <p>
-                        Discover a world of fiery products at The Flaming Shop! We specialize in offering a wide range of high-quality items that ignite your passions and desires.
-                    </p>
-                    
-                    <a class="btn btn-info" style="background-color: rgb(0,191,255);" href="https://localhost:44369/AppUser/About">Read More</a>
-                </div>
+﻿<footer class="footer">
+
+    <div class="footer-container">
+
+        <div class="footer-column">
+            <h3>
+                <i class="fa-solid fa-fire" style="color: rgb(231,196,123);"></i>
+                The Flaming Shop
+                <i class="fa-solid fa-fire" style="color: rgb(231,196,123);"></i>
+            </h3>
+
+            <p>
+                Discover a world of fiery products at The Flaming Shop!
+                We specialize in offering premium products that ignite your
+                passions.
+            </p>
+
+            <a class="footer-button"
+               href="@Url.Action("About","AppUser")">
+                Read More
+            </a>
+        </div>
 
 
-                <hr class="w-100 clearfix d-md-none" />
+        <div class="footer-column">
+            <h3>
+                <i class="fa-solid fa-box-open" style="color: rgb(231,196,123);"></i>
+                Products
+            </h3>
 
+            <div class="footer-links-outer-container">
+                <div class="footer-links-inner-container">
 
-                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                    <h6 class="text-uppercase mb-4 font-weight-bold">Products</h6>
-                    <p>
-                        <a class="text-white" href="https://localhost:44369/Product/ProductsDisplay?filterOption=Rating&optionIdentify=1">Most Popular</a>
-                    </p>
-                    <p>
-                        <a class="text-white" href="https://localhost:44369/Product/ProductsDisplay?filterOption=Most%20Sold">Most Sold</a>
-                    </p>
-                    <p>
-                        <a class="text-white" href="https://localhost:44369/Product/ProductsDisplay?filterOption=Category&optionIdentify=3">Phones</a>
-                    </p>
-                    <p>
-                        <a class="text-white" href="https://localhost:44369/Product/ProductsDisplay?filterOption=Category&optionIdentify=2">Clothes</a>
-                    </p>
-                    <p>
-                        <a class="text-white" href="https://localhost:44369/Product/ProductsDisplay?filterOption=Category&optionIdentify=1">Gym Equipment</a>
-                    </p>
-                    <p>
-                        <a class="text-white" href="https://localhost:44369/Product/ProductsDisplay?filterOption=Category&optionIdentify=4">Games</a>
-                    </p>
-                </div>
-
-
-                <hr class="w-100 clearfix d-md-none" />
-
-                <hr class="w-100 clearfix d-md-none" />
-
-
-                <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
-                    <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
-                    <a href="https://www.linkedin.com/in/pedro-henrique-de-matos-veronese/" style="text-decoration: none; color: white;">
-                        <p> <i class="fab fa-linkedin-in"></i> LinkedIn</p> 
+                    <a href="@Url.Action("ProductsDisplay","Product",new{filterOption="Rating",optionIdentify=1})">
+                        <i class="fa-solid fa-fire"></i> 
+                        Most Popular
                     </a>
-                    <p><i class="fas fa-envelope mr-3"></i> peterhryk@gmail.com</p>
-                    <p><i class="fas fa-phone mr-3"></i> +55 55 997142547</p>
-                </div>
 
-                <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
-                    <h6 class="text-uppercase mb-4 font-weight-bold">Useful Links</h6>
-                    <p>
-                        <a class="text-white" href="https://localhost:44369/">Home</a>
-                    </p>
-                    <p>
-                        <a class="text-white" href="https://localhost:44369/Product/ProductsDisplay">All Products</a>
-                    </p>
-                    <p>
-                        <a class="text-white" href="https://localhost:44369/AppUser/About">About</a>
-                    </p>
-                    <p>
-                        <a class="text-white" href="https://localhost:44369/Contact/Create">Talk to Us</a>
-                    </p>
+                    <a href="@Url.Action("ProductsDisplay","Product",new{filterOption="Most Sold"})">
+                        <i class="fa-solid fa-chart-line"></i>  
+                        Most Sold
+                    </a>
 
+                    <a href="@Url.Action("ProductsDisplay","Product",new{filterOption="Category",optionIdentify=3})">
+                        <i class="fa-solid fa-mobile-screen-button"></i>
+                        Phones
+                    </a>
+
+                    <a href="@Url.Action("ProductsDisplay","Product",new{filterOption="Category",optionIdentify=2})">
+                        <i class="fa-solid fa-shirt"></i>
+                        Clothes
+                    </a>
+
+                    <a href="@Url.Action("ProductsDisplay","Product",new{filterOption="Category",optionIdentify=1})">
+                        <i class="fa-solid fa-dumbbell"></i>
+                        Gym Equipment
+                    </a>
+
+                    <a href="@Url.Action("ProductsDisplay","Product",new{filterOption="Category",optionIdentify=4})">
+                        <i class="fa-solid fa-gamepad"></i>
+                        Games
+                    </a>
                 </div>
             </div>
 
-        </section>
+        </div>
+
+
+        <div class="footer-column">
+            <h3>
+                <i class="fa-solid fa-address-book" style="color: rgb(231,196,123);"></i>
+                Contact
+            </h3>
+
+            <div class="footer-links-outer-container">
+                <div class="footer-links-inner-container">
+                    <a href="https://www.linkedin.com/in/pedro-henrique-de-matos-veronese/">
+                        <i class="fab fa-linkedin"></i> LinkedIn
+                    </a>
+
+                    <p>
+                        <i class="fas fa-envelope"></i>
+                        peterhryk@gmail.com
+                    </p>
+
+                    <p>
+                        <i class="fas fa-phone"></i>
+                        +55 55 99714-2547
+                    </p>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="footer-column">
+            <h3>
+                <i class="fa-solid fa-link" style="color: rgb(231,196,123);"></i>
+                Useful Links
+            </h3>
+
+            <div class="footer-links-outer-container">
+                <div class="footer-links-inner-container">
+                    <a href="@Url.Action("Index","Product")">
+                        <i class="fa-solid fa-house"></i>
+                        Home
+                    </a>
+
+                    <a href="@Url.Action("ProductsDisplay","Product")">
+                        <i class="fa-solid fa-store"></i>
+                        Products
+                    </a>
+
+                    <a href="@Url.Action("About","AppUser")">
+                        <i class="fa-solid fa-circle-info"></i>
+                        About
+                    </a>
+
+                    <a href="@Url.Action("Create","Contact")">
+                        <i class="fa-solid fa-comments"></i>
+                        Talk to Us
+                    </a>
+                </div>
+            </div>
+        </div>
 
     </div>
 
-    <div class="text-center p-3"
-         style="background-color: rgba(0, 0, 0, 0.2)">
-        © 2024 Copyright:
-        <a class="text-white" href="https://localhost:44369/">The Flaming Shop</a>
+    <div class="footer-bottom">
+        © 2024 The Flaming Shop. All rights reserved.
     </div>
 
 </footer>
