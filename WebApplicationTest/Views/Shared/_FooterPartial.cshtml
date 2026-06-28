@@ -2,12 +2,13 @@
 
     <div class="footer-container">
 
-        <div class="footer-column">
+        <div class="footer-column footer-about-flaming">
             <h3>
                 <i class="fa-solid fa-fire" style="color: rgb(231,196,123);"></i>
                 The Flaming Shop
                 <i class="fa-solid fa-fire" style="color: rgb(231,196,123);"></i>
             </h3>
+
 
             <p>
                 Discover a world of fiery products at The Flaming Shop!
@@ -23,103 +24,86 @@
 
 
         <div class="footer-column">
-            <h3>
-                <i class="fa-solid fa-box-open" style="color: rgb(231,196,123);"></i>
-                Products
-            </h3>
 
             <div class="footer-links-outer-container">
-                <div class="footer-links-inner-container">
+                <h3>
+                    <i class="fa-solid fa-box-open"></i> Products
+                </h3>
 
-                    <a href="@Url.Action("ProductsDisplay","Product",new{filterOption="Rating",optionIdentify=1})">
-                        <i class="fa-solid fa-fire"></i> 
-                        Most Popular
-                    </a>
+                <a href="@Url.Action("ProductsDisplay","Product",new{filterOption="Rating",optionIdentify=1})">
+                    <i class="fa-solid fa-fire"></i> Most Popular
+                </a>
 
-                    <a href="@Url.Action("ProductsDisplay","Product",new{filterOption="Most Sold"})">
-                        <i class="fa-solid fa-chart-line"></i>  
-                        Most Sold
-                    </a>
+                <a href="@Url.Action("ProductsDisplay","Product",new{filterOption="Most Sold"})">
+                    <i class="fa-solid fa-chart-line"></i> Most Sold
+                </a>
 
-                    <a href="@Url.Action("ProductsDisplay","Product",new{filterOption="Category",optionIdentify=3})">
-                        <i class="fa-solid fa-mobile-screen-button"></i>
-                        Phones
-                    </a>
+                <a href="@Url.Action("ProductsDisplay","Product",new{filterOption="Category",optionIdentify=3})">
+                    <i class="fa-solid fa-mobile-screen-button"></i> Phones
+                </a>
 
-                    <a href="@Url.Action("ProductsDisplay","Product",new{filterOption="Category",optionIdentify=2})">
-                        <i class="fa-solid fa-shirt"></i>
-                        Clothes
-                    </a>
+                <a href="@Url.Action("ProductsDisplay","Product",new{filterOption="Category",optionIdentify=2})">
+                    <i class="fa-solid fa-shirt"></i> Clothes
+                </a>
 
-                    <a href="@Url.Action("ProductsDisplay","Product",new{filterOption="Category",optionIdentify=1})">
-                        <i class="fa-solid fa-dumbbell"></i>
-                        Gym Equipment
-                    </a>
+                <a href="@Url.Action("ProductsDisplay","Product",new{filterOption="Category",optionIdentify=1})">
+                    <i class="fa-solid fa-dumbbell"></i> Gym Equipment
+                </a>
 
-                    <a href="@Url.Action("ProductsDisplay","Product",new{filterOption="Category",optionIdentify=4})">
-                        <i class="fa-solid fa-gamepad"></i>
-                        Games
-                    </a>
-                </div>
+                <a href="@Url.Action("ProductsDisplay","Product",new{filterOption="Category",optionIdentify=4})">
+                    <i class="fa-solid fa-gamepad"></i> Games
+                </a>
             </div>
 
         </div>
 
 
         <div class="footer-column">
-            <h3>
-                <i class="fa-solid fa-address-book" style="color: rgb(231,196,123);"></i>
-                Contact
-            </h3>
+            
 
             <div class="footer-links-outer-container">
-                <div class="footer-links-inner-container">
-                    <a href="https://www.linkedin.com/in/pedro-henrique-de-matos-veronese/">
-                        <i class="fab fa-linkedin"></i> LinkedIn
-                    </a>
+                <h3>
+                    <i class="fa-solid fa-address-book"></i>
+                    Contact
+                </h3>
+                <a href="https://www.linkedin.com/in/pedro-henrique-de-matos-veronese/">
+                    <i class="fab fa-linkedin"></i> LinkedIn
+                </a>
 
-                    <p>
-                        <i class="fas fa-envelope"></i>
-                        peterhryk@gmail.com
-                    </p>
+                <p>
+                    <i class="fas fa-envelope"></i> peterhryk@gmail.com
+                </p>
 
-                    <p>
-                        <i class="fas fa-phone"></i>
-                        +55 55 99714-2547
-                    </p>
-                </div>
+                <p>
+                    <i class="fas fa-phone"></i> +55 55 99714-2547
+                </p>
             </div>
         </div>
 
 
         <div class="footer-column">
-            <h3>
-                <i class="fa-solid fa-link" style="color: rgb(231,196,123);"></i>
-                Useful Links
-            </h3>
+            
 
             <div class="footer-links-outer-container">
-                <div class="footer-links-inner-container">
-                    <a href="@Url.Action("Index","Product")">
-                        <i class="fa-solid fa-house"></i>
-                        Home
-                    </a>
+                <h3>
+                    <i class="fa-solid fa-link"></i>
+                    Useful Links
+                </h3>
+                <a href="@Url.Action("Index","Product")">
+                    <i class="fa-solid fa-house"></i> Home
+                </a>
 
-                    <a href="@Url.Action("ProductsDisplay","Product")">
-                        <i class="fa-solid fa-store"></i>
-                        Products
-                    </a>
+                <a href="@Url.Action("ProductsDisplay","Product")">
+                    <i class="fa-solid fa-store"></i> Products
+                </a>
 
-                    <a href="@Url.Action("About","AppUser")">
-                        <i class="fa-solid fa-circle-info"></i>
-                        About
-                    </a>
+                <a href="@Url.Action("About","AppUser")">
+                    <i class="fa-solid fa-circle-info"></i> About
+                </a>
 
-                    <a href="@Url.Action("Create","Contact")">
-                        <i class="fa-solid fa-comments"></i>
-                        Talk to Us
-                    </a>
-                </div>
+                <a href="@Url.Action("Create","Contact")">
+                    <i class="fa-solid fa-comments"></i> Talk to Us
+                </a>
             </div>
         </div>
 

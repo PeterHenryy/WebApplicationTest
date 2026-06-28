@@ -106,6 +106,7 @@
     color: rgb(231, 196, 123);
 }
 
+
 .shop-logo {
     width: 100px;
 }
@@ -377,6 +378,14 @@
     }
 
     .mobile-menu a:hover {
+        color: rgb(231,196,123);
+    }
+
+    .mobile-menu i::before {
+        width: 20px;
+        height: 20px;
+        margin-right: 5px;
+        display: block;
         color: rgb(231,196,123);
     }
 

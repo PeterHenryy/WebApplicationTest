@@ -5,6 +5,12 @@
     border-top: 1px solid #2d2d2d;
 }
 
+.footer-about-flaming{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .footer-container {
     max-width: 1700px;
     margin: auto;
@@ -18,6 +24,10 @@
     margin-bottom: 20px;
     color: rgb(231,196,123);
     font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 .footer-column p {
@@ -37,23 +47,6 @@
 .footer-column a:hover {
     color: rgb(231,196,123);
     transform: translateX(6px);
-}
-
-.footer-links-outer-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.footer-links-inner-container{
-    text-align: start;
-}
-
-.footer-links-inner-container i::before{
-    margin-right: 5px;
-    width: 20px;
-    height: 20px;
-    display: block;
 }
 
 .footer-button {
@@ -78,12 +71,37 @@
     color: #aaa;
 }
 
+.footer-column a,
+.footer-column p {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 220px;
+    gap: 12px;
+    margin-bottom: 12px;
+}
 
-@media (max-width:1000px) {
+
+
+.footer-column a i,
+.footer-column p i {
+    width: 22px;
+    text-align: center;
+    color: rgb(231,196,123);
+    flex-shrink: 0;
+}
+
+.footer-links-outer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media (max-width:1200px) {
 
     .footer-container {
         grid-template-columns: repeat(2,1fr);
-        gap: 50px;
+        gap: 30px;
     }
 }
 

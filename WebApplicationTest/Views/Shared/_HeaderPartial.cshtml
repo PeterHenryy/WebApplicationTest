@@ -64,19 +64,19 @@
                     <h6>Admin Menu</h6>
 
                     <a href="@Url.Action("CompanyRefunds", "Refund", new { companyID = currentUser.CompanyID })">
-                        Refund Requests
+                        <i class="fa-solid fa-rotate-left"></i>Refund Requests
                     </a>
 
                     <a href="@Url.Action("CompanyCoupons", "Coupon", new { companyID = currentUser.CompanyID })">
-                        Manage Coupons
+                        <i class="fa-solid fa-ticket"></i> Manage Coupons
                     </a>
 
                     <a href="@Url.Action("CompanyProducts", "Product", new { companyID = currentUser.CompanyID })">
-                        Company Products
+                        <i class="fa-solid fa-box-open"></i> Company Products
                     </a>
 
                     <a href="@Url.Action("CompanyStats", "Company")">
-                        Company Stats
+                        <i class="fa-solid fa-chart-line"></i> Company Stats
                     </a>
 
                 </div>
@@ -87,13 +87,21 @@
 
                 <h6>Menu</h6>
 
-                <a href="@Url.Action("Index", "Product")">Home</a>
+                <a href="@Url.Action("Index","Product")">
+                    <i class="fa-solid fa-house"></i> Home
+                </a>
 
-                <a href="@Url.Action("ProductsDisplay", "Product")">Products</a>
+                <a href="@Url.Action("ProductsDisplay","Product")">
+                    <i class="fa-solid fa-store"></i> Products
+                </a>
 
-                <a href="@Url.Action("About", "AppUser")">About</a>
+                <a href="@Url.Action("About","AppUser")">
+                    <i class="fa-solid fa-circle-info"></i> About
+                </a>
 
-                <a href="@Url.Action("Create", "Contact")">Contact</a>
+                <a href="@Url.Action("Create","Contact")">
+                    <i class="fa-solid fa-comments"></i> Talk to Us
+                </a>
 
             </div>
             <hr class="mobile-divider" />
@@ -103,23 +111,23 @@
                 <h6>My Account</h6>
 
                 <a href="@Url.Action("UserTransactions", "Transaction", new { userID = userIntID })">
-                    Activity
+                    <i class="fa-solid fa-clock-rotate-left"></i> Activity
                 </a>
 
                 <a href="@Url.Action("Update", "AppUser")">
-                    Update Profile
+                    <i class="fa-solid fa-user-gear"></i> Update Profile
                 </a>
 
                 <a href="@Url.Action("UserCards", "CreditCard", new { userID = userIntID })">
-                    Credit Cards
+                    <i class="fa-regular fa-credit-card"></i> Credit Cards
                 </a>
 
                 <a href="@Url.Action("UserRefunds", "Refund", new { userID = userIntID })">
-                    Refunds
+                    <i class="fa-solid fa-money-bill-transfer"></i> Refunds
                 </a>
 
                 <a href="@Url.Action("UserReviews", "Review", new { userID = userIntID })">
-                    Your Reviews
+                    <i class="fa-solid fa-star"></i> Your Reviews
                 </a>
 
             </div>
@@ -127,7 +135,7 @@
             <hr class="mobile-divider" />
 
             <a asp-controller="AppUser" asp-action="Logout">
-                Logout
+                <i class="fa-solid fa-right-from-bracket"></i> Logout
             </a>
         }
 
@@ -137,24 +145,36 @@
 
                 <h6>Menu</h6>
 
-                <a href="@Url.Action("Index", "Product")">Home</a>
+                <a href="@Url.Action("Index","Product")">
+                    <i class="fa-solid fa-house"></i>
+                    Home
+                </a>
 
-                <a href="@Url.Action("ProductsDisplay", "Product")">Products</a>
+                <a href="@Url.Action("ProductsDisplay","Product")">
+                    <i class="fa-solid fa-store fontaw-icon"></i>
+                    Products
+                </a>
 
-                <a href="@Url.Action("About", "AppUser")">About</a>
+                <a href="@Url.Action("About","AppUser")">
+                    <i class="fa-solid fa-circle-info"></i>
+                    About
+                </a>
 
-                <a href="@Url.Action("Create", "Contact")">Contact</a>
+                <a href="@Url.Action("Create","Contact")">
+                    <i class="fa-solid fa-comments"></i>
+                    Talk to Us
+                </a>
 
             </div>
             <hr class="mobile-divider" />
             <a asp-controller="AppUser"
             asp-action="Login">
-                Login
+                <i class="fa-solid fa-right-to-bracket"></i> Login
             </a>
 
             <a asp-controller="AppUser"
             asp-action="Register">
-                Register
+                <i class="fa-solid fa-user-plus"></i> Register
             </a>
         }
     </div>
