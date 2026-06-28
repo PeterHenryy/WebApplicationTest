@@ -37,76 +37,28 @@
                 }
                 <div>
                     <h5>@currentUser.UserName</h5>
-
-                    @if (!isUserAdmin){
-                        <div class="reward-points-container">
-                            <div class="reward-points-inner-container">
-                                <i class="fa-solid fa-bag-shopping fa-xl" style="color: #ffffff;"></i>
-                                <span style="color: #ffffff;">@Math.Round(currentUser.UserRewardPoints, 2)</span>
-                            </div>
-                            <div class="reward-points-explanation">
-                                <p class="reward-points">These are your reward points, you gain points each time you purchase products with money!</p>
-                            </div>
-                        </div>
-                    }
+                   
+                    
                 </div>
 
-
             </div>
+                <div class="mobile-menu-section">
+
+                    <div class="reward-points-container">
+
+                    <p style="color: white"> <i class="fa-solid fa-bag-shopping fa-xl" style="color: white; margin-right: 5px;"></i>Reward Points</p>
+                    <p style="color: rgb(231, 196, 123);">@Math.Round(currentUser.UserRewardPoints, 2) <span style="color: white;">Points</span></p>
+                    </div>
+                </div>
 
             <hr class="mobile-divider" />
         }
         @if (isUserSignedIn)
         {
-            @if (!isUserAdmin)
+
+            @if (isUserAdmin)
             {
 
-                <div class="mobile-menu-section">
-
-                    <h6>Menu</h6>
-
-                    <a href="@Url.Action("Index", "Product")">Home</a>
-
-                    <a href="@Url.Action("ProductsDisplay", "Product")">Products</a>
-
-                    <a href="@Url.Action("About", "AppUser")">About</a>
-
-                    <a href="@Url.Action("Create", "Contact")">Contact</a>
-
-                </div>
-                <hr class="mobile-divider" />
-
-                <div class="mobile-menu-section">
-
-                    <h6>My Account</h6>
-
-                    <a href="@Url.Action("Update", "AppUser")">
-                        Update Profile
-                    </a>
-
-                    <a href="@Url.Action("UserCards", "CreditCard", new { userID = userIntID })">
-                        Credit Cards
-                    </a>
-
-                    <a href="@Url.Action("UserRefunds", "Refund", new { userID = userIntID })">
-                        Refunds
-                    </a>
-
-                    <a href="@Url.Action("UserReviews", "Review", new { userID = userIntID })">
-                        Your Reviews
-                    </a>
-
-                    <a href="@Url.Action("UserTransactions", "Transaction", new { userID = userIntID })">
-                        Activity
-                    </a>
-
-                </div>
-
-                <hr class="mobile-divider" />
-
-            }
-            else
-            {
                 <div class="mobile-menu-section">
 
                     <h6>Admin Menu</h6>
@@ -128,18 +80,52 @@
                     </a>
 
                 </div>
-
                 <hr class="mobile-divider" />
-                <div class="mobile-menu-section">
-
-                    <h6>My Account</h6>
-
-                    <a href="@Url.Action("Update", "AppUser")">
-                        Update Profile
-                    </a>
-
-                </div>
             }
+
+            <div class="mobile-menu-section">
+
+                <h6>Menu</h6>
+
+                <a href="@Url.Action("Index", "Product")">Home</a>
+
+                <a href="@Url.Action("ProductsDisplay", "Product")">Products</a>
+
+                <a href="@Url.Action("About", "AppUser")">About</a>
+
+                <a href="@Url.Action("Create", "Contact")">Contact</a>
+
+            </div>
+            <hr class="mobile-divider" />
+
+            <div class="mobile-menu-section">
+
+                <h6>My Account</h6>
+
+                <a href="@Url.Action("UserTransactions", "Transaction", new { userID = userIntID })">
+                    Activity
+                </a>
+
+                <a href="@Url.Action("Update", "AppUser")">
+                    Update Profile
+                </a>
+
+                <a href="@Url.Action("UserCards", "CreditCard", new { userID = userIntID })">
+                    Credit Cards
+                </a>
+
+                <a href="@Url.Action("UserRefunds", "Refund", new { userID = userIntID })">
+                    Refunds
+                </a>
+
+                <a href="@Url.Action("UserReviews", "Review", new { userID = userIntID })">
+                    Your Reviews
+                </a>
+
+            </div>
+
+            <hr class="mobile-divider" />
+
             <a asp-controller="AppUser" asp-action="Logout">
                 Logout
             </a>

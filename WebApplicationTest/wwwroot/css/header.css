@@ -148,12 +148,16 @@
     z-index: 5;
 }
 
+.reward-points-container p{
+    margin: 5px;
+}
+
 .reward-points {
     margin: 0;
 }
 
 .reward-points-explanation {
-    width: 270px;
+    width: 265px;
     display: none;
     position: absolute;
     top: 100%;
@@ -163,6 +167,7 @@
     font-size: 16px;
     padding: 10px;
     margin-top: 25px;
+
 }
 
 .reward-points-container:hover .reward-points-explanation {
@@ -230,7 +235,6 @@
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-bottom: 20px;
 }
 
 .mobile-menu-section h6 {
@@ -330,6 +334,8 @@
         transform: translateX(-100%);
         transition: transform .3s ease;
         display: flex;
+        overflow-y: auto;
+        overscroll-behavior: contain;
     }
 
     .mobile-menu.show {
@@ -383,6 +389,10 @@
         flex-wrap: wrap;
         height: auto;
         padding: 10px;
+    }
+
+    .reward-points-explanation{
+        left: -90px;
     }
 }
 
