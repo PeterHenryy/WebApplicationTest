@@ -186,15 +186,13 @@
         <i class="fa-solid fa-bars"></i>
     </button>
     <a href="@Url.Action("Index", "Product")">
-        <img class="shop-logo" src="~/Img/flaminglogo.png" />
+        <img class="shop-logo" src="~/Img/FlamingShopLogo.png" />
     </a>
     @if (isUserSignedIn)
     {
-        @if (!isUserAdmin) {
-            <div class="mobile-cart">
-                @await Component.InvokeAsync("ShoppingCartItems")
-            </div>
-        }
+        <div class="mobile-cart">
+            @await Component.InvokeAsync("ShoppingCartItems")
+        </div>
     }
     <ul class="header-items-list desktop-nav">
         <li class="header-item"><a href="@Url.Action("Index", "Product")">Home</a></li>

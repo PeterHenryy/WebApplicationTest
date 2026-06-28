@@ -3,7 +3,10 @@
     color: white;
     margin-top: 80px;
     border-top: 1px solid #2d2d2d;
+    position: relative;
+    overflow: hidden;
 }
+
 
 .footer-about-flaming{
     display: flex;
@@ -11,13 +14,26 @@
     align-items: center;
 }
 
+.footer-column {
+    position: relative;
+}
+
+
+.footer-column:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: -30px;
+    top: 15px;
+    width: 1px;
+    height: 85%;
+    background: rgba(255,255,255,.06);
+}
+
 .footer-container {
-    max-width: 1700px;
-    margin: auto;
     display: grid;
-    grid-template-columns: repeat(4,1fr);
+    grid-template-columns: 1fr 1fr 1fr 1fr;
     gap: 60px;
-    padding: 60px 40px;
+    padding: 20px 0px;
 }
 
 .footer-column h3 {
@@ -41,12 +57,16 @@
     margin-bottom: 12px;
     color: white;
     text-decoration: none;
-    transition: .2s;
+    transition: .25s;
 }
 
 .footer-column a:hover {
     color: rgb(231,196,123);
     transform: translateX(6px);
+}
+
+.footer-column a:hover i {
+    transform: translateX(4px);
 }
 
 .footer-button {
@@ -59,10 +79,10 @@
     font-weight: bold;
 }
 
-    .footer-button:hover {
-        transform: scale(1.05);
-        color: black !important;
-    }
+.footer-button:hover {
+    transform: scale(1.05);
+    color: black !important;
+}
 
 .footer-bottom {
     border-top: 1px solid #2d2d2d;
@@ -81,7 +101,9 @@
     margin-bottom: 12px;
 }
 
-
+.footer-column a i {
+    transition: .25s;
+}
 
 .footer-column a i,
 .footer-column p i {
