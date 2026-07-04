@@ -296,7 +296,7 @@ namespace WebApplicationTest.Services
             
             List<Product> filteredProducts = new List<Product>();
 
-            int productsPerPage = 12;
+            int productsPerPage = 24;
             if(pageNumber == 1 | pageNumber == 0)
             {
                 filteredProducts = products.Take(productsPerPage).ToList();

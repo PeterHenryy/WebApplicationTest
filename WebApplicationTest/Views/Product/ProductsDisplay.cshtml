@@ -10,6 +10,7 @@
 <link rel="stylesheet" href="~/css/containerResponsive.css" />
 <link rel="stylesheet" href="~/css/header.css" />
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/footer.css" />
 
 <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -19,87 +20,89 @@
     <header class="header">
         <partial name="_HeaderPartial" />
     </header>
-    <nav class="sidebar-filter">
-        <p id="filter-announcement">Filter By:</p>
-        <a style="text-decoration: none;" class="option" href="@Url.Action("ProductsDisplay", "Product")">
-            <p class="filter-option">All Products</p>
-        </a>
-        <p class="filter-option">Category</p>
-        @foreach (var filterOption in Model.Categories)
-        {
-            <a style="text-decoration: none;" class="option" href="@Url.Action("ProductsDisplay", "Product", new {filterOption = "Category", optionIdentify = filterOption.ID})">
+    <div class="products-page">
+
+        <nav class="sidebar-filter">
+            <a style="text-decoration: none;" class="option" href="@Url.Action("ProductsDisplay", "Product")">
+                <p class="filter-option">All Products</p>
+            </a>
+            <p class="filter-option">Category</p>
+            @foreach (var filterOption in Model.Categories)
+            {
+                <a style="text-decoration: none;" class="option" href="@Url.Action("ProductsDisplay", "Product", new {filterOption = "Category", optionIdentify = filterOption.ID})">
+                    <div class="option-container">
+                        @{
+                            string iconName = filterOption.Name + "Icon.svg";
+                        }
+                        <img class="filter-icon" src="~/icons/@iconName">
+                        @filterOption.Name
+                    </div>
+                </a>
+            }
+
+            <p class="filter-option">Sales</p>
+            <a style="text-decoration: none;" class="option" href="@Url.Action("ProductsDisplay", "Product", new {filterOption = "Most Sold"})">
                 <div class="option-container">
-                    @{
-                        string iconName = filterOption.Name + "Icon.svg";
-                    }
-                    <img class="filter-icon" src="~/icons/@iconName">
-                    @filterOption.Name
+
+                    <i class="fa-solid fa-money-bill-trend-up" style="color: #ffffff;"></i>
+                    <p class="option">Most Sold</p>
                 </div>
             </a>
-        }
-
-        <p class="filter-option">Sales</p>
-        <a style="text-decoration: none;" class="option" href="@Url.Action("ProductsDisplay", "Product", new {filterOption = "Most Sold"})">
-            <div class="option-container">
-
-                <i class="fa-solid fa-money-bill-trend-up" style="color: #ffffff;"></i>
-                <p class="option">Most Sold</p>
-            </div>
-        </a>
-        <p class="filter-option">Company</p>
-        @foreach (var filterOption in Model.Companies)
-        {
-            <a style="text-decoration: none;" class="option" href="@Url.Action("ProductsDisplay", "Product", new {filterOption = "Company", optionIdentify = filterOption.ID})">
+            <p class="filter-option">Company</p>
+            @foreach (var filterOption in Model.Companies)
+            {
+                <a style="text-decoration: none;" class="option" href="@Url.Action("ProductsDisplay", "Product", new {filterOption = "Company", optionIdentify = filterOption.ID})">
+                    <div class="option-container">
+                        @{
+                            string iconName = filterOption.Name + "Icon.svg";
+                        }
+                        <img class="filter-icon" src="@filterOption.Logo">
+                        @filterOption.Name
+                    </div>
+                </a>
+            }
+            <p class="filter-option">Price</p>
+            <a style="text-decoration: none;" class="option" href="@Url.Action("ProductsDisplay", "Product", new {filterOption = "Price", optionIdentify = 1})">
                 <div class="option-container">
-                    @{
-                        string iconName = filterOption.Name + "Icon.svg";
-                    }
-                    <img class="filter-icon" src="@filterOption.Logo">
-                    @filterOption.Name
+                    <i class="fa-solid fa-money-bill" style="color: #ffffff;"></i>
+                    <p class="option">Lowest</p>
                 </div>
             </a>
-        }
-        <p class="filter-option">Price</p>
-        <a style="text-decoration: none;" class="option" href="@Url.Action("ProductsDisplay", "Product", new {filterOption = "Price", optionIdentify = 1})">
-            <div class="option-container">
-                <i class="fa-solid fa-money-bill" style="color: #ffffff;"></i>
-                <p class="option">Lowest</p>
-            </div>
-        </a>
-        <a style="text-decoration: none;" class="option" href="@Url.Action("ProductsDisplay", "Product", new {filterOption = "Price", optionIdentify = 2})">
-            <div class="option-container">
-                <i class="fa-solid fa-sack-dollar" style="color: #ffffff;"></i>
-                <p class="option">Highest</p>
-            </div>
-        </a>
-        <p class="filter-option">Rating</p>
-        <a style="text-decoration: none;" class="option" href="@Url.Action("ProductsDisplay", "Product", new {filterOption = "Rating", optionIdentify = 1})">
-            <div class="option-container">
-                <i class="fa-solid fa-star fa-sm" style="color: #29db47;"></i>
-                <p class="option">Highest</p>
-            </div>
-        </a>
-        <a style="text-decoration: none;" class="option" href="@Url.Action("ProductsDisplay", "Product", new {filterOption = "Rating", optionIdentify = 2})">
-            <div class="option-container">
-                <i class="fa-solid fa-star fa-sm" style="color: red;"></i>
-                <p class="option">Lowest</p>
-            </div>
-        </a>
-    </nav>
-    <main>
-        <section>
-            <div class="responsive-container">
-                <div class="products-display-grid">
-                    @{
-                        var products = Model.Products;
-                        var currentUser = Model.User;
-                        ProductsCardViewModel productsViewModel = new ProductsCardViewModel
-                        {
-                            Products = products,
-                            User = currentUser
-                        };
-                        Html.RenderPartial("_ProductsGridPartial", productsViewModel);
-                    }
+            <a style="text-decoration: none;" class="option" href="@Url.Action("ProductsDisplay", "Product", new {filterOption = "Price", optionIdentify = 2})">
+                <div class="option-container">
+                    <i class="fa-solid fa-sack-dollar" style="color: #ffffff;"></i>
+                    <p class="option">Highest</p>
+                </div>
+            </a>
+            <p class="filter-option">Rating</p>
+            <a style="text-decoration: none;" class="option" href="@Url.Action("ProductsDisplay", "Product", new {filterOption = "Rating", optionIdentify = 1})">
+                <div class="option-container">
+                    <i class="fa-solid fa-star fa-sm" style="color: #29db47;"></i>
+                    <p class="option">Highest</p>
+                </div>
+            </a>
+            <a style="text-decoration: none;" class="option" href="@Url.Action("ProductsDisplay", "Product", new {filterOption = "Rating", optionIdentify = 2})">
+                <div class="option-container">
+                    <i class="fa-solid fa-star fa-sm" style="color: red;"></i>
+                    <p class="option">Lowest</p>
+                </div>
+            </a>
+        </nav>
+        <main>
+            <section>
+                <div class="responsive-container">
+                    <div class="products-display-grid">
+                        @{
+                            var products = Model.Products;
+                            var currentUser = Model.User;
+                            ProductsCardViewModel productsViewModel = new ProductsCardViewModel
+                            {
+                                Products = products,
+                                User = currentUser
+                            };
+                            Html.RenderPartial("_ProductsGridPartial", productsViewModel);
+                        }
+                    </div>
                 </div>
                 <div class="pagination-container">
 
@@ -109,20 +112,20 @@
 
                                 @if(@ViewBag.CurrentPageNumber == i){
 
-                                    <li class="page-item active">
-                                        <a class="page-link" href="#">@i<span class="sr-only">(current)</span></a>
+                                    <li>
+                                        <a class="page-button page-button-active" href="#">@i<span class="sr-only">(current)</span></a>
                                     </li>
                                 }
                                 else{
-                                    <li class="page-item"><a class="page-link" href="@Url.Action("ProductsDisplay", "Product", new {filterOption = String.IsNullOrEmpty(ViewBag.FilterOption) ? "Page" : @ViewBag.FilterOption, optionIdentify = @ViewBag.OptionIdentify, pageNumber = @i, searchedProduct = @ViewBag.SearchedProduct})">@i</a></li>
+                                    <li><a class="page-button" href="@Url.Action("ProductsDisplay", "Product", new {filterOption = String.IsNullOrEmpty(ViewBag.FilterOption) ? "Page" : @ViewBag.FilterOption, optionIdentify = @ViewBag.OptionIdentify, pageNumber = @i, searchedProduct = @ViewBag.SearchedProduct})">@i</a></li>
                                 }
                             }
                         </ul>
                     </nav>
                 </div>
-            </div>
-        </section>
-    </main>
+            </section>
+        </main>
+    </div>
     <partial name="_FooterPartial" />
 
     <script src="https://kit.fontawesome.com/8da1ba04bb.js" crossorigin="anonymous"></script>

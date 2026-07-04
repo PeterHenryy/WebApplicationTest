@@ -77,7 +77,7 @@ namespace WebApplicationTest.Services
         {
             IEnumerable<TransactionItem> companyYearTransactions = GetCompanyYearTransactions(companyID);
             List<double> revenuesPerMonth = new List<double>();
-            for (int i = 1; i <= 12; i++)
+            for (int i = 1; i <= 24; i++)
             {
                 double monthRevenue = 0;
                 monthRevenue += companyYearTransactions.Where(x => x.Transaction.TransactionDate.Month == i)

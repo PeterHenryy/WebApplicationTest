@@ -37,7 +37,7 @@ namespace WebApplicationTest.Controllers
             var productDisplayViewModel = new ProductDisplayViewModel();
             productDisplayViewModel.Companies = _productService.GetAllCompanies();
             productDisplayViewModel.Categories = _productService.GetAllCategories();
-            int maxProductsPerPage = 12;
+            int maxProductsPerPage = 24;
             double numberOfPages = 0;
             if (String.IsNullOrEmpty(filterOption))
             {
@@ -175,7 +175,7 @@ namespace WebApplicationTest.Controllers
         {
             var companyProductsDisplay = new ProductDisplayViewModel();
             companyProductsDisplay.Categories = _productService.GetAllCategories();
-            int maxProductsPerPage = 12;
+            int maxProductsPerPage = 24;
             double numberOfPages = 0;
             if (String.IsNullOrEmpty(filterOption))
             {

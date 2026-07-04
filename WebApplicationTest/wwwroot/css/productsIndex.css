@@ -42,14 +42,17 @@
 }
 
 .products-display-grid {
-        display: grid;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px,1fr));
+    gap: 32px;
 }
 
 .products-display-grid {
     column-gap: 40px;
     row-gap: 40px;
     justify-content: center;
-    margin-top: 40px;
+    margin-top: 60px;
     margin-bottom: 40px;
 }
 
@@ -59,8 +62,8 @@
     font-family: 'Cascadia Mono';
     padding-bottom: 15px;
     overflow: visible;
-    background: #1A1A1A;
-    border: solid 1px #2A2A2A;
+    background: #1C1C1E;
+    border: solid 1px #2F2F33;
     box-shadow: 0 4px 6px rgba(0,0,0,.05), 0 10px 25px rgba(0,0,0,.08);
     border-radius: 16px;
     padding: 12px;
@@ -184,7 +187,7 @@
     margin-top: 10px;
     max-width: 100%;
     color:white;
-    font-weight:600;
+    font-weight:700;
     height: 62px;
 }
 
@@ -195,9 +198,10 @@
 }
 
 .product-price {
-    font-size: 28px;
-    color: white;
-    font-weight: bold;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: .3px;
+    color: rgb(231,196,123);
     margin-bottom: 20px;
     margin-top: 10px;
 }
@@ -229,7 +233,8 @@
     text-align: center;
 }
 
-.details-button {
+.details-button,
+.page-button {
     padding: 10px 30px;
     color: #d6b36a;
     background: transparent;
@@ -293,12 +298,19 @@
 }
 
 
-.details-button:hover {
+.details-button:hover,
+.page-button:hover {
     background: rgba(214,179,106,.08);
     border-color: #d6b36a;
     color: #f5d38a;
     transform: translateY(-3px);
     box-shadow: 0 6px 18px rgba(212,175,55,.18);
+    text-decoration: none;
+}
+
+.page-button-active {
+    background: linear-gradient(135deg, #d6b36a, #f5d38a);
+    color: #111;
 }
 
 .product-add-to-cart-button:hover {
@@ -308,75 +320,6 @@
 
 .image-card {
     padding: 20px;
-}
-
-.sidebar-filter {
-    display: flex;
-    flex-direction: column;
-    row-gap: 20px;
-    background-color: rgb(0,0,0);
-    padding: 60px 20px;
-    position: fixed;
-    left: 0;
-    top: 0px;
-    font-family: Arial;
-    overflow: auto;
-    scrollbar-width: thin;
-    height: 100%;
-    border-right: 2px solid white;
-}
-
-    .sidebar-filter::-webkit-scrollbar {
-        width: 6px;
-    }
-
-    .sidebar-filter::-webkit-scrollbar-thumb {
-        background-color: rgb(219, 112, 147);
-    }
-
-    .sidebar-filter::-webkit-scrollbar-track {
-        background-color: transparent;
-    }
-
-    .sidebar-filter p {
-        margin-bottom: 0;
-        margin-top: 10px;
-    }
-
-
-#filter-announcement {
-    font-size: 30px;
-    color: white;
-}
-
-.filter-option {
-    font-size: 25px;
-    color: rgb(0,191,255);
-}
-
-.option-container {
-    display: flex;
-    align-items: center;
-    column-gap: 10px;
-}
-
-    .option-container p,
-    .option {
-        margin: 0;
-        font-size: 20px;
-        text-decoration: none;
-        color: white;
-    }
-
-
-        .option:hover {
-            cursor: pointer;
-            color: rgb(0,191,255);
-        }
-
-.filter-icon {
-    width: 30px;
-    height: 30px;
 }
 
 .product-buttons-column-box {
