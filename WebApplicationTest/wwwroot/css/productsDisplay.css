@@ -19,7 +19,7 @@
     scrollbar-width: thin;
     border-right: 2px solid white;
     border: 1px solid #2a2a2a;
-    max-width: 260px;
+    width: 300px;
 }
 
 .sidebar-filter {

@@ -7,7 +7,10 @@
 <link rel="stylesheet" href="~/css/general.css" />
 
 <div class="login-form-container">
-    <h1>Welcome!</h1>
+    <h1>Welcome Back</h1>
+    <p class="login-subtitle">
+        Sign in to continue shopping.
+    </p>
     <form id="loginForm" asp-controller="AppUser" asp-action="Login" method="post">
         <input type="hidden" name="returnUrl" value="@ViewData["returnUrl"]" />
         <input type="hidden" name="cartItemQuantity" value="@ViewData["cartItemQuantity"]" />

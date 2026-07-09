@@ -49,6 +49,21 @@
     }
 }
 
+@media(max-width:1920px){
+
+    .responsive-container {
+        display: flex;
+        max-width: 1536px;
+    }
+
+    .products-page {
+        grid-template-columns: 340px 1fr;
+    }
+
+    .product-card{
+        width: 380px;
+    }
+}
 
 @media (max-width: 1750px) {
     .responsive-container {
