@@ -11,18 +11,32 @@
     font-family: 'Segoe UI', Arial, sans-serif;
 }
 
+.logo-container{
+    display: flex;
+    justify-content: center;
+    max-height: 100px;
+    overflow: hidden;
+}
+
+.login-logo {
+    width: 300px;
+    display: block;
+    align-self: center;
+    margin-right: 30px;
+}
+
 .login-form-container {
     width: 420px;
-    padding: 45px;
+    padding: 20px 30px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    background: rgba(24,24,24,.95);
+    background: rgba(24,24,24,.92);
+    backdrop-filter: blur(8px);
     border: 1px solid #2a2a2a;
     border-radius: 18px;
     color: white;
-    box-shadow: 0 25px 60px rgba(0,0,0,.55), 0 0 30px rgba(231,196,123,.08);
-    backdrop-filter: blur(10px);
+    box-shadow: 0 25px 60px rgba(0,0,0,.6), 0 0 40px rgba(231,196,123,.08);
 }
 
 input {
@@ -56,6 +70,7 @@ h1 {
     font-weight: 700;
     animation-name: appear;
     animation-duration: 4s;
+    margin-top: 10px;
 }
 
 @keyframes appear {

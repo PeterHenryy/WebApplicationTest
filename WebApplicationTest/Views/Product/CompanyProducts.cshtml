@@ -18,207 +18,124 @@
 <link rel="stylesheet" href="~/css/productsIndex.css" /> 
 <link rel="stylesheet" href="~/css/general.css" />
 <link rel="stylesheet" href="~/css/productsDisplay.css" />
-<link rel="stylesheet" href="~/css/responsiveContainer.css" />
+<link rel="stylesheet" href="~/css/containerResponsive.css" />
 <link rel="stylesheet" href="~/css/header.css" />
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-
+<link rel="stylesheet" href="~/css/footer.css" />
 <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<body >
+
+<body style="background: #121212">
 
     <header class="header">
-        <link rel="stylesheet" href="~/css/header.css" />
-        <link href="~/css/productdetails.css" rel="stylesheet" />
-
-        <div class="header-items-container">
-            <a href="@Url.Action("Index", "Product")">
-                <img class="shop-logo" src="~/Img/flaminglogo.png" />
-            </a>
-            <ul class="header-items-list">
-                <li class="header-item"><a href="@Url.Action("Index", "Product")">Home</a></li>
-                <li class="header-item"><a href="@Url.Action("ProductsDisplay", "Product")">Products</a></li>
-                <li class="header-item"><a href="@Url.Action("About", "AppUser")">About</a></li>
-                <li class="header-item"><a href="@Url.Action("Create", "Contact")">Contact</a></li>
-            </ul>
-
-            <form class="search-container" asp-controller="Product" asp-action="CompanyProducts" method="get">
-                <input type="hidden" name="filterOption" value="Search" />
-                <input type="text" name="searchedProduct" class="search-input" placeholder="Search for products..." required>
-                <button class="search-button" type="submit"><i class="fa-solid fa-magnifying-glass glass-icon"></i></button>
-            </form>
-
-
-            <div class="user-options">
-                @if (User.IsInRole(UserRolesEnum.Admin.ToString()))
-                {
-                    <div class="options-menu-dropdown">
-                        <p class="options-menu-trigger">Admin</p>
-                        <ul class="options-menu">
-                            <li><a href="@Url.Action("CompanyRefunds", "Refund", new {companyID = currentUser.CompanyID})">Refund Requests</a></li>
-                            <li><a href="@Url.Action("CompanyCoupons", "Coupon", new {companyID = currentUser.CompanyID})">Manage Coupons</a></li>
-                            <li><a href="@Url.Action("CompanyProducts", "Product", new {companyID = currentUser.CompanyID})">Company Products</a></li>
-                            <li><a href="@Url.Action("CompanyStats", "Company")">Company Stats</a></li>
-                        </ul>
-                    </div>
-                }
-                @if (SignInManager.IsSignedIn(User))
-                {
-                    @await Component.InvokeAsync("ShoppingCartItems")
-                    <div class="options-menu-dropdown">
-                        <div class="user-profile-and-name">
-                            @if (currentUser.ProfilePicture == "user-solid.svg")
-                            {
-                                <img class="user-profile-picture" src="~/icons/user-solid.svg">
-                            }
-                            else
-                            {
-                                <img class="user-profile-picture" src="@currentUser.ProfilePicture">
-                            }
-                            <p>@User.Identity.Name</p>
-                        </div>
-                        <ul class="options-menu">
-                            <li><a href="@Url.Action("Update", "AppUser")">Update Profile</a></li>
-                            <li><a href="@Url.Action("UserCards", "CreditCard", new {userID = userIntID})">Credit Cards</a></li>
-                            <li><a href="@Url.Action("UserRefunds", "Refund", new {userID = userIntID})">Refunds</a></li>
-                            <li><a href="@Url.Action("UserReviews", "Review", new {userID = userIntID})">Your Reviews</a></li>
-                            <li><a href="@Url.Action("UserTransactions", "Transaction", new {userID = userIntID})">Activity</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="reward-points-container">
-                        <div class="reward-points-inner-container">
-                            <i class="fa-solid fa-bag-shopping fa-xl" style="color: white;"></i>
-                            <span style="color: white">@Math.Round(currentUser.UserRewardPoints, 2)</span>
-                        </div>
-                        <div class="reward-points-exaplanation">
-                            <p class="reward-points">These are your reward points, you gain points each time you purchase products with money!</p>
-                        </div>
-                    </div>
-
-                    <form class="form-inline" asp-controller="AppUser" asp-action="Logout" style="margin: 0;">
-                        <button class="logout-button" type="submit">Logout</button>
-                    </form>
-                }
-                else
-                {
-                    <ul class="header-items-list">
-                        <li class="header-item"><a asp-controller="AppUser" asp-action="Register">Register</a></li>
-                        <li class="header-item"><a asp-controller="AppUser" asp-action="Login">Login</a></li>
-                    </ul>
-                }
-            </div>
-        </div>
-
-        <script src="https://kit.fontawesome.com/8da1ba04bb.js" crossorigin="anonymous"></script>
-        @if (TempData["NoProductsFoundMessage"] != null)
-        {
-            <script type="text/javascript">
-                let message = '@Html.Raw(TempData["NoProductsFoundMessage"].ToString())';
-                alert(message);
-            </script>
-        }
-
-
+        <partial name="_HeaderPartial" />
     </header>
-    <nav class="sidebar-filter">
-        <p id="filter-announcement">Filter By:</p>
-        <a style="text-decoration: none;" class="option" href="@Url.Action("CompanyProducts", "Product")">
-            <p class="filter-option">All Products</p>
-        </a>
-        <p class="filter-option">Sales</p>
-        <a style="text-decoration: none;" class="option" href="@Url.Action("CompanyProducts", "Product", new {filterOption = "Most Sold"})">
-            <div class="option-container">
+    <div class="products-page">
 
-                <i class="fa-solid fa-money-bill-trend-up" style="color: #ffffff;"></i>
-                <p class="option">Most Sold</p>
-            </div>
-        </a>
-        <a style="text-decoration: none;" class="option" href="@Url.Action("CompanyProducts", "Product", new {filterOption = "Most Revenue"})">
-            <div class="option-container">
 
-                <i class="fa-solid fa-money-bill-trend-up" style="color: #ffffff;"></i>
-                <p class="option">Most Revenue</p>
-            </div>
-        </a>
-        <p class="filter-option">Price</p>
-        <a style="text-decoration: none;" class="option" href="@Url.Action("CompanyProducts", "Product", new {filterOption = "Price", optionIdentify = 1 })">
-            <div class="option-container">
-                <i class="fa-solid fa-money-bill" style="color: #ffffff;"></i>
-                <p class="option">Lowest</p>
-            </div>
-        </a>
-        <a style="text-decoration: none;" class="option" href="@Url.Action("CompanyProducts", "Product", new {filterOption = "Price", optionIdentify = 2 })">
-            <div class="option-container">
-                <i class="fa-solid fa-sack-dollar" style="color: #ffffff;"></i>
-                <p class="option">Highest</p>
-            </div>
-        </a>
-        <p class="filter-option">Rating</p>
-        <a style="text-decoration: none;" class="option" href="@Url.Action("CompanyProducts", "Product", new {filterOption = "Rating", optionIdentify = 1})">
-            <div class="option-container">
-                <i class="fa-solid fa-star fa-sm" style="color: #29db47;"></i>
-                <p class="option">Highest</p>
-            </div>
-        </a>
-        <a style="text-decoration: none;" class="option" href="@Url.Action("CompanyProducts", "Product", new {filterOption = "Rating", optionIdentify = 2})">
-            <div class="option-container">
-                <i class="fa-solid fa-star fa-sm" style="color: red;"></i>
-                <p class="option">Lowest</p>
-            </div>
-        </a>
-    </nav>
-    <main>
-        <section>
-            <div class="responsive-container">
+        <nav class="sidebar-filter">
+            <a style="text-decoration: none;" class="option" href="@Url.Action("CompanyProducts", "Product")">
+                <p class="filter-option">All Products</p>
+            </a>
+            <p class="filter-option">Sales</p>
+            <a style="text-decoration: none;" class="option" href="@Url.Action("CompanyProducts", "Product", new {filterOption = "Most Sold"})">
+                <div class="option-container">
 
-                @if (ViewBag.SearchNotFound)
-                {
-                    <h1 style="text-align: center;">No Products found for your search: @ViewBag.SearchedProduct</h1>
-                }
-                <div class="add-product-container">
-                    <a class="btn btn-success" style="font-size: 24px; background-color: deepskyblue; border: none;" href="@Url.Action("Create", "Product")">Add Product</a>
+                    <i class="fa-solid fa-money-bill-trend-up" style="color: #ffffff;"></i>
+                    <p class="option">Most Sold</p>
                 </div>
-                <div class="products-display-grid">
-                    
-                    @{
-                        var products = Model.Products;
-                        ProductsCardViewModel productsViewModel = new ProductsCardViewModel
-                        {
-                            Products = products,
-                            User = currentUser,
-                            CompanyProducts = true
-                        };
-                        Html.RenderPartial("_ProductsGridPartial", productsViewModel);
+            </a>
+            <a style="text-decoration: none;" class="option" href="@Url.Action("CompanyProducts", "Product", new {filterOption = "Most Revenue"})">
+                <div class="option-container">
+
+                    <i class="fa-solid fa-money-bill-trend-up" style="color: #ffffff;"></i>
+                    <p class="option">Most Revenue</p>
+                </div>
+            </a>
+            <p class="filter-option">Price</p>
+            <a style="text-decoration: none;" class="option" href="@Url.Action("CompanyProducts", "Product", new {filterOption = "Price", optionIdentify = 1 })">
+                <div class="option-container">
+                    <i class="fa-solid fa-money-bill" style="color: #ffffff;"></i>
+                    <p class="option">Lowest</p>
+                </div>
+            </a>
+            <a style="text-decoration: none;" class="option" href="@Url.Action("CompanyProducts", "Product", new {filterOption = "Price", optionIdentify = 2 })">
+                <div class="option-container">
+                    <i class="fa-solid fa-sack-dollar" style="color: #ffffff;"></i>
+                    <p class="option">Highest</p>
+                </div>
+            </a>
+            <p class="filter-option">Rating</p>
+            <a style="text-decoration: none;" class="option" href="@Url.Action("CompanyProducts", "Product", new {filterOption = "Rating", optionIdentify = 1})">
+                <div class="option-container">
+                    <i class="fa-solid fa-star fa-sm" style="color: #29db47;"></i>
+                    <p class="option">Highest</p>
+                </div>
+            </a>
+            <a style="text-decoration: none;" class="option" href="@Url.Action("CompanyProducts", "Product", new {filterOption = "Rating", optionIdentify = 2})">
+                <div class="option-container">
+                    <i class="fa-solid fa-star fa-sm" style="color: red;"></i>
+                    <p class="option">Lowest</p>
+                </div>
+            </a>
+        </nav>
+        <main>
+            <section>
+                <div class="responsive-container">
+
+                    @if (ViewBag.SearchNotFound)
+                    {
+                        <h1 style="text-align: center;">No Products found for your search: @ViewBag.SearchedProduct</h1>
                     }
-                </div>
-                <div class="pagination-container">
-
-                    <nav aria-label="...">
-                        <ul class="pagination">
-                            @for (int i = 1; i <= @ViewBag.NumberOfPages; i++)
+                    <div class="admin-options-container ">
+                        <h1 class="admin-title">
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                            Manage Products
+                        </h1>
+                        <a class="add-product-btn" href="@Url.Action("Create", "Product")"> <i class="fa-solid fa-plus"></i>Add a New Product</a>
+                    </div>
+                    <div class="products-display-grid">
+                    
+                        @{
+                            var products = Model.Products;
+                            ProductsCardViewModel productsViewModel = new ProductsCardViewModel
                             {
+                                Products = products,
+                                User = currentUser,
+                                CompanyProducts = true
+                            };
+                            Html.RenderPartial("_ProductsGridPartial", productsViewModel);
+                        }
+                    </div>
+                    <div class="pagination-container">
 
-                                @if (@ViewBag.CurrentPageNumber == i)
+                        <nav aria-label="...">
+                            <ul class="pagination">
+                                @for (int i = 1; i <= @ViewBag.NumberOfPages; i++)
                                 {
 
-                                    <li class="page-item active">
-                                        <a class="page-link" href="#">@i<span class="sr-only">(current)</span></a>
-                                    </li>
+                                    @if (@ViewBag.CurrentPageNumber == i)
+                                    {
+                                        <li class="page-item active">
+                                            <a class="page-button page-button-active" href="#">@i<span class="sr-only">(current)</span></a>
+                                        </li>
+                                    }
+                                    else
+                                    {
+                                        <li><a class="page-button" href="@Url.Action("CompanyProducts", "Product", new {filterOption = String.IsNullOrEmpty(ViewBag.FilterOption) ? "Page" : @ViewBag.FilterOption, optionIdentify = @ViewBag.OptionIdentify, pageNumber = @i, searchedProduct = @ViewBag.SearchedProduct})">@i</a></li>
+                                    }
                                 }
-                                else
-                                {
-                                    <li class="page-item"><a class="page-link" href="@Url.Action("CompanyProducts", "Product", new {filterOption = String.IsNullOrEmpty(ViewBag.FilterOption) ? "Page" : @ViewBag.FilterOption, optionIdentify = @ViewBag.OptionIdentify, pageNumber = @i, searchedProduct = @ViewBag.SearchedProduct})">@i</a></li>
-                                }
-                            }
-                        </ul>
-                    </nav>
+                            </ul>
+                        </nav>
+                    </div>
+
                 </div>
-
-            </div>
-        </section>
-    </main>
+            </section>
+        </main>
+    </div>
     <partial name="_FooterPartial" />
 
     <script src="https://kit.fontawesome.com/8da1ba04bb.js" crossorigin="anonymous"></script>

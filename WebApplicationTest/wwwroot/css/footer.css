@@ -7,6 +7,11 @@
     overflow: hidden;
 }
 
+.page-wrapper {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
 
 .footer-about-flaming{
     display: flex;

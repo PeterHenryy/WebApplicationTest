@@ -10,54 +10,58 @@
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="~/css/site.css" />
 <link href="~/css/general.css" rel="stylesheet" />
+<link href="~/css/footer.css" rel="stylesheet" />
 
-<header class="header">
-    <partial name="_HeaderPartial" />
-</header>
+<div class="page-wrapper">
 
-<div class="container shadow p-3 mb-5 bg-white rounded">
-    <div class="row">
-        <div class="col-lg-12 col-12">
-            <div class="row">
-                <div class="col-12">
-                    <div style="display: flex; justify-content: center;">
-                        <a style="margin-bottom: 20px; font-size: 24px; background-color: deepskyblue; border: none;" class="btn btn-success" href="@Url.Action("Create", "Coupon")">Add Coupon</a>
-                    </div>
-                    <table id="coupons-table" class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Discount Percentage</th>
-                                <th>Code</th>
-                                <th>Active</th>
-                                <th>Quantity</th>
-                                <th>Product Name</th>
-                                <th>Category Name</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var coupon in @Model)
-                            {
+    <header class="header">
+        <partial name="_HeaderPartial" />
+    </header>
+
+    <div class="container shadow p-3 mb-5 bg-white rounded">
+        <div class="row">
+            <div class="col-lg-12 col-12">
+                <div class="row">
+                    <div class="col-12">
+                        <div style="display: flex; justify-content: center;">
+                            <a style="margin-bottom: 20px; font-size: 24px; background-color: deepskyblue; border: none;" class="btn btn-success" href="@Url.Action("Create", "Coupon")">Add Coupon</a>
+                        </div>
+                        <table id="coupons-table" class="table table-striped">
+                            <thead>
                                 <tr>
-                                    <td>@coupon.ID</td>
-                                    <td>@coupon.DiscountPercentage%</td>
-                                    <td>@coupon.Code</td>
-                                    <td>@coupon.Active</td>
-                                    <td>@coupon.Quantity</td>
-                                    <td>@(coupon.Product != null ? @coupon.Product.Name : "N/A")</td>
-                                    <td>@(coupon.Category != null ? @coupon.Category.Name : "N/A")</td>
-                                    <td><a class="btn btn-danger" href="@Url.Action("Delete", "Coupon", new {couponID = coupon.ID})">Delete</a></td>
+                                    <th>ID</th>
+                                    <th>Discount Percentage</th>
+                                    <th>Code</th>
+                                    <th>Active</th>
+                                    <th>Quantity</th>
+                                    <th>Product Name</th>
+                                    <th>Category Name</th>
+                                    <th>Action</th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach (var coupon in @Model)
+                                {
+                                    <tr>
+                                        <td>@coupon.ID</td>
+                                        <td>@coupon.DiscountPercentage%</td>
+                                        <td>@coupon.Code</td>
+                                        <td>@coupon.Active</td>
+                                        <td>@coupon.Quantity</td>
+                                        <td>@(coupon.Product != null ? @coupon.Product.Name : "N/A")</td>
+                                        <td>@(coupon.Category != null ? @coupon.Category.Name : "N/A")</td>
+                                        <td><a class="btn btn-danger" href="@Url.Action("Delete", "Coupon", new {couponID = coupon.ID})">Delete</a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+    <partial name="_FooterPartial" />
 </div>
-<partial name="_FooterPartial" />
 
 <script>
     $.noConflict();

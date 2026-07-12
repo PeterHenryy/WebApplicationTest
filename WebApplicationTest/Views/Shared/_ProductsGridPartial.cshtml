@@ -106,7 +106,7 @@
                 <div class="product-buttons-column-box">
 
                     <div class="product-buttons-flexbox">
-                        <a class="btn btn-primary"
+                        <a class="btn-update"
                            href="@Url.Action("Update", "Product", new { productID = product.ID })">
                             Update
                         </a>
@@ -122,7 +122,7 @@
 
                         @if (!product.Archived)
                         {
-                            <a class="btn btn-info"
+                            <a class="btn-archive"
                                href="@Url.Action("ManageProductArchiving", "Product", new { productID = product.ID, option = 1 })">
                                 Archive
                             </a>

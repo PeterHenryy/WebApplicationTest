@@ -163,17 +163,16 @@
 }
 
 .reward-points-explanation {
-    width: 265px;
+    width: 400px;
     display: none;
     position: absolute;
-    top: 100%;
-    background-color: rgb(231, 196, 123);
-    color: black;
+    top: 50%;
+    background: #1C1C1E;
+    color: white;
     border-radius: 7px;
     font-size: 16px;
     padding: 10px;
     margin-top: 25px;
-
 }
 
 .reward-points-container:hover .reward-points-explanation {
@@ -323,7 +322,7 @@
     }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1150px) {
 
     .burger-menu {
         display: block;
@@ -426,3 +425,10 @@
     }
 }
 
+@media (max-width: 440px) {
+
+    .shop-logo{
+        width: 200px;
+    }
+    
+}

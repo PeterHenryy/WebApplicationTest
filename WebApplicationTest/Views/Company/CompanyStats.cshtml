@@ -10,6 +10,8 @@
 <link href="~/css/company-stats.css" rel="stylesheet" />
 <link href="~/css/shoppingcart.css" rel="stylesheet" />
 <link href="~/css/productdetails.css" rel="stylesheet" />
+<link href="~/css/footer.css" rel="stylesheet" />
+
 
 <body >
 
@@ -31,8 +33,8 @@
                     <p class="statistics-of-year">Current statistics of @DateTime.Now.Year:</p>
                     <div class="stats-container">
                         <div class="specific-stat-container">
-                            <div class="icon-container little-diamond">
-                                <i class="fa-sharp fa-regular fa-gem fa-2xl" style="color: #ffffff;"></i>
+                            <div class="icon-container">
+                                 <i class="fa-solid fa-coins"></i>
                             </div>
                             <div class="stats-display">
                                 <p class="stat-show">$@Model.YearRevenue.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture)</p>
@@ -41,7 +43,7 @@
                         </div>
                         <div class="specific-stat-container">
                             <div class="icon-container customers">
-                                <i class="fa-solid fa-users fa-2xl"></i>
+                                <i class="fa-solid fa-people-group"></i>
                             </div>
                             <div class="stats-display">
                                 <p class="stat-show">@Model.YearCustomers</p>

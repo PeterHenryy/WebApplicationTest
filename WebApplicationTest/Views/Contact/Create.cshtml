@@ -11,6 +11,7 @@
 <link href="~/css/containerresponsive.css" rel="stylesheet" />
 <link href="~/css/general.css" rel="stylesheet" />
 <link href="~/css/footer.css" rel="stylesheet" />
+<link href="~/css/productsIndex.css" rel="stylesheet" />
 
 
 <body style="background: #121212">
@@ -316,7 +317,7 @@
         </svg>
 
         <form asp-controller="Contact" asp-action="Create" onsubmit="onFormSubmitSuccess()" id="contact-form">
-            <h1 class="title text-center mb-4">Talk to Us</h1>
+            <h1 class="title text-center mb-4" style="color: rgb(231, 196, 123);">Talk to Us</h1>
             <!-- Name -->
             <div class="form-group position-relative">
                 <label for="formName" class="d-block">
@@ -337,7 +338,7 @@
             </div>
             <!-- Submit btn -->
             <div class="text-center">
-                <button type="submit" class="btn btn-primary" tabIndex="-1" style="width: 100%;">Send message</button>
+                <button type="submit" class="send-message-button" tabIndex="-1" style="width: 100%; font-weight: bold;">Send message</button>
             </div>
         </form>
     </div>
