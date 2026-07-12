@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="~/css/site.css" />
 <link href="~/css/general.css" rel="stylesheet" />
 <link href="~/css/footer.css" rel="stylesheet" />
+<link href="~/css/general.css" rel="stylesheet" />
 
 <div class="page-wrapper">
 
@@ -18,16 +19,17 @@
         <partial name="_HeaderPartial" />
     </header>
 
-    <div class="container shadow p-3 mb-5 bg-white rounded">
+    <div class="container data-table-dark">
         <div class="row">
             <div class="col-lg-12 col-12">
                 <div class="row">
                     <div class="col-12">
-                        <div style="display: flex; justify-content: center;">
-                            <a style="margin-bottom: 20px; font-size: 24px; background-color: deepskyblue; border: none;" class="btn btn-success" href="@Url.Action("Create", "Coupon")">Add Coupon</a>
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <p class="data-table-title">Company Coupons</p>
+                            <a class="gold-button" href="@Url.Action("Create", "Coupon")"><i class="fa-solid fa-plus"></i> Add a New Coupon</a>
                         </div>
-                        <table id="coupons-table" class="table table-striped">
-                            <thead>
+                        <table id="app-data-table" class="table table-striped">
+                            <thead class="data-table-headers">
                                 <tr>
                                     <th>ID</th>
                                     <th>Discount Percentage</th>
@@ -66,7 +68,7 @@
 <script>
     $.noConflict();
     jQuery(document).ready(function ($) {
-        $('#coupons-table').DataTable();
+        $('#app-data-table').DataTable();
     });
 </script>
 

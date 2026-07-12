@@ -43,7 +43,7 @@
                         </div>
                         <div class="specific-stat-container">
                             <div class="icon-container customers">
-                                <i class="fa-solid fa-people-group"></i>
+                                    <i class="fa-solid fa-users"></i>
                             </div>
                             <div class="stats-display">
                                 <p class="stat-show">@Model.YearCustomers</p>
@@ -52,7 +52,7 @@
                         </div>
                         <div class="specific-stat-container">
                             <div class="icon-container orders">
-                                <i class="fa-solid fa-cart-shopping fa-2xl" style="color: rgb(0,0,0)" aria-hidden="true"></i>
+                                <i class="fa-solid fa-cart-shopping fa-2xl" aria-hidden="true"></i>
                             </div>
                             <div class="stats-display">
                                 <p class="stat-show">@Model.YearOrders</p>
@@ -74,12 +74,11 @@
                 </div>
             </div>
         </div>
-
-        <div class="col-12 shadow p-3 mb-5 bg-white rounded">
-            <div>
-                <canvas id="company-chart"></canvas>
-            </div>
+       
+        <div>
+            <canvas id="company-chart"></canvas>
         </div>
+   
         
         @if (Model.Company.TotalSales > 0)
             {

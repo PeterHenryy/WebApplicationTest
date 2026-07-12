@@ -318,36 +318,52 @@
 
         <form asp-controller="Contact" asp-action="Create" onsubmit="onFormSubmitSuccess()" id="contact-form">
             <h1 class="title text-center mb-4" style="color: rgb(231, 196, 123);">Talk to Us</h1>
-            <!-- Name -->
             <div class="form-group position-relative">
                 <label for="formName" class="d-block">
                     <i class="icon" data-feather="user"></i>
                 </label>
                 <input type="text" id="formName" class="form-control form-control-lg thick" placeholder="Name" asp-for="@Model.Name" required>
             </div>
-            <!-- E-mail -->
             <div class="form-group position-relative">
                 <label for="formEmail" class="d-block">
                     <i class="icon" data-feather="mail"></i>
                 </label>
                 <input type="email" id="formEmail" class="form-control form-control-lg thick" placeholder="E-mail" asp-for="@Model.Email" required>
             </div>
-            <!-- Message -->
             <div class="form-group message">
                 <textarea id="formMessage" class="form-control form-control-lg" rows="7" placeholder="Message" asp-for="@Model.Message" required></textarea>
             </div>
-            <!-- Submit btn -->
             <div class="text-center">
                 <button type="submit" class="send-message-button" tabIndex="-1" style="width: 100%; font-weight: bold;">Send message</button>
             </div>
+            @if (TempData["MessageSent"] != null)
+            {
+                <div class="message-sent-container">
+                    <div class="message-sent-inner-container show">
+                        <p class="message-sent">
+                            Thank you for contacting us. We will send you an email regarding your inquiry in 1-3 business days!
+                        </p>
+                    </div>
+                </div>
+            }
         </form>
     </div>
+   
+
     <partial name="_FooterPartial" />
+
 
     <script>
         function onFormSubmitSuccess() {
-            alert('Thank you for contacting us, we will send you an email regarding your inquiry in 1-3 business days!');
-            document.getElementById('contact-form').reset(); 
-        }
+        document.getElementById('contact-form').reset();
+
+        const message = document.querySelector('.message-sent-inner-container');
+
+        message.classList.add('show');
+
+        setTimeout(() => {
+            message.classList.remove('show');
+        }, 5000);
+    }
     </script>
 </body>

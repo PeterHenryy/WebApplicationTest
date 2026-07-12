@@ -31,8 +31,8 @@
     background: #1C1C1E;
     border: solid 1px #2F2F33;
     box-shadow: 0 4px 6px rgba(0,0,0,.05), 0 10px 25px rgba(0,0,0,.08);
-    padding: 0 20px;
     border-radius: 16px;
+    padding: 0 20px;
     color: white;
 }
 
@@ -54,20 +54,9 @@
 
 .icon-container i {
     font-size: 28px;
-    color: rgb(231,196,123);
+    color: white;
 }
 
-.little-diamond {
-    background-color: rgb(0, 186, 157);
-}
-
-.customers {
-    background-color: royalblue;
-}
-
-.orders {
-    background-color: green;
-}
 
 .stats-container {
     display: flex;
@@ -93,10 +82,11 @@
 
 .stat-show {
     font-size: 30px;
+    color: rgb(231,196,123);
 }
 
 .stat-label {
-    color: gray;
+    color: white;
 }
 
 .revenue-total-and-image {
@@ -413,3 +403,9 @@
     box-shadow: 0px 0px 5px rgb(128, 128, 0, 0.9);
 }
 
+#company-chart {
+    background: #1C1C1E;
+    border: solid 1px #2F2F33;
+    box-shadow: 0 4px 6px rgba(0,0,0,.05), 0 10px 25px rgba(0,0,0,.08);
+    border-radius: 16px;
+}

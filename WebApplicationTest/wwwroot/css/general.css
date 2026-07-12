@@ -36,3 +36,70 @@ footer {
     color: black !important;
 }
 
+.data-table-dark {
+    background: #1C1C1E;
+    border: solid 1px #2F2F33;
+    box-shadow: 0 4px 6px rgba(0,0,0,.05), 0 10px 25px rgba(0,0,0,.08);
+    border-radius: 16px;
+    padding: 20px;
+}
+
+
+.data-table-headers{
+    color: white;
+}
+
+#app-data-table_info,
+#app-data-table_filter,
+.dataTables_empty
+ {
+    color: white !important;
+}
+
+.dataTables_wrapper .dataTables_info,
+.dataTables_wrapper .dataTables_filter label,
+.dataTables_wrapper .dataTables_length label,
+table.dataTable tbody td.dataTables_empty,
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    color: white !important;
+}
+
+
+.dataTables_length select {
+    color: black;
+    background-color: #1C1C1E !important;
+}
+
+.gold-button{
+    color: white;
+    transition: background-color 0.5s, box-shadow 0.5s;
+    white-space: nowrap;
+    color: #111;
+    background: linear-gradient(135deg, #d6b36a, #f5d38a);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all .3s ease;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    padding: 10px 30px;
+    background-color: black;
+    border: none;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.gold-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(212,175,55,.35);
+    background: linear-gradient(135deg,#f5d38a,#d6b36a);
+    text-decoration: none;
+    color: #111;
+    font-weight: bold;
+}
+
+.data-table-title {
+    color:rgb(231, 196, 123);
+    font-size: 25px;
+    font-weight: bold;
+}

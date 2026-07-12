@@ -6,59 +6,61 @@
 <link href="~/css/header.css" rel="stylesheet" />
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 <link href="~/css/footer.css" rel="stylesheet" />
+<link href="~/css/forms.css" rel="stylesheet" /> 
 
-<body>
+<body style="background: #121212">
     <header class="header">
         <partial name="_HeaderPartial" />
     </header>
+    <div class="form-outer-container">
 
-    <!-- Content Container: This should take up available space -->
-    <div class="container shadow p-3 mb-5 bg-white rounded">
-        <form asp-controller="AppUser" asp-action="Update" enctype="multipart/form-data">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputEmail4">FirstName</label>
-                    <input type="text"  class="form-control" placeholder="FirstName" value="@Model.FirstName" asp-for="FirstName">
+        <div class="form-container">
+            <form asp-controller="AppUser" asp-action="Update" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">FirstName</label>
+                        <input type="text" class="form-input" placeholder="FirstName" value="@Model.FirstName" asp-for="FirstName">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">LastName</label>
+                        <input type="text" class="form-input" placeholder="LastName" value="@Model.LastName" asp-for="LastName">
+                    </div>
                 </div>
-                <div class="form-group col-md-6">
-                    <label for="inputPassword4">LastName</label>
-                    <input type="text" class="form-control" placeholder="LastName" value="@Model.LastName" asp-for="LastName">
+                <div class="form-group">
+                    <label for="inputAddress2">Password</label>
+                    <input type="password" class="form-input" placeholder="Password" value="@Model.Password" asp-for="Password">
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="inputAddress2">Password</label>
-                <input type="password" class="form-control" placeholder="Password" value="@Model.Password" asp-for="Password">
-            </div>
-            <div class="form-group">
-                <label for="inputAddress2">Phone Number</label>
-                <input type="text" class="form-control" placeholder="Phone Number" value="@Model.PhoneNumber" asp-for="PhoneNumber">
-            </div>
-            <div class="form-group">
-                <label style="margin-right: 7px;" for="inputAddress2">Profile Picture</label>
-                @if (Model.ProfilePicture == "user-solid.svg")
-                {
-                    <img style="width: 30px; border-radius: 50%;" src="~/icons/user-solid.svg" />
-                }
-                else
-                {
-                    <img style="width: 30px; border-radius: 50%;" src="@Model.ProfilePicture" />
-                }
-                <input style="margin-top: 10px;" type="file" class="form-control" placeholder="Profile Picture" asp-for="ProfilePicture">
-            </div>
-            <div class="form-group">
-                <label for="inputAddress2">UserName</label>
-                <input type="text" class="form-control" placeholder="UserName" value="@Model.UserName" asp-for="UserName">
-            </div>
-            <div class="form-group">
-                <label for="inputAddress2">Email</label>
-                <input type="text" class="form-control" placeholder="Email" value="@Model.Email" asp-for="Email">
-            </div>
-            <div style="display: flex; justify-content: center;">
-                <button style="width: 100%; font-size: 24px;  background-color: deepskyblue; border: none;" type="submit" class="btn btn-primary" >
-                    Update Profile
-                </button>
-            </div>
-        </form>
+                <div class="form-group">
+                    <label for="inputAddress2">Phone Number</label>
+                    <input type="text" class="form-input" placeholder="Phone Number" value="@Model.PhoneNumber" asp-for="PhoneNumber">
+                </div>
+                <div class="form-group">
+                    <label style="margin-right: 7px;" for="inputAddress2">Profile Picture</label>
+                    @if (Model.ProfilePicture == "user-solid.svg")
+                    {
+                        <img style="width: 30px; border-radius: 50%;" src="~/icons/user-solid.svg" />
+                    }
+                    else
+                    {
+                        <img style="width: 30px; border-radius: 50%;" src="@Model.ProfilePicture" />
+                    }
+                    <input style="margin-top: 10px;" type="file" class="form-input" placeholder="Profile Picture" asp-for="ProfilePicture">
+                </div>
+                <div class="form-group">
+                    <label for="inputAddress2">UserName</label>
+                    <input type="text" class="form-input" placeholder="UserName" value="@Model.UserName" asp-for="UserName">
+                </div>
+                <div class="form-group">
+                    <label for="inputAddress2">Email</label>
+                    <input type="text" class="form-input" placeholder="Email" value="@Model.Email" asp-for="Email">
+                </div>
+                <div style="display: flex; justify-content: center;">
+                    <button type="submit" class="form-button">
+                        Update Profile
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
 
     <partial name="_FooterPartial" />

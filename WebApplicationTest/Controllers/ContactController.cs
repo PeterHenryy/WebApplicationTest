@@ -23,6 +23,7 @@ namespace WebApplicationTest.Controllers
         public IActionResult Create(Contact contactRequest)
         {
             bool createdRequest = _contactService.Create(contactRequest);
+            TempData["MessageSent"] = true;
             return View();
         }
     }
