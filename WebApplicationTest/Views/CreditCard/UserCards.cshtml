@@ -12,41 +12,45 @@
 <link href="~/css/general.css" rel="stylesheet" />
 <link href="~/css/footer.css" rel="stylesheet" />
 
-
 <header class="header">
     <partial name="_HeaderPartial" />
 </header>
-<div class="add-card-button-container">
-    <a style="margin-bottom: 15px; background-color: deepskyblue; border: none;" class="btn btn-primary add-card-button" href="@Url.Action("Create", "CreditCard")">Add a Credit Card</a>
-</div>
-<div class="container shadow p-3 mb-5 bg-white rounded">
-    <div class="row">
-        <div class="col-lg-12 col-12">
-            <div class="row">
-                <div class="col-12">
-                    <table id="credit-cards-table" class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Card Number</th>
-                                <th>Name On Card</th>
-                                <th>CVV</th>
-                                <th>Expiry</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var card in @Model)
-                            {
+
+<div class="page-wrapper">
+
+    <div class="container data-table-dark">
+        <div class="row">
+            <div class="col-lg-12 col-12">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="div-flex">
+                            <p class="data-table-title">Credit Cards</p>
+                            <a class="gold-button" href="@Url.Action("Create", "CreditCard")"> <i class="fa-solid fa-plus"></i> Add a Credit Card</a>
+                        </div>
+                        <table id="app-data-table" class="table table-striped">
+                            <thead class="data-table-headers">
                                 <tr>
-                                    <td>@card.CardNumber</td>
-                                    <td>@card.NameOnCard</td>
-                                    <td>@card.CVV</td>
-                                    <td>@card.Expiry</td>
-                                    <td> <a class="btn btn-danger" href="@Url.Action("Delete", "CreditCard", new {cardID = card.ID})">Remove</a></td>
+                                    <th>Card Number</th>
+                                    <th>Name On Card</th>
+                                    <th>CVV</th>
+                                    <th>Expiry</th>
+                                    <th>Action</th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach (var card in @Model)
+                                {
+                                    <tr>
+                                        <td>@card.CardNumber</td>
+                                        <td>@card.NameOnCard</td>
+                                        <td>@card.CVV</td>
+                                        <td>@card.Expiry</td>
+                                        <td> <a class="btn btn-danger" href="@Url.Action("Delete", "CreditCard", new {cardID = card.ID})">Remove</a></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -56,7 +60,7 @@
 <script>
     $.noConflict();
     jQuery(document).ready(function ($) {
-        $('#credit-cards-table').DataTable();
+        $('#app-data-table').DataTable();
     });
 </script>
 <partial name="_FooterPartial" />

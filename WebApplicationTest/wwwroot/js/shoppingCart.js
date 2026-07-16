@@ -45,24 +45,36 @@ function updateItemsAndPrices(productID, quantity, price) {
 }
 
 function updateCartItemQuantity(quantity) {
-    const cartItemQuantityElement = document.querySelector('.cart-item-quantity');
-    let itemQuantity = Number(cartItemQuantityElement.innerHTML);
-    itemQuantity += Number(quantity);
-    if (itemQuantity < 100) {
 
-        cartItemQuantityElement.innerHTML = itemQuantity;
-    }
-    else {
-        cartItemQuantityElement.innerHTML = '99+';
-    }
+    const cartBadges = document.querySelectorAll('.cart-item-quantity');
+
+    cartBadges.forEach(badge => {
+
+        let itemQuantity = badge.innerHTML === '99+'
+            ? 99
+            : Number(badge.innerHTML);
+
+        itemQuantity += Number(quantity);
+
+        badge.innerHTML = itemQuantity < 100
+            ? itemQuantity
+            : '99+';
+    });
 }
 
 function updateItemQuantityHTML(productID) {
-    const cartItemQuantityElement = document.querySelector('.cart-item-quantity');
+    const cartItemQuantityElements = document.querySelectorAll('.cart-item-quantity');
     const quantitySelectors = document.querySelectorAll('.quantity-selector');
+
     let quantity = 0;
-    quantitySelectors.forEach(x => quantity += Number(x.value));
-    cartItemQuantityElement.innerHTML = quantity;
+
+    quantitySelectors.forEach(selector => {
+        quantity += Number(selector.value);
+    });
+
+    cartItemQuantityElements.forEach(badge => {
+        badge.innerHTML = quantity;
+    });
 }
 
 function updateProductTotalPrice(productID, itemQuantity, price) {

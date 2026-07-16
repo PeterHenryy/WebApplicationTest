@@ -16,40 +16,45 @@
     <partial name="_HeaderPartial" />
 </header>
 
-<div class="container shadow p-3 mb-5 bg-white rounded">
-    <div class="row">
-        <div class="col-lg-12 col-12">
-            <h1 style="text-align:center">Your Refund Requests</h1>
-            <div class="row">
-                <div class="col-12">
-                    <table id="refunds-table" class="table table-striped">
-                        <thead>
-                            <tr>
-                                <th>Product</th>
-                                <th>Refund Reason</th>
-                                <th>Quantity Bought</th>
-                                <th>Price Paid</th>
-                                <th>Transaction ID</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var refund in @Model)
-                            {
-                                double transactionItemPrice = refund.TransactionItem.Quantity * refund.Product.Price;
+<div class="page-wrapper">
+
+    <div class="container data-table-dark">
+        <div class="row">
+            <div class="col-lg-12 col-12">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="div-flex" style="justify-content: center;">
+                            <p class="data-table-title">Refund Requests</p>
+                        </div>
+                        <table id="app-data-table" class="table table-striped">
+                            <thead class="data-table-headers">
                                 <tr>
-
-                                    <td> <a href="@Url.Action("Details", "Product", new {productID = refund.ProductID})" style="text-decoration: none; color: black">@refund.Product.Name</a></td>
-                                    <td>@refund.Reason</td>
-                                    <td>@refund.TransactionItem.Quantity</td>
-                                    <td>$@transactionItemPrice.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture)</td>
-                                    <td>@refund.TransactionID</td>
-                                    <td>@refund.Status</td>
+                                    <th>Product</th>
+                                    <th>Refund Reason</th>
+                                    <th>Quantity Bought</th>
+                                    <th>Price Paid</th>
+                                    <th>Transaction ID</th>
+                                    <th>Status</th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach (var refund in @Model)
+                                {
+                                    double transactionItemPrice = refund.TransactionItem.Quantity * refund.Product.Price;
+                                    <tr>
 
+                                        <td> <a href="@Url.Action("Details", "Product", new {productID = refund.ProductID})" style="text-decoration: none; color: black">@refund.Product.Name</a></td>
+                                        <td>@refund.Reason</td>
+                                        <td>@refund.TransactionItem.Quantity</td>
+                                        <td>$@transactionItemPrice.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture)</td>
+                                        <td>@refund.TransactionID</td>
+                                        <td>@refund.Status</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -60,7 +65,7 @@
 <script>
     $.noConflict();
     jQuery(document).ready(function ($) {
-        $('#refunds-table').DataTable();
+        $('#app-data-table').DataTable();
     });
 </script>
 

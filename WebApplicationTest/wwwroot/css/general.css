@@ -4,6 +4,12 @@
     background-color: #121212
 }
 
+.div-flex{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .fontaw-icon::before{
     width: 20px;
     height: 20px;
@@ -102,4 +108,9 @@ table.dataTable tbody td.dataTables_empty,
     color:rgb(231, 196, 123);
     font-size: 25px;
     font-weight: bold;
+}
+
+.button-container{
+    display: flex;
+    justify-content: center;
 }

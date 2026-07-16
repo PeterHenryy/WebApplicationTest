@@ -7,38 +7,45 @@
 <link rel="stylesheet" href="~/css/site.css" />
 <link href="~/css/general.css" rel="stylesheet" />
 <link href="~/css/footer.css" rel="stylesheet" />
+<link href="~/css/forms.css" rel="stylesheet" />
 
 
-<header class="header">
-    <partial name="_HeaderPartial" />
-</header>   
+<body style="background: #121212">
+    <header class="header">
+        <partial name="_HeaderPartial" />
+    </header>   
+   
+    <div class="form-outer-container">
+        <div class="form-container" style="justify-content: start; height: 620px;">
+            <form asp-controller="CreditCard" asp-action="Create">
+                <input type="hidden" asp-for="@Model.RedirectToTransaction" />
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Name on Card</label>
+                        <input type="text" class="form-input" placeholder="Name" asp-for="@Model.CreditCard.NameOnCard" required>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputPassword4">Card Number</label>
+                        <input type="number" class="form-input" placeholder="Card Number" asp-for="@Model.CreditCard.CardNumber" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputAddress2">Expiry</label>
+                    <input type="month" class="form-input" placeholder="Expiry" asp-for="@Model.CreditCard.Expiry" required>
+                </div>
+                <div class="form-group">
+                    <label for="inputAddress2">CVV</label>
+                    <input type="number" class="form-input" placeholder="CVV" asp-for="@Model.CreditCard.CVV" required>
+                </div>
+                <div class="button-container" style="margin-top: 50px;">
+                    <button type="submit" class="form-button">Add Credit Card</button>
+                </div>
 
-<div class="container shadow p-3 mb-5 bg-white rounded" style="font-size: 20px;">
-    <form asp-controller="CreditCard" asp-action="Create">
-        <input type="hidden" asp-for="@Model.RedirectToTransaction" />
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputEmail4">Name on Card</label>
-                <input type="text" class="form-control" placeholder="Name" asp-for="@Model.CreditCard.NameOnCard" required>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="inputPassword4">Card Number</label>
-                <input type="number" class="form-control" placeholder="Card Number" asp-for="@Model.CreditCard.CardNumber" required>
-            </div>
+            </form>
         </div>
-        <div class="form-group">
-            <label for="inputAddress2">Expiry</label>
-            <input type="month" class="form-control" placeholder="Expiry" asp-for="@Model.CreditCard.Expiry" required>
-        </div>
-        <div class="form-group">
-            <label for="inputAddress2">CVV</label>
-            <input type="number" class="form-control" placeholder="CVV" asp-for="@Model.CreditCard.CVV" required>
-        </div>
-        <div style="display: flex; justify-content: center;">
-            <button style="font-size: 24px;width: 100%; background-color: deepskyblue; border: none;" type="submit" class="btn btn-primary">Add Credit Card</button>
-        </div>
+    </div>
+    
 
-    </form>
-</div>
-<partial name="_FooterPartial" />
+    <partial name="_FooterPartial" />
+</body>
 

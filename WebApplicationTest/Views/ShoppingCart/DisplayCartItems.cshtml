@@ -16,13 +16,12 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
-<body >
+<body style="background: #121212">
     <header class="header" style="margin-bottom: 70px;">
         <partial name="_HeaderPartial" />
     </header>
     @if (Model.CartItems != null)
     {
-
         <div class="products-and-order-container">
             <div class="cart-products-container">
                 @foreach (var item in Model.CartItems)
