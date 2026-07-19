@@ -19,7 +19,7 @@
     background: #1C1C1E;
     border: solid 1px #2F2F33;
     box-shadow: 0 4px 6px rgba(0,0,0,.05), 0 10px 25px rgba(0,0,0,.08);
-    border-radius: 16px;
+    border-radius: 12px;
     color: white;
 }
 
@@ -37,7 +37,6 @@
     display: flex;
     column-gap: 70px;
     padding: 50px;
-    border-radius: 7px;
     box-shadow: 0 0 5px rgba(0,0,0,0.15);
     width: 100%;
 }
@@ -83,6 +82,7 @@
     transform: scale(1.5);
     background-color: green;
     padding: 5px;
+    accent-color: rgb(231, 196, 123);
 }
 
 .delivery-option:hover,
@@ -133,6 +133,10 @@
     padding: 10px;
 }
 
+
+.checkout-button{
+    margin: 0;
+}
 
 
 .checkout-button,
@@ -191,4 +195,67 @@
 
 .products-wrapper div{
     width: 400px;
+}
+
+.remove-item-button,
+.clear-cart-button {
+    background: rgba(140, 40, 50, .15);
+    color: #d97b83;
+    border: 1px solid rgba(170, 70, 80, .45);
+    border-radius: 12px;
+    padding: 10px 18px;
+    font-weight: 600;
+    transition: all .25s ease;
+    width: 100%;
+    text-align: center;
+}
+
+.remove-item-button:hover,
+.clear-cart-button:hover {
+    background: rgba(170, 55, 65, .25);
+    border-color: #cf5f69;
+    color: #f3a0a8;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(180,40,55,.18);
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.quantity-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    border: 1px solid #4a3d21;
+    background: #1C1C1E;
+    color: rgb(231,196,123);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all .25s ease;
+}
+
+.quantity-btn:hover {
+    background: rgba(214,179,106,.08);
+    border-color: rgb(231,196,123);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(212,175,55,.18);
+}
+
+.quantity-value {
+    width: 30px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+}
+
+.quantity-container{
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
 }

@@ -166,9 +166,9 @@
     color: black;
 }
 
-    .details-link:hover {
-        color: black;
-    }
+.details-link:hover {
+    color: black;
+}
 
 .product-info {
     padding-left: 15px;
@@ -342,6 +342,7 @@
 .star-icon{
     height: 20px;
     width: 20px;
+    color: white;
 }
 
 .pagination-container {

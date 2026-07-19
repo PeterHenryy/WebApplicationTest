@@ -53,7 +53,10 @@ namespace WebApplicationTest.Controllers
             double cartTotal = _shoppingCartService.CalculateCartTotal();
             IEnumerable<CartItem> cartItems = _shoppingCartService.GetCartItems();
             _transactionService.CalculateTransactionTotal(cartTotal, currentTransaction, cartItems);
-            _couponService.ValidateCoupon(currentTransaction, cartItems, couponCode);
+            if (!String.IsNullOrEmpty(couponCode))
+            {
+                _couponService.ValidateCoupon(currentTransaction, cartItems, couponCode);
+            }
             transactionViewModel.CartItems = cartItems;
             transactionViewModel.Categories = _transactionService.GetCategories();
             transactionViewModel.ItemsBought = _shoppingCartService.GetItemsBoughtQuantity();

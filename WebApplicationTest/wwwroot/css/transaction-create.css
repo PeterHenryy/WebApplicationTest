@@ -21,9 +21,8 @@
 .form-and-product-container {
     display: flex;
     box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
-    border-radius: 8px;
-    background-color: white;
     overflow: hidden;
+    border-radius: 12px;
     width: 50%;
 }
 
@@ -136,7 +135,11 @@
 
 .purchase-summary {
     padding: 15px;
-    background-color: rgb(0,0,0);
+    background: rgba(24,24,24,.92);
+    backdrop-filter: blur(8px);
+    border: 1px solid #2a2a2a;
+    border-top-left-radius: 18px;
+    border-bottom-left-radius: 18px;
 }
 
 .summary-products {
@@ -179,15 +182,14 @@
 }
 
 .summary-product-price,
-.transaction-total,
 .summary-product-tax {
-    color: rgb(0, 191, 255);
+    color: white;
 }
 
 .summary-product-name-quantity,
 .purchase-announcement,
 .summary-product-total {
-    color: rgb(0, 191, 255);
+    color: white;
 }
 
 .summary-product-total {
@@ -199,6 +201,7 @@
 .transaction-total {
     font-size: 28px;
     margin: 0;
+    color: rgb(231, 196, 123);
 }
 
 .payment-method-radio {
@@ -229,9 +232,9 @@
     color: white;
 }
 
-    .credit-card-selector:hover {
-        cursor: pointer;
-    }
+.credit-card-selector:hover {
+    cursor: pointer;
+}
 
 .payment-options {
     display: flex;

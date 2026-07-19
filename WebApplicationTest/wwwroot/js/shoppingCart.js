@@ -32,6 +32,30 @@ calculateShipping();
 calculateTax();
 calculateOrderTotal();
 
+function changeQuantity(button, delta) {
+
+    const selector = button.parentElement;
+
+    const quantityElement = selector.querySelector('.quantity-value');
+
+    let quantity = Number(quantityElement.innerText);
+
+    quantity += delta;
+
+    if (quantity < 1)
+        quantity = 1;
+
+    if (quantity > 10)
+        quantity = 10;
+
+    quantityElement.innerText = quantity;
+    updateItemsAndPrices(
+        selector.dataset.productId,
+        quantity,
+        selector.dataset.price
+    );
+}
+
 function updateItemsAndPrices(productID, quantity, price) {
     updateItemQuantityInCheckout(productID, quantity);
     updateItemQuantityHTML(productID);
@@ -64,12 +88,9 @@ function updateCartItemQuantity(quantity) {
 
 function updateItemQuantityHTML(productID) {
     const cartItemQuantityElements = document.querySelectorAll('.cart-item-quantity');
-    const quantitySelectors = document.querySelectorAll('.quantity-selector');
-
     let quantity = 0;
-
-    quantitySelectors.forEach(selector => {
-        quantity += Number(selector.value);
+    document.querySelectorAll('.quantity-value').forEach(x => {
+        quantity += Number(x.innerText);
     });
 
     cartItemQuantityElements.forEach(badge => {
@@ -258,7 +279,6 @@ function validateCoupon(couponCode) {
         data: { couponCode },
         success: (result) => {
             if (result.couponValid) {
-                console.log(result);
                 giveTransactionDiscount(result, couponCode);
             }
             else {
