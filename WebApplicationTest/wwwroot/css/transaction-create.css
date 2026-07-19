@@ -140,6 +140,7 @@
     border: 1px solid #2a2a2a;
     border-top-left-radius: 18px;
     border-bottom-left-radius: 18px;
+    width: 500px;
 }
 
 .summary-products {
@@ -207,6 +208,7 @@
 .payment-method-radio {
     transform: scale(1.5);
     padding: 5px;
+    accent-color: rgb(231, 196, 123);
 }
 
 .transaction-total-display {

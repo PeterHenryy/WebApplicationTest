@@ -36,7 +36,7 @@
                                     string summaryItemCost = (item.Product.Price * item.Quantity).ToString("C2", System.Globalization.CultureInfo.GetCultureInfo("en-us"));
                                     string itemQuantity = $"(x{@item.Quantity})";
                                 }
-                                <p class="summary-product-name-quantity">@item.Product.Name @itemQuantity</p>
+                                <p class="summary-product-name-quantity product-name">@item.Product.Name @itemQuantity</p>
                                 <p class="summary-product-price">@summaryItemCost</p>
                             </div>
                         </div>
@@ -45,7 +45,7 @@
                 <hr style="background-color: black; width: 90%" />
                 <div class="summary-product-container">
                     <div class="summary-product-tax-container">
-                         <img class="money-bag" src="~/icons/moneybag.svg" /> 
+                        <i class="fa-solid fa-coins fa-2xl" style="color: rgb(231, 196, 123);"></i>
                     </div>
                     <div class="summary-product-info">
                         <p class="products-tax">Tax</p>

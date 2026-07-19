@@ -1,6 +1,6 @@
 ﻿$(document).ready(function () {
     // Handle change event for reason select
-    $(".reasonSelect").change(function () {
+    $(".reason-select").change(function () {
         const customReasonInput = $(this).closest('.refund-reason-select').find(".customReasonInput");
         if ($(this).val() === "Other") {
             customReasonInput.show();
@@ -19,11 +19,11 @@
 // Submit form function
 function submitForm(button) {
     const refundForm = $(button).closest('form');
-    let selectedReason = refundForm.find('.reasonSelect').val();
+    let selectedReason = refundForm.find('.reason-select').val();
     let customReason = refundForm.find('.customReasonInput textarea').val();
 
     // Set the selected reason to either custom or selected value
-    refundForm.find('.reasonSelect').val(selectedReason === 'Other' ? customReason : selectedReason);
+    refundForm.find('.reason-select').val(selectedReason === 'Other' ? customReason : selectedReason);
 
     // Submit the form
     refundForm.submit();

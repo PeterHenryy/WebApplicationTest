@@ -51,7 +51,8 @@ footer {
 }
 
 
-.data-table-headers{
+.data-table-headers
+.data-table-tds{
     color: white;
 }
 
@@ -65,9 +66,26 @@ footer {
 .dataTables_wrapper .dataTables_info,
 .dataTables_wrapper .dataTables_filter label,
 .dataTables_wrapper .dataTables_length label,
-table.dataTable tbody td.dataTables_empty,
-.dataTables_wrapper .dataTables_paginate .paginate_button {
+table.dataTable tbody td.dataTables_empty, table.dataTable thead > tr > th.sorting, table.dataTable tbody th, table.dataTable tbody td {
     color: white !important;
+}
+
+table.dataTable tbody th, table.dataTable tbody td
+ {
+    padding: 18px 10px;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.dataTables_wrapper:hover, .dataTables_paginate:hover, .paginate_button.current:hover{
+    color: black !important;
+}
+
+.paginate_button, paginate_button.current {
+    color: black !important;
+    background-color: rgb(231, 196, 123) !important;
 }
 
 
@@ -113,4 +131,83 @@ table.dataTable tbody td.dataTables_empty,
 .button-container{
     display: flex;
     justify-content: center;
+}
+
+.refund-reason-select {
+    background: #1C1C1E;
+    border: 1px solid #2F2F33;
+    border-radius: 12px;
+    padding: 25px;
+    margin-top: 25px;
+    box-shadow: 0 4px 6px rgba(0,0,0,.05), 0 10px 25px rgba(0,0,0,.08);
+}
+
+.refund-reason-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.refund-reason-form p {
+    color: white;
+    font-family: 'Cascadia Mono';
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.reason-select {
+    width: 100%;
+    padding: 12px 45px 12px 16px;
+    background: #252527;
+    color: white;
+    border: 1px solid #4b3d22;
+    border-radius: 8px;
+    font-family: 'Cascadia Mono';
+    font-size: 16px;
+    transition: .25s ease;
+    margin-bottom: 15px;
+}
+
+.reason-select:hover {
+    border-color: rgb(231,196,123);
+    cursor: pointer;
+}
+
+.reason-select:focus {
+    outline: none;
+    border-color: rgb(231,196,123);
+    box-shadow: 0 0 12px rgba(231,196,123,.25);
+}
+
+.reason-select option {
+    background: #252527;
+    color: white;
+}
+
+.customReasonInput textarea {
+    width: 100%;
+    min-height: 120px;
+    padding: 15px;
+    background: #252527;
+    color: white;
+    border: 1px solid #4b3d22;
+    border-radius: 8px;
+    font-family: 'Cascadia Mono';
+    resize: vertical;
+    transition: .25s ease;
+    margin-bottom: 15px;
+}
+
+.customReasonInput textarea::placeholder {
+    color: #8b8b8b;
+}
+
+.customReasonInput textarea:focus {
+    outline: none;
+    border-color: rgb(231,196,123);
+    box-shadow: 0 0 12px rgba(231,196,123,.25);
+}
+
+.refund-reason-form button:active {
+    transform: scale(.98);
 }

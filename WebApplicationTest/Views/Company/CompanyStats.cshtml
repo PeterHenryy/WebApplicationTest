@@ -19,9 +19,7 @@
         <partial name="_HeaderPartial" />
     </header>
    <div style="display: flex; justify-content: center;">
-
-    <div>
-
+    <div class="stats-inner-container">
         <div class="stats-wrapper">
 
             <div class="general-stats">
@@ -84,13 +82,13 @@
             {
 
                 <div class="row justify-content-between">
-                    <div class="purchased-products-container" style="height: 1100px;">
+                    <div class="purchased-products-container">
                         <p class="table-announcement">Latest Purchased Company Products</p>
                         <div class="cart-products-container">
                             @foreach (var item in Model.CompanyPurchasedItems)
                             {
                                 <div class="cart-product js-cart-product-@item.ProductID">
-                                    <img src="@item.Product.Image" style="width: 200px;height: 200px;" class="cart-product-image">
+                                    <img src="~/Img/@item.Product.Image" class="cart-product-image">
                                     <div class="cart-product-info">
                                         <p class="cart-product-name">@item.Product.Name</p>
                                         <div class="cart-product-rating">
@@ -135,7 +133,7 @@
                                     </div>
                                 </div>
                             }
-                            <a class="btn btn-primary" style="font-size: 20px; background-color: deepskyblue; border: none;" href="@Url.Action("CompanyPurchasedProducts", "Company")">View All</a>
+                            <a class="gold-button" style="width: 100%;" href="@Url.Action("CompanyPurchasedProducts", "Company")">View All Purchases</a>
                         </div>
 
                     </div>

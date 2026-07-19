@@ -50,7 +50,7 @@
                                         <td>@transaction.TransactionDate</td>
                                         <td>@transaction.ItemsBought</td>
                                         <td>@transaction.PaymentType</td>
-                                        <td> <a class="btn btn-primary" style="background-color: deepskyblue; border: none;" href="@Url.Action("TransactionItems", "Transaction", new{transactionID = transaction.ID})">View Items</a></td>
+                                        <td> <a class="gold-button" style="background-color: deepskyblue; border: none;" href="@Url.Action("TransactionItems", "Transaction", new{transactionID = transaction.ID})">View Items</a></td>
                                     </tr>
                                 }
                             </tbody>

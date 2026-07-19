@@ -39,6 +39,7 @@
     padding: 50px;
     box-shadow: 0 0 5px rgba(0,0,0,0.15);
     width: 100%;
+    font-size: 18px;
 }
 
 .cart-product-info {
@@ -51,6 +52,9 @@
 .cart-product-name {
     margin: 0;
     width: 200px;
+    font-size: 20px;
+    margin-bottom: 5px;
+    color: white;
 }
 
 .cart-product-image {
@@ -104,6 +108,7 @@
     padding-top: 30px;
     padding-left: 30px;
     padding-right: 30px;
+    font-size: 18px;
 }
 
 .order-summary,
@@ -155,17 +160,23 @@
 
 #coupon-code,
 #submit-coupon {
-    padding: 5px 10px;
-    font-size: 20px;
+    padding: 10px 30px;
+    font-size: 16px;
     border-radius: 4px;
 }
 
 #submit-coupon {
-    margin-top: 5px;
-    border: none;
-    background-color: deepskyblue;
-    color: white;
+    background: transparent;
+    border: 1px solid rgba(214,179,106,.45);
+    border-radius: 12px;
+    color: #d6b36a;
     display: none;
+}
+
+#submit-coupon:hover {
+    background: rgba(214,179,106,.08);
+    border-color: #d6b36a;
+    color: #f5d38a;
 }
 
 
@@ -198,7 +209,8 @@
 }
 
 .remove-item-button,
-.clear-cart-button {
+.clear-cart-button,
+.refund-button{
     background: rgba(140, 40, 50, .15);
     color: #d97b83;
     border: 1px solid rgba(170, 70, 80, .45);
@@ -211,7 +223,8 @@
 }
 
 .remove-item-button:hover,
-.clear-cart-button:hover {
+.clear-cart-button:hover,
+.refund-button:hover{
     background: rgba(170, 55, 65, .25);
     border-color: #cf5f69;
     color: #f3a0a8;

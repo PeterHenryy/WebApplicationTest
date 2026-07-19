@@ -8,7 +8,7 @@
     <input type="hidden" asp-for="ProductID" />
     <input type="hidden" asp-for="TransactionItemID" />
     <p>Select a reason for your refund</p>
-    <select asp-for="Reason" id="reasonSelect">
+    <select asp-for="Reason" id="reason-select">
         @{
             var refundReasons = RefundReasons.Reasons;
         }
@@ -29,7 +29,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function () {
-        $("#reasonSelect").change(function () {
+        $("#reason-select").change(function () {
             if ($(this).val() === "Other") {
                 $("#customReasonInput").show();
             } else {

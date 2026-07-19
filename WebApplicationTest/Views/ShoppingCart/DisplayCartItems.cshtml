@@ -11,6 +11,7 @@
 <link rel="stylesheet" href="~/css/shoppingCart.css" />
 <link rel="stylesheet" href="~/css/containerResponsive.css" />
 <link href="~/css/footer.css" rel="stylesheet" />
+<link href="~/css/forms.css" rel="stylesheet" />
 
 <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -137,7 +138,7 @@
                     }
                     <button class="coupon-button page-button" >Enter Coupon Code</button>
                     <div class="coupon-input">
-                        <input type="text" id="coupon-code">
+                        <input class="form-input" style="margin-bottom: 0; border-radius: 12px;" type="text" id="coupon-code">
                     </div>
                     <button id="submit-coupon">Submit Code</button>
                     <a class="clear-cart-button" style="text-decoration: none;" href="@Url.Action("ClearCart", "ShoppingCart")">Clear Cart</a>

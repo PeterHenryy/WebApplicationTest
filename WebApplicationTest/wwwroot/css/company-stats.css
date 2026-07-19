@@ -127,6 +127,7 @@
 
 .table-announcement {
     font-size: 20px;
+    color: white;
 }
 
 .table-announcement {
@@ -136,8 +137,7 @@
 }
 
 .purchased-products-container {
-    width: 60%;
-    background-color: white;
+    width: 100%;
     border-radius: 8px;
     padding: 20px;
 }
@@ -408,4 +408,10 @@
     border: solid 1px #2F2F33;
     box-shadow: 0 4px 6px rgba(0,0,0,.05), 0 10px 25px rgba(0,0,0,.08);
     border-radius: 16px;
+}
+
+.stats-inner-container{
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
 }

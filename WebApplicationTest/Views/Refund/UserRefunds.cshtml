@@ -43,7 +43,7 @@
                                     double transactionItemPrice = refund.TransactionItem.Quantity * refund.Product.Price;
                                     <tr>
 
-                                        <td> <a href="@Url.Action("Details", "Product", new {productID = refund.ProductID})" style="text-decoration: none; color: black">@refund.Product.Name</a></td>
+                                        <td> <a href="@Url.Action("Details", "Product", new {productID = refund.ProductID})" style="text-decoration: none; color: white;">@refund.Product.Name</a></td>
                                         <td>@refund.Reason</td>
                                         <td>@refund.TransactionItem.Quantity</td>
                                         <td>$@transactionItemPrice.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture)</td>

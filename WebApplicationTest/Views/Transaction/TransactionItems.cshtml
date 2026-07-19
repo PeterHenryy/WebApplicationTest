@@ -14,7 +14,8 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 
-<body >
+<body style="background-color: #121212">
+   
     <header class="header">
         <partial name="_HeaderPartial" />
     </header>
@@ -25,8 +26,7 @@
             {
                 <div class="cart-product js-cart-product-@item.ProductID">
                     <a href="@Url.Action("Details", "Product", new {productID = item.ProductID})" style="text-decoration: none; color: black">
-
-                        <img src="@item.Product.Image" class="cart-product-image">
+                        <img src="~/Img/@item.Product.Image" class="cart-product-image">
                     </a>
                     <a href="@Url.Action("Details", "Product", new {productID = item.ProductID})" style="text-decoration: none; color: black">
 
@@ -75,7 +75,7 @@
                         @if (!Model.HasRequestedRefund(item.ID))
                         {
                             <div>
-                                <button id="refund-button-@item.ID" class="refund-button btn btn-danger">Refund Item</button>
+                                <button id="refund-button-@item.ID" class="refund-button">Refund Item</button>
                             </div>
                             <div class="refund-reason-select" style="display: none;" id="refund-reason-select-@item.ID">
                                 <form asp-controller="Refund" asp-action="Create" class="refund-reason-form">
@@ -83,7 +83,7 @@
                                     <input type="hidden" value="@item.ProductID" asp-for="@Model.Refund.ProductID" />
                                     <input type="hidden" value="@item.ID" asp-for="@Model.Refund.TransactionItemID" />
                                     <p>Select a reason for your refund</p>
-                                    <select asp-for="@Model.Refund.Reason" class="reasonSelect">
+                                    <select asp-for="@Model.Refund.Reason" class="reason-select">
                                         @{
                                             var refundReasons = RefundReasons.Reasons;
                                         }
@@ -97,7 +97,7 @@
                                         <textarea style="width: 100%; margin-top: 15px; padding: 15px;" asp-for="@Model.Refund.Reason" placeholder="Enter your custom reason"></textarea>
                                     </div>
                                     <div>
-                                        <button style="margin-top: 15px; background-color: deepskyblue; border:none;" type="submit" class="btn btn-primary"  onclick="submitForm(this)">Request Refund</button>
+                                        <button class="refund-button" type="submit"  onclick="submitForm(this)">Request Refund</button>
                                     </div>
                                 </form>
                             </div>
