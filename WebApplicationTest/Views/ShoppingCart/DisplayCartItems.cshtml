@@ -149,24 +149,34 @@
         </div>
     }
     else
-    {
-        <h1 class="no-items-header" style="text-align: center;">You have no items in your cart!!</h1>
-        <h2 style="text-align: center;">Suggested Items to Add to Your Cart (our most popular products):</h2>
-        <div class="cart-wrapper">
-            <div class="products-wrapper">
-                @{
+    {   
+        <div class="container-section">
+            <div class="carousel-container">
+                <div class="no-items-container">
+                    <h1>You have no items in your cart. Check out our most popular products!</h1>
+                </div>
+                <button class="carousel-btn left" onclick="scrollCarousel(this, -1)">‹</button>
 
-                    var popularProducts = Model.PopularProducts;
-                    var currentUser = Model.User;
-                    ProductsCardViewModel viewModel = new ProductsCardViewModel
-                    {
-                        Products = popularProducts,
-                        User = currentUser
-                
-                    };
-                    Html.RenderPartial("_ProductsGridPartial", viewModel);
-                }
+                <div class="carousel-track">
+
+                    @{
+                        var popularProducts = Model.PopularProducts;
+
+                        ProductsCardViewModel popularProductsViewModel = new ProductsCardViewModel
+                        {
+                            Products = popularProducts,
+                            User = Model.User
+                        };
+
+                        Html.RenderPartial("_ProductsGridPartial", popularProductsViewModel);
+                    }
+
+                </div>
+
+                <button class="carousel-btn right" onclick="scrollCarousel(this, 1)">›</button>
+
             </div>
+
         </div>
         
     }

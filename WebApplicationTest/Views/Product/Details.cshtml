@@ -12,6 +12,8 @@
 <link rel="stylesheet" href="~/css/productsIndex.css" />
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="~/css/footer.css" />
+<link href="~/css/forms.css" rel="stylesheet" />
+<link href="~/css/shoppingcart.css" rel="stylesheet" />
 <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
@@ -70,7 +72,7 @@
                                 {
                                     <button class="product-add-to-cart-button"
                                             onclick="addItemToCart(@Model.ProductID, 1, '@(HttpUtility.JavaScriptStringEncode(Model.Product.Name))', true); updateCartItemQuantity(1);">
-                                        
+                                            Add to Cart
                                     </button>
                                 }
                                 else
@@ -152,30 +154,78 @@
                         </div>
                         @if (Model.HasUserBoughtProduct && !Model.HasUserReviewedProduct)
                         {
-                            <form id="reviewForm" asp-controller="Review" asp-action="Create">
-                                <div class="review-radios">
-                                    <label for="rating">Rate your experience with this product:</label>
-                                    <div class="rating-options">
-                                        @for (int i = 1; i <= 5; i++)
-                                        {
-                                            <input type="radio" id="Review.Rating@(i)" name="Review.Rating" value="@i" class="rating-radio" required />
-                                            <label for="Review.Rating@(i)">@i</label>
-                                        }
-                                    </div>
-                                </div>
-                                <input type="hidden" value="@Model.ProductID" asp-for="Review.ProductID" />
-                                <div class="user">
-                                    @if (@Model.CurrentUser.ProfilePicture == "user-solid.svg"){
-                                        <img class="user-profile-picture" src="~/icons/user-solid.svg">
+                            <div class="master-flexbox">
 
-                                    }
-                                    else{
-                                        <img class="user-profile-picture" src="@Model.CurrentUser.ProfilePicture">
-                                    }
-                                    <textarea id="reviewBody" placeholder="Type your review here..." class="add-review-input" asp-for="Review.Body" required></textarea>
+                                <div class="reviews-box">
+
+                                    <form id="reviewForm" asp-controller="Review" asp-action="Create">
+
+                                        <div class="review-radios">
+                                            <label>Rate your experience with this product:</label>
+
+                                            <div class="star-rating">
+
+                                                <input type="radio" asp-for="Review.Rating" id="star5" value="5" required />
+                                                <label for="star5">
+                                                    <i class="fa-regular fa-star fa-sm"></i>
+                                                </label>
+
+                                                <input type="radio" asp-for="Review.Rating" id="star4" value="4" />
+                                                <label for="star4">
+                                                    <i class="fa-regular fa-star fa-sm"></i>
+                                                </label>
+
+                                                <input type="radio" asp-for="Review.Rating" id="star3" value="3" />
+                                                <label for="star3">
+                                                    <i class="fa-regular fa-star fa-sm"></i>
+                                                </label>
+
+                                                <input type="radio" asp-for="Review.Rating" id="star2" value="2" />
+                                                <label for="star2">
+                                                    <i class="fa-regular fa-star fa-sm"></i>
+                                                </label>
+
+                                                <input type="radio" asp-for="Review.Rating" id="star1" value="1" />
+                                                <label for="star1">
+                                                    <i class="fa-regular fa-star fa-sm"></i>
+                                                </label>
+
+                                            </div>
+                                        </div>
+
+                                        <input type="hidden"
+                                               value="@Model.ProductID"
+                                               asp-for="Review.ProductID" />
+
+                                        <div class="user">
+
+                                            @if (Model.CurrentUser.ProfilePicture == "user-solid.svg")
+                                            {
+                                                <img class="user-profile-picture"
+                                                     src="~/icons/user-solid.svg" />
+                                            }
+                                            else
+                                            {
+                                                <img class="user-profile-picture"
+                                                     src="@Model.CurrentUser.ProfilePicture" />
+                                            }
+
+                                            <textarea id="reviewBody"
+                                                      class="form-input"
+                                                      asp-for="Review.Body"
+                                                      placeholder="Tell other customers what you thought about this product..."
+                                                      required></textarea>
+
+                                        </div>
+
+                                        <button type="submit" class="gold-button">
+                                            <i class="fa-solid fa-paper-plane"></i>
+                                            Submit Review
+                                        </button>
+
+                                    </form>
                                 </div>
-                                <button type="submit" class="btn btn-primary" style="float: right; background-color: deepskyblue; border: none;">Add Review</button>
-                            </form>
+                            </div>
                         }
                         @foreach (var review in Model.Reviews)
                         {
@@ -223,19 +273,19 @@
                                     <div class="rating-buttons-container">
                                         @if (userLikeInReview != null)
                                         {
-                                            <button class="btn btn-success" disabled>
+                                            <button class="like-button-disabled" disabled>
                                                 <i class="fa-solid fa-thumbs-up fa-sm"></i> @reviewLikeCounter
                                             </button>
-                                            <button class="btn btn-danger" disabled>
+                                            <button class="dislike-button-disabled" disabled>
                                                 <i class="fa-solid fa-thumbs-down fa-sm"></i> @reviewDislikeCounter
                                             </button>
                                         }
                                         else if (userDislikeInReview != null)
                                         {
-                                            <button class="btn btn-success" disabled>
+                                            <button class="like-button-disabled" disabled>
                                                 <i class="fa-solid fa-thumbs-up fa-sm"></i> @reviewLikeCounter
                                             </button>
-                                            <button class="btn btn-danger" disabled>
+                                            <button class="dislike-button-disabled" disabled>
                                                 <i class="fa-solid fa-thumbs-down fa-sm"></i> @reviewDislikeCounter
                                             </button>
                                         }
@@ -245,7 +295,7 @@
                                                 <input type="text" hidden value="@review.ID" asp-for="LikeForm.ReviewID">
                                                 <input type="text" hidden value="@Model.CurrentUser.Id" asp-for="LikeForm.UserID">
                                                 <input type="text" hidden value="@Model.ProductID" asp-for="ProductID">
-                                                <button class="btn btn-success likeButton" type="button" data-review-id="@review.ID">
+                                                <button class="like-button likeButton" type="button" data-review-id="@review.ID">
                                                     <i class="fa-solid fa-thumbs-up fa-sm"></i> @reviewLikeCounter
                                                 </button>
                                             </form>
@@ -254,7 +304,7 @@
                                                 <input type="text" hidden value="@review.ID" asp-for="DislikeForm.ReviewID">
                                                 <input type="text" hidden value="@Model.CurrentUser.Id" asp-for="DislikeForm.UserID">
                                                 <input type="text" hidden value="@Model.ProductID" asp-for="ProductID">
-                                                <button class="btn btn-danger dislikeButton" type="button" data-review-id="@review.ID">
+                                                <button class="dislike-button dislikeButton" type="button" data-review-id="@review.ID">
                                                     <i class="fa-solid fa-thumbs-down fa-sm"></i> @reviewDislikeCounter
                                                 </button>
                                             </form>
@@ -293,45 +343,90 @@
             }
             else
             {
-                <div class="no-review-announcement">
-                    @if (Model.HasUserBoughtProduct)
-                    {
-                        <div class="container col-7 shadow p-3 mb-5 bg-white rounded">
-                            <p class="first-review">Be the first to review this product</p>
+                @if (Model.HasUserBoughtProduct && !Model.HasUserReviewedProduct)
+                {
+                    <div class="master-flexbox">
+
+                        <div class="reviews-box">
+
                             <form id="reviewForm" asp-controller="Review" asp-action="Create">
+
                                 <div class="review-radios">
-                                    <label for="rating">Rate your experience with this product:</label>
-                                    <div class="rating-options">
-                                        @for (int i = 1; i <= 5; i++)
-                                        {
-                                            <input type="radio" id="Review.Rating@(i)" name="Review.Rating" value="@i" class="rating-radio" required />
-                                            <label for="Review.Rating@(i)">@i</label>
-                                        }
+                                    <label>Be the first to review this product:</label>
+
+                                    <div class="star-rating">
+
+                                        <input type="radio" asp-for="Review.Rating" id="star5" value="5" required />
+                                        <label for="star5">
+                                            <i class="fa-regular fa-star fa-sm"></i>
+                                        </label>
+
+                                        <input type="radio" asp-for="Review.Rating" id="star4" value="4" />
+                                        <label for="star4">
+                                            <i class="fa-regular fa-star fa-sm"></i>
+                                        </label>
+
+                                        <input type="radio" asp-for="Review.Rating" id="star3" value="3" />
+                                        <label for="star3">
+                                            <i class="fa-regular fa-star fa-sm"></i>
+                                        </label>
+
+                                        <input type="radio" asp-for="Review.Rating" id="star2" value="2" />
+                                        <label for="star2">
+                                            <i class="fa-regular fa-star fa-sm"></i>
+                                        </label>
+
+                                        <input type="radio" asp-for="Review.Rating" id="star1" value="1" />
+                                        <label for="star1">
+                                            <i class="fa-regular fa-star fa-sm"></i>
+                                        </label>
+
                                     </div>
                                 </div>
-                                <input type="hidden" value="@Model.ProductID" asp-for="Review.ProductID" />
+
+                                <input type="hidden"
+                                       value="@Model.ProductID"
+                                       asp-for="Review.ProductID" />
+
                                 <div class="user">
 
-                                    @if (@Model.CurrentUser.ProfilePicture == "user-solid.svg")
+                                    @if (Model.CurrentUser.ProfilePicture == "user-solid.svg")
                                     {
-                                        <img class="user-profile-picture" src="~/icons/user-solid.svg">
-
+                                        <img class="user-profile-picture"
+                                             src="~/icons/user-solid.svg" />
                                     }
                                     else
                                     {
-                                        <img class="user-profile-picture" src="@Model.CurrentUser.ProfilePicture">
+                                        <img class="user-profile-picture"
+                                             src="@Model.CurrentUser.ProfilePicture" />
                                     }
-                                    <textarea id="reviewBody" placeholder="Type your review here..." class="add-review-input" asp-for="Review.Body" required></textarea>
+
+                                    <textarea id="reviewBody"
+                                              class="form-input"
+                                              asp-for="Review.Body"
+                                              placeholder="Tell other customers what you thought about this product..."
+                                              required></textarea>
+
                                 </div>
-                                <button type="submit" class="btn btn-primary" style="float: right; background-color: deepskyblue; border: none;">Add Review</button>
+
+                                <button type="submit" class="gold-button">
+                                    <i class="fa-solid fa-paper-plane"></i>
+                                    Submit Review
+                                </button>
+
                             </form>
                         </div>
-                    }
-                    else
-                    {
-                        <h1>This product has no reviews yet</h1>
-                    }
-                </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="master-flexbox">
+                        <div class="reviews-box">
+                            <h1>This product has no reviews yet!</h1>    
+                        </div>
+                    </div>
+                }
+                
             }
         </section>
     </main>

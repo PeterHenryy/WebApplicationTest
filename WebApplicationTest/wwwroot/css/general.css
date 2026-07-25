@@ -95,7 +95,6 @@ table.dataTable tbody th, table.dataTable tbody td
 }
 
 .gold-button{
-    color: white;
     transition: background-color 0.5s, box-shadow 0.5s;
     white-space: nowrap;
     color: #111;

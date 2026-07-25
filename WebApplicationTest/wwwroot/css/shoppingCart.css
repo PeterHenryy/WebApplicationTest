@@ -15,7 +15,7 @@
     margin-bottom: auto;
 }
 
-.cart-product, .order-summary-container {
+.cart-product, .order-summary-container, .no-items-container {
     background: #1C1C1E;
     border: solid 1px #2F2F33;
     box-shadow: 0 4px 6px rgba(0,0,0,.05), 0 10px 25px rgba(0,0,0,.08);
@@ -271,4 +271,10 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+}
+
+.no-items-container{
+    display: flex;
+    justify-content: center;
+    padding: 20px;
 }

@@ -15,6 +15,7 @@
     margin-bottom: 50px;
     font-family: 'Cascadia Mono';
     padding: 50px;
+    color: white;
 }
 
 .product-flexbox {
@@ -22,15 +23,15 @@
     flex-direction: column;
 }
 
-    .product-flexbox .rating-container {
-        margin-bottom: 20px;
-    }
+.product-flexbox .rating-container {
+    margin-bottom: 20px;
+}
 
 .product-title {
     white-space: normal;
-    max-width: 100%; /* Set maximum width */
-    overflow-wrap: break-word; /* Ensure long words or URLs break */
-    word-wrap: break-word; /* For older browsers */
+    max-width: 100%; 
+    overflow-wrap: break-word; 
+    word-wrap: break-word; 
     hyphens: auto;
     font-size: 24px;
     margin-bottom: 5px;
@@ -123,7 +124,7 @@
 .percentage-filled {
     display: inline-block;
     height: 100%;
-    background-color: deepskyblue;
+    background-color: rgb(231, 196, 123);
 }
 
 .rating-container {
@@ -295,4 +296,86 @@
 .pagination-container {
     display: flex;
     justify-content: center;
+}
+
+.rating-title {
+    display: block;
+    margin-bottom: 15px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.star-rating {
+    display: inline-flex;
+    flex-direction: row-reverse;
+    gap: 6px;
+}
+
+.star-rating input {
+    display: none;
+}
+
+.star-rating label {
+    cursor: pointer;
+    font-size: 34px;
+    color: #666;
+    transition: .2s;
+}
+
+.star-rating label i {
+    transition: .2s;
+}
+
+
+.star-rating label:hover i,
+.star-rating label:hover ~ label i {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    color: rgb(231,196,123);
+}
+
+.star-rating input:checked ~ label i {
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    color: rgb(231,196,123);
+}
+
+.review-radios{
+    font-size: 20px;
+}
+
+.dislike-button, .dislike-button-disabled {
+    background: rgba(140, 40, 50, .15);
+    color: #d97b83;
+    border: 1px solid rgba(170, 70, 80, .45);
+    border-radius: 12px;
+    transition: all .25s ease;
+    text-align: center;
+    padding: 8px;
+    
+}
+
+.dislike-button:hover {
+    background: rgba(170, 55, 65, .25);
+    border-color: #cf5f69;
+    color: #f3a0a8;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(180,40,55,.18);
+}
+
+.like-button, .like-button-disabled {
+    background: linear-gradient(135deg, #d6b36a, #f5d38a);
+    border-radius: 12px;
+    transition: all .3s ease;
+    padding: 8px;
+}
+
+.like-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(212,175,55,.35);
+    background: linear-gradient(135deg,#f5d38a,#d6b36a);
+    text-decoration: none;
+    color: #111;
+    font-weight: bold;
 }
