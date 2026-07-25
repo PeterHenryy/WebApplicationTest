@@ -12,6 +12,7 @@
 <link href="~/css/general.css" rel="stylesheet" />
 <link href="~/css/user-reviews.css" rel="stylesheet" />
 <link href="~/css/footer.css" rel="stylesheet" />
+<link href="~/css/shoppingcart.css" rel="stylesheet" />
 
 <header class="header">
     <partial name="_HeaderPartial" />
@@ -41,7 +42,7 @@
                                     @foreach (var review in @Model)
                                     {
                                         <tr>
-                                            <td> <a href="@Url.Action("Details", "Product", new {productID = review.ProductID})" style="text-decoration: none;">@review.Product.Name</a></td>
+                                            <td> <a href="@Url.Action("Details", "Product", new {productID = review.ProductID})" style="text-decoration: none; color:white;">@review.Product.Name</a></td>
                                             <td>
                                                 <div class="rating-container">
                                                     <p class="review-rating">@review.Rating</p>
@@ -66,7 +67,7 @@
                                             </td>
                                             <td>@review.Body</td>
                                             <td>@review.Date.ToString("MM/dd/yyyy")</td>
-                                            <td><a class="btn btn-danger" href="@Url.Action("Delete", "Review", new {reviewID = @review.ID})">Delete</a></td>
+                                            <td><a class="remove-item-button" style="text-decoration: none;" href="@Url.Action("Delete", "Review", new {reviewID = @review.ID})">Delete</a></td>
                                         </tr>
                                     }
                                 </tbody>

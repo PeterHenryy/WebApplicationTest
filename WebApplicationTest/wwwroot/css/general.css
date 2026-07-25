@@ -210,3 +210,13 @@ table.dataTable tbody th, table.dataTable tbody td
 .refund-reason-form button:active {
     transform: scale(.98);
 }
+
+.product-image-table-container{
+    display: flex;
+    justify-content: center;
+}
+
+.product-image-table {
+    width: 50px;
+    height: 50px;
+}

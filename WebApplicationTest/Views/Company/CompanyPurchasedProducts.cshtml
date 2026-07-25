@@ -17,48 +17,54 @@
     <partial name="_HeaderPartial" />
 </header>
 
-<div class="container data-table-dark">
-    <div class="row">
-        <div class="col-lg-12 col-12">
-            <div class="row">
-                <div class="col-12">
-                    <div class="div-flex">
-                        <p class="data-table-title">Products Purchased by Customers</p>
-                    </div>
+<div class="page-wrapper">
 
-                    <table id="app-data-table" class="table table-striped">
-                        <thead class="data-table-headers">
-                            <tr>
-                                <th>Product Picture</th>
-                                <th>Product Name</th>
-                                <th>Quantity Bought</th>
-                                <th>Price Per Unit</th>
-                                <th>Total Price</th>
-                                <th>Delivery Chosen</th>
-                                <th>Transaction ID</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in @Model)
-                            {
-                                double totalPrice = item.Product.Price * item.Quantity;
+    <div class="container data-table-dark">
+        <div class="row">
+            <div class="col-lg-12 col-12">
+                <div class="row">
+                    <div class="col-12">
+                         <p class="data-table-title" style="text-align: center;">Products Purchased by Customers</p>
+                        <table id="app-data-table" class="table table-striped">
+                            <thead class="data-table-headers">
                                 <tr>
-                                    <td>@item.Product.Name</td>
-                                    <td>@item.Quantity</td>
-                                    <td>$@item.Product.Price.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture)</td>
-                                    <td>$@totalPrice.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture)</td>
-                                    <td>@item.ShippingOption</td>
-                                    <td>@item.TransactionID</td>
+                                    <th>Product Picture</th>
+                                    <th>Product Name</th>
+                                    <th>Quantity Bought</th>
+                                    <th>Price Per Unit</th>
+                                    <th>Total Price</th>
+                                    <th>Delivery Chosen</th>
+                                    <th>Transaction ID</th>
                                 </tr>
-                            }
-                        </tbody>
-                    </table>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in @Model)
+                                {
+                                    double totalPrice = item.Product.Price * item.Quantity;
+                                    <tr>
+                                        <td> 
+                                            <div class="product-image-table-container">
+                                                <img class="product-image-table" src="~/Img/@item.Product.Image" />
+                                            </div>
+                                        </td>
+                                        <td>@item.Product.Name</td>
+                                        <td>@item.Quantity</td>
+                                        <td>$@item.Product.Price.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture)</td>
+                                        <td>$@totalPrice.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture)</td>
+                                        <td>@item.ShippingOption</td>
+                                        <td>@item.TransactionID</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
 
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 <partial name="_FooterPartial" />
 
 <script>

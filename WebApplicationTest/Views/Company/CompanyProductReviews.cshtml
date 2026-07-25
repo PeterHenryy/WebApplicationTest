@@ -19,67 +19,58 @@
 </header>
 
 <body >
-    <div class="container shadow p-3 mb-5 bg-white rounded">
-        <div class="row">
-            <div class="col-lg-12 col-12">
-                <div class="row">
-                    <div class="col-12">
-                        <table id="reviews-table" class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>Product Reviewed</th>
-                                    <th>User Picture</th>
-                                    <th>Username</th>
-                                    <th>Rating</th>
-                                    <th>Body</th>
-                                    <th>Date</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var review in @Model)
-                                {
+    <div class="page-wrapper">
+        <div class="container data-table-dark">
+            <div class="row">
+                <div class="col-lg-12 col-12">
+                    <div class="row">
+                        <div class="col-12">
+                            <table id="app-data-table" class="table table-striped">
+                                <thead class="data-table-headers">
                                     <tr>
-                                        <td>@review.Product.Name</td>
-                                        <td>
-                                            @if (@review.User.ProfilePicture == "user-solid.svg"){
-                                                <img style="width: 40px; height: 40px; border-radius: 50%;" src="~/icons/user-solid.svg " />
-
-                                            }
-                                            else{
-
-                                                <img style="width: 40px; height: 40px; border-radius: 50%;" src="@review.User.ProfilePicture">
-                                            }
-                                        </td>
-                                        <td>@review.User.UserName</td>
-                                        <td>
-                                            <div class="rating-container">
-                                                <p class="review-rating">@review.Rating</p>
-                                                <div class="stars-container">
-                                                    @for (int i = 1; i <= 5; i++)
-                                                    {
-                                                        if (i <= review.Rating)
-                                                        {
-                                                            <i class="fa-solid fa-star fa-sm" style="color: #29db47;"></i>
-                                                        }
-                                                        else if (review.Rating >= (i - 1) + 0.5 && review.Rating < i)
-                                                        {
-                                                            <i class="fa-solid fa-star-half-stroke fa-sm" style="color: #29db47;"></i>
-                                                        }
-                                                        else
-                                                        {
-                                                            <i class="fa-regular fa-star fa-sm"></i>
-                                                        }
-                                                    }
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>@review.Body</td>
-                                        <td>@review.Date.ToString("MM/dd/yyyy")</td>
+                                        <th>Product Reviewed</th>
+                                        <th>Username</th>
+                                        <th>Rating</th>
+                                        <th>Body</th>
+                                        <th>Date</th>
                                     </tr>
-                                }
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach (var review in @Model)
+                                    {
+                                        <tr>
+                                            <td>@review.Product.Name</td>
+                                            <td>@review.User.UserName</td>
+                                            <td>
+                                                <div class="rating-container">
+                                                    <p class="review-rating">@review.Rating</p>
+                                                    <div class="stars-container">
+                                                        @for (int i = 1; i <= 5; i++)
+                                                        {
+                                                            if (i <= review.Rating)
+                                                            {
+                                                                <i class="fa-solid fa-star fa-sm" style="color: #29db47;"></i>
+                                                            }
+                                                            else if (review.Rating >= (i - 1) + 0.5 && review.Rating < i)
+                                                            {
+                                                                <i class="fa-solid fa-star-half-stroke fa-sm" style="color: #29db47;"></i>
+                                                            }
+                                                            else
+                                                            {
+                                                                <i class="fa-regular fa-star fa-sm"></i>
+                                                            }
+                                                        }
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>@review.Body</td>
+                                            <td>@review.Date.ToString("MM/dd/yyyy")</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
 
+                        </div>
                     </div>
                 </div>
             </div>
@@ -90,7 +81,7 @@
 <script>
     $.noConflict();
     jQuery(document).ready(function ($) {
-        $('#reviews-table').DataTable();
+        $('#app-data-table').DataTable();
     });
 </script>
 

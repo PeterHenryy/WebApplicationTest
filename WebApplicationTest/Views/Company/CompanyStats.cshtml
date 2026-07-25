@@ -81,7 +81,7 @@
         @if (Model.Company.TotalSales > 0)
             {
 
-                <div class="row justify-content-between">
+                <div class="outer-stats-container">
                     <div class="purchased-products-container">
                         <p class="table-announcement">Latest Purchased Company Products</p>
                         <div class="cart-products-container">
@@ -139,12 +139,12 @@
                     </div>
                     @if (Model.CompanyProductsReviews.Count > 0)
                     {
-                        <div class="latest-reviews-container p-3 mb-5 bg-white rounded">
+                        <div class="outer-reviews-container">
                             <p class="table-announcement">Latest Reviews on Company Products</p>
                             @foreach (var review in Model.CompanyProductsReviews)
                             {
                                 string reviewVibe = (review.Rating > 3) ? "review-container-green" : "review-container-red";
-                                <div class="review-wraper">
+                                <div class="latest-reviews-container">
 
                                     <div class="@reviewVibe review-adjusted review-height" style="margin-bottom: 20px; padding: 10px;">
                                         <p style="font-weight: bold; font-size: 20px;">@review.Product.Name</p>
@@ -176,16 +176,16 @@
 
                                                 <img class="user-profile-picture" src="@review.User.ProfilePicture">
                                             }
-                                            <p class="username">@review.User.UserName</p>
+                                            <p class="username" style="margin:0;">@review.User.UserName</p>
                                         </div>
                                         <p class="review-body">@review.Body</p>
                                     </div>
                                 </div>
 
                             }
-                            <div class="view-all-container">
-                                <a class="btn btn-primary" style="font-size: 20px; background-color: deepskyblue; border: none;" href="@Url.Action("CompanyProductReviews", "Company")">View All</a>
-                            </div>
+                         
+                            <a class="gold-button" style="width: 100%;" href="@Url.Action("CompanyProductReviews", "Company")">View All Reviews</a>
+                         
                         </div>
                     }
 

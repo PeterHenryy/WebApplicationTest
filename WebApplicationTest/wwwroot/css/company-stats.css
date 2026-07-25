@@ -8,7 +8,7 @@
 }
 .stats-wrapper {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     column-gap: 60px;
     margin-bottom: 70px;
     margin-top: 50px;
@@ -16,6 +16,12 @@
 .company-name {
     font-size: 33px;
     font-weight: bold;
+}
+
+.outer-stats-container{
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
 }
 
 .company-logo {
@@ -34,6 +40,7 @@
     border-radius: 16px;
     padding: 0 20px;
     color: white;
+    width: 100%;
 }
 
 
@@ -96,7 +103,7 @@
     background: #1C1C1E;
     border: solid 1px #2F2F33;
     box-shadow: 0 4px 6px rgba(0,0,0,.05), 0 10px 25px rgba(0,0,0,.08);
-    width: 660px;
+    width: 60%;
     height: 330px;
     border-radius: 16px;
 }
@@ -160,8 +167,22 @@
 }
 
 
+.outer-reviews-container{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 40px;
+    padding: 20px;
+}
+
 .latest-reviews-container {
-    width: 35%;
+    padding: 15px;
+    background: #1C1C1E;
+    border: solid 1px #2F2F33;
+    box-shadow: 0 4px 6px rgba(0,0,0,.05), 0 10px 25px rgba(0,0,0,.08);
+    border-radius: 12px;
+    color: white;
 }
 
 .review-wraper {
