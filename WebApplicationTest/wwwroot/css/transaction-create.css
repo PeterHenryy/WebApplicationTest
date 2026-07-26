@@ -262,3 +262,66 @@
     cursor: pointer;
     color: white;
 }
+
+
+.credit-card-form.show {
+    max-height: 400px;
+    opacity: 1;
+    transform: translateY(0);
+    margin-top: 25px;
+}
+
+.credit-card-selector {
+    width: 100%;
+    padding: 14px 18px;
+    margin-bottom: 20px;
+    background: #1C1C1E;
+    color: white;
+    border: 1px solid #3A3A3D;
+    border-radius: 12px;
+    font-family: "Cascadia Mono";
+    font-size: 16px;
+    transition: .25s;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, rgb(231,196,123) 50%), linear-gradient(135deg, rgb(231,196,123) 50%, transparent 50%);
+    background-position: calc(100% - 22px) calc(50% - 3px), calc(100% - 16px) calc(50% - 3px);
+    background-size: 6px 6px;
+    background-repeat: no-repeat;
+}
+
+.credit-card-selector:hover {
+    border-color: rgb(231,196,123);
+}
+
+.credit-card-selector:focus {
+    outline: none;
+    border-color: rgb(231,196,123);
+    box-shadow: 0 0 0 3px rgba(231,196,123,.15);
+}
+
+
+#credit-card-container {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    transform: translateY(-15px);
+    transition: max-height .45s ease, opacity .35s ease, transform .35s ease;
+    pointer-events: none;
+}
+
+#credit-card-container.show {
+    max-height: 800px;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.credit-card-form {
+    overflow: hidden;
+    max-height: 400px;
+    opacity: 1;
+    transition: max-height .35s ease, opacity .25s ease;
+}

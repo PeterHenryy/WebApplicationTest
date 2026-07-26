@@ -9,6 +9,7 @@
         public IEnumerable<CartItem> CartItems { get; set; }
         public IEnumerable<Category> Categories { get; set; }
         public int ItemsBought { get; set; }
+        public CreditCard UserNewCard { get; set; }
 
         public string GetSummaryProductCategory(int? categoryID)
         {

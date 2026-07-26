@@ -29,10 +29,9 @@ namespace WebApplicationTest.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create(bool redirectToTransaction)
+        public IActionResult Create()
         {
             var creditCardVM = new CreditCardViewModel();
-            creditCardVM.RedirectToTransaction = redirectToTransaction;
             return View(creditCardVM);
         }
 
@@ -45,12 +44,7 @@ namespace WebApplicationTest.Controllers
             {
                 _currentUser.HasCreditCard = true;
                 await _userManager.UpdateAsync(_currentUser);
-                if (cardVM.RedirectToTransaction)
-                {
-                    return RedirectToAction("Create", "Transaction");
-                }
                 return RedirectToAction("UserCards", "CreditCard", new { userID = _currentUser.Id });
-
             }
             return View(cardVM.CreditCard);
         }

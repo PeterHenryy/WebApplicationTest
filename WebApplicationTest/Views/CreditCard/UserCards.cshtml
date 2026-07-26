@@ -45,7 +45,7 @@
                                         <td>@card.NameOnCard</td>
                                         <td>@card.CVV</td>
                                         <td>@card.Expiry</td>
-                                        <td> <a class="btn btn-danger" href="@Url.Action("Delete", "CreditCard", new {cardID = card.ID})">Remove</a></td>
+                                        <td> <a class="destructive-action-button" href="@Url.Action("Delete", "CreditCard", new {cardID = card.ID})">Remove</a></td>
                                     </tr>
                                 }
                             </tbody>

@@ -90,9 +90,6 @@
                         <input asp-for="Transaction.State" class="form-input" id="state" placeholder="State" required />
                         <input asp-for="Transaction.Zip" class="form-input" id="zip" placeholder="Zip" required />
                     </div>
-                    @{
-                        var hasCreditCards = Model.UserCards.Count() > 0;
-                    }
                     <div class="payment-methods-container">
                         <label id="payment-method-label" for="Transaction.PaymentType">Choose Payment Method</label>
 
@@ -101,13 +98,40 @@
                                 <input type="radio" class="payment-method-radio js-credit-card-radio" id="creditcard" name="Transaction.PaymentType" value="CreditCard" />
                                 <label class="payment-method" for="creditcard">Credit Card</label>
                             </div>
-                            <div class="credit-card-options">
+                            <div id="credit-card-container">
                                 @if (Model.UserCards.Count() > 0)
                                 {
-                                    <select class="credit-card-selector" id="creditCardSelect" asp-for="ChosenCardID" asp-items="@(new SelectList(Model.UserCards, nameof(CreditCard.ID), nameof(CreditCard.CardNumber)))">
-                                        <option value="" style="display: none;">Select Credit Card</option>
-                                    </select>
+                                    <div class="info-row">
+                                        <select class="credit-card-selector"
+                                                id="creditCardSelect"
+                                                asp-for="ChosenCardID">
+
+                                            <option value="">Use a new card</option>
+
+                                            @foreach (var card in Model.UserCards)
+                                            {
+                                                var last4 = card.CardNumber.Length >= 4
+                                                ? card.CardNumber.Substring(card.CardNumber.Length - 4)
+                                                : card.CardNumber;
+
+                                                <option value="@card.ID">
+                                                    💳 •••• •••• •••• @last4
+                                                </option>
+                                            }
+
+                                        </select>
+                                    </div>
                                 }
+                                <div class="credit-card-form">
+                                    <div class="info-row">
+                                        <input asp-for="UserNewCard.NameOnCard" class="form-input"  placeholder="Name on Card" required />
+                                        <input asp-for="UserNewCard.CardNumber" class="form-input" type="number" placeholder="Card Number" required />
+                                    </div>
+                                    <div class="info-row">
+                                        <input asp-for="UserNewCard.Expiry" class="form-input" style="color: white;" type="date" placeholder="Expiry" required />
+                                        <input asp-for="UserNewCard.CVV" class="form-input"  type="number" maxlength="3" placeholder="CVV" required />
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -131,30 +155,6 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://kit.fontawesome.com/8da1ba04bb.js" crossorigin="anonymous"></script>
     <script src="~/js/transaction.js"></script>
-    <script>
-        document.getElementById('transactionForm').addEventListener('submit', function (event) {
-            const paymentType = document.querySelector('input[name="Transaction.PaymentType"]:checked');
-            const creditCardSelect = document.getElementById('creditCardSelect');
-
-            // Check if a payment method is selected
-            if (!paymentType) {
-                alert('Please select a payment method.');
-                event.preventDefault(); // Prevent form submission
-                return false;
-            }
-
-            // If Credit Card is selected, ensure a card is chosen
-            if (paymentType.value === 'CreditCard') {
-                if (!creditCardSelect || creditCardSelect.value === '') {
-                    alert('Please select a credit card from the dropdown.');
-                    event.preventDefault(); // Prevent form submission
-                    return false;
-                }
-            }
-
-            // If everything is correct, allow form submission
-            return true;
-        });
-    </script>
+   
 </body>
 

@@ -19,15 +19,17 @@ namespace WebApplicationTest.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly ShoppingCartService _shoppingCartService;
         private readonly CouponService _couponService;
+        private readonly CreditCardService _creditCardService;
         private readonly AppUser _currentUser;
 
-        public TransactionController(TransactionService transactionService, UserService userService, UserManager<AppUser> userManager, ShoppingCartService shoppingCartService, CouponService couponService)
+        public TransactionController(TransactionService transactionService, UserService userService, UserManager<AppUser> userManager, ShoppingCartService shoppingCartService, CouponService couponService, CreditCardService creditCardService)
         {
             _transactionService = transactionService;
             _userService = userService;
             _userManager = userManager;
             _shoppingCartService = shoppingCartService;
             _couponService = couponService;
+            _creditCardService = creditCardService;
             _currentUser = userService.GetCurrentUser();
         }
 
@@ -72,9 +74,10 @@ namespace WebApplicationTest.Controllers
             currentTransaction.UserID = _currentUser.Id;
             currentTransaction.ItemsBought = _shoppingCartService.GetItemsBoughtQuantity();
             transactionViewModel.UserCards = _transactionService.GetSpecificUserCards(_currentUser.Id);
-            if (!_currentUser.HasCreditCard)
+            if (transactionViewModel.UserNewCard != null)
             {
-                return RedirectToAction("Create", "CreditCard", new { redirectToTransaction = true });
+                transactionViewModel.UserNewCard.UserID = _currentUser.Id;
+                _creditCardService.Create(transactionViewModel.UserNewCard);
             }
             bool createdTransaction = _transactionService.Create(currentTransaction);
             if (createdTransaction)

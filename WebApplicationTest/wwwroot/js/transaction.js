@@ -1,50 +1,107 @@
 ﻿document.addEventListener("DOMContentLoaded", function () {
-    let form = document.getElementById('transactionForm');
-    let creditCardRadio = document.getElementById('creditcard');
-    let creditCardSelect = document.getElementById('creditCardSelect');
 
-    form.addEventListener('submit', function (event) {
-        // Check if the "Credit Card" radio button is selected
-        if (creditCardRadio.checked) {
-            // Check if a card is selected
-            if (creditCardSelect.value === "" || creditCardSelect.value === null) {
-                // Prevent form submission
-                event.preventDefault();
-                alert("Please select a credit card.");
+    const form = document.getElementById("transactionForm");
+
+    const creditRadio = document.getElementById("creditcard");
+    const selector = document.getElementById("creditCardSelect");
+
+    const container = document.getElementById("credit-card-container");
+    const cardForm = document.querySelector(".credit-card-form");
+
+    //----------------------------------------------------
+    // Updates the credit card UI
+    //----------------------------------------------------
+    function updatePaymentUI() {
+
+        // Credit Card NOT selected
+        if (!creditRadio.checked) {
+
+            container.classList.remove("show");
+
+            if (cardForm) {
+                cardForm.querySelectorAll("input").forEach(input => {
+                    input.required = false;
+                });
             }
+
+            return;
         }
-    });
-});
 
-$(document).ready(function () {
-    $('#transactionForm').on('submit', function (event) {
-        let selectedPaymentMethod = $('input[name="Transaction.PaymentType"]:checked').val();
-        let transactionTotalRaw = $('#transactionTotal').val();
+        // Credit Card selected
+        container.classList.add("show");
 
-        let transactionTotal = transactionTotalRaw.replace(',', '.');
+        if (!selector || !cardForm)
+            return;
 
+        // User selected an existing card
+        if (selector.value !== "") {
 
-        let parsedTransactionTotal = parseFloat(transactionTotal);
+            cardForm.style.opacity = "0";
+            cardForm.style.maxHeight = "0";
 
-        if (selectedPaymentMethod === 'RewardPoints') {
-            event.preventDefault(); 
-
-            $.ajax({
-                url: '/Transaction/CheckRewardPoints', 
-                type: 'GET',
-                data: { transactionTotal: parsedTransactionTotal }, 
-                success: function (response) {
-                    if (response.success) {
-                        // Proceed with form submission
-                        $('#transactionForm').off('submit').submit();
-                    } else {
-                        alert('You do not have enough reward points for this purchase! You can check how many reward points you have by looking to the right of your name in the website header!');
-                    }
-                },
-                error: function () {
-                    alert('An error occurred while checking reward points.');
-                }
+            cardForm.querySelectorAll("input").forEach(input => {
+                input.required = false;
             });
+
         }
+        // User wants to use a new card
+        else {
+
+            cardForm.style.opacity = "1";
+            cardForm.style.maxHeight = "400px";
+
+            cardForm.querySelectorAll("input").forEach(input => {
+                input.required = true;
+            });
+
+        }
+
+    }
+
+    //----------------------------------------------------
+    // Payment method changed
+    //----------------------------------------------------
+    document.querySelectorAll(".payment-method-radio")
+        .forEach(radio => {
+            radio.addEventListener("change", updatePaymentUI);
+        });
+
+    //----------------------------------------------------
+    // Saved card changed
+    //----------------------------------------------------
+    if (selector) {
+        selector.addEventListener("change", updatePaymentUI);
+    }
+
+    //----------------------------------------------------
+    // Validate before submitting
+    //----------------------------------------------------
+    form.addEventListener("submit", function (event) {
+
+        const selectedPayment =
+            document.querySelector('input[name="Transaction.PaymentType"]:checked');
+
+        if (!selectedPayment) {
+            event.preventDefault();
+            alert("Please choose a payment method.");
+            return;
+        }
+
+        if (selectedPayment.value === "CreditCard") {
+
+            // Saved card selected -> OK
+            if (selector && selector.value !== "")
+                return;
+
+            // New card selected -> browser validates required fields
+        }
+
     });
+
+    //----------------------------------------------------
+    // Initial page state
+    //----------------------------------------------------
+    updatePaymentUI();
+
+  
 });
