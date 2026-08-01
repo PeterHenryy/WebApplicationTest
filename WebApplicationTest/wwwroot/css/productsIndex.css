@@ -34,7 +34,6 @@
 
 .product-h1 {
     text-align: center;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     margin-right: 5px;
     margin-left: 5px;
     font-size: 50px;
@@ -59,7 +58,6 @@
 .product-card {
     flex: 0 0 auto;
     scroll-snap-align: start;
-    font-family: 'Cascadia Mono';
     padding-bottom: 15px;
     overflow: visible;
     background: #1C1C1E;

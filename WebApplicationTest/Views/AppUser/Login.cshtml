@@ -5,6 +5,9 @@
 
 <link rel="stylesheet" href="~/css/loginForm.css" />
 <link rel="stylesheet" href="~/css/general.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <div class="login-form-container">
     <div class="logo-container">
@@ -24,7 +27,13 @@
         <input type="text" placeholder="Username" asp-for="Username" required />
         <input type="password" placeholder="Password" asp-for="Password" required />
 
-        <div asp-validation-summary="All" class="error-login"></div>
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="error-login-container">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <div asp-validation-summary="All" class="error-login"></div>
+            </div>
+        }
 
         <button type="submit">Login</button>
 
@@ -34,6 +43,7 @@
     </form>
 </div>
 
+<script src="https://kit.fontawesome.com/8da1ba04bb.js" crossorigin="anonymous"></script>
 <script>
     function setAdminLoginAndSubmit() {
         document.getElementById('adminLogin').value = 'true';

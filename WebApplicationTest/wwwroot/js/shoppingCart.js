@@ -146,13 +146,19 @@ function removeFromCart(itemID, productName) {
     cartProductElement.remove();
     const cartProducts = document.querySelectorAll('.cart-product');
     if (cartProducts.length === 0) {
-        const orderElement = document.querySelector('.order-summary-container');
-        if (orderElement) {
-            orderElement.remove();
-        }
-        setTimeout(() => {
-            window.location.href = "https://localhost:44369/ShoppingCart/DisplayCartItems";
-        }, 1500);
+
+        const orderSummaryContainer = document.querySelector('.order-summary-container');
+        orderSummaryContainer.remove();
+        document.getElementById("redirect-overlay").classList.add("show");
+
+        $.ajax({
+            url: "/ShoppingCart/ClearCart",
+            type: "POST",
+            success: function () {
+                location.reload();
+            }
+        });
+
     }
     else {
         updateItemQuantityHTML(itemID);

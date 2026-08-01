@@ -8,7 +8,6 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    font-family: 'Segoe UI', Arial, sans-serif;
 }
 
 .logo-container{
@@ -111,12 +110,38 @@ button:hover,
     background: rgba(231,196,123,.1);
 }
 
-.error-login {
-    color: #ff7d7d;
-    font-weight: 600;
-    text-align: center;
-    margin-bottom: 20px;
+.error-login-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    margin-bottom: 24px;
+    background: rgba(255, 85, 85, .08);
+    border: 1px solid rgba(255, 85, 85, .20);
+    border-radius: 12px;
 }
+
+    .error-login-container i {
+        color: #ff7d7d;
+        font-size: 20px;
+        flex-shrink: 0;
+    }
+
+.error-login {
+    flex: 1;
+}
+
+    .error-login ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .error-login li {
+        color: #ffb5b5;
+        font-weight: 600;
+        margin: 0;
+    }
 
 .login-subtitle {
     text-align: center;

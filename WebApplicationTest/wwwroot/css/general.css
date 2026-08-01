@@ -1,8 +1,10 @@
 ﻿html, body {
-    height: 100%; 
-    margin: 0; 
-    background-color: #121212
+    height: 100%;
+    margin: 0;
+    background-color: #121212;
+    font-family: 'Outfit', sans-serif !important;
 }
+
 
 .div-flex{
     display: flex;
@@ -154,7 +156,6 @@ table.dataTable tbody th, table.dataTable tbody td
 
 .refund-reason-form p {
     color: white;
-    font-family: 'Cascadia Mono';
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 15px;
@@ -167,7 +168,6 @@ table.dataTable tbody th, table.dataTable tbody td
     color: white;
     border: 1px solid #4b3d22;
     border-radius: 8px;
-    font-family: 'Cascadia Mono';
     font-size: 16px;
     transition: .25s ease;
     margin-bottom: 15px;
@@ -197,7 +197,6 @@ table.dataTable tbody th, table.dataTable tbody td
     color: white;
     border: 1px solid #4b3d22;
     border-radius: 8px;
-    font-family: 'Cascadia Mono';
     resize: vertical;
     transition: .25s ease;
     margin-bottom: 15px;

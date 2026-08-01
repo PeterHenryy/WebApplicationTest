@@ -4,8 +4,6 @@
     display: flex;
     justify-content: center;
     margin-bottom: 30px;
-    font-family: Arial;
-   
     z-index: 9999;
     position: relative;
 }
@@ -216,7 +214,6 @@
     border-radius: 5px;
     font-size: 16px;
     box-sizing: border-box;
-    font-family: Arial;
     background: #222;
     color: white;
     border: 1px solid #3a3a3a;
@@ -225,6 +222,7 @@
 .search-input::placeholder {
     color: #9a9a9a;
     font-weight: bold;
+    font-size: 16px;
 }
 
 .search-button {
