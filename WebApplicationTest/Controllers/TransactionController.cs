@@ -8,6 +8,7 @@ using WebApplicationTest.Models.ViewModels;
 using WebApplicationTest.Helpers.Enums;
 using WebApplicationTest.Helpers;
 using System.Globalization;
+using Microsoft.CodeAnalysis;
 
 namespace WebApplicationTest.Controllers
 {
@@ -20,9 +21,10 @@ namespace WebApplicationTest.Controllers
         private readonly ShoppingCartService _shoppingCartService;
         private readonly CouponService _couponService;
         private readonly CreditCardService _creditCardService;
+        private readonly ProductService _productService;
         private readonly AppUser _currentUser;
 
-        public TransactionController(TransactionService transactionService, UserService userService, UserManager<AppUser> userManager, ShoppingCartService shoppingCartService, CouponService couponService, CreditCardService creditCardService)
+        public TransactionController(TransactionService transactionService, UserService userService, UserManager<AppUser> userManager, ShoppingCartService shoppingCartService, CouponService couponService, CreditCardService creditCardService, ProductService productService)
         {
             _transactionService = transactionService;
             _userService = userService;
@@ -30,6 +32,7 @@ namespace WebApplicationTest.Controllers
             _shoppingCartService = shoppingCartService;
             _couponService = couponService;
             _creditCardService = creditCardService;
+            _productService = productService;
             _currentUser = userService.GetCurrentUser();
         }
 
@@ -74,8 +77,15 @@ namespace WebApplicationTest.Controllers
             currentTransaction.UserID = _currentUser.Id;
             currentTransaction.ItemsBought = _shoppingCartService.GetItemsBoughtQuantity();
             transactionViewModel.UserCards = _transactionService.GetSpecificUserCards(_currentUser.Id);
-            if (transactionViewModel.UserNewCard != null)
+            if (currentTransaction.PaymentType == "CreditCard" && transactionViewModel.ChosenCardID == null)
             {
+                var validationError = _creditCardService.ValidateCreditCard(transactionViewModel.UserNewCard, currentTransaction.TransactionDate);
+
+                if (validationError != null)
+                {
+                    ModelState.AddModelError("", validationError);
+                    return View(transactionViewModel);
+                }
                 transactionViewModel.UserNewCard.UserID = _currentUser.Id;
                 _creditCardService.Create(transactionViewModel.UserNewCard);
             }
@@ -132,6 +142,8 @@ namespace WebApplicationTest.Controllers
             {
                 transactionItemsVM.Discount = _transactionService.GetCouponDiscount(transaction.CouponPercentage, transaction.Total);
             }
+            transactionItemsVM.Reviews = _productService.GetReviews();
+            transactionItemsVM.CurrentUser = _currentUser;
             return View(transactionItemsVM);
         }
 

@@ -100,6 +100,78 @@
                         </h1>
                         <a class="add-product-btn" href="@Url.Action("Create", "Product")"> <i class="fa-solid fa-plus"></i>Add a New Product</a>
                     </div>
+                    <div class="products-stats">
+
+                        <div class="stat-card">
+                            <div class="stat-icon active">
+                                <i class="fa-solid fa-coins"></i>
+                            </div>
+
+                            <div class="stat-info">
+                                <span class="stat-number">
+                                    @Model.Products.Sum(x => x.Price).ToString("C")
+                                </span>
+                                <span class="stat-label">Inventory Value</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fa-solid fa-boxes-stacked"></i>
+                            </div>
+
+                            <div class="stat-info">
+                                <span class="stat-number">@Model.Products.Count()</span>
+                                <span class="stat-label">Products</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon active">
+                                <i class="fa-solid fa-circle-check"></i>
+                            </div>
+
+                            <div class="stat-info">
+                                <span class="stat-number">
+                                    @Model.Products.Count(x => !x.Archived)
+                                </span>
+                                <span class="stat-label">Active</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon archived">
+                                <i class="fa-solid fa-box-archive"></i>
+                            </div>
+
+                            <div class="stat-info">
+                                <span class="stat-number">
+                                    @Model.Products.Count(x => x.Archived)
+                                </span>
+                                <span class="stat-label">Archived</span>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon active">
+                                <i class="fa-solid fa-star"></i>
+                            </div>
+
+                            <div class="stat-info">
+                                <span class="stat-number">
+                                    @{
+                                        double productAvgRating = Model.Products.Any()
+                                        ? Model.Products.Average(x => x.AverageRating)
+                                        : 0;
+                                        double roundedRating = Math.Round(productAvgRating, 2);
+                                    }
+                                    @roundedRating
+                                </span>
+                                <span class="stat-label">Avg. Product Rating</span>
+                            </div>
+                        </div>
+
+                    </div>
                     <div class="products-display-grid">
                     
                         @{

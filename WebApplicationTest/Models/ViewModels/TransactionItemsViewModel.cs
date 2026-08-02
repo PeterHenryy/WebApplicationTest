@@ -1,4 +1,7 @@
-﻿namespace WebApplicationTest.Models.ViewModels
+﻿using Microsoft.CodeAnalysis;
+using WebApplicationTest.Models.Identity;
+
+namespace WebApplicationTest.Models.ViewModels
 {
     public class TransactionItemsViewModel
     {
@@ -13,5 +16,15 @@
             return refundExists;
         }
         public string Discount { get; set; }
+        public IEnumerable<Review> Reviews { get; set; }
+        public bool HasUserReviewedProduct(int? productID, int userID)
+        {
+            return Reviews.Any(x => x.ProductID == productID && x.UserID == userID);
+        }
+        public AppUser CurrentUser { get; set; }
+        public Review Review { get; set; }
+
+
+
     }
 }

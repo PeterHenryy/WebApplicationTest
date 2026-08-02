@@ -43,8 +43,11 @@
                             <tbody>
                                 @foreach (var card in @Model)
                                 {
+                                    var last4 = card.CardNumber.Length >= 4
+                                    ? card.CardNumber.Substring(card.CardNumber.Length - 4)
+                                    : card.CardNumber;
                                     <tr>
-                                        <td>@card.CardNumber</td>
+                                        <td>💳 •••• •••• •••• @last4</td>
                                         <td>@card.NameOnCard</td>
                                         <td>@card.CVV</td>
                                         <td>@card.Expiry</td>

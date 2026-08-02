@@ -101,7 +101,7 @@ function updateItemQuantityHTML(productID) {
 function updateProductTotalPrice(productID, itemQuantity, price) {
     const productTotalElement = document.querySelector(`.js-product-total-${productID}`);
     const productTotal = itemQuantity * parseFloat(price);
-    productTotalElement.innerHTML = productTotal;
+    productTotalElement.innerHTML = productTotal.toFixed(2);
 }
 
 function resetDropdown(selectElement) {

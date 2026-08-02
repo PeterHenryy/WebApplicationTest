@@ -14,6 +14,7 @@
         const refundSelect = $(this).closest('.cart-product').find('.refund-reason-select');
         refundSelect.slideToggle("slow");
     });
+
 });
 
 // Submit form function

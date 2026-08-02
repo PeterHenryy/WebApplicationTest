@@ -1,5 +1,6 @@
 ﻿using WebApplicationTest.Models.Repositories;
 using WebApplicationTest.Models;
+using WebApplicationTest.Models.ViewModels;
 
 namespace WebApplicationTest.Services
 {
@@ -41,5 +42,46 @@ namespace WebApplicationTest.Services
             var deletedCard = _creditCardRepos.Delete(cardID);
             return deletedCard;
         }
+
+
+        public string? ValidateCreditCard(CreditCard card, DateTime transactionDate)
+        {
+            if (string.IsNullOrWhiteSpace(card.NameOnCard))
+                return "Name on card is required.";
+
+            if (card.NameOnCard.Length < 3)
+                return "Name on card is too short.";
+
+            if (card.NameOnCard.Any(char.IsDigit))
+                return "Name on card cannot contain numbers.";
+
+            if (string.IsNullOrWhiteSpace(card.CardNumber))
+                return "Please enter the card number.";
+
+            var number = card.CardNumber.Replace(" ", "");
+
+            if (!number.All(char.IsDigit))
+                return "Card number must contain only digits.";
+
+            if (number.Length != 16)
+                return "Card number must contain exactly 16 digits.";
+
+            if (card.CVV == 0)
+                return "Please enter the CVV.";
+
+            string cvv = card.CVV.ToString();
+
+            if (!cvv.All(char.IsDigit))
+                return "CVV must contain only digits.";
+
+            if (cvv.Length != 3)
+                return "CVV must contain exactly 3 digits.";
+
+            if (card.Expiry < new DateOnly(transactionDate.Year, transactionDate.Month, 1))
+                return "This credit card has expired.";
+
+            return null;
+        }
+    
     }
 }
