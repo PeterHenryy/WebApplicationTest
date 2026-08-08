@@ -4,10 +4,10 @@
     {
         public Transaction Transaction { get; set; }
         public double TransactionTax { get; set; }
-        public List<CreditCard> UserCards { get; set; }
+        public List<CreditCard>? UserCards { get; set; }
         public int? ChosenCardID { get; set; }
-        public IEnumerable<CartItem> CartItems { get; set; }
-        public IEnumerable<Category> Categories { get; set; }
+        public IEnumerable<CartItem>? CartItems { get; set; }
+        public IEnumerable<Category>? Categories { get; set; }
         public int ItemsBought { get; set; }
         public CreditCard UserNewCard { get; set; }
 

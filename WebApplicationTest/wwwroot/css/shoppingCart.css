@@ -220,9 +220,13 @@
     text-align: center;
 }
 
+.clear-cart-button{
+    width: 100%;
+}
+
 .remove-item-button:hover,
 .clear-cart-button:hover,
-.refund-button:hover{
+.refund-button:hover {
     background: rgba(170, 55, 65, .25);
     border-color: #cf5f69;
     color: #f3a0a8;

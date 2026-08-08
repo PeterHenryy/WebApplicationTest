@@ -77,8 +77,15 @@ namespace WebApplicationTest.Services
             if (cvv.Length != 3)
                 return "CVV must contain exactly 3 digits.";
 
-            if (card.Expiry < new DateOnly(transactionDate.Year, transactionDate.Month, 1))
+            var currentMonth = new DateTime(
+                transactionDate.Year,
+                transactionDate.Month,
+                1);
+
+            if (card.Expiry < currentMonth)
+            {
                 return "This credit card has expired.";
+            }
 
             return null;
         }

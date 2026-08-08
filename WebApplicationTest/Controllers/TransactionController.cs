@@ -49,23 +49,16 @@ namespace WebApplicationTest.Controllers
         {
             var transactionViewModel = new TransactionViewModel();
             transactionViewModel.Transaction = new Transaction();
-            transactionViewModel.UserCards = _transactionService.GetSpecificUserCards(_currentUser.Id);
-            if (!_currentUser.HasCreditCard)
-            {
-                return RedirectToAction("Create", "CreditCard", new {redirectToTransaction = true});
-            }
             Transaction currentTransaction = transactionViewModel.Transaction;
-            double cartTotal = _shoppingCartService.CalculateCartTotal();
             IEnumerable<CartItem> cartItems = _shoppingCartService.GetCartItems();
-            _transactionService.CalculateTransactionTotal(cartTotal, currentTransaction, cartItems);
             if (!String.IsNullOrEmpty(couponCode))
             {
                 _couponService.ValidateCoupon(currentTransaction, cartItems, couponCode);
             }
             transactionViewModel.CartItems = cartItems;
-            transactionViewModel.Categories = _transactionService.GetCategories();
-            transactionViewModel.ItemsBought = _shoppingCartService.GetItemsBoughtQuantity();
-            transactionViewModel.TransactionTax = _transactionService.CalculateTransactionTax(cartTotal);
+            double cartTotal = _shoppingCartService.CalculateCartTotal();
+            _transactionService.PopulateViewModel(transactionViewModel, _currentUser.Id, cartTotal);
+            _transactionService.CalculateTransactionTotal(cartTotal, currentTransaction, cartItems);
             currentTransaction.Total += transactionViewModel.TransactionTax;
             return View(transactionViewModel);
         }
@@ -83,6 +76,9 @@ namespace WebApplicationTest.Controllers
 
                 if (validationError != null)
                 {
+                    double cartTotal = _shoppingCartService.CalculateCartTotal();
+                    _transactionService.PopulateViewModel(transactionViewModel, _currentUser.Id, cartTotal);
+                    transactionViewModel.CartItems = _shoppingCartService.GetCartItems();
                     ModelState.AddModelError("", validationError);
                     return View(transactionViewModel);
                 }

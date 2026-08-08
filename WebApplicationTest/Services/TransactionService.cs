@@ -2,16 +2,21 @@
 using WebApplicationTest.Models.Repositories;
 using WebApplicationTest.Models;
 using System.Globalization;
+using WebApplicationTest.Models.ViewModels;
 
 namespace WebApplicationTest.Services
 {
     public class TransactionService
     {
         private readonly TransactionRepository _transactionRepos;
+        private readonly ShoppingCartService _shoppingCartService;
+        private readonly CouponService _couponService;
 
-        public TransactionService(TransactionRepository transactionRepos)
+        public TransactionService(TransactionRepository transactionRepos, ShoppingCartService shoppingCartService, CouponService couponService)
         {
             _transactionRepos = transactionRepos;
+            _shoppingCartService = shoppingCartService;
+            _couponService = couponService;
         }
 
         public bool Create(Transaction transaction)
@@ -142,5 +147,15 @@ namespace WebApplicationTest.Services
             var formattedDiscount = roundedDiscount.ToString("F2", CultureInfo.InvariantCulture);
             return formattedDiscount;
         }
+
+        public void PopulateViewModel(TransactionViewModel transactionViewModel, int userID, double cartTotal)
+        {
+            transactionViewModel.UserCards = GetSpecificUserCards(userID);
+            transactionViewModel.Categories = GetCategories();
+            transactionViewModel.ItemsBought = _shoppingCartService.GetItemsBoughtQuantity();
+            transactionViewModel.TransactionTax = CalculateTransactionTax(cartTotal);
+        }
+
+       
     }
 }

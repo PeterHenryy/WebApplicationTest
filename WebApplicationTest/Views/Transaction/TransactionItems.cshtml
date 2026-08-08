@@ -108,13 +108,14 @@
                             </div>
                         }
                         <div>
-                            <button id="review-button-@item.ProductID" class="gold-button review-button" style="padding: 10px 18px;">Add Review</button>
+                            <button id="review-button-@item.ProductID" class="gold-button review-button review-button-toggle" style="padding: 10px 18px;" onclick="showReviewForm(@item.ProductID, this)"><i class="fa-solid fa-star"></i>Add Review</button>
                         </div>
+                        @* @if (!Model.HasUserReviewedProduct(item.ProductID, Model.CurrentUser.Id)) *@
                         @if (true)
                         {
-                            <div class="reviews-box">
-                            
-                                <form id="reviewForm" asp-controller="Review" asp-action="Create">
+                            <div class="review-form-container" id="review-form-@item.ProductID">
+
+                                <form asp-controller="Review" asp-action="Create" id="review-form-submit-@item.ProductID">
 
                                     <div class="review-radios">
                                         <label>Rate your experience with this product:</label>

@@ -29,3 +29,32 @@ function submitForm(button) {
     // Submit the form
     refundForm.submit();
 }
+
+function showReviewForm(productID, button) {
+
+    const reviewForm = document.getElementById(`review-form-${productID}`);
+
+    if (!reviewForm)
+        return;
+
+    const isOpen = reviewForm.classList.contains("show");
+
+    if (isOpen) {
+        // Close the form
+        reviewForm.classList.remove("show");
+
+        button.innerHTML = `
+            <i class="fa-solid fa-star"></i>
+            Add Review
+        `;
+    }
+    else {
+        // Open the form
+        reviewForm.classList.add("show");
+
+        button.innerHTML = `
+            <i class="fa-solid fa-xmark"></i>
+            Close Review
+        `;
+    }
+}
