@@ -9,6 +9,7 @@
 <link href="~/css/general.css" rel="stylesheet" />
 <link href="~/css/create-coupon.css" rel="stylesheet" />
 <link href="~/css/footer.css" rel="stylesheet" />
+<link href="~/css/forms.css" rel="stylesheet" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -17,37 +18,41 @@
     <partial name="_HeaderPartial" />
 </header>
 
-<div class="container shadow p-3 mb-5 bg-white rounded">
-    <form asp-controller="Coupon" asp-action="Create">
-        <input type="text" hidden value="true" asp-for="Coupon.Active" />
+<div class="form-outer-container">
+    <div class="form-container">
 
-        <div class="form-group col-md-12">
-            <label for="inputEmail4">Code</label>
-            <input type="text" class="form-control" placeholder="Code" asp-for="Coupon.Code" required>
-        </div>
-        <div class="form-group col-md-12">
-            <label for="inputPassword4">Percentage Discount</label>
-            <input type="number" value="1" min="1" class="form-control" placeholder="Discount Percentage" asp-for="Coupon.DiscountPercentage">
-        </div>
-        <div class="form-group col-md-12">
-            <label for="inputPassword4">Quantity</label>
-            <input type="number" value="1" min="1" class="form-control" placeholder="Quantity" asp-for="Coupon.Quantity">
-        </div>
+        <form asp-controller="Coupon" asp-action="Create">
+            <input type="text" hidden value="true" asp-for="Coupon.Active" />
 
-        <div class="buttons-box">
-            <select style="font-size: 20px; background-color: black;" class="btn btn-info" id="coupon-button"  asp-for="Coupon.ProductID"
-                    asp-items="@(new SelectList(Model.Products, nameof(Product.ID), nameof(Product.Name)))">
-                <option>Add Coupon to a Product</option>
-            </select>
-            <select style="font-size: 20px; background-color: black;" class="btn btn-primary" id="coupon-button" asp-for="Coupon.CategoryID"
-                    asp-items="@(new SelectList(Model.Categories, nameof(Category.ID), nameof(Category.Name)))">
-                <option>Add Coupon to a Category</option>
-            </select>
-        </div>
-        <div class="create-button-container">
-            <button type="submit" class="btn btn-success create-coupon" style="background-color: deepskyblue; border: none;">Create Coupon</button>
-        </div>
-    </form>
+            <div class="form-group col-md-12">
+                <label for="inputEmail4">Code</label>
+                <input type="text" class="form-input" placeholder="Code" asp-for="Coupon.Code" required>
+            </div>
+            <div class="form-group col-md-12">
+                <label for="inputPassword4">Percentage Discount</label>
+                <input type="number" value="1" min="1" class="form-input" placeholder="Percentage Discount" asp-for="Coupon.DiscountPercentage">
+            </div>
+            <div class="form-group col-md-12">
+                <label for="inputPassword4">Quantity</label>
+                <input type="number" value="1" min="1" class="form-input" placeholder="Quantity" asp-for="Coupon.Quantity">
+            </div>
+            <div class="form-select-container">
+
+                <select class="select-category-button" id="coupon-button" asp-for="Coupon.ProductID"
+                        asp-items="@(new SelectList(Model.Products, nameof(Product.ID), nameof(Product.Name)))">
+                    <option>Add Coupon to a Product</option>
+                </select>
+                <select class="select-category-button" id="coupon-button" asp-for="Coupon.CategoryID"
+                        asp-items="@(new SelectList(Model.Categories, nameof(Category.ID), nameof(Category.Name)))">
+                    <option>Add Coupon to a Category</option>
+                </select>
+            </div>
+        
+            <div class="button-container" style="margin-top: 50px;">
+                <button type="submit" class="form-button">Add Coupon</button>
+            </div>
+        </form>
+    </div>
 </div>
 <partial name="_FooterPartial" />
 

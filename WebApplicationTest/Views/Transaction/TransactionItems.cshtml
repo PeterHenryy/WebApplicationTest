@@ -33,158 +33,161 @@
                     <a href="@Url.Action("Details", "Product", new {productID = item.ProductID})" style="text-decoration: none; color: black">
                         <img src="~/Img/@item.Product.Image" class="cart-product-image">
                     </a>
-                    <a href="@Url.Action("Details", "Product", new {productID = item.ProductID})" style="text-decoration: none; color: black">
-
-                        <div class="cart-product-info">
-                            <p class="cart-product-name">@item.Product.Name</p>
-                            <div class="cart-product-rating">
-                                @for (int i = 1; i <= 5; i++)
+                    <div class="cart-product-info">
+                        <p class="cart-product-name">@item.Product.Name</p>
+                        <div class="cart-product-rating">
+                            @for (int i = 1; i <= 5; i++)
+                            {
+                                if (i <= @item.Product.AverageRating)
                                 {
-                                    if (i <= @item.Product.AverageRating)
-                                    {
-                                        <i class="fa-solid fa-star fa-sm" style="color: #29db47;"></i>
-                                    }
-                                    else if (@item.Product.AverageRating >= (i - 1) + 0.5 && @item.Product.AverageRating < i)
-                                    {
-                                        <i class="fa-solid fa-star-half-stroke fa-sm" style="color: #29db47;"></i>
-                                    }
-                                    else
-                                    {
-                                        <i class="fa-regular fa-star fa-sm star-icon"></i>
-                                    }
+                                    <i class="fa-solid fa-star fa-sm" style="color: #29db47;"></i>
                                 }
-                            </div>
+                                else if (@item.Product.AverageRating >= (i - 1) + 0.5 && @item.Product.AverageRating < i)
+                                {
+                                    <i class="fa-solid fa-star-half-stroke fa-sm" style="color: #29db47;"></i>
+                                }
+                                else
+                                {
+                                    <i class="fa-regular fa-star fa-sm star-icon"></i>
+                                }
+                            }
                         </div>
-                    </a>
-
+                    </div>
+                 
                     <div>
                         <p style="margin-bottom: 10px;">Delivery Chosen:</p>
                         <p>@item.ShippingOption</p>
                     </div>
+                    <div class="info-and-buttons">
 
-                    <div class="item-quantity-and-price">
-                        <div class="quantity-container">
-                            <p style="margin-bottom: 5px;">Quantity Bought: @item.Quantity</p>
-                        </div>
-
-                        <div class="prices-container">
-                            @{
-                                double productTotalPrice = @item.Product.Price * @item.Quantity;
-                                string formattedTotalPrice = productTotalPrice.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
-                                double productPrice = item.Product.Price;
-                                string formattedPrice = productPrice.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
-                            }
-                            <span class="cart-product-price">$@formattedPrice each</span>
-                        </div>
-                        <span class="cart-product-total-price ">Total: $<span class="product-total js-product-total-@item.ProductID">@formattedTotalPrice</span></span>
-                        @if (!Model.HasRequestedRefund(item.ID))
-                        {
-                            <div>
-                                <button id="refund-button-@item.ID" class="refund-button">Refund Item</button>
+                        <div class="item-quantity-and-price">
+                            <div class="quantity-container">
+                                <p style="margin-bottom: 5px;">Quantity Bought: @item.Quantity</p>
                             </div>
-                            <div class="refund-reason-select" style="display: none;" id="refund-reason-select-@item.ID">
-                                <form asp-controller="Refund" asp-action="Create" class="refund-reason-form">
-                                    <input type="hidden" value="@item.TransactionID" asp-for="@Model.Refund.TransactionID" />
-                                    <input type="hidden" value="@item.ProductID" asp-for="@Model.Refund.ProductID" />
-                                    <input type="hidden" value="@item.ID" asp-for="@Model.Refund.TransactionItemID" />
-                                    <p>Select a reason for your refund</p>
-                                    <select asp-for="@Model.Refund.Reason" class="reason-select">
-                                        @{
-                                            var refundReasons = RefundReasons.Reasons;
-                                        }
-                                        @for (int i = 0; i < refundReasons.Count(); i++)
-                                        {
-                                            <option value="@refundReasons[i]">@refundReasons[i]</option>
-                                        }
-                                    </select>
 
-                                    <div class="customReasonInput form-row" style="display:none;">
-                                        <textarea style="width: 100%; margin-top: 15px; padding: 15px;" asp-for="@Model.Refund.Reason" placeholder="Enter your custom reason"></textarea>
-                                    </div>
+                            <div class="prices-container">
+                                @{
+                                    double productTotalPrice = @item.Product.Price * @item.Quantity;
+                                    string formattedTotalPrice = productTotalPrice.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
+                                    double productPrice = item.Product.Price;
+                                    string formattedPrice = productPrice.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
+                                }
+                                <span class="cart-product-price">$@formattedPrice each</span>
+                            </div>
+                            <span class="cart-product-total-price ">Total: $<span class="product-total js-product-total-@item.ProductID">@formattedTotalPrice</span></span>
+
+                        </div>
+                        <div class="review-refund-buttons">
+
+                                @if (!Model.HasRequestedRefund(item.ID))
+                                {
                                     <div>
-                                        <button class="refund-button" type="submit"  onclick="submitForm(this)">Request Refund</button>
+                                        <button id="refund-button-@item.ID" class="refund-button">Refund Item</button>
                                     </div>
-                                </form>
-                            </div>
-                        }
-                        <div>
-                            <button id="review-button-@item.ProductID" class="gold-button review-button review-button-toggle" style="padding: 10px 18px;" onclick="showReviewForm(@item.ProductID, this)"><i class="fa-solid fa-star"></i>Add Review</button>
+                                    <div class="refund-reason-select" style="display: none;" id="refund-reason-select-@item.ID">
+                                        <form asp-controller="Refund" asp-action="Create" class="refund-reason-form">
+                                            <input type="hidden" value="@item.TransactionID" asp-for="@Model.Refund.TransactionID" />
+                                            <input type="hidden" value="@item.ProductID" asp-for="@Model.Refund.ProductID" />
+                                            <input type="hidden" value="@item.ID" asp-for="@Model.Refund.TransactionItemID" />
+                                            <p>Select a reason for your refund</p>
+                                            <select asp-for="@Model.Refund.Reason" class="reason-select">
+                                                @{
+                                                    var refundReasons = RefundReasons.Reasons;
+                                                }
+                                                @for (int i = 0; i < refundReasons.Count(); i++)
+                                                {
+                                                    <option value="@refundReasons[i]">@refundReasons[i]</option>
+                                                }
+                                            </select>
+
+                                            <div class="customReasonInput form-row" style="display:none;">
+                                                <textarea style="width: 100%; margin-top: 15px; padding: 15px;" asp-for="@Model.Refund.Reason" placeholder="Enter your custom reason"></textarea>
+                                            </div>
+                                            <div>
+                                                <button class="refund-button" type="submit"  onclick="submitForm(this)">Request Refund</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                }
+                                @if (!Model.HasUserReviewedProduct(item.ProductID, Model.CurrentUser.Id)) 
+                                {
+                                    <div>
+                                        <button id="review-button-@item.ProductID" class="gold-button review-button review-button-toggle" style="padding: 10px 18px;" onclick="showReviewForm(@item.ProductID, this)"><i class="fa-solid fa-star"></i>Add Review</button>
+                                    </div>
+                                    <div class="review-form-container" id="review-form-@item.ProductID">
+
+                                        <form asp-controller="Review" asp-action="Create" id="review-form-submit-@item.ProductID">
+
+                                            <div class="review-radios">
+                                                <label>Rate your experience with this product:</label>
+
+                                                <div class="star-rating">
+
+                                                    <input type="radio" asp-for="@Model.Review.Rating" id="star5" value="5" required />
+                                                    <label for="star5">
+                                                        <i class="fa-regular fa-star fa-sm"></i>
+                                                    </label>
+
+                                                    <input type="radio" asp-for="@Model.Review.Rating" id="star4" value="4" />
+                                                    <label for="star4">
+                                                        <i class="fa-regular fa-star fa-sm"></i>
+                                                    </label>
+
+                                                    <input type="radio" asp-for="@Model.Review.Rating" id="star3" value="3" />
+                                                    <label for="star3">
+                                                        <i class="fa-regular fa-star fa-sm"></i>
+                                                    </label>
+
+                                                    <input type="radio" asp-for="@Model.Review.Rating" id="star2" value="2" />
+                                                    <label for="star2">
+                                                        <i class="fa-regular fa-star fa-sm"></i>
+                                                    </label>
+
+                                                    <input type="radio" asp-for="@Model.Review.Rating" id="star1" value="1" />
+                                                    <label for="star1">
+                                                        <i class="fa-regular fa-star fa-sm"></i>
+                                                    </label>
+
+                                                </div>
+                                            </div>
+
+                                            <input type="hidden"
+                                                    value="@item.ProductID"
+                                                    asp-for="Review.ProductID" />
+
+                                            <div class="user">
+
+                                                @if (Model.CurrentUser.ProfilePicture == "user-solid.svg")
+                                                {
+                                                    <img class="user-profile-picture"
+                                                            src="~/icons/user-solid.svg" />
+                                                }
+                                                else
+                                                {
+                                                    <img class="user-profile-picture"
+                                                            src="@Model.CurrentUser.ProfilePicture" />
+                                                }
+
+                                                <textarea id="reviewBody"
+                                                            class="form-input"
+                                                            asp-for="Review.Body"
+                                                            placeholder="Tell other customers what you thought about this product..."
+                                                            required></textarea>
+
+                                            </div>
+
+                                            <button type="submit" class="gold-button review-button">
+                                                <i class="fa-solid fa-paper-plane"></i>
+                                                Submit Review
+                                            </button>
+
+                                        </form>
+                                    </div>
+                                }
                         </div>
-                        @* @if (!Model.HasUserReviewedProduct(item.ProductID, Model.CurrentUser.Id)) *@
-                        @if (true)
-                        {
-                            <div class="review-form-container" id="review-form-@item.ProductID">
-
-                                <form asp-controller="Review" asp-action="Create" id="review-form-submit-@item.ProductID">
-
-                                    <div class="review-radios">
-                                        <label>Rate your experience with this product:</label>
-
-                                        <div class="star-rating">
-
-                                            <input type="radio" asp-for="@Model.Review.Rating" id="star5" value="5" required />
-                                            <label for="star5">
-                                                <i class="fa-regular fa-star fa-sm"></i>
-                                            </label>
-
-                                            <input type="radio" asp-for="@Model.Review.Rating" id="star4" value="4" />
-                                            <label for="star4">
-                                                <i class="fa-regular fa-star fa-sm"></i>
-                                            </label>
-
-                                            <input type="radio" asp-for="@Model.Review.Rating" id="star3" value="3" />
-                                            <label for="star3">
-                                                <i class="fa-regular fa-star fa-sm"></i>
-                                            </label>
-
-                                            <input type="radio" asp-for="@Model.Review.Rating" id="star2" value="2" />
-                                            <label for="star2">
-                                                <i class="fa-regular fa-star fa-sm"></i>
-                                            </label>
-
-                                            <input type="radio" asp-for="@Model.Review.Rating" id="star1" value="1" />
-                                            <label for="star1">
-                                                <i class="fa-regular fa-star fa-sm"></i>
-                                            </label>
-
-                                        </div>
-                                    </div>
-
-                                    <input type="hidden"
-                                           value="@item.ProductID"
-                                           asp-for="Review.ProductID" />
-
-                                    <div class="user">
-
-                                        @if (Model.CurrentUser.ProfilePicture == "user-solid.svg")
-                                        {
-                                            <img class="user-profile-picture"
-                                                 src="~/icons/user-solid.svg" />
-                                        }
-                                        else
-                                        {
-                                            <img class="user-profile-picture"
-                                                 src="@Model.CurrentUser.ProfilePicture" />
-                                        }
-
-                                        <textarea id="reviewBody"
-                                                  class="form-input"
-                                                  asp-for="Review.Body"
-                                                  placeholder="Tell other customers what you thought about this product..."
-                                                  required></textarea>
-
-                                    </div>
-
-                                    <button type="submit" class="gold-button review-button">
-                                        <i class="fa-solid fa-paper-plane"></i>
-                                        Submit Review
-                                    </button>
-
-                                </form>
-                            </div>
-                        }
 
                     </div>
+
                 </div>
             }
         </div>

@@ -334,3 +334,14 @@
         transform: rotate(360deg);
     }
 }
+
+.info-and-buttons{
+    display: flex;
+    gap: 70px;
+}
+
+.review-refund-buttons{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}

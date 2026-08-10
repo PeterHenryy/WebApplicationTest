@@ -51,6 +51,7 @@
     font-size: 16px;
     font-weight: 700;
     transition: .25s;
+    font-size: 22px;
 }
 
 .form-button:hover {
@@ -91,4 +92,53 @@
     color: #ffb5b5;
     font-weight: 600;
     margin: 0;
+}
+
+.form-select-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 25px;
+    gap: 30px;
+}
+
+.select-category-button {
+    width: 195px;
+    height: 50px;
+    padding: 0 42px 0 14px;
+    background-color: #1C1C1E;
+    color: #F5F5F5;
+    border: 1px solid #3A3A3D;
+    border-radius: 10px;
+    font-family: "Outfit", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, rgb(231, 196, 123) 50%), linear-gradient(135deg, rgb(231, 196, 123) 50%, transparent 50%);
+    background-position: calc(100% - 18px) 21px, calc(100% - 12px) 21px;
+    background-size: 6px 6px, 6px 6px;
+    background-repeat: no-repeat;
+    transition: border-color 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+}
+
+.select-category-button:hover {
+    background-color: #1C1C1E;
+    border-color: rgb(231, 196, 123);
+    cursor: pointer;
+}
+
+.select-category-button:focus {
+    outline: none;
+    background-color: #1C1C1E;
+    border-color: rgb(231, 196, 123);
+    box-shadow: 0 0 0 3px rgba(231, 196, 123, 0.15);
+}
+
+.select-category-button option {
+    background-color: #1C1C1E;
+    color: #F5F5F5;
+    font-family: "Outfit", sans-serif;
 }

@@ -8,6 +8,7 @@
 <link href="~/css/general.css" rel="stylesheet" />
 <link href="~/css/create-product.css" rel="stylesheet" />
 <link href="~/css/footer.css" rel="stylesheet" />
+<link href="~/css/forms.css" rel="stylesheet" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -17,48 +18,49 @@
     <partial name="_HeaderPartial" />
 </header>
 
+<div class="form-outer-container">
+    <div class="form-container">
 
+        <form asp-controller="Product" asp-action="Create" enctype="multipart/form-data" id="product-form">
 
-<div class="container shadow p-3 mb-5 bg-white rounded">
-    <form asp-controller="Product" asp-action="Create" enctype="multipart/form-data" id="product-form">
-
-        <div class="form-row">
-            <input type="text" hidden value="@Model.User.CompanyID" asp-for="@Model.Product.CompanyID" />
-            <div class="form-group col-md-6">
-                <label for="inputEmail4">Product Name</label>
-                <input type="text" class="form-control" placeholder="Name" asp-for="@Model.Product.Name" required>
+            <div class="form-row">
+                <input type="text" hidden value="@Model.User.CompanyID" asp-for="@Model.Product.CompanyID" />
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Product Name</label>
+                    <input type="text" class="form-input" placeholder="Name" asp-for="@Model.Product.Name" required>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputPassword4">Stock</label>
+                    <input type="number" class="form-input" placeholder="Stock" asp-for="@Model.Product.Stock" required>
+                </div>
             </div>
-            <div class="form-group col-md-6">
-                <label for="inputPassword4">Stock</label>
-                <input type="number" class="form-control" placeholder="Stock" asp-for="@Model.Product.Stock" required>
+            <div class="form-group">
+                <label for="inputAddress2">Price</label>
+                <input type="number" class="form-input" placeholder="Price" asp-for="@Model.Product.Price" required>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="inputAddress2">Price</label>
-            <input type="number" class="form-control" placeholder="Price" asp-for="@Model.Product.Price" required>
-        </div>
-        <div class="form-group">
-            <label for="inputAddress2">Image</label>
-            <input type="file" class="form-control" placeholder="Image" asp-for="@Model.Product.Image" id="product-image" multiple>
-        </div>
-        <div class="form-group">
-            <label for="inputEmail4">Release Date</label>
-            <input type="text" class="form-control" placeholder="Release Date" asp-for="@Model.Product.ReleaseDate" required>
-        </div>
-        <div class="form-group">
-            <label for="inputAddress2">Description</label>
-            <textarea id="description" class="form-control" placeholder="Description" asp-for="@Model.Product.Description"></textarea>
-        </div>
-        <div class="category-select-container">
-            <select  class="product-category-button" asp-for="Product.CategoryID" id="product-category"
-                    asp-items="@(new SelectList(Model.Categories, nameof(Category.ID), nameof(Category.Name)))">
-                <option value="">Select a Category</option>
-            </select>
-        </div>
-        <div class="create-button-container">
-            <button type="submit" class="btn btn-success create-button" style="font-size: 24px; background-color: deepskyblue; border: none;">Add Product</button>
-        </div>
-    </form>
+            <div class="form-group">
+                <label for="inputAddress2">Image</label>
+                <input type="file" class="form-input" placeholder="Image" asp-for="@Model.Product.Image" id="product-image" multiple>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail4">Release Date</label>
+                <input type="text" class="form-input" placeholder="Release Date" asp-for="@Model.Product.ReleaseDate" required>
+            </div>
+            <div class="form-group">
+                <label for="inputAddress2">Description</label>
+                <textarea id="description" class="form-input" placeholder="Description" asp-for="@Model.Product.Description"></textarea>
+            </div>
+            <div class="form-select-container">
+                <select class="select-category-button" asp-for="Product.CategoryID" id="product-category"
+                        asp-items="@(new SelectList(Model.Categories, nameof(Category.ID), nameof(Category.Name)))">
+                    <option value="">Select a Category</option>
+                </select>
+            </div>
+            <div class="button-container" style="margin-top: 50px;">
+                <button type="submit" class="form-button">Add Product</button>
+            </div>
+        </form>
+    </div>
 </div>
 <partial name="_FooterPartial" />
 
