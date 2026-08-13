@@ -60,13 +60,17 @@
                         {
                             <button class="product-add-to-cart-button"
                                     onclick="addItemToCart(@product.ID, 1, '@(HttpUtility.JavaScriptStringEncode(product.Name))', true); updateCartItemQuantity(1);">
+                                <i class="fa-solid fa-cart-plus"></i>
                                 Add to Cart
                             </button>
                         }
                         else
                         {
                             <div class="disabled-add-to-card-container">
-                                <button class="product-add-to-cart-button-disabled">Add to Cart</button>
+                                <button class="product-add-to-cart-button-disabled">
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                    Add to Cart
+                                    </button>
                                 <div class="out-of-stock-message-container">
                                     <p class="out-of-stock-message">Product out of stock!</p>
                                 </div>
@@ -79,13 +83,17 @@
                         {
                             <button class="product-add-to-cart-button"
                                     onclick="redirectToLogin('@Url.Action("Login", "AppUser")', @product.ID,1)">
+                                <i class="fa-solid fa-cart-plus"></i>
                                 Add to Cart
                             </button>
                         }
                         else
                         {
                             <div class="disabled-add-to-card-container">
-                                <button class="product-add-to-cart-button-disabled">Add to Cart</button>
+                                <button class="product-add-to-cart-button-disabled">
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                    Add to Cart
+                                    </button>
                                 <div class="out-of-stock-message-container">
                                     <p class="out-of-stock-message">Product out of stock!</p>
                                 </div>
@@ -96,6 +104,7 @@
                     <a style="text-decoration: none"
                        href="@Url.Action("Details", "Product", new { productID = product.ID })"
                        class="details-button">
+                        <i class="fa-solid fa-circle-info"></i>
                         Details
                     </a>
 
@@ -108,12 +117,14 @@
                     <div class="product-buttons-flexbox">
                         <a class="btn-update"
                            href="@Url.Action("Update", "Product", new { productID = product.ID })">
+                            <i class="fa-solid fa-pen"></i>
                             Update
                         </a>
 
                         <a style="text-decoration: none"
                            href="@Url.Action("Details", "Product", new { productID = product.ID })"
                            class="details-button">
+                            <i class="fa-solid fa-circle-info"></i>
                             Details
                         </a>
                     </div>
@@ -124,6 +135,7 @@
                         {
                             <a class="btn-archive"
                                href="@Url.Action("ManageProductArchiving", "Product", new { productID = product.ID, option = 1 })">
+                                <i class="fa-solid fa-box-archive"></i>
                                 Archive
                             </a>
                         }
@@ -131,6 +143,7 @@
                         {
                             <a class="unarchive-btn" style="text-decoration: none;"
                                href="@Url.Action("ManageProductArchiving", "Product", new { productID = product.ID, option = 2 })">
+                                <i class="fa-solid fa-box-open"></i>
                                 Un-Archive
                             </a>
                         }

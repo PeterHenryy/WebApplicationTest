@@ -101,7 +101,10 @@
                             </div>
 
                             <span class="cart-product-total-price ">Total: $<span class="product-total js-product-total-@item.ProductID">@formattedTotalPrice</span></span>
-                            <button class="remove-item-button"  onclick="removeFromCart(@item.Product.ID, '@(HttpUtility.JavaScriptStringEncode(@item.Product.Name))')" id="js-remove-item-button">Remove Item</button>
+                            <button class="remove-item-button"  onclick="removeFromCart(@item.Product.ID, '@(HttpUtility.JavaScriptStringEncode(@item.Product.Name))')" id="js-remove-item-button">
+                                <i class="fa-solid fa-trash"></i>
+                                Remove Item
+                                </button>
 
                         </div>
                     </div>
