@@ -133,16 +133,15 @@
             </div>
 
         </section>
-@* 
+
+        <a href="@Url.Action("ProductsDisplay", "Product", new { filterOption = "Category", optionIdentify = 3 })">
+            <picture>
+                <source media="(max-width: 1000px)" srcset="~/Img/gymbanner-mobile.png">
+                <img class="main-banner" src="~/Img/gymbanner.jpg" alt="Banner">
+            </picture>
+        </a>
         <section class="container-section">
 
-            <div class="banner-container">
-                <div class="responsive-container">
-                    <a href="@Url.Action("ProductsDisplay", "Product", new { filterOption = "Category", optionIdentify = 1 })">
-                        <img class="banner" src="~/Img/bannergym-removebg.png">
-                    </a>
-                </div>
-            </div>
 
             <div class="carousel-container">
 
@@ -150,17 +149,17 @@
 
                 <div class="products-index-flex carousel-track">
 
-                    @{
-                        var popularGymEquipment = Model.GetMostPopularProducts(1);
+@*                     @{
+                        var popularCellphones = Model.GetMostPopularProducts(3);
 
-                        ProductsCardViewModel popularGymEquipmentViewModel = new ProductsCardViewModel
-                        {
-                            Products = popularGymEquipment,
-                            User = Model.User
-                        };
+                        ProductsCardViewModel popularCellphonesViewModel = new ProductsCardViewModel
+                    {
+                        Products = popularCellphones,
+                        User = Model.User
+                    };
 
-                        Html.RenderPartial("_ProductsGridPartial", popularGymEquipmentViewModel);
-                    }
+                        Html.RenderPartial("_ProductsGridPartial", popularCellphonesViewModel);
+                    } *@
 
                 </div>
 
@@ -168,7 +167,7 @@
 
             </div>
 
-        </section> *@
+        </section>
 
     </main>
 
