@@ -7,18 +7,18 @@
 <link rel="stylesheet" href="~/css/productsIndex.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/general.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/containerResponsive.css" asp-append-version="true" />
-<link rel="stylesheet" href="~/css/header.css" />
-<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-<link href="~/css/footer.css" rel="stylesheet" />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="~/css/header.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+<link href="~/css/footer.css" rel="stylesheet" asp-append-version="true" />
+<link rel="preconnect" href="https://fonts.googleapis.com" >
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin >
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" >
 
-<link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+<link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet"  />
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-<script src="~/js/site.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js" ></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" ></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <body style="background-color: #121212">
@@ -134,7 +134,7 @@
 
         </section>
 
-        <a href="@Url.Action("ProductsDisplay", "Product", new { filterOption = "Category", optionIdentify = 3 })">
+        <a href="@Url.Action("ProductsDisplay", "Product", new { filterOption = "Category", optionIdentify = 1 })">
             <picture>
                 <source media="(max-width: 1000px)" srcset="~/Img/gymbanner-mobile.png">
                 <img class="main-banner" src="~/Img/gymbanner.jpg" alt="Banner">
@@ -142,6 +142,39 @@
         </a>
         <section class="container-section">
 
+            <div class="carousel-container">
+
+                <button class="carousel-btn left" onclick="scrollCarousel(this, -1)">‹</button>
+
+                <div class="products-index-flex carousel-track">
+
+                    @{
+                        var popularGymEquipment = Model.GetMostPopularProducts(1);
+
+                        ProductsCardViewModel popularGymEquipmentViewModel = new ProductsCardViewModel
+                        {
+                            Products = popularGymEquipment,
+                            User = Model.User
+                        };
+
+                        Html.RenderPartial("_ProductsGridPartial", popularGymEquipmentViewModel);
+                    }
+
+                </div>
+
+                <button class="carousel-btn right" onclick="scrollCarousel(this, 1)">›</button>
+
+            </div>
+
+        </section>
+
+        <a href="@Url.Action("ProductsDisplay", "Product", new { filterOption = "Category", optionIdentify = 4 })">
+            <picture>
+                <source media="(max-width: 1000px)" srcset="~/Img/gamesbanner-mobile.png">
+                <img class="main-banner" src="~/Img/gamesbanner.png" alt="Banner">
+            </picture>
+        </a>
+        <section class="container-section">
 
             <div class="carousel-container">
 
@@ -149,17 +182,17 @@
 
                 <div class="products-index-flex carousel-track">
 
-@*                     @{
-                        var popularCellphones = Model.GetMostPopularProducts(3);
+                    @{
+                        var popularGames = Model.GetMostPopularProducts(4);
 
-                        ProductsCardViewModel popularCellphonesViewModel = new ProductsCardViewModel
-                    {
-                        Products = popularCellphones,
-                        User = Model.User
-                    };
+                        ProductsCardViewModel popularGamesViewModel = new ProductsCardViewModel
+                        {
+                            Products = popularGames,
+                            User = Model.User
+                        };
 
-                        Html.RenderPartial("_ProductsGridPartial", popularCellphonesViewModel);
-                    } *@
+                        Html.RenderPartial("_ProductsGridPartial", popularGamesViewModel);
+                    }
 
                 </div>
 
@@ -173,8 +206,8 @@
 
     <partial name="_FooterPartial" />
 
-    <script src="https://kit.fontawesome.com/8da1ba04bb.js" crossorigin="anonymous"></script>
-    <script src="~/js/shoppingCart.js"></script>
+    <script src="https://kit.fontawesome.com/8da1ba04bb.js" crossorigin="anonymous" ></script>
+    <script src="~/js/shoppingCart.js" asp-append-version="true"></script>
 
 
 </body>

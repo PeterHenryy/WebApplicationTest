@@ -3,10 +3,10 @@
 }
 @model AppLogin
 
-<link rel="stylesheet" href="~/css/loginForm.css" />
-<link rel="stylesheet" href="~/css/general.css" />
+<link rel="stylesheet" href="~/css/loginForm.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/general.css" asp-append-version="true" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin >
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <div class="login-form-container">
@@ -43,7 +43,7 @@
     </form>
 </div>
 
-<script src="https://kit.fontawesome.com/8da1ba04bb.js" crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/8da1ba04bb.js" crossorigin="anonymous" asp-append-version="true"></script>
 <script>
     function setAdminLoginAndSubmit() {
         document.getElementById('adminLogin').value = 'true';
