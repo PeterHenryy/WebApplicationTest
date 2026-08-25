@@ -59,8 +59,9 @@
                     <div class="option-container">
                         @{
                             string iconName = filterOption.Name + "Icon.svg";
+                            string companyLogo = filterOption.Name + "Logo.png";
                         }
-                        <img class="filter-icon" src="@filterOption.Logo">
+                        <img class="filter-icon" src="~/Img/@companyLogo">
                         @filterOption.Name
                     </div>
                 </a>

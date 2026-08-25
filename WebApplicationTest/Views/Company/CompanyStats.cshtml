@@ -21,13 +21,16 @@
     <header class="header">
         <partial name="_HeaderPartial" />
     </header>
-   <div style="display: flex; justify-content: center;">
-    <div class="stats-inner-container">
-        <div class="stats-wrapper">
+    <div style="display: flex; justify-content: center;">
+        <div class="stats-inner-container">
+            <div class="stats-wrapper">
 
-            <div class="general-stats">
-                <div class="company-logo-container">
-                    <img class="company-logo" src="@Model.Company.Logo" />
+                <div class="general-stats">
+                    <div class="company-logo-container">
+                    @{
+                        string companyLogo = Model.Company.Name + "Logo.png";
+                    }
+                    <img class="company-logo" src="~/Img/@companyLogo">
                 </div>
                 <div class="company-statistics-container">
                     <p class="company-name">@Model.Company.Name</p>
