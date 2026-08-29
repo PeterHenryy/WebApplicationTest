@@ -38,10 +38,8 @@
                     <img class="mobile-user-picture"
                     src="~/profilepics/@currentUser.ProfilePicture">
                 }
-                <div>
+                <div class="header-username">
                     <h5>@currentUser.UserName</h5>
-                   
-                    
                 </div>
 
             </div>
@@ -237,7 +235,9 @@
                     {
                         <img class="user-profile-picture" src="~/profilepics/@currentUser.ProfilePicture">
                     }
-                    <p>@currentUser.UserName</p>
+                    <div class="header-username">
+                        <h5>@currentUser.UserName</h5>
+                    </div>
                 </div>
                 <ul class="options-menu">
                     <li><a href="@Url.Action("Update", "AppUser")">Update Profile</a></li>

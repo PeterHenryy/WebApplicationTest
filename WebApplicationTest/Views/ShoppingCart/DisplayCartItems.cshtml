@@ -133,15 +133,7 @@
                     </div>
                 </div>
                 <div class="summary-buttons">
-
-                    @if (Model.UserHasCreditCard)
-                    {
-                        <a class="gold-button checkout-button" href="@Url.Action("Create","Transaction")" id="checkout-link">Proceed to Checkout</a>
-                    }
-                    else
-                    {
-                        <a class="gold-button checkout-button" href="@Url.Action("Create","CreditCard", new {redirectToTransaction = true})" id="checkout-link">Proceed to Checkout</a>
-                    }
+                    <a class="gold-button checkout-button" href="@Url.Action("Create","Transaction")" id="checkout-link">Proceed to Checkout</a>
                     <button class="coupon-button page-button" >Enter Coupon Code</button>
                     <div class="coupon-input">
                         <input class="form-input" style="margin-bottom: 0; border-radius: 12px;" type="text" id="coupon-code">

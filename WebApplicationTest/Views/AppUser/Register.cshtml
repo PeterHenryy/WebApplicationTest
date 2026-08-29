@@ -13,7 +13,7 @@
     <h1>Welcome!</h1>
     <form asp-controller="AppUser" asp-action="Register">
 
-      <input type="text"  placeholder="Username" asp-for="UserName" required>
+     <input type="text" maxlength="20" placeholder="Username" asp-for="UserName" required>
       <input type="text" placeholder="First Name" asp-for="FirstName" required>
       <input type="text" placeholder="Last Name" asp-for="LastName" required>
       <input type="email" placeholder="Email" asp-for="Email" required/>
