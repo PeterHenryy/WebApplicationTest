@@ -54,7 +54,7 @@
                                         <td>@coupon.Quantity</td>
                                         <td>@(coupon.Product != null ? @coupon.Product.Name : "N/A")</td>
                                         <td>@(coupon.Category != null ? @coupon.Category.Name : "N/A")</td>
-                                        <td><a class="btn btn-danger" href="@Url.Action("Delete", "Coupon", new {couponID = coupon.ID})">Delete</a></td>
+                                        <td><a class="destructive-action-button" href="@Url.Action("Delete", "Coupon", new {couponID = coupon.ID})">Delete</a></td>
                                     </tr>
                                 }
                             </tbody>

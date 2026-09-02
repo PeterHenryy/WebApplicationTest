@@ -51,14 +51,14 @@ namespace WebApplicationTest.Controllers
             transactionViewModel.Transaction = new Transaction();
             Transaction currentTransaction = transactionViewModel.Transaction;
             IEnumerable<CartItem> cartItems = _shoppingCartService.GetCartItems();
-            if (!String.IsNullOrEmpty(couponCode))
-            {
-                _couponService.ValidateCoupon(currentTransaction, cartItems, couponCode);
-            }
             transactionViewModel.CartItems = cartItems;
             double cartTotal = _shoppingCartService.CalculateCartTotal();
             _transactionService.PopulateViewModel(transactionViewModel, _currentUser.Id);
             _transactionService.CalculateTransactionTotal(cartTotal, currentTransaction, cartItems);
+            if (!String.IsNullOrEmpty(couponCode))
+            {
+                _couponService.ValidateCoupon(currentTransaction, cartItems, couponCode);
+            }
             currentTransaction.Total += transactionViewModel.TransactionTax;
             return View(transactionViewModel);
         }

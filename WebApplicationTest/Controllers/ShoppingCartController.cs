@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Globalization;
+using WebApplicationTest.Helpers;
 using WebApplicationTest.Models;
 using WebApplicationTest.Models.Identity;
 using WebApplicationTest.Models.ViewModels;
@@ -13,12 +14,14 @@ namespace WebApplicationTest.Controllers
     {
         private readonly ShoppingCartService _shoppingCartService;
         private readonly UserService _userService;
+        private readonly CouponService _couponService;
         private readonly AppUser _currentUser;
 
-        public ShoppingCartController(ShoppingCartService shoppingCartService, UserService userService)
+        public ShoppingCartController(ShoppingCartService shoppingCartService, UserService userService, CouponService couponService)
         {
             _shoppingCartService = shoppingCartService;
             _userService = userService;
+            _couponService = couponService;
             _currentUser = userService.GetCurrentUser();
         }
 
@@ -57,14 +60,23 @@ namespace WebApplicationTest.Controllers
         }
 
         [HttpPost]
-        public void RemoveFromCart(int itemID)
+        public bool RemoveFromCart(int itemID, string couponCode = null)
         {
             bool removedItem = _shoppingCartService.DeleteCartItem(itemID);
             IEnumerable<CartItem> cartItems = _shoppingCartService.GetCartItems();
-            if(cartItems.Count() == 0)
+            if(removedItem && !string.IsNullOrEmpty(couponCode))
+            {
+                Transaction transaction = new Transaction();
+                double cartTotal = _shoppingCartService.CalculateCartTotal();
+                transaction.Total = cartTotal;
+                CouponValidator validatedCoupon = _couponService.ValidateCoupon(transaction, cartItems, couponCode);
+                return !validatedCoupon.CouponValid;
+            }
+            if (cartItems.Count() == 0)
             {
                 DeleteCart();
             }
+            return true;
         }
 
         [HttpPost]

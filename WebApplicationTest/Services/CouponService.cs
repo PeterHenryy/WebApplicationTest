@@ -69,9 +69,17 @@ namespace WebApplicationTest.Services
                 {
                     transaction.CouponCode = couponCode;
                     transaction.CouponPercentage = coupon.DiscountPercentage;
-                    transaction.Total -= (transaction.Total * (coupon.DiscountPercentage / 100)) * 100 / 100;
+                    if(coupon.ProductID != 0)
+                    {
+                        transaction.Total -= (item.Product.Price * (coupon.DiscountPercentage / 100)) * 100 / 100;
+                    }
+                    if (coupon.CategoryID != 0)
+                    {
+                        var productsCategoryTotal = cartItems.Where(x => x.Product.CategoryID == coupon.CategoryID).Sum(x => x.Product.Price);
+                        transaction.Total -= (productsCategoryTotal * (coupon.DiscountPercentage / 100)) * 100 / 100;
+                    }
                     couponValidator.CouponValid = isCouponValid;
-                    couponValidator.CouponPercentage = coupon.DiscountPercentage;
+                    couponValidator.Coupon = coupon;
                     break;
                 }
             }

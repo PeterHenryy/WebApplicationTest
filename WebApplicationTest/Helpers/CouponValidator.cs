@@ -6,7 +6,7 @@ namespace WebApplicationTest.Helpers
     {
         public double Total { get; set; }
         public bool CouponValid { get; set; }
-        public double CouponPercentage { get; set; }
+        public Coupon Coupon { get; set; }
         public bool Validate(Coupon coupon, Product product)
         {
             if (coupon == null) return false;

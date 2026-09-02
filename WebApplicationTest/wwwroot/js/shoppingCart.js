@@ -25,7 +25,13 @@ function addItemToCart(itemID, quantity, productName) {
     toastr.success(`Added ${productName} to Cart!`);
 }
 
-let couponDiscount = 0;
+let coupon = {
+    discountPercentage: 0,
+    productId: 0,
+    categoryId: 0,
+    code: ''
+};
+
 calculateOrderSubtotal();
 displayOrderItems();
 calculateShipping();
@@ -60,7 +66,7 @@ function updateItemsAndPrices(productID, quantity, price) {
     updateItemQuantityInCheckout(productID, quantity);
     updateItemQuantityHTML(productID);
     updateProductTotalPrice(productID, quantity, price);
-    calculateOrderSubtotal(couponDiscount);
+    calculateOrderSubtotal(coupon.discountPercentage);
     displayOrderItems();
     calculateShipping();
     calculateOrderTotal();
@@ -128,32 +134,91 @@ function clearCart() {
     orderSummaryContainer.remove();
     clearCartButton.innerHTML = '<h1>There are no items in your cart!</h1>';
 }
+
 function removeFromCart(itemID, productName) {
+
     const data = {
-        itemID
+        itemID,
+        couponCode: coupon.code
     };
+
+    const overlay =
+        document.getElementById('remove-cart-item-overlay');
+
+    // Show loading overlay while the API is processing
+    overlay.classList.add("show");
+
     $.ajax({
         url: "/ShoppingCart/RemoveFromCart",
         type: "POST",
         dataType: 'json',
         contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-        data
-    })
+        data,
+
+        success: function (result) {
+
+            const invalidCoupon = result;
+
+            if (invalidCoupon) {
+
+                coupon.discountPercentage = 0;
+                coupon.productId = 0;
+                coupon.categoryId = 0;
+                coupon.code = '';
+
+                const orderTotalBeforeCoupon =
+                    document.querySelector('.js-order-total-before-coupon');
+
+                orderTotalBeforeCoupon.remove();
+
+                const newOrderTotal =
+                    document.querySelector('.order-total');
+
+                newOrderTotal.innerHTML = "Order Total:";
+
+                // Recalculate everything without the coupon
+                calculateOrderSubtotal();
+                calculateOrderTotal();
+            }
+
+            // Server has finished processing
+            overlay.classList.remove("show");
+        },
+
+        error: function (error) {
+
+            console.error(error);
+
+            // Make sure the overlay doesn't stay forever
+            overlay.classList.remove("show");
+        }
+    });
 
     toastr.warning(`Removed ${productName} from cart!`);
 
-    const cartProductElement = document.querySelector(`.js-cart-product-${itemID}`)
+    const cartProductElement =
+        document.querySelector(`.js-cart-product-${itemID}`);
+
     cartProductElement.remove();
-    const cartProducts = document.querySelectorAll('.cart-product');
+
+    const cartProducts =
+        document.querySelectorAll('.cart-product');
+
     if (cartProducts.length === 0) {
 
-        const orderSummaryContainer = document.querySelector('.order-summary-container');
+        const orderSummaryContainer =
+            document.querySelector('.order-summary-container');
+
         orderSummaryContainer.remove();
-        document.getElementById("redirect-overlay").classList.add("show");
+
+        document
+            .getElementById("redirect-overlay")
+            .classList.add("show");
 
         $.ajax({
             url: "/ShoppingCart/ClearCart",
             type: "POST",
+
             success: function () {
                 location.reload();
             }
@@ -161,13 +226,15 @@ function removeFromCart(itemID, productName) {
 
     }
     else {
+
         updateItemQuantityHTML(itemID);
         displayOrderItems();
-        calculateOrderSubtotal(couponDiscount);
+        calculateOrderSubtotal(coupon.discountPercentage);
         calculateShipping(itemID);
         calculateOrderTotal();
     }
 }
+
 function calculateProductTotalPrices() {
     const productPrices = document.querySelectorAll('.product-total');
     let productsTotal = 0;
@@ -177,16 +244,16 @@ function calculateProductTotalPrices() {
     return productsTotal;
 }
 
-function calculateOrderSubtotal(couponDiscount = 0) {
+function calculateOrderSubtotal(discountPercentage = 0) {
     const subtotalPrice = document.querySelector('.js-subtotal-price');
     let orderTotalPrice = calculateProductTotalPrices();
     subtotalPrice.innerHTML = ((orderTotalPrice * 100) / 100).toFixed(2);
-    if (couponDiscount !== 0) {
+    if (coupon.discountPercentage !== 0) {
         calculateTax();
         const summaryPricesBeforeCoupon = calculateSummaryPrices();
         const orderTotalBeforeCoupon = document.querySelector('.js-order-total-before-coupon');
         orderTotalBeforeCoupon.innerHTML = `<p>Was: <span style="position: absolute; right: 0;"> <del>$${summaryPricesBeforeCoupon.toFixed(2)}</del></span></p>`;
-        orderTotalPrice -= (couponDiscount / 100) * orderTotalPrice;
+        orderTotalPrice -= (coupon.discountPercentage / 100) * orderTotalPrice;
         subtotalPrice.innerHTML = ((orderTotalPrice * 100) / 100).toFixed(2);
     }
     else {
@@ -221,9 +288,9 @@ function calculateShipping(productID) {
     });
     shippingElement.innerHTML = (shippingCost === 0) ? "FREE" : `$${shippingCost}`;
     let wasTotal = calculateOrderTotal();
-    if (couponDiscount !== 0) {
+    if (coupon.discountPercentage !== 0) {
         const orderProductPrices = calculateProductTotalPrices()
-        wasTotal += Math.round((orderProductPrices * (couponDiscount / 100)) * 100) / 100;
+        wasTotal += Math.round((orderProductPrices * (coupon.discountPercentage / 100)) * 100) / 100;
         const orderTotalBeforeCoupon = document.querySelector('.js-order-total-before-coupon');
         orderTotalBeforeCoupon.innerHTML = `<p>Was: <span style="position: absolute; right: 0;"> <del>$${wasTotal.toFixed(2)}</del></span></p>`;
     }
@@ -290,7 +357,6 @@ submitCouponButton.addEventListener('click', () => {
 
         message.textContent = 'Validating coupon...';
 
-        // Show spinner while validating
         spinner.style.display = 'block';
 
         overlay.classList.add('show');
@@ -298,7 +364,6 @@ submitCouponButton.addEventListener('click', () => {
         validateCoupon(submitedCouponCode);
     }
 });
-
 
 function validateCoupon(couponCode) {
 
@@ -320,6 +385,14 @@ function validateCoupon(couponCode) {
 
             if (result.couponValid) {
 
+                coupon.code = result.coupon.code;
+                if (result.productID !== 0) {
+                    coupon.productId = result.coupon.productID;
+                }
+                if (result.categoryID !== 0) {
+                    coupon.categoryId = result.coupon.categoryID;
+                }
+
                 giveTransactionDiscount(result, couponCode);
 
                 overlay.classList.remove('show');
@@ -338,7 +411,7 @@ function validateCoupon(couponCode) {
                 orderTotalBeforeCoupon.innerHTML = '';
                 orderTotalElement.innerHTML = 'Order Total:';
 
-                couponDiscount = 0;
+                coupon.discountPercentage = 0;
 
                 // Change modal to error state
                 spinner.style.display = 'none';
@@ -410,7 +483,7 @@ function giveTransactionDiscount(result, couponCode) {
     const newOrderTotal = document.querySelector('.order-total');
     newOrderTotal.innerHTML = "New Order Total:";
     toastr.success(`Coupon "${couponCode}" applied!`);
-    couponDiscount = result.couponPercentage;
+    coupon.discountPercentage = result.coupon.discountPercentage;
 }
 
 function updateCartItemShippingOption(itemID, newShippingCost, newShippingOption) {
