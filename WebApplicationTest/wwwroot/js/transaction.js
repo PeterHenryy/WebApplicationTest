@@ -65,11 +65,6 @@
         const selectedPayment =
             document.querySelector('input[name="Transaction.PaymentType"]:checked');
 
-        if (!selectedPayment) {
-            event.preventDefault();
-            alert("Please choose a payment method.");
-            return;
-        }
 
         if (selectedPayment.value === "CreditCard") {
 

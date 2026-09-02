@@ -184,6 +184,24 @@
             <p>Clearing cart...</p>
         </div>
     </div>
+
+    <div id="coupon-validation-overlay">
+        <div class="redirect-modal" id="coupon-validation-modal">
+
+            <button type="button"
+                    id="close-coupon-validation"
+                    class="close-coupon-validation">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="redirect-spinner" id="coupon-validation-spinner"></div>
+
+            <p id="coupon-validation-message">
+                Validating coupon...
+            </p>
+
+        </div>
+    </div>
     <partial name="_FooterPartial" />
 
     <script src="~/js/shoppingCart.js" asp-append-version="true"></script>

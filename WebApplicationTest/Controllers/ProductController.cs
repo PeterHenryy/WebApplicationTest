@@ -148,7 +148,7 @@ namespace WebApplicationTest.Controllers
             Product product = _productService.GetProductByID(productID);
             product.AverageRating = _productService.CalculateProductAverageRating(productID);
             var detailsViewModel = new ProductDetailsViewModel();
-            if (_user != null)
+            if (_user != null && _user.Id != 0)
             {
                 detailsViewModel.HasUserBoughtProduct = _productService.HasUserBoughtProduct(productID, _user.Id);
                 detailsViewModel.CurrentUser = _user;

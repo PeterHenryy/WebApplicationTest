@@ -328,6 +328,51 @@
     animation: spin .8s linear infinite;
 }
 
+#coupon-validation-overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(18, 18, 18, .82);
+    backdrop-filter: blur(6px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .25s ease;
+    z-index: 99999;
+}
+
+#coupon-validation-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+#submit-coupon:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.close-coupon-validation {
+    position: absolute;
+    top: 12px;
+    right: 15px;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 28px;
+    cursor: pointer;
+    transition: color .2s ease, transform .2s ease;
+}
+
+.close-coupon-validation:hover {
+    color: rgb(231,196,123);
+    transform: scale(1.1);
+}
+
+#coupon-validation-modal {
+    position: relative;
+}
+
 @keyframes spin {
 
     to {

@@ -69,36 +69,21 @@
                             @{
                                 bool productHasStock = @Model.Product.Stock > 0;
                             }
-                            @if (Model.CurrentUser.Id != 0)
+                            
+                            @if (productHasStock)
                             {
-                                @if (productHasStock)
-                                {
-                                    <button class="product-add-to-cart-button"
-                                            onclick="addItemToCart(@Model.ProductID, 1, '@(HttpUtility.JavaScriptStringEncode(Model.Product.Name))', true); updateCartItemQuantity(1);">
-                                        <i class="fa-solid fa-cart-plus"></i>
-                                            Add to Cart
-                                    </button>
-                                }
-                                else
-                                {
-                                    <button class="product-add-to-cart-button-disabled">Product out of stock!</button>
-                                }
+                                <button class="product-add-to-cart-button"
+                                        onclick="addItemToCart(@Model.ProductID, 1, '@(HttpUtility.JavaScriptStringEncode(Model.Product.Name))', true); updateCartItemQuantity(1);">
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                        Add to Cart
+                                </button>
                             }
                             else
                             {
-                                @if (productHasStock)
-                                {
-                                    <button class="product-add-to-cart-button"
-                                            onclick="addItemToCart(@Model.ProductID, 1, '@(HttpUtility.JavaScriptStringEncode(Model.Product.Name))', true); updateCartItemQuantity(1);">
-                                        <i class="fa-solid fa-cart-plus"></i>
-                                        Add to Cart
-                                    </button>
-                                }
-                                else
-                                {
-                                    <button class="product-add-to-cart-button-disabled">Product out of stock!</button>
-                                }
+                                <button class="product-add-to-cart-button-disabled">Product out of stock!</button>
                             }
+                            
+                           
                         </div>
                     </div>
                     <div class="description-container">
@@ -271,7 +256,7 @@
                                     <p class="review-date">@review.Date.ToString("MM/dd/yyyy")</p>
                                 </div>
                                 <p class="review-body">@review.Body</p>
-                                @if (Model.CurrentUser != null)
+                                @if (Model.CurrentUser != null && Model.CurrentUser.Id != 0)
                                 {
                                     Like userLikeInReview = Model.FindUserLikeInReview(Model.CurrentUser.Id, review.ID);
                                     Dislike userDislikeInReview = Model.FindUserDislikeInReview(Model.CurrentUser.Id, review.ID);
@@ -315,6 +300,14 @@
                                             </form>
                                         }
                                     </div>
+                                }
+                                else{
+                                    <button class="like-button-disabled" disabled>
+                                        <i class="fa-solid fa-thumbs-up fa-sm"></i> @reviewLikeCounter
+                                    </button>
+                                    <button class="dislike-button-disabled" disabled>
+                                        <i class="fa-solid fa-thumbs-down fa-sm"></i> @reviewDislikeCounter
+                                    </button>
                                 }
                             </div>
                         }

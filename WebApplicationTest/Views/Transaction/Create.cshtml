@@ -60,9 +60,19 @@
                     <p class="transaction-total">@Model.Transaction.Total.ToString("C2", System.Globalization.CultureInfo.GetCultureInfo("en-us"))</p>
                     <p class="transaction-total">or</p>
                     @{
-                        double transactionPointsCost = Model.Transaction.Total * 5;
+                        double transactionPointsCost = Math.Round((Model.Transaction.Total * 5), 2);
                     }
-                    <p class="transaction-total">@transactionPointsCost Points</p>
+                    <div class="transaction-total points-cost">
+                        @transactionPointsCost Points
+
+                        <span class="points-info">
+                            <i class="fa-solid fa-circle-info"></i>
+
+                            <span class="points-tooltip">
+                                Pay with reward points or earn them by paying with money. Your points balance is shown in the navbar!
+                            </span>
+                        </span>
+                    </div>
 
                 </div>
             </div>

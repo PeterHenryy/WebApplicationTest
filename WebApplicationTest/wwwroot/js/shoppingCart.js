@@ -269,41 +269,136 @@ let totalBeforeCoupon = document.querySelector('.order-total-price').innerHTML;
 let submitedCouponCode = "";
 
 submitCouponButton.addEventListener('click', () => {
-    var url = '/Transaction/Create?couponCode=' + encodeURIComponent(couponCodeInput.value);
+
+    var url = '/Transaction/Create?couponCode=' +
+        encodeURIComponent(couponCodeInput.value);
 
     document.getElementById('checkout-link').setAttribute('href', url);
+
     if (submitedCouponCode !== couponCodeInput.value) {
+
         submitedCouponCode = couponCodeInput.value;
+
+        const overlay =
+            document.getElementById('coupon-validation-overlay');
+
+        const message =
+            document.getElementById('coupon-validation-message');
+
+        const spinner =
+            document.getElementById('coupon-validation-spinner');
+
+        message.textContent = 'Validating coupon...';
+
+        // Show spinner while validating
+        spinner.style.display = 'block';
+
+        overlay.classList.add('show');
+
         validateCoupon(submitedCouponCode);
     }
-
 });
+
+
 function validateCoupon(couponCode) {
+
     $.ajax({
         type: 'GET',
         url: '/Transaction/ValidateCoupon',
         data: { couponCode },
+
         success: (result) => {
+
+            const overlay =
+                document.getElementById('coupon-validation-overlay');
+
+            const message =
+                document.getElementById('coupon-validation-message');
+
+            const spinner =
+                document.getElementById('coupon-validation-spinner');
+
             if (result.couponValid) {
+
                 giveTransactionDiscount(result, couponCode);
+
+                overlay.classList.remove('show');
             }
             else {
+
                 calculateOrderSubtotal();
                 calculateOrderTotal();
-                const orderTotalBeforeCoupon = document.querySelector('.js-order-total-before-coupon');
-                const orderTotalElement = document.querySelector('.order-total');
+
+                const orderTotalBeforeCoupon =
+                    document.querySelector('.js-order-total-before-coupon');
+
+                const orderTotalElement =
+                    document.querySelector('.order-total');
+
                 orderTotalBeforeCoupon.innerHTML = '';
-                orderTotalElement.innerHTML = "Order Total:";
-                toastr.error(`Coupon "${couponCode}" is not valid!`);
+                orderTotalElement.innerHTML = 'Order Total:';
+
                 couponDiscount = 0;
+
+                // Change modal to error state
+                spinner.style.display = 'none';
+
+                message.textContent =
+                    `Coupon "${couponCode}" is not valid!`;
+
+                setTimeout(() => {
+                    overlay.classList.remove('show');
+                }, 5000);
             }
         },
+
         error: function (error) {
+
             console.error(error);
+
+            const overlay =
+                document.getElementById('coupon-validation-overlay');
+
+            const message =
+                document.getElementById('coupon-validation-message');
+
+            const spinner =
+                document.getElementById('coupon-validation-spinner');
+
+            spinner.style.display = 'none';
+
+            message.textContent =
+                'Something went wrong while validating the coupon.';
+
+            setTimeout(() => {
+                overlay.classList.remove('show');
+            }, 5000);
         }
     });
 }
 
+const couponValidationOverlay =
+    document.getElementById('coupon-validation-overlay');
+
+const couponValidationModal =
+    document.getElementById('coupon-validation-modal');
+
+const closeCouponValidation =
+    document.getElementById('close-coupon-validation');
+
+
+closeCouponValidation.addEventListener('click', () => {
+    couponValidationOverlay.classList.remove('show');
+});
+
+
+couponValidationOverlay.addEventListener('click', (event) => {
+
+    if (event.target === couponValidationOverlay) {
+        couponValidationOverlay.classList.remove('show');
+    }
+
+});
 
 function giveTransactionDiscount(result, couponCode) {
     const summaryPriceElement = document.querySelector('.js-summary-price');

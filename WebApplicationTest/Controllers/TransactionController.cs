@@ -57,7 +57,7 @@ namespace WebApplicationTest.Controllers
             }
             transactionViewModel.CartItems = cartItems;
             double cartTotal = _shoppingCartService.CalculateCartTotal();
-            _transactionService.PopulateViewModel(transactionViewModel, _currentUser.Id, cartTotal);
+            _transactionService.PopulateViewModel(transactionViewModel, _currentUser.Id);
             _transactionService.CalculateTransactionTotal(cartTotal, currentTransaction, cartItems);
             currentTransaction.Total += transactionViewModel.TransactionTax;
             return View(transactionViewModel);
@@ -70,18 +70,20 @@ namespace WebApplicationTest.Controllers
             currentTransaction.UserID = _currentUser.Id;
             currentTransaction.ItemsBought = _shoppingCartService.GetItemsBoughtQuantity();
             transactionViewModel.UserCards = _transactionService.GetSpecificUserCards(_currentUser.Id);
-            if (currentTransaction.PaymentType == "CreditCard" && transactionViewModel.ChosenCardID == null)
+
+            if (string.IsNullOrEmpty(currentTransaction.PaymentType))
+            {
+                return ReturnTransactionWithError(transactionViewModel, "You must select a payment method!");
+            }
+            if (currentTransaction.PaymentType == PaymentTypes.RewardPoints.ToString())
+            {
+                bool validRewardPoints = _transactionService.ValidatePointsForTransaction(_currentUser.UserRewardPoints, currentTransaction.Total);
+                if (!validRewardPoints) return ReturnTransactionWithError(transactionViewModel, "You do not have enough reward points for this purchase!");
+            }
+            if (currentTransaction.PaymentType == PaymentTypes.CreditCard.ToString() && transactionViewModel.ChosenCardID == null)
             {
                 var validationError = _creditCardService.ValidateCreditCard(transactionViewModel.UserNewCard, currentTransaction.TransactionDate);
-
-                if (validationError != null)
-                {
-                    double cartTotal = _shoppingCartService.CalculateCartTotal();
-                    _transactionService.PopulateViewModel(transactionViewModel, _currentUser.Id, cartTotal);
-                    transactionViewModel.CartItems = _shoppingCartService.GetCartItems();
-                    ModelState.AddModelError("", validationError);
-                    return View(transactionViewModel);
-                }
+                if (validationError != null) return ReturnTransactionWithError(transactionViewModel, validationError);
                 transactionViewModel.UserNewCard.UserID = _currentUser.Id;
                 _creditCardService.Create(transactionViewModel.UserNewCard);
             }
@@ -102,16 +104,20 @@ namespace WebApplicationTest.Controllers
                     _transactionService.CreateTransactionItem(cartItem, currentTransaction.ID);
                 }
                 bool clearedCart = _shoppingCartService.ClearCart();
-                bool validRewardPoints = false;
-                if (currentTransaction.PaymentType == PaymentTypes.RewardPoints.ToString())
-                {
-                    validRewardPoints = _transactionService.ValidatePointsForTransaction(_currentUser.UserRewardPoints, currentTransaction.Total);
-                }
-                _transactionService.UpdateUserRewardPoints(currentTransaction.Total, _currentUser, validRewardPoints);
+                
+                _transactionService.UpdateUserRewardPoints(currentTransaction.Total, _currentUser, currentTransaction.PaymentType == PaymentTypes.RewardPoints.ToString());
                 await _userManager.UpdateAsync(_currentUser);
                 return RedirectToAction("UserTransactions", "Transaction", new { userID = _currentUser.Id });
             }
             return View(transactionViewModel);
+        }
+
+        public IActionResult ReturnTransactionWithError(TransactionViewModel transactionViewModel, string message)
+        {
+            _transactionService.PopulateViewModel(transactionViewModel, _currentUser.Id);
+            ModelState.Clear();
+            ModelState.AddModelError("", message);
+            return View("Create", transactionViewModel);
         }
 
         [HttpGet]

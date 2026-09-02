@@ -153,6 +153,7 @@ namespace WebApplicationTest.Controllers
                 //bool uploadedBlob = await _blobService.UploadBlob(files[0].FileName, files[0], new Blob());
                 //updatedUser.ProfilePicture = _blobService.GetBlob(files[0].FileName);
                 _userService.HandleUserProfilePicture(files);
+                updatedUser.ProfilePicture = files[0].FileName;
             }
 
         }

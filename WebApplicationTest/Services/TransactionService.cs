@@ -123,7 +123,7 @@ namespace WebApplicationTest.Services
             List<TransactionItem> transactionItems = _transactionRepos.GetTransactionItems().Where(x => x.TransactionID == transactionID).ToList();
             return transactionItems;
         }
-        public void UpdateUserRewardPoints(double transactionTotal, AppUser _currentUser, bool paidWithPoints = false)
+        public void UpdateUserRewardPoints(double transactionTotal, AppUser _currentUser, bool paidWithPoints)
         {
             if (paidWithPoints)
             {
@@ -148,12 +148,14 @@ namespace WebApplicationTest.Services
             return formattedDiscount;
         }
 
-        public void PopulateViewModel(TransactionViewModel transactionViewModel, int userID, double cartTotal)
+        public void PopulateViewModel(TransactionViewModel transactionViewModel, int userID)
         {
+            var cartTotal = _shoppingCartService.CalculateCartTotal();
             transactionViewModel.UserCards = GetSpecificUserCards(userID);
             transactionViewModel.Categories = GetCategories();
             transactionViewModel.ItemsBought = _shoppingCartService.GetItemsBoughtQuantity();
             transactionViewModel.TransactionTax = CalculateTransactionTax(cartTotal);
+            transactionViewModel.CartItems = _shoppingCartService.GetCartItems();
         }
 
        
