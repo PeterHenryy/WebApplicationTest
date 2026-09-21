@@ -156,6 +156,7 @@
                                         <input asp-for="UserNewCard.Expiry"
                                                class="form-input"
                                                type="month"
+                                               min="@DateTime.Today.ToString("yyyy-MM")"
                                                required />
 
                                         <input asp-for="UserNewCard.CVV"

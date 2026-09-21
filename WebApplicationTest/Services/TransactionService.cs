@@ -140,9 +140,9 @@ namespace WebApplicationTest.Services
             return userRewardPoints >= transactionTotal * 5;
         }
 
-        public string GetCouponDiscount(double couponPercentage, double transactionTotal )
+        public string GetCouponDiscount(double transactionCartItemsTotal, double couponPercentage)
         {
-            var transactionDiscount = transactionTotal * (couponPercentage / 100);
+            var transactionDiscount = transactionCartItemsTotal * (couponPercentage / 100);
             var roundedDiscount = Math.Round(transactionDiscount, 2);
             var formattedDiscount = roundedDiscount.ToString("F2", CultureInfo.InvariantCulture);
             return formattedDiscount;

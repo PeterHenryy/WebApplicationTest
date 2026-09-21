@@ -142,3 +142,40 @@
     color: #F5F5F5;
     font-family: "Outfit", sans-serif;
 }
+
+input[type="month"].form-input {
+    width: 100%;
+    padding: 12px 15px;
+    background: #181818;
+    color: #ffffff;
+    border: 1px solid #3a3a3a;
+    border-radius: 8px;
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    color-scheme: dark;
+    box-sizing: border-box;
+    transition: border-color .2s ease, box-shadow .2s ease;
+}
+
+input[type="month"].form-input:focus {
+    outline: none;
+    border-color: rgb(231, 196, 123);
+    box-shadow: 0 0 0 2px rgba(231, 196, 123, .15);
+}
+
+input[type="month"].form-input::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: .85;
+}
+
+input[type="month"].form-input {
+    color-scheme: dark;
+    border-radius: 10px;
+    accent-color: rgb(231, 196, 123);
+}
+
+input[type="month"].form-input::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: .85;
+    filter: none;
+}

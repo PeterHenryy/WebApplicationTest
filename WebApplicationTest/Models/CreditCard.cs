@@ -10,6 +10,7 @@ namespace WebApplicationTest.Models
         public string CardNumber { get; set; }
         public string NameOnCard { get; set; }
         public int CVV { get; set; }
+        [Required]
         public DateTime Expiry { get; set; }
 
         [ForeignKey("AspNetUsers")]

@@ -140,9 +140,11 @@ namespace WebApplicationTest.Controllers
             transactionItemsVM.TransactionTotal = "$" + transaction.Total.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture);
             transactionItemsVM.Refunds = _transactionService.GetAllUserRefunds(_currentUser.Id);
             transactionItemsVM.TransactionQuantityBought = transaction.ItemsBought;
+
             if (!String.IsNullOrEmpty(transaction.CouponCode))
             {
-                transactionItemsVM.Discount = _transactionService.GetCouponDiscount(transaction.CouponPercentage, transaction.Total);
+                double transactionCartItemsTotal = transactionItems.Sum(x => x.Product.Price * x.Quantity);
+                transactionItemsVM.Discount = _transactionService.GetCouponDiscount(transactionCartItemsTotal, transaction.CouponPercentage);
             }
             transactionItemsVM.Reviews = _productService.GetReviews();
             transactionItemsVM.CurrentUser = _currentUser;

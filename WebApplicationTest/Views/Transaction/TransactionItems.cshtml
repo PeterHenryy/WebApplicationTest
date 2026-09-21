@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="~/css/header.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/shoppingCart.css" asp-append-version="true" />
+<link href="~/css/containerresponsive.css" rel="stylesheet" asp-append-version="true" />
 <link href="~/css/transactioncreate.css" rel="stylesheet" asp-append-version="true" />
 <link href="~/css/forms.css" rel="stylesheet" asp-append-version="true" />
 <link href="~/css/footer.css" rel="stylesheet" asp-append-version="true" />
@@ -57,9 +58,6 @@
                     <div>
                         <p style="margin-bottom: 10px;">Delivery Chosen:</p>
                         <p>@item.ShippingOption</p>
-                    </div>
-                    <div class="info-and-buttons">
-
                         <div class="item-quantity-and-price">
                             <div class="quantity-container">
                                 <p style="margin-bottom: 5px;">Quantity Bought: @item.Quantity</p>
@@ -77,6 +75,9 @@
                             <span class="cart-product-total-price ">Total: $<span class="product-total js-product-total-@item.ProductID">@formattedTotalPrice</span></span>
 
                         </div>
+                    </div>
+                    <div class="info-and-buttons">
+
                         <div class="review-refund-buttons">
 
                                 @if (!Model.HasRequestedRefund(item.ID))
@@ -181,7 +182,7 @@
                                                 else
                                                 {
                                                     <img class="user-profile-picture"
-                                                            src="@Model.CurrentUser.ProfilePicture" />
+                                                     src="~/profilepics/@Model.CurrentUser.ProfilePicture" />
                                                 }
 
                                                 <textarea id="reviewBody"
