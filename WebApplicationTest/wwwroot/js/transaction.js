@@ -192,3 +192,19 @@ cardNumberInput.addEventListener("input", function () {
 
     this.value = value;
 });
+
+const transactionForm = document.getElementById('transactionForm');
+const purchaseValidationOverlay =
+    document.getElementById('purchase-validation-overlay');
+
+transactionForm.addEventListener('submit', function (event) {
+
+    if (!transactionForm.checkValidity()) {
+        return;
+    }
+
+    purchaseValidationOverlay.classList.add('show');
+
+    const purchaseButton = document.getElementById('purchase-button');
+    purchaseButton.disabled = true;
+});

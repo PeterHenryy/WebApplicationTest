@@ -7,6 +7,7 @@
 <link href="~/css/general.css" rel="stylesheet" asp-append-version="true" />
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
 <link href="~/css/transaction-create.css" rel="stylesheet" asp-append-version="true" />
+<link href="~/css/shoppingcart.css" rel="stylesheet" asp-append-version="true" />
 <link href="~/css/footer.css" rel="stylesheet" asp-append-version="true" />
 <link href="~/css/forms.css" rel="stylesheet" asp-append-version="true" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -112,7 +113,7 @@
                                 <label class="payment-method" for="creditcard">Credit Card</label>
                             </div>
                             <div id="credit-card-container">
-                                @if (Model.UserCards.Count() > 0)
+                                @if (@Model.UserCards.Count() > 0)
                                 {
                                     <div class="info-row">
                                         <select class="credit-card-selector"
@@ -185,11 +186,25 @@
                             <div asp-validation-summary="All" class="form-error"></div>
                         </div>
                     }
-                    <button class="gold-button" style="width: 100%; font-size: 30px;" type="submit">Purchase</button>
+                    <button id="purchase-button"
+                            class="gold-button"
+                            style="width: 100%; font-size: 30px;"
+                            type="submit">
+                        Purchase
+                    </button>
                 </form>
 
             </div>
 
+        </div>
+
+        <div id="purchase-validation-overlay">
+            <div class="redirect-modal" id="purchase-validation-modal">
+                <div class="redirect-spinner" id="purchase-validation-spinner"></div>
+                <p id="purchase-validation-message">
+                    Validating and finalizing purchase...
+                </p>
+            </div>
         </div>
     </main>
     <partial name="_FooterPartial" />

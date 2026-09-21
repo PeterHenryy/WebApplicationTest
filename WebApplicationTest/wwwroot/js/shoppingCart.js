@@ -286,7 +286,7 @@ function calculateShipping(productID) {
             shippingCost += Number(element.value);
         }
     });
-    shippingElement.innerHTML = (shippingCost === 0) ? "FREE" : `$${shippingCost}`;
+    shippingElement.innerHTML = `$${shippingCost}`;
     let wasTotal = calculateOrderTotal();
     if (coupon.discountPercentage !== 0) {
         const orderProductPrices = calculateProductTotalPrices()

@@ -281,7 +281,7 @@
     padding: 20px;
 }
 
-#redirect-overlay, #coupon-validation-overlay, #remove-cart-item-overlay {
+#redirect-overlay, #coupon-validation-overlay, #remove-cart-item-overlay, #purchase-validation-overlay {
     position: fixed;
     inset: 0;
     display: flex;
@@ -295,7 +295,7 @@
     z-index: 99999;
 }
 
-#redirect-overlay.show, #coupon-validation-overlay.show, #remove-cart-item-overlay.show {
+#redirect-overlay.show, #coupon-validation-overlay.show, #remove-cart-item-overlay.show, #purchase-validation-overlay.show {
     opacity: 1;
     visibility: visible;
 }
