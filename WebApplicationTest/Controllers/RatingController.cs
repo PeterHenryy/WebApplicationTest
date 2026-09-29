@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using WebApplicationTest.Models.ViewModels;
 using WebApplicationTest.Services;
 
 namespace WebApplicationTest.Controllers
 {
+    [Authorize]
     public class RatingController : Controller
     {
         private readonly RatingService _ratingService;

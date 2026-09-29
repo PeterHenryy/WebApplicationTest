@@ -80,6 +80,10 @@
                         <i class="fa-solid fa-chart-line"></i> Company Stats
                     </a>
 
+                    <a href="@Url.Action("RegisterAdmin", "AppUser")">
+                        <i class="fa-solid fa-chart-line"></i> Add Admin
+                    </a>
+
                 </div>
                 <hr class="mobile-divider" />
             }
@@ -219,6 +223,7 @@
                     <li><a href="@Url.Action("CompanyCoupons", "Coupon", new {companyID = currentUser.CompanyID})">Manage Coupons</a></li>
                     <li><a href="@Url.Action("CompanyProducts", "Product", new {companyID = currentUser.CompanyID})">Company Products</a></li>
                     <li><a href="@Url.Action("CompanyStats", "Company")">Company Stats</a></li>
+                    <li><a href="@Url.Action("RegisterAdmin", "AppUser")">Add Admin</a></li>
                 </ul>
             </div>
         }

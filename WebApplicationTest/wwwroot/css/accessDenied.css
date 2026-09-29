@@ -1,0 +1,104 @@
+﻿.access-denied-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    background: radial-gradient( circle at center, rgba(231, 196, 123, .08), transparent 45% ), #121212;
+    font-family: 'Outfit', sans-serif;
+}
+
+.access-denied-card {
+    width: min(520px, 100%);
+    padding: 50px 45px;
+    text-align: center;
+    background: #1C1C1E;
+    border: 1px solid #2F2F33;
+    border-radius: 18px;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, .5);
+}
+
+.access-denied-icon {
+    width: 75px;
+    height: 75px;
+    margin: 0 auto 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background: rgba(231, 196, 123, .1);
+    border: 1px solid rgba(231, 196, 123, .3);
+    color: rgb(231, 196, 123);
+    font-size: 30px;
+}
+
+.access-denied-card h1 {
+    margin: 0 0 12px;
+    color: #ffffff;
+    font-size: 38px;
+    font-weight: 800;
+}
+
+.access-denied-title {
+    margin: 0;
+    color: rgb(231, 196, 123);
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.access-denied-description {
+    margin: 12px 0 30px;
+    color: #aaaaaa;
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+.access-denied-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+    margin-top: 30px;
+}
+
+    .access-denied-actions a {
+        box-sizing: border-box;
+        width: auto !important;
+        min-width: 0;
+        margin: 0;
+        text-decoration: none;
+        white-space: nowrap;
+    }
+
+    .access-denied-actions .gold-button {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: auto !important;
+        min-width: 109px;
+        padding: 12px 22px;
+        text-align: center;
+    }
+
+    .access-denied-actions .back-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        width: auto;
+        min-width: 164px;
+        padding: 12px 22px;
+        text-align: center;
+        color: #ffffff;
+        background: #252527;
+        border: 1px solid #3a3a3d;
+        border-radius: 8px;
+        transition: .2s ease;
+    }
+
+    .back-button:hover {
+        color: rgb(231, 196, 123);
+        border-color: rgb(231, 196, 123);
+    }

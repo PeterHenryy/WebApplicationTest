@@ -2,9 +2,11 @@
 using WebApplicationTest.Models.Identity;
 using WebApplicationTest.Models;
 using WebApplicationTest.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApplicationTest.Controllers
 {
+    [Authorize]
     public class ReviewController : Controller
     {
         private readonly ReviewService _reviewService;

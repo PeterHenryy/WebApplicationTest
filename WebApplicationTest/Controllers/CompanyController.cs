@@ -3,9 +3,12 @@ using WebApplicationTest.Models.Identity;
 using WebApplicationTest.Models;
 using WebApplicationTest.Services;
 using WebApplicationTest.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
+using WebApplicationTest.Helpers.Enums;
 
 namespace WebApplicationTest.Controllers
 {
+    [Authorize(Roles = nameof(UserRolesEnum.Admin))]
     public class CompanyController : Controller
     {
         private readonly CompanyService _companyService;

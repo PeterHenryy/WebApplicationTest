@@ -59,8 +59,8 @@ namespace WebApplicationTest.Controllers
             appUser.ProfilePicture = "user-solid.svg";
             var userRegister = await _userManager.CreateAsync(appUser);
             var assignRole = await _userManager.AddToRoleAsync(appUser, role);
-
-            return RedirectToAction("Login", "AppUser");
+            await _signInManager.SignInAsync(appUser, false);
+            return RedirectToAction("Index", "Product");
         }
         [HttpGet]
         public IActionResult Login(string returnUrl = null, int cartItemQuantity = 0, int cartItemProductID = 0)
@@ -105,7 +105,7 @@ namespace WebApplicationTest.Controllers
                         }
                         if (!String.IsNullOrEmpty(returnUrl))
                         {
-                            return Redirect("https://localhost:44369/" + returnUrl);
+                            return Redirect("https://localhost:44369" + returnUrl);
                         }
                         return RedirectToAction("Index", "Product");
                     }
@@ -130,12 +130,14 @@ namespace WebApplicationTest.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public IActionResult Update()
         {
             return View(_currentUser);
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Update(AppUser updatedUser)
         {
             await HandleBlob(updatedUser);
@@ -159,12 +161,14 @@ namespace WebApplicationTest.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = nameof(UserRolesEnum.Admin))]
         public IActionResult RegisterAdmin()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = nameof(UserRolesEnum.Admin))]
         public async Task<IActionResult> RegisterAdmin(AppUser admin)
         {
             admin.CompanyID = _currentUser.CompanyID;
@@ -180,6 +184,10 @@ namespace WebApplicationTest.Controllers
             return View();
         }
 
-        
+        [AllowAnonymous]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
     }
 }

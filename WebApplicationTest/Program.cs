@@ -43,7 +43,11 @@ builder.Services.AddTransient<ContactRepository>();
 builder.Services.AddTransient<ContactService>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
-builder.Services.ConfigureApplicationCookie(x => x.LoginPath = "/AppUser/Login");
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/AppUser/Login";
+    options.AccessDeniedPath = "/AppUser/AccessDenied";
+});
 
 builder.Services.AddSingleton(u => new BlobServiceClient(
         builder.Configuration.GetValue<string>("BlobConnection")
@@ -61,7 +65,8 @@ builder.Services.Configure<IdentityOptions>(options =>
     options.User.RequireUniqueEmail = true;
 });
 builder.Services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
-
+builder.Services.AddAuthentication();
+builder.Services.AddAuthorization();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

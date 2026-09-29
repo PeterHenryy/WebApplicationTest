@@ -5,9 +5,11 @@ using WebApplicationTest.Models;
 using WebApplicationTest.Services;
 using WebApplicationTest.Models.ViewModels;
 using WebApplicationTest.Helpers.Enums;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApplicationTest.Controllers
 {
+    [Authorize]
     public class RefundController : Controller
     {
         private readonly RefundService _refundService;
@@ -29,6 +31,7 @@ namespace WebApplicationTest.Controllers
             return View(userRefunds);
         }
 
+        [Authorize(Roles = nameof(UserRolesEnum.Admin))]
         public IActionResult CompanyRefunds()
         {
             var companyRefunds = _refundService.GetCompanyRefunds(_currentUser.CompanyID);

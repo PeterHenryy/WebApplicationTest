@@ -4,9 +4,11 @@ using WebApplicationTest.Models.Identity;
 using WebApplicationTest.Models;
 using WebApplicationTest.Services;
 using WebApplicationTest.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApplicationTest.Controllers
 {
+    [Authorize]
     public class CreditCardController : Controller
     {
         private readonly CreditCardService _cardService;
