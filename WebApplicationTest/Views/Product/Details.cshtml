@@ -69,18 +69,45 @@
                             @{
                                 bool productHasStock = @Model.Product.Stock > 0;
                             }
-                            
-                            @if (productHasStock)
-                            {
-                                <button class="product-add-to-cart-button"
-                                        onclick="addItemToCart(@Model.ProductID, 1, '@(HttpUtility.JavaScriptStringEncode(Model.Product.Name))', true); updateCartItemQuantity(1);">
-                                    <i class="fa-solid fa-cart-plus"></i>
-                                        Add to Cart
-                                </button>
+
+                            @if (Model.CurrentUser != null && Model.CurrentUser.Id != 0) { 
+
+                                @if (productHasStock)
+                                {
+                                    <button class="product-add-to-cart-button"
+                                            onclick="addItemToCart(@Model.ProductID, 1, '@(HttpUtility.JavaScriptStringEncode(Model.Product.Name))', true); updateCartItemQuantity(1);">
+                                        <i class="fa-solid fa-cart-plus"></i>
+                                            Add to Cart
+                                    </button>
+                                }
+                                else
+                                {
+                                    <button class="product-add-to-cart-button-disabled">Product out of stock!</button>
+                                }
                             }
+
                             else
                             {
-                                <button class="product-add-to-cart-button-disabled">Product out of stock!</button>
+                                if (productHasStock)
+                                {
+                                    <button class="product-add-to-cart-button"
+                                            onclick="redirectToLogin('@Url.Action("Login", "AppUser")', @Model.Product.ID,1)">
+                                        <i class="fa-solid fa-cart-plus"></i>
+                                        Add to Cart
+                                    </button>
+                                }
+                                else
+                                {
+                                    <div class="disabled-add-to-card-container">
+                                        <button class="product-add-to-cart-button-disabled">
+                                            <i class="fa-solid fa-cart-plus"></i>
+                                            Add to Cart
+                                        </button>
+                                        <div class="out-of-stock-message-container">
+                                            <p class="out-of-stock-message">Product out of stock!</p>
+                                        </div>
+                                    </div>
+                                }
                             }
                             
                            

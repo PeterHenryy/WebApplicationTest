@@ -54,7 +54,7 @@
 
                 <div class="product-buttons-flexbox">
 
-                    @if (Model.User.Id != 0)
+                    @if (Model.User != null && Model.User.Id != 0)
                     {
                         if (productHasStock)
                         {
