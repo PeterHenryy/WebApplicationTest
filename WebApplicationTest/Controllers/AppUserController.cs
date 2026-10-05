@@ -105,7 +105,7 @@ namespace WebApplicationTest.Controllers
                         }
                         if (!String.IsNullOrEmpty(returnUrl))
                         {
-                            return Redirect("https://localhost:44369" + returnUrl);
+                            return Redirect("https://theflamingshop.com" + returnUrl);
                         }
                         return RedirectToAction("Index", "Product");
                     }
