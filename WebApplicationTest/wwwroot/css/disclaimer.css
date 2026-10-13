@@ -1,0 +1,210 @@
+﻿
+:root {
+    color-scheme: dark;
+    --gold: #d9b56d;
+    --gold-dark: #c49a4a;
+    --background: #101010;
+    --panel: #181818;
+    --muted: #b7b7b7;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    padding: 32px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(ellipse at top, #292319 0%, transparent 48%), var(--background);
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+}
+
+.welcome-card {
+    width: 100%;
+    max-width: 690px;
+    padding: 42px;
+    background: rgba(24, 24, 24, 0.97);
+    border: 1px solid #55462b;
+    border-radius: 18px;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
+    animation: appear 0.6s ease-out;
+}
+
+.brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 28px;
+    text-align: center;
+}
+
+.brand-icon {
+    color: var(--gold);
+    font-size: 35px;
+    margin-bottom: 3px;
+}
+
+.brand-name {
+    margin: 0;
+    color: var(--gold);
+    font-size: clamp(23px, 4vw, 32px);
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+.brand-subtitle {
+    color: #a9a9a9;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 3px;
+}
+
+.separator {
+    height: 1px;
+    margin: 0 0 28px;
+    background: linear-gradient( 90deg, transparent, #806638, transparent );
+}
+
+.welcome-title {
+    margin: 0 0 18px;
+    font-size: clamp(25px, 4vw, 32px);
+    font-weight: 600;
+    text-align: center;
+}
+
+.intro {
+    margin: 0 auto 24px;
+    max-width: 540px;
+    color: #d0d0d0;
+    font-size: 16px;
+    line-height: 1.8;
+    text-align: center;
+}
+
+.info-panel {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    margin: 26px 0;
+    padding: 19px;
+    background: #222;
+    border: 1px solid #303030;
+    border-radius: 10px;
+}
+
+.info-icon {
+    padding-top: 3px;
+    color: var(--gold);
+    font-size: 21px;
+}
+
+.info-panel h2 {
+    margin: 0 0 7px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.info-panel p {
+    margin: 0;
+    color: #c3c3c3;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+.disclaimer-details {
+    margin: 0 0 28px;
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.8;
+    text-align: center;
+}
+
+.enter-button {
+    display: flex;
+    width: 100%;
+    min-height: 54px;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 15px 22px;
+    background: var(--gold-dark);
+    border: 1px solid var(--gold);
+    border-radius: 8px;
+    color: #111;
+    font: inherit;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-align: center;
+    text-decoration: none;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+    .enter-button:hover {
+        background: var(--gold);
+        color: #111;
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(217, 181, 109, 0.15);
+    }
+
+    .enter-button:focus-visible {
+        outline: 2px solid white;
+        outline-offset: 4px;
+    }
+
+.footer-note {
+    margin: 22px 0 0;
+    color: #777;
+    font-size: 12px;
+    text-align: center;
+}
+
+@keyframes appear {
+    from {
+        opacity: 0;
+        transform: translateY(12px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 520px) {
+    body {
+        padding: 18px 12px;
+    }
+
+    .welcome-card {
+        padding: 28px 20px;
+        border-radius: 14px;
+    }
+
+    .brand-name {
+        letter-spacing: 2px;
+    }
+
+    .brand-subtitle {
+        letter-spacing: 2px;
+    }
+
+    .intro {
+        font-size: 15px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+
