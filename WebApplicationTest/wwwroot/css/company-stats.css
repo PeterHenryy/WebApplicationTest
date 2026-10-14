@@ -106,13 +106,14 @@
     width: 70%;
     height: 330px;
     border-radius: 16px;
-    padding: 20px;
 }
 
 
 .revenue-image {
     width: 400px;
-    height: 310px;
+    height: 100%;
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
 }
 
 

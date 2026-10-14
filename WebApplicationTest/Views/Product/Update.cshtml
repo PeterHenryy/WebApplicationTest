@@ -43,7 +43,11 @@
                 </div>
                 <div class="form-group">
                     <label for="inputAddress2">Price</label>
-                    <input type="text" class="form-input" placeholder="Price" asp-for="Price">
+                    <input type="number"
+                           class="form-input"
+                           placeholder="Price"
+                           asp-for="Price"
+                           step="0.01">
                 </div>
                 <div class="form-group">
                     <label for="inputAddress2">Image</label>
