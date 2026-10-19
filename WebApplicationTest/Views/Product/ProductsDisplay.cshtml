@@ -4,7 +4,6 @@
 
 @model ProductDisplayViewModel
 
-<link rel="stylesheet" href="~/css/productsDisplay.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/productsIndex.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/general.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/containerResponsive.css" asp-append-version="true" />
@@ -13,6 +12,7 @@
 <link rel="stylesheet" href="~/css/footer.css" asp-append-version="true" />
 <link rel="preconnect" href="https://fonts.googleapis.com" >
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin >
+<link rel="stylesheet" href="~/css/productsDisplay.css" asp-append-version="true" />
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" >
 
 <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet"  />
@@ -25,8 +25,21 @@
         <partial name="_HeaderPartial" />
     </header>
     <div class="products-page">
+        <div class="filter-overlay" id="filterOverlay"></div>
+        <nav class="sidebar-filter" id="filterSidebar">
+            <div class="filter-sidebar-header">
+                <h2>
+                    <i class="fa-solid fa-filter"></i>
+                    Filters
+                </h2>
 
-        <nav class="sidebar-filter">
+                <button type="button"
+                        class="filter-close-button"
+                        id="closeFilters"
+                        aria-label="Close filters">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
             <a style="text-decoration: none;" class="option" href="@Url.Action("ProductsDisplay", "Product")">
                 <p class="filter-option">All Products</p>
             </a>
@@ -95,6 +108,17 @@
         </nav>
         <main>
             <section>
+                <div class="filter-toolbar">
+                    <button type="button"
+                            class="filter-open-button"
+                            id="openFilters"
+                            aria-controls="filterSidebar"
+                            aria-expanded="false">
+
+                        <i class="fa-solid fa-sliders"></i>
+                        Filters
+                    </button>
+                </div>
                 <div class="responsive-container">
                     <div class="products-display-grid">
                         @{
@@ -135,4 +159,5 @@
 
     <script src="https://kit.fontawesome.com/8da1ba04bb.js" crossorigin="anonymous" ></script>
     <script src="~/js/shoppingCart.js" asp-append-version="true"></script>
+    <script src="~/js/productsdisplay.js" asp-append-version="true"></script>
 </body>
