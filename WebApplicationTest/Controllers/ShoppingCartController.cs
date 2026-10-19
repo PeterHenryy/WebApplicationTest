@@ -16,13 +16,15 @@ namespace WebApplicationTest.Controllers
         private readonly UserService _userService;
         private readonly CouponService _couponService;
         private readonly AppUser _currentUser;
+        private readonly ProductService _productService;
 
-        public ShoppingCartController(ShoppingCartService shoppingCartService, UserService userService, CouponService couponService)
+        public ShoppingCartController(ShoppingCartService shoppingCartService, UserService userService, CouponService couponService, ProductService productService)
         {
             _shoppingCartService = shoppingCartService;
             _userService = userService;
             _couponService = couponService;
             _currentUser = userService.GetCurrentUser();
+            _productService = productService;
         }
 
         public IActionResult DisplayCartItems()
@@ -35,11 +37,36 @@ namespace WebApplicationTest.Controllers
             shoppingCartViewModel.User = _currentUser;
             return View(shoppingCartViewModel);
         }
+
         [HttpPost]
-        public void AddItemToCart(int itemID, int quantity, int userID)
+        public IActionResult AddItemToCart(int itemID, int quantity, int userID)
         {
-            bool addedItem = _shoppingCartService.AddItemToCart(itemID, quantity, userID);
+            bool addedItem = _shoppingCartService.AddItemToCart(
+                itemID,
+                quantity,
+                userID
+            );
+
+            if (!addedItem)
+            {
+                return Json(new
+                {
+                    success = false,
+                    message = "Could not add the product to your cart."
+                });
+            }
+
+            var product = _productService.GetProductByID(itemID);
+
+            return Json(new
+            {
+                success = true,
+                message = "Product added successfully.",
+                productImage = Url.Content($"~/Img/{product.Image}"),
+                price = product.Price
+            });
         }
+
 
         public IActionResult ClearCart()
         {

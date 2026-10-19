@@ -1,0 +1,47 @@
+﻿
+<div class="cart-modal-overlay" id="cartModalOverlay" hidden>
+    <div class="cart-modal"
+         role="dialog"
+         aria-modal="true"
+         aria-labelledby="cartModalTitle"
+         tabindex="-1">
+
+        <button type="button"
+                class="cart-modal-close"
+                id="cartModalClose"
+                aria-label="Close">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="cart-modal-success">
+            <i class="fa-solid fa-circle-check"></i>
+            <h2 id="cartModalTitle">Added to your cart!</h2>
+        </div>
+
+        <div class="cart-modal-product">
+            <img id="cartModalProductImage"
+                 alt="Product image"
+                 hidden />
+
+            <div class="cart-modal-product-info">
+                <h3 id="cartModalProductName"></h3>
+                <p id="cartModalQuantity"></p>
+                <span id="cartModalPrice"></span>
+            </div>
+        </div>
+
+        <div class="cart-modal-actions">
+            <a class="cart-modal-view-cart"
+               href="@Url.Action("DisplayCartItems", "ShoppingCart")">
+                <i class="fa-solid fa-cart-shopping"></i>
+                View Cart
+            </a>
+
+            <button type="button"
+                    class="cart-modal-continue"
+                    id="cartModalContinue">
+                Keep Shopping
+            </button>
+        </div>
+    </div>
+</div>

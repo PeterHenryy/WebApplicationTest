@@ -1,29 +1,49 @@
 ﻿
-function addItemToCart(itemID, quantity, productName) {
-    const data = {
-        itemID,
-        quantity
-    };
-    $.ajax({
+
+
+function addItemToCart(itemID, quantity, productName, showNotification = true) {
+
+    return $.ajax({
         url: "/ShoppingCart/AddItemToCart",
         type: "POST",
-        dataType: 'json',
-        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-        data
-    });
-    if (productName.length > 35) {
-        let truncated = productName.substring(0, 35);
-
-        const lastSpace = truncated.lastIndexOf(" ");
-
-        if (lastSpace > 0) {
-            truncated = truncated.substring(0, lastSpace);
+        dataType: "json",
+        data: {
+            itemID: itemID,
+            quantity: quantity
         }
+    })
+        .done(function (response) {
 
-        productName = truncated + "...";
-    }
-    toastr.success(`Added ${productName} to Cart!`);
+            if (!response.success) {
+                toastr.error(response.message || "Could not add product to cart.");
+                return;
+            }   
+
+            if (typeof window.showAddedToCartModal === "function") {
+
+                window.showAddedToCartModal({
+                    name: productName,
+                    quantity: quantity,
+                    image: response.productImage,
+                    price: response.price
+                });
+            }
+            else if (showNotification) {
+                toastr.success(`Added ${productName} to Cart!`);
+            }
+
+            // Update cart quantity only after a successful request.
+            if (typeof updateCartItemQuantity === "function") {
+                updateCartItemQuantity(quantity);
+            }
+
+        })
+        .fail(function () {
+            toastr.error("Something went wrong while adding the product to your cart.");
+        });
 }
+
+
 
 let coupon = {
     discountPercentage: 0,
