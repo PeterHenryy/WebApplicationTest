@@ -71,9 +71,6 @@ function changeQuantity(button, delta) {
     if (quantity < 1)
         quantity = 1;
 
-    if (quantity > 10)
-        quantity = 10;
-
     quantityElement.innerText = quantity;
     updateItemsAndPrices(
         selector.dataset.productId,
