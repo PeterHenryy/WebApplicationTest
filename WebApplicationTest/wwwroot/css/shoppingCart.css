@@ -504,6 +504,10 @@
     .summary-buttons {
         padding: 15px;
     }
+
+    .cart-product-info{
+        width: 140px;
+    }
 }
 
 

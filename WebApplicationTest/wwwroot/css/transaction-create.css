@@ -3,11 +3,14 @@
     display: flex;
 }
 
+
 .main-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 90vh;
+    min-height: 90vh;
+    height: auto;
+    padding: 40px 20px;
 }
 
 
@@ -17,12 +20,16 @@
     width: 100%;
 }
 
+
 .form-and-product-container {
     display: flex;
-    box-shadow: 0px 0px 5px rgba(0,0,0,0.2);
+    width: 100%;
+    max-width: 1260px;
+    min-width: 0;
+    box-shadow: 0 0 5px rgba(0,0,0,.2);
     overflow: hidden;
-    border-radius: 12px;
-    width: 50%;
+    border-radius: 18px;
+    border: 1px solid #2a2a2a;
 }
 
 .transaction-form-container {
@@ -415,4 +422,323 @@
     opacity: 1;
     visibility: visible;
     transform: translateX(-50%) translateY(0);
+}
+
+
+/* =========================================
+   CHECKOUT - BASE LAYOUT IMPROVEMENTS
+========================================= */
+
+.form-and-product-container {
+    box-sizing: border-box;
+}
+
+.purchase-summary {
+    flex: 0 0 360px;
+    width: 360px;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.form-and-product-container > .form-container {
+    flex: 1 1 0;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.transaction-form {
+    width: 100%;
+    min-width: 0;
+}
+
+.info-row {
+    width: 100%;
+    min-width: 0;
+}
+
+    .info-row > .form-input {
+        flex: 1 1 0;
+        width: 100%;
+        min-width: 0;
+    }
+
+.summary-product-container {
+    min-width: 0;
+}
+
+.summary-product-info {
+    min-width: 0;
+}
+
+.summary-product-container p {
+    overflow-wrap: anywhere;
+}
+
+.points-cost {
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+/* =========================================
+   SMALLER DESKTOPS - 1400px
+========================================= */
+
+@media (max-width: 1400px) {
+
+    .form-and-product-container {
+        max-width: 1100px;
+    }
+
+    .purchase-summary {
+        flex-basis: 320px;
+        width: 320px;
+    }
+
+    .form-and-product-container > .form-container {
+        padding: 25px;
+    }
+
+    .info-row {
+        gap: 15px;
+    }
+
+    .summary-product-container p {
+        font-size: 17px;
+    }
+
+    .summary-product-total {
+        font-size: 23px;
+    }
+
+    .transaction-total {
+        font-size: 25px;
+    }
+}
+
+
+/* =========================================
+   TABLETS - 900px
+========================================= */
+
+@media (max-width: 900px) {
+
+    .main-container {
+        min-height: 0;
+        height: auto;
+        padding: 30px 20px;
+        align-items: flex-start;
+    }
+
+    .form-and-product-container {
+        flex-direction: column;
+        width: 100%;
+        max-width: 700px;
+    }
+
+    .purchase-summary {
+        width: 100%;
+        flex: none;
+        border-radius: 0;
+        border: none;
+        border-bottom: 1px solid #353538;
+        padding: 25px;
+    }
+
+    .summary-products {
+        max-height: 250px;
+    }
+
+    .summary-product-container p {
+        max-width: none;
+    }
+
+    .form-and-product-container > .form-container {
+        width: 100% !important;
+        flex: none;
+        border-radius: 0 !important;
+        padding: 30px;
+    }
+
+    .transaction-form {
+        width: 100%;
+    }
+
+    .purchase-announcement {
+        font-size: 24px;
+    }
+
+    .transaction-total-display {
+        gap: 10px;
+    }
+
+    #payment-method-label {
+        font-size: 26px;
+    }
+}
+
+
+/* =========================================
+   PHONES - 600px
+========================================= */
+
+@media (max-width: 600px) {
+
+    .main-container {
+        padding: 20px 12px;
+    }
+
+    .form-and-product-container {
+        width: 100%;
+        border-radius: 12px;
+    }
+
+    .purchase-summary {
+        padding: 20px 15px;
+        row-gap: 15px;
+    }
+
+    .purchase-announcement {
+        font-size: 21px;
+    }
+
+    .summary-products {
+        max-height: 220px;
+        padding-right: 8px;
+        row-gap: 15px;
+    }
+
+    .summary-product-container {
+        gap: 12px;
+    }
+
+    .summary-product-category {
+        width: 35px;
+        height: 35px;
+    }
+
+    .summary-product-container p {
+        font-size: 16px;
+    }
+
+    .summary-product-total {
+        font-size: 21px;
+    }
+
+    .transaction-total {
+        font-size: 23px;
+    }
+
+    .form-and-product-container > .form-container {
+        padding: 20px 15px;
+    }
+
+    .info-row {
+        gap: 12px;
+    }
+
+        .info-row > .form-input {
+            min-width: 0;
+            font-size: 16px;
+        }
+
+            .info-row > .form-input::placeholder {
+                font-size: 14px;
+            }
+
+    #payment-method-label {
+        font-size: 23px;
+        margin-bottom: 15px;
+    }
+
+    .payment-method {
+        font-size: 17px;
+    }
+
+    .payment-method-radio {
+        transform: scale(1.2);
+    }
+
+    .payment-methods-container {
+        margin-bottom: 25px;
+    }
+
+    #purchase-button {
+        font-size: 22px !important;
+        padding: 12px 15px;
+    }
+
+    .credit-card-selector {
+        font-size: 14px;
+        padding: 12px;
+    }
+
+    .points-tooltip {
+        width: min(280px, 75vw);
+        left: auto;
+        right: -15px;
+        transform: translateY(5px);
+    }
+
+    .points-info:hover .points-tooltip {
+        transform: translateY(0);
+    }
+
+    .points-tooltip::after {
+        left: auto;
+        right: 15px;
+        transform: none;
+    }
+}
+
+
+/* =========================================
+   SMALL PHONES - 450px
+========================================= */
+
+@media (max-width: 450px) {
+
+    .main-container {
+        padding: 15px 10px;
+    }
+
+    .purchase-summary {
+        padding: 18px 12px;
+    }
+
+    .form-and-product-container > .form-container {
+        padding: 20px 12px;
+    }
+
+    .info-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+    }
+
+    .info-row > .form-input {
+        flex: none;
+        width: 100%;
+        min-width: 0;
+    }
+
+    .purchase-announcement {
+        font-size: 20px;
+    }
+
+    .transaction-total {
+        font-size: 21px;
+    }
+
+    #payment-method-label {
+        font-size: 21px;
+    }
+
+    .payment-method {
+        font-size: 16px;
+    }
+
+    #purchase-button {
+        font-size: 20px !important;
+    }
 }
