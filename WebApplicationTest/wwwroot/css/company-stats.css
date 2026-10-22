@@ -445,6 +445,8 @@
 
 /* COMPANY STATS - RESPONSIVE FOUNDATION */
 
+
+
 .stats-inner-container {
     width: 100%;
     max-width: 1536px;
@@ -642,3 +644,12 @@
         gap: 30px;
     }
 }
+
+@media (min-width: 1721px) {
+    .purchased-products-container .cart-product-image {
+        width: 200px;
+        height: 200px;
+        object-fit: contain;
+    }
+}
+
