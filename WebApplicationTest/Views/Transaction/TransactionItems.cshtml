@@ -7,7 +7,6 @@
 <link rel="stylesheet" href="~/css/general.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/header.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
-<link rel="stylesheet" href="~/css/shoppingCart.css" asp-append-version="true" />
 <link href="~/css/containerresponsive.css" rel="stylesheet" asp-append-version="true" />
 <link href="~/css/transactioncreate.css" rel="stylesheet" asp-append-version="true" />
 <link href="~/css/forms.css" rel="stylesheet" asp-append-version="true" />
@@ -19,6 +18,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="~/css/shoppingCart.css" asp-append-version="true" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <body style="background-color: #121212">
 
@@ -26,11 +27,11 @@
         <partial name="_HeaderPartial" />
     </header>
 
-    <div class="products-and-order-container">
+    <div class="products-and-order-container transaction-items-page">
         <div class="cart-products-container">
             @foreach (var item in Model.Transactionitems)
             {
-                <div class="cart-product js-cart-product-@item.ProductID">
+                <div class="cart-product transaction-card js-cart-product-@item.ProductID">
                     <a href="@Url.Action("Details", "Product", new {productID = item.ProductID})" style="text-decoration: none; color: black">
                         <img src="~/Img/@item.Product.Image" class="cart-product-image">
                     </a>

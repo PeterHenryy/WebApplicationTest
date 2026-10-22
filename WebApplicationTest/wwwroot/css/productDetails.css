@@ -14,14 +14,22 @@
     box-shadow: 0 4px 6px rgba(0, 0, 0, .05), 0 10px 25px rgba(0, 0, 0, .08);
     border-radius: 8px;
     margin-bottom: 50px;
-    padding: 50px;
     color: white;
 }
 
-.product-flexbox {
-    display: flex;
-    flex-direction: column;
+.review-form-container{
+    padding: 15px;
 }
+
+.product-flexbox,
+.reviews-box {
+    padding: 50px;
+}
+
+    .product-flexbox {
+        display: flex;
+        flex-direction: column;
+    }
 
 .product-flexbox .rating-container {
     margin-bottom: 20px;
