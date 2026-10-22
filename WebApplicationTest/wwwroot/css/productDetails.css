@@ -406,3 +406,140 @@
     transform: translateY(0);
     pointer-events: auto;
 }
+
+
+/* Product Details - Responsive Layout */
+
+@media (max-width: 1100px) {
+
+    .image-info-container {
+        gap: 40px;
+        white-space: normal;
+        align-items: flex-start;
+    }
+
+    .image-container,
+    .product-details-info {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .product-image {
+        width: 100%;
+        height: auto;
+        max-width: 400px;
+        object-fit: contain;
+    }
+
+    .product-details-info {
+        width: auto;
+    }
+
+    .review-statistics {
+        column-gap: 40px;
+    }
+
+    .percentage-bars-container {
+        flex: 1;
+        min-width: 0;
+    }
+}
+
+/* Tablets and smaller screens */
+
+@media (max-width: 750px) {
+
+    .product-flexbox,
+    .reviews-box {
+        padding: 25px;
+    }
+
+    .image-info-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 25px;
+    }
+
+    .image-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .product-image {
+        width: 100%;
+        max-width: 320px;
+        height: auto;
+    }
+
+    .product-details-info {
+        width: 100%;
+        flex: none;
+    }
+
+    .review-statistics {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .percentage-bars-container {
+        width: 100%;
+    }
+
+    .rating-container {
+        flex-wrap: wrap;
+        row-gap: 10px;
+    }
+
+    .ratings-count {
+        margin-left: 0;
+    }
+}
+
+/* Small phones */
+
+@media (max-width: 480px) {
+
+    .product-flexbox,
+    .reviews-box {
+        padding: 15px;
+    }
+
+    .product-image {
+        max-width: 260px;
+    }
+
+    .product-title {
+        font-size: 22px;
+    }
+
+    .product-details-info {
+        font-size: 16px;
+    }
+
+    .product-info p:not(.product-title, .ratings-count, .average-rating) {
+        margin-bottom: 18px;
+    }
+
+    .big-average-rating {
+        font-size: 2rem;
+    }
+
+    .review-container-green,
+    .review-container-red {
+        padding: 15px;
+    }
+
+    .percentage-bar {
+        column-gap: 8px;
+    }
+
+    .percentage-empty {
+        min-width: 0;
+    }
+
+    .description-announcer,
+    .ratings-and-reviews {
+        font-size: 23px;
+    }
+}
