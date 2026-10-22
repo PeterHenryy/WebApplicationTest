@@ -18,10 +18,12 @@
     font-weight: bold;
 }
 
-.outer-stats-container{
-    display: flex;
-    justify-content: space-between;
-    gap: 40px;
+.outer-stats-container {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 30px;
+    align-items: start;
+    width: 100%;
 }
 
 .company-logo {
@@ -141,20 +143,25 @@
 
 .purchased-products-container {
     width: 100%;
+    min-width: 0;
     border-radius: 8px;
-    padding: 20px;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .review-adjusted {
-    overflow: hidden;
-    padding: 10px;
-    margin-bottom: 20px;
     width: 100%;
+    min-width: 0;
+    overflow-wrap: anywhere;
+    padding: 15px;
+    margin-bottom: 0;
+    box-sizing: border-box;
 }
 
 .review-body {
-    overflow: hidden;
-    text-overflow: ellipsis;
+    overflow-wrap: anywhere;
+    white-space: normal;
+    line-height: 1.6;
 }
 
 .view-all-container {
@@ -163,22 +170,26 @@
 }
 
 
-.outer-reviews-container{
-    width: 60%;
+.outer-reviews-container {
+    width: 100%;
+    min-width: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    row-gap: 40px;
-    padding: 20px;
+    align-items: stretch;
+    gap: 20px;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .latest-reviews-container {
+    width: 100%;
+    min-width: 0;
     padding: 15px;
     background: #1C1C1E;
-    border: solid 1px #2F2F33;
-    box-shadow: 0 4px 6px rgba(0,0,0,.05), 0 10px 25px rgba(0,0,0,.08);
+    border: 1px solid #2F2F33;
     border-radius: 12px;
     color: white;
+    box-sizing: border-box;
 }
 
 .review-wraper {
@@ -430,4 +441,204 @@
     display: flex;
     flex-direction: column;
     gap: 40px;
+}
+
+/* COMPANY STATS - RESPONSIVE FOUNDATION */
+
+.stats-inner-container {
+    width: 100%;
+    max-width: 1536px;
+    min-width: 0;
+    padding: 0 20px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.stats-wrapper {
+    display: grid;
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    gap: 30px;
+    margin-top: 50px;
+    margin-bottom: 70px;
+}
+
+.general-stats {
+    width: 100%;
+    min-width: 0;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.company-logo {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+}
+
+.company-statistics-container {
+    min-width: 0;
+}
+
+.stats-container {
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.revenue-total-and-image {
+    width: 100%;
+    min-width: 0;
+    height: auto;
+    min-height: 240px;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.revenue-image-container {
+    width: 50%;
+    align-self: stretch;
+    flex-shrink: 0;
+}
+
+.revenue-image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.revenue-total-container {
+    min-width: 0;
+    padding: 15px;
+}
+
+.revenue-display {
+    font-size: clamp(22px, 2vw, 35px);
+    overflow-wrap: anywhere;
+}
+
+@media (max-width: 1300px) {
+
+    .stats-wrapper {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .general-stats {
+        justify-content: flex-start;
+        gap: 30px;
+    }
+
+    .revenue-total-and-image {
+        min-height: 220px;
+    }
+
+    .revenue-image-container {
+        width: 40%;
+    }
+}
+
+@media (max-width: 650px) {
+
+    .stats-inner-container {
+        padding: 0 12px;
+    }
+
+    .stats-wrapper {
+        margin-top: 25px;
+        margin-bottom: 40px;
+    }
+
+    .general-stats {
+        flex-direction: column;
+        text-align: center;
+        padding: 25px 15px;
+    }
+
+    .company-logo {
+        width: 160px;
+        height: 160px;
+    }
+
+    .company-name {
+        font-size: 26px;
+    }
+
+    .statistics-of-year {
+        font-size: 20px;
+    }
+
+    .stats-container {
+        justify-content: center;
+        gap: 20px;
+    }
+
+    .specific-stat-container {
+        gap: 10px;
+    }
+
+    .stat-show {
+        font-size: 24px;
+    }
+
+    .revenue-total-and-image {
+        flex-direction: column;
+    }
+
+    .revenue-image-container {
+        width: 100%;
+        height: 180px;
+    }
+
+    .revenue-total-container {
+        text-align: center;
+        padding: 20px;
+    }
+}
+
+.company-chart-container {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    min-width: 0;
+    margin-bottom: 50px;
+}
+
+#company-chart {
+    display: block; 
+    width: 100% !important;
+    height: 100% !important;
+}
+
+@media (max-width: 650px) {
+    .company-chart-container {
+        height: 300px;
+    }
+}
+
+@media (max-width: 1400px) {
+
+    .outer-stats-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .purchased-products-container,
+    .outer-reviews-container {
+        width: 100%;
+    }
+
+    .company-chart-container {
+        height: 350px;
+    }
+}
+
+@media (max-width: 650px) {
+
+    .company-chart-container {
+        height: 280px;
+    }
+
+    .outer-stats-container {
+        gap: 30px;
+    }
 }

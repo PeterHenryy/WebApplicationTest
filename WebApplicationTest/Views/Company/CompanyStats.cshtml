@@ -14,6 +14,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin >
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" >
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 
 <body >
@@ -78,8 +79,8 @@
                 </div>
             </div>
         </div>
-       
-        <div>
+
+        <div class="company-chart-container">
             <canvas id="company-chart"></canvas>
         </div>
    
@@ -152,7 +153,7 @@
                                 string reviewVibe = (review.Rating > 3) ? "review-container-green" : "review-container-red";
                                 <div class="latest-reviews-container">
 
-                                    <div class="@reviewVibe review-adjusted review-height" style="margin-bottom: 20px; padding: 10px;">
+                                    <div class="@reviewVibe review-adjusted review-height">
                                         <p style="font-weight: bold; font-size: 20px;">@review.Product.Name</p>
                                         <div class="rating-container">
                                             <p class="review-rating">@review.Rating</p>
