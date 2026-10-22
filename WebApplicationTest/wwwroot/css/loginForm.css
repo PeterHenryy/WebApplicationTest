@@ -3,11 +3,14 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    min-height: 100dvh;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .logo-container{
@@ -25,7 +28,9 @@
 }
 
 .login-form-container {
-    width: 420px;
+    width: 100%;
+    max-width: 420px;
+    box-sizing: border-box;
     padding: 20px 30px;
     display: flex;
     flex-direction: column;
@@ -151,13 +156,48 @@ button:hover,
 }
 
 
-@media (max-width: 500px) {
+@media (max-height: 650px) {
+    body {
+        align-items: flex-start;
+    }
+
     .login-form-container {
-        width: 90%;
-        padding: 35px 25px;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+}
+
+@media (max-width: 500px) {
+
+    body {
+        padding: 15px;
+    }
+
+    .login-form-container {
+        padding: 25px 20px;
+    }
+
+    .login-logo {
+        width: 240px;
+        max-width: 100%;
+        height: auto;
+        margin-right: 0;
     }
 
     h1 {
         font-size: 30px;
+        margin-bottom: 25px;
+    }
+
+    .login-subtitle {
+        margin-top: -10px;
+        margin-bottom: 25px;
+    }
+
+    input,
+    button,
+    .register-button {
+        font-size: 16px;
     }
 }
+
