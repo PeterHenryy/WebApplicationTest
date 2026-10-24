@@ -13,6 +13,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" >
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin >
 <link rel="stylesheet" href="~/css/productsDisplay.css" asp-append-version="true" />
+<link href="~/css/addedtocartmodal.css" rel="stylesheet" asp-append-version="true" />
+
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" >
 
 <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet"  />
@@ -155,9 +157,11 @@
             </section>
         </main>
     </div>
+    <partial name="_AddedToCartModal" />
     <partial name="_FooterPartial" />
 
     <script src="https://kit.fontawesome.com/8da1ba04bb.js" crossorigin="anonymous" ></script>
     <script src="~/js/shoppingCart.js" asp-append-version="true"></script>
     <script src="~/js/productsdisplay.js" asp-append-version="true"></script>
+    <script src="~/js/addedtocartmodal.js" asp-append-version="true"></script>
 </body>

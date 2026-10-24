@@ -3,6 +3,18 @@
 
 function addItemToCart(itemID, quantity, productName, showNotification = true) {
 
+    const button = document.activeElement?.closest("button");
+
+    const originalHTML = button ? button.innerHTML : null;
+
+    if (button) {
+        button.disabled = true;
+        button.innerHTML = `
+            <i class="fa-solid fa-spinner fa-spin"></i>
+            Adding...
+        `;
+    }
+
     return $.ajax({
         url: "/ShoppingCart/AddItemToCart",
         type: "POST",
@@ -17,7 +29,7 @@ function addItemToCart(itemID, quantity, productName, showNotification = true) {
             if (!response.success) {
                 toastr.error(response.message || "Could not add product to cart.");
                 return;
-            }   
+            }
 
             if (typeof window.showAddedToCartModal === "function") {
 
@@ -27,12 +39,11 @@ function addItemToCart(itemID, quantity, productName, showNotification = true) {
                     image: response.productImage,
                     price: response.price
                 });
-            }
-            else if (showNotification) {
+
+            } else if (showNotification) {
                 toastr.success(`Added ${productName} to Cart!`);
             }
 
-            // Update cart quantity only after a successful request.
             if (typeof updateCartItemQuantity === "function") {
                 updateCartItemQuantity(quantity);
             }
@@ -40,6 +51,14 @@ function addItemToCart(itemID, quantity, productName, showNotification = true) {
         })
         .fail(function () {
             toastr.error("Something went wrong while adding the product to your cart.");
+        })
+        .always(function () {
+
+            if (button) {
+                button.disabled = false;
+                button.innerHTML = originalHTML;
+            }
+
         });
 }
 

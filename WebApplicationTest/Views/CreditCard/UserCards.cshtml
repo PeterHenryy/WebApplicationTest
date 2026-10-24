@@ -14,6 +14,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" >
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin >
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" >
+<link href="~/css/dataTablesResponsive.css" rel="stylesheet" asp-append-version="true" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <header class="header">
     <partial name="_HeaderPartial" />
@@ -30,32 +32,35 @@
                             <p class="data-table-title">Credit Cards</p>
                             <a class="gold-button" href="@Url.Action("Create", "CreditCard")"> <i class="fa-solid fa-plus"></i> Add a Credit Card</a>
                         </div>
-                        <table id="app-data-table" class="table table-striped">
-                            <thead class="data-table-headers">
-                                <tr>
-                                    <th>Card Number</th>
-                                    <th>Name On Card</th>
-                                    <th>CVV</th>
-                                    <th>Expiry</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var card in @Model)
-                                {
-                                    var last4 = card.CardNumber.Length >= 4
-                                    ? card.CardNumber.Substring(card.CardNumber.Length - 4)
-                                    : card.CardNumber;
+                        <div class="data-table-scroll">
+
+                            <table id="app-data-table" class="table table-striped">
+                                <thead class="data-table-headers">
                                     <tr>
-                                        <td>💳 •••• •••• •••• @last4</td>
-                                        <td>@card.NameOnCard</td>
-                                        <td>@card.CVV</td>
-                                        <td>@card.Expiry</td>
-                                        <td> <a class="destructive-action-button" href="@Url.Action("Delete", "CreditCard", new {cardID = card.ID})">Remove</a></td>
+                                        <th>Card Number</th>
+                                        <th>Name On Card</th>
+                                        <th>CVV</th>
+                                        <th>Expiry</th>
+                                        <th>Action</th>
                                     </tr>
-                                }
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach (var card in @Model)
+                                    {
+                                        var last4 = card.CardNumber.Length >= 4
+                                        ? card.CardNumber.Substring(card.CardNumber.Length - 4)
+                                        : card.CardNumber;
+                                        <tr>
+                                            <td>💳 •••• •••• •••• @last4</td>
+                                            <td>@card.NameOnCard</td>
+                                            <td>@card.CVV</td>
+                                            <td>@card.Expiry</td>
+                                            <td> <a class="destructive-action-button" href="@Url.Action("Delete", "CreditCard", new {cardID = card.ID})">Remove</a></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

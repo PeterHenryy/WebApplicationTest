@@ -1,0 +1,184 @@
+﻿/* ==========================================
+   REUSABLE RESPONSIVE DATA TABLES
+   ========================================== */
+
+/* Main table container */
+
+.page-wrapper{
+    margin: 20px;
+}
+
+
+
+.data-table-dark {
+    width: 100%;
+    max-width: 1400px;
+    margin: 40px auto;
+    padding: 25px;
+    box-sizing: border-box;
+    min-width: 0;
+}
+
+    /* Prevent Bootstrap rows and columns from overflowing */
+
+    .data-table-dark .row {
+        min-width: 0;
+    }
+
+        .data-table-dark .row > [class*="col-"] {
+            min-width: 0;
+        }
+
+    /* Title and action buttons */
+
+    .data-table-dark .div-flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-bottom: 20px;
+    }
+
+    .data-table-dark .data-table-title {
+        margin: 0;
+    }
+
+    .data-table-dark .gold-button {
+        margin-bottom: 0;
+    }
+
+/* Horizontal scrolling container */
+
+.data-table-scroll {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: thin;
+    scrollbar-color: rgb(231,196,123) #1C1C1E;
+}
+
+    .data-table-scroll::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    .data-table-scroll::-webkit-scrollbar-track {
+        background: #1C1C1E;
+    }
+
+    .data-table-scroll::-webkit-scrollbar-thumb {
+        background: rgb(231,196,123);
+        border-radius: 10px;
+    }
+
+    /* Table sizing */
+
+    .data-table-scroll table.dataTable {
+        width: 100% !important;
+        min-width: 650px;
+    }
+
+        .data-table-scroll table.dataTable th,
+        .data-table-scroll table.dataTable td {
+            white-space: nowrap;
+            vertical-align: middle;
+        }
+
+/* DataTables controls */
+
+.data-table-dark .dataTables_wrapper {
+    width: 100%;
+    min-width: 0;
+}
+
+.data-table-dark .dataTables_length select,
+.data-table-dark .dataTables_filter input {
+    max-width: 100%;
+}
+
+.data-table-dark .dataTables_filter input {
+    background: #121212;
+    border: 1px solid #3A3A3D;
+    border-radius: 8px;
+    color: white;
+    padding: 8px 12px;
+}
+
+    .data-table-dark .dataTables_filter input:focus {
+        outline: none;
+        border-color: rgb(231,196,123);
+    }
+
+/* ==========================================
+   TABLETS
+   ========================================== */
+
+@media (max-width: 768px) {
+
+    .data-table-dark {
+        margin: 25px auto;
+        padding: 20px;
+    }
+
+        .data-table-dark .dataTables_length,
+        .data-table-dark .dataTables_filter {
+            float: none;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .data-table-dark .dataTables_info,
+        .data-table-dark .dataTables_paginate {
+            float: none;
+            text-align: center;
+            margin-top: 15px;
+        }
+}
+
+/* ==========================================
+   SMARTPHONES
+   ========================================== */
+
+@media (max-width: 500px) {
+
+    .data-table-dark {
+        padding: 15px;
+        border-radius: 12px;
+    }
+
+        .data-table-dark .div-flex {
+            flex-direction: column;
+            align-items: stretch;
+            gap: 15px;
+        }
+
+        .data-table-dark .data-table-title {
+            text-align: center;
+            font-size: 23px;
+        }
+
+        .data-table-dark .gold-button {
+            width: 100%;
+            text-align: center;
+            white-space: normal;
+        }
+
+        .data-table-dark .dataTables_filter input {
+            width: 100%;
+            margin: 8px 0 0;
+            box-sizing: border-box;
+        }
+
+        .data-table-dark .dataTables_paginate {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .data-table-dark .destructive-action-button {
+            display: inline-block;
+            width: auto;
+            white-space: nowrap;
+        }
+}

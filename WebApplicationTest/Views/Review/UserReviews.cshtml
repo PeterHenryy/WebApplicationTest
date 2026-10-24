@@ -10,12 +10,15 @@
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 <link href="~/css/general.css" rel="stylesheet" asp-append-version="true" />
-<link href="~/css/user-reviews.css" rel="stylesheet" asp-append-version="true" />
 <link href="~/css/footer.css" rel="stylesheet" asp-append-version="true" />
 <link href="~/css/shoppingcart.css" rel="stylesheet" asp-append-version="true" />
 <link rel="preconnect" href="https://fonts.googleapis.com" >
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="~/css/dataTablesResponsive.css" rel="stylesheet" asp-append-version="true" />
+<link href="~/css/user-reviews.css" rel="stylesheet" asp-append-version="true" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <header class="header">
     <partial name="_HeaderPartial" />
@@ -31,50 +34,53 @@
                             <div class="div-flex" style="justify-content: center;">
                                 <p class="data-table-title">Reviews</p>
                             </div>
-                            <table id="app-data-table" class="table table-striped">
-                                <thead class="data-table-headers">
-                                    <tr>
-                                        <th>Product Reviewed</th>
-                                        <th>Rating</th>
-                                        <th>Body</th>
-                                        <th>Date</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach (var review in @Model)
-                                    {
+                            <div class="data-table-scroll">
+
+                                <table id="app-data-table" class="table table-striped">
+                                    <thead class="data-table-headers">
                                         <tr>
-                                            <td> <a href="@Url.Action("Details", "Product", new {productID = review.ProductID})" style="text-decoration: none; color:white;">@review.Product.Name</a></td>
-                                            <td>
-                                                <div class="rating-container">
-                                                    <p class="review-rating">@review.Rating</p>
-                                                    <div class="stars-container">
-                                                        @for (int i = 1; i <= 5; i++)
-                                                        {
-                                                            if (i <= review.Rating)
-                                                            {
-                                                                <i class="fa-solid fa-star fa-sm" style="color: #29db47;"></i>
-                                                            }
-                                                            else if (review.Rating >= (i - 1) + 0.5 && review.Rating < i)
-                                                            {
-                                                                <i class="fa-solid fa-star-half-stroke fa-sm" style="color: #29db47;"></i>
-                                                            }
-                                                            else
-                                                            {
-                                                                <i class="fa-regular fa-star fa-sm"></i>
-                                                            }
-                                                        }
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>@review.Body</td>
-                                            <td>@review.Date.ToString("MM/dd/yyyy")</td>
-                                            <td><a class="remove-item-button" style="text-decoration: none;" href="@Url.Action("Delete", "Review", new {reviewID = @review.ID})">Delete</a></td>
+                                            <th>Product Reviewed</th>
+                                            <th>Rating</th>
+                                            <th>Body</th>
+                                            <th>Date</th>
+                                            <th>Action</th>
                                         </tr>
-                                    }
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var review in @Model)
+                                        {
+                                            <tr>
+                                                <td> <a href="@Url.Action("Details", "Product", new {productID = review.ProductID})" style="text-decoration: none; color:white;">@review.Product.Name</a></td>
+                                                <td>
+                                                    <div class="rating-container">
+                                                        <p class="review-rating">@review.Rating</p>
+                                                        <div class="stars-container">
+                                                            @for (int i = 1; i <= 5; i++)
+                                                            {
+                                                                if (i <= review.Rating)
+                                                                {
+                                                                    <i class="fa-solid fa-star fa-sm" style="color: #29db47;"></i>
+                                                                }
+                                                                else if (review.Rating >= (i - 1) + 0.5 && review.Rating < i)
+                                                                {
+                                                                    <i class="fa-solid fa-star-half-stroke fa-sm" style="color: #29db47;"></i>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <i class="fa-regular fa-star fa-sm"></i>
+                                                                }
+                                                            }
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="review-body-cell">@review.Body</td>
+                                                <td>@review.Date.ToString("MM/dd/yyyy")</td>
+                                                <td><a class="remove-item-button" style="text-decoration: none;" href="@Url.Action("Delete", "Review", new {reviewID = @review.ID})">Delete</a></td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
 
                         </div>
                     </div>

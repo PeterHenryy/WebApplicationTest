@@ -14,6 +14,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="~/css/dataTablesResponsive.css" rel="stylesheet" asp-append-version="true" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <header class="header">
     <partial name="_HeaderPartial" />
@@ -29,33 +32,36 @@
                         <div class="div-flex" style="justify-content: center;">
                             <p class="data-table-title">Refund Requests</p>
                         </div>
-                        <table id="app-data-table" class="table table-striped">
-                            <thead class="data-table-headers">
-                                <tr>
-                                    <th>Product</th>
-                                    <th>Refund Reason</th>
-                                    <th>Quantity Bought</th>
-                                    <th>Price Paid</th>
-                                    <th>Transaction ID</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var refund in @Model)
-                                {
-                                    double transactionItemPrice = refund.TransactionItem.Quantity * refund.Product.Price;
-                                    <tr>
+                        <div class="data-table-scroll">
 
-                                        <td> <a href="@Url.Action("Details", "Product", new {productID = refund.ProductID})" style="text-decoration: none; color: white;">@refund.Product.Name</a></td>
-                                        <td>@refund.Reason</td>
-                                        <td>@refund.TransactionItem.Quantity</td>
-                                        <td>$@transactionItemPrice.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture)</td>
-                                        <td>@refund.TransactionID</td>
-                                        <td>@refund.Status</td>
+                            <table id="app-data-table" class="table table-striped">
+                                <thead class="data-table-headers">
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Refund Reason</th>
+                                        <th>Quantity Bought</th>
+                                        <th>Price Paid</th>
+                                        <th>Transaction ID</th>
+                                        <th>Status</th>
                                     </tr>
-                                }
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach (var refund in @Model)
+                                    {
+                                        double transactionItemPrice = refund.TransactionItem.Quantity * refund.Product.Price;
+                                        <tr>
+
+                                            <td> <a href="@Url.Action("Details", "Product", new {productID = refund.ProductID})" style="text-decoration: none; color: white;">@refund.Product.Name</a></td>
+                                            <td>@refund.Reason</td>
+                                            <td>@refund.TransactionItem.Quantity</td>
+                                            <td>$@transactionItemPrice.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture)</td>
+                                            <td>@refund.TransactionID</td>
+                                            <td>@refund.Status</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
 
                     </div>
                 </div>
