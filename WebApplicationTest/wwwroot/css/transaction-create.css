@@ -8,9 +8,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 90vh;
-    height: auto;
+    min-height: 100vh;
+    min-height: 100dvh;
     padding: 40px 20px;
+    background-image: url('/Img/FlamingShopBackground.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 
@@ -428,6 +432,14 @@
 /* =========================================
    CHECKOUT - BASE LAYOUT IMPROVEMENTS
 ========================================= */
+.transaction-footer {
+    margin-top: 0 !important;
+}
+
+.transaction-footer footer,
+.transaction-footer .footer {
+    margin-top: 0 !important;
+}
 
 .form-and-product-container {
     box-sizing: border-box;

@@ -14,6 +14,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com" >
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin >
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" >
+<link href="~/css/dataTablesResponsive.css" rel="stylesheet" asp-append-version="true" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <div class="page-wrapper">
 
@@ -30,35 +32,38 @@
                             <p class="data-table-title">Company Coupons</p>
                             <a class="gold-button" href="@Url.Action("Create", "Coupon")"><i class="fa-solid fa-plus"></i> Add a New Coupon</a>
                         </div>
-                        <table id="app-data-table" class="table table-striped">
-                            <thead class="data-table-headers">
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Discount Percentage</th>
-                                    <th>Code</th>
-                                    <th>Active</th>
-                                    <th>Quantity</th>
-                                    <th>Product Name</th>
-                                    <th>Category Name</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var coupon in @Model)
-                                {
+                        <div class="data-table-scroll">
+
+                            <table id="app-data-table" class="table table-striped">
+                                <thead class="data-table-headers">
                                     <tr>
-                                        <td>@coupon.ID</td>
-                                        <td>@coupon.DiscountPercentage%</td>
-                                        <td>@coupon.Code</td>
-                                        <td>@coupon.Active</td>
-                                        <td>@coupon.Quantity</td>
-                                        <td>@(coupon.Product != null ? @coupon.Product.Name : "N/A")</td>
-                                        <td>@(coupon.Category != null ? @coupon.Category.Name : "N/A")</td>
-                                        <td><a class="destructive-action-button" href="@Url.Action("Delete", "Coupon", new {couponID = coupon.ID})">Delete</a></td>
+                                        <th>ID</th>
+                                        <th>Discount Percentage</th>
+                                        <th>Code</th>
+                                        <th>Active</th>
+                                        <th>Quantity</th>
+                                        <th>Product Name</th>
+                                        <th>Category Name</th>
+                                        <th>Action</th>
                                     </tr>
-                                }
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach (var coupon in @Model)
+                                    {
+                                        <tr>
+                                            <td>@coupon.ID</td>
+                                            <td>@coupon.DiscountPercentage%</td>
+                                            <td>@coupon.Code</td>
+                                            <td>@coupon.Active</td>
+                                            <td>@coupon.Quantity</td>
+                                            <td>@(coupon.Product != null ? @coupon.Product.Name : "N/A")</td>
+                                            <td>@(coupon.Category != null ? @coupon.Category.Name : "N/A")</td>
+                                            <td><a class="destructive-action-button" href="@Url.Action("Delete", "Coupon", new {couponID = coupon.ID})">Delete</a></td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -16,6 +16,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="~/css/dataTablesResponsive.css" rel="stylesheet" asp-append-version="true" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 <div class="page-wrapper">
 
@@ -31,46 +33,49 @@
                         <div style="display: flex; justify-content: center;">
                             <p class="data-table-title">Refund Requests</p>
                         </div>
-                        <table id="app-data-table" class="table table-striped">
-                            <thead class="data-table-headers">
-                                <tr>
-                                    <th>User Name</th>
-                                    <th>Refund Reason</th>
-                                    <th>Product</th>
-                                    <th>Quantity Bought</th>
-                                    <th>Price Paid</th>
-                                    <th>Transaction ID</th>
-                                    <th>Status</th>
-                                    <th>Action</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var refund in @Model)
-                                {
-                                    double transactionItemPrice = refund.TransactionItem.Quantity * refund.Product.Price;
+                        <div class="data-table-scroll">
+
+                            <table id="app-data-table" class="table table-striped">
+                                <thead class="data-table-headers">
                                     <tr>
-                                        <td>@refund.User.UserName</td>
-                                        <td>@refund.Reason</td>
-                                        <td>@refund.Product.Name</td>
-                                        <td>@refund.TransactionItem.Quantity</td>
-                                        <td>$@transactionItemPrice.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture)</td>
-                                        <td>@refund.TransactionID</td>
-                                        <td>@refund.Status</td>
-                                        @if (refund.Status == RefundStatus.Pending.ToString())
-                                        {
-                                            <td> <a class="gold-button" href="@Url.Action("UpdateRefundStatus", "Refund", new {refundID = refund.ID, accepted = true, paymentType = refund.Transaction.PaymentType})">Accept</a></td>
-                                            <td> <a class="refund-button" style="text-decoration: none;" href="@Url.Action("UpdateRefundStatus", "Refund", new {refundID = refund.ID, accepted = false, paymentType = refund.Transaction.PaymentType})">Deny</a></td>
-                                        }
-                                        else
-                                        {
-                                            <td>N/A</td>
-                                            <td>N/A</td>
-                                        }
+                                        <th>User Name</th>
+                                        <th>Refund Reason</th>
+                                        <th>Product</th>
+                                        <th>Quantity Bought</th>
+                                        <th>Price Paid</th>
+                                        <th>Transaction ID</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                        <th>Action</th>
                                     </tr>
-                                }
-                            </tbody>
-                        </table>
+                                </thead>
+                                <tbody>
+                                    @foreach (var refund in @Model)
+                                    {
+                                        double transactionItemPrice = refund.TransactionItem.Quantity * refund.Product.Price;
+                                        <tr>
+                                            <td>@refund.User.UserName</td>
+                                            <td>@refund.Reason</td>
+                                            <td>@refund.Product.Name</td>
+                                            <td>@refund.TransactionItem.Quantity</td>
+                                            <td>$@transactionItemPrice.ToString("0.00", System.Globalization.CultureInfo.InvariantCulture)</td>
+                                            <td>@refund.TransactionID</td>
+                                            <td>@refund.Status</td>
+                                            @if (refund.Status == RefundStatus.Pending.ToString())
+                                            {
+                                                <td> <a class="gold-button" href="@Url.Action("UpdateRefundStatus", "Refund", new {refundID = refund.ID, accepted = true, paymentType = refund.Transaction.PaymentType})">Accept</a></td>
+                                                <td> <a class="refund-button" style="text-decoration: none;" href="@Url.Action("UpdateRefundStatus", "Refund", new {refundID = refund.ID, accepted = false, paymentType = refund.Transaction.PaymentType})">Deny</a></td>
+                                            }
+                                            else
+                                            {
+                                                <td>N/A</td>
+                                                <td>N/A</td>
+                                            }
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
 
                     </div>
                 </div>

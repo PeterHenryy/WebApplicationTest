@@ -16,7 +16,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <body style="background: #121212">
 
-    <header class="header">
+    <header class="header" style="margin: 0;">
         <partial name="_HeaderPartial" />
     </header>
 
@@ -77,7 +77,7 @@
 
                 </div>
             </div>
-            <div class="form-container" style="border-top-left-radius: 0; border-bottom-left-radius: 0; width: 100%;">
+            <div class="form-container" style="border-top-left-radius: 0; border-bottom-left-radius: 0; max-width: 100%;">
 
                 <form class="transaction-form" asp-controller="Transaction" asp-action="Create" id="transactionForm">
                     <input type="hidden" asp-for="@Model.Transaction.CouponCode" />
@@ -207,7 +207,9 @@
             </div>
         </div>
     </main>
-    <partial name="_FooterPartial" />
+    <div class="transaction-footer">
+        <partial name="_FooterPartial" />
+    </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://kit.fontawesome.com/8da1ba04bb.js" crossorigin="anonymous"></script>
