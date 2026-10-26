@@ -4,24 +4,24 @@
 
 @model Contact
 
-<link href="~/css/contact.css" rel="stylesheet" asp-append-version="true" />
 <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" asp-append-version="true" />
 <link href="~/css/header.css" rel="stylesheet" asp-append-version="true" />
 <link href="~/css/containerresponsive.css" rel="stylesheet" asp-append-version="true" />
 <link href="~/css/general.css" rel="stylesheet" asp-append-version="true" />
 <link href="~/css/footer.css" rel="stylesheet" asp-append-version="true" />
 <link href="~/css/productsIndex.css" rel="stylesheet" asp-append-version="true" />
+<link href="~/css/contact.css" rel="stylesheet" asp-append-version="true" />
 <link rel="preconnect" href="https://fonts.googleapis.com" >
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin >
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" >
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+<body>
 
-<body style="background: #121212">
-
-    <header class="header">
+    <header class="header" style="margin: 0;">
         <partial name="_HeaderPartial" />
     </header>
-    <div class="container d-flex justify-content-center align-items-center">
+    <div class="container contact-page-container" style="max-width: 100%;">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 790 563" fill="none">
             <g id="Image">
                 <g id="g14">
@@ -352,7 +352,9 @@
     </div>
    
 
-    <partial name="_FooterPartial" />
+    <div class="contact-footer">
+        <partial name="_FooterPartial" />
+    </div>
 
 
     <script>

@@ -1,13 +1,17 @@
-﻿
-.outer-about-container {
-    background-color: #121212;
-    padding: 20px;
+﻿.outer-about-container {
+    background-image: url('/Img/FlamingShopBackground.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 40px 20px;
     display: flex;
-    height: 100vh;
+    min-height: 100vh;
+    min-height: 100dvh;
+    height: auto;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
 }
-
 .shop-about-container {
     max-width: 800px;
     margin: 0 auto;
@@ -15,10 +19,12 @@
 
 .about-text-box {
     font-size: 22px;
-    padding: 20px;
-    background: #1C1C1E;
-    border: solid 1px #2F2F33;
-    box-shadow: 0 4px 6px rgba(0,0,0,.05), 0 10px 25px rgba(0,0,0,.08);
+    padding: 30px;
+    background: rgba(28, 28, 30, 0.94);
+    backdrop-filter: blur(8px);
+    border: 1px solid #2F2F33;
+    border-radius: 16px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
     color: white;
 }
 
@@ -53,4 +59,79 @@
     margin: 0;
     color: rgb(231, 196, 123);
     font-weight: bold;
+}
+
+.about-footer {
+    margin-top: 0 !important;
+}
+
+.about-footer footer,
+.about-footer .footer {
+    margin-top: 0 !important;
+}
+
+@media (max-width: 768px) {
+
+    .outer-about-container {
+        padding: 30px 15px;
+    }
+
+    .shop-about-container {
+        width: 100%;
+        max-width: 800px;
+    }
+
+    .about-text-box {
+        padding: 25px 20px;
+    }
+
+    .about-heading,
+    .since-text {
+        font-size: 30px;
+    }
+
+    .about-paragraph {
+        font-size: 16px;
+    }
+
+    .about-icons-container {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 30px 15px;
+        padding: 25px 10px;
+    }
+
+    .about-icon {
+        row-gap: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+
+    .outer-about-container {
+        padding: 20px 10px;
+    }
+
+    .about-text-box {
+        padding: 20px 15px;
+    }
+
+    .about-heading,
+    .since-text {
+        font-size: 25px;
+    }
+
+    .about-paragraph {
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    .about-icons-container {
+        gap: 25px 10px;
+        padding: 25px 0;
+    }
+
+    .about-text {
+        font-size: 14px;
+    }
 }

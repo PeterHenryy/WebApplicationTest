@@ -58,13 +58,25 @@
         opacity: 1;
     }
 }
-
-.container {
-    height: 100vh;
+.contact-page-container {
+    min-height: 100vh;
+    min-height: 100dvh;
+    width: 100%;
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    background-image: url('/Img/FlamingShopBackground.webp');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
-#contact-form{
 
-    min-width: 25rem;
+#contact-form {
+    width: 100%;
+    max-width: 400px;
+    min-width: 0;
 }
 form {
     .title
@@ -171,4 +183,34 @@ textarea {
 
 .message-sent{
     margin: 0;
+}
+
+.contact-page-container svg {
+    width: 100%;
+    max-width: 450px;
+    height: auto;
+    margin-right: 0;
+    flex-shrink: 1;
+}
+
+@media (max-width: 768px) {
+    .contact-page-container {
+        flex-direction: column;
+        padding: 50px 20px;
+        gap: 30px;
+    }
+
+        .contact-page-container svg {
+            max-width: 300px;
+        }
+
+    #contact-form {
+        max-width: 100%;
+    }
+}
+
+.contact-footer,
+.contact-footer footer,
+.contact-footer .footer {
+    margin-top: 0 !important;
 }
