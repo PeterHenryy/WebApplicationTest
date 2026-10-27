@@ -38,8 +38,21 @@
     </header>
     <div class="products-page">
 
+        <div class="filter-overlay" id="filterOverlay"></div>
+        <nav class="sidebar-filter" id="filterSidebar">
+            <div class="filter-sidebar-header">
+                <h2>
+                    <i class="fa-solid fa-filter"></i>
+                    Filters
+                </h2>
 
-        <nav class="sidebar-filter">
+                <button type="button"
+                        class="filter-close-button"
+                        id="closeFilters"
+                        aria-label="Close filters">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
             <a style="text-decoration: none;" class="option" href="@Url.Action("CompanyProducts", "Product")">
                 <p class="filter-option">All Products</p>
             </a>
@@ -87,6 +100,17 @@
         </nav>
         <main>
             <section>
+                <div class="filter-toolbar">
+                    <button type="button"
+                            class="filter-open-button"
+                            id="openFilters"
+                            aria-controls="filterSidebar"
+                            aria-expanded="false">
+
+                        <i class="fa-solid fa-sliders"></i>
+                        Filters
+                    </button>
+                </div>
                 <div class="responsive-container">
 
                     @if (ViewBag.SearchNotFound)
@@ -215,4 +239,5 @@
 
     <script src="https://kit.fontawesome.com/8da1ba04bb.js" crossorigin="anonymous" ></script>
     <script src="~/js/shoppingcart.js" asp-append-version="true"></script>
+    <script src="~/js/productsdisplay.js"></script>
 </body>

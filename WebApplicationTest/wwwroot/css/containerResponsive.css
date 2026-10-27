@@ -238,7 +238,12 @@
         font-size: 25px;
     }
 
-    .product-card .product-add-to-cart-button, .details-button {
+    .carousel-container .product-card .product-add-to-cart-button {
+        font-size: 13px;
+        padding: 10px 10px;
+    }
+
+    .carousel-container .details-button {
         font-size: 13px;
         padding: 10px 10px;
     }
