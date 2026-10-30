@@ -225,7 +225,7 @@
                                             else
                                             {
                                                 <img class="user-profile-picture"
-                                                     src="@Model.CurrentUser.ProfilePicture" />
+                                                     src="~/profilepics/@Model.CurrentUser.ProfilePicture" />
                                             }
 
                                             <textarea id="reviewBody"
@@ -278,7 +278,7 @@
 
                                     }
                                     else{
-                                        <img class="user-profile-picture" src="@review.User.ProfilePicture">
+                                        <img class="user-profile-picture" src="~/profilepics/@review.User.ProfilePicture">
                                     }
                                     <p class="username">@review.User.UserName</p>
                                     <p class="review-date">@review.Date.ToString("MM/dd/yyyy")</p>
@@ -424,7 +424,7 @@
                                     else
                                     {
                                         <img class="user-profile-picture"
-                                             src="@Model.CurrentUser.ProfilePicture" />
+                                             src="~/profilepics/@Model.CurrentUser.ProfilePicture" />
                                     }
 
                                     <textarea id="reviewBody"

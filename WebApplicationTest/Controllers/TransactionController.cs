@@ -107,7 +107,11 @@ namespace WebApplicationTest.Controllers
                 
                 _transactionService.UpdateUserRewardPoints(currentTransaction.Total, _currentUser, currentTransaction.PaymentType == PaymentTypes.RewardPoints.ToString());
                 await _userManager.UpdateAsync(_currentUser);
-                return RedirectToAction("UserTransactions", "Transaction", new { userID = _currentUser.Id });
+                return RedirectToAction(
+                    "OrderConfirmation",
+                    "Transaction",
+                    new { id = currentTransaction.ID }
+                );
             }
             return View(transactionViewModel);
         }
@@ -156,6 +160,30 @@ namespace WebApplicationTest.Controllers
         {
             bool result = _transactionService.ValidatePointsForTransaction(_currentUser.UserRewardPoints, transactionTotal);
             return Json(new { success = result });
+        }
+
+        [HttpGet]
+        public IActionResult OrderConfirmation(int id)
+        {
+            Transaction transaction = _transactionService.GetTransactionByID(id);
+
+            if (transaction == null)
+            {
+                return NotFound();
+            }
+
+            if (transaction.UserID != _currentUser.Id)
+            {
+                return Forbid();
+            }
+
+            OrderConfirmationViewModel viewModel = new OrderConfirmationViewModel
+            {
+                Transaction = transaction,
+                TransactionItems = _transactionService.GetTransactionItems(id)
+            };
+
+            return View(viewModel);
         }
     }
 }

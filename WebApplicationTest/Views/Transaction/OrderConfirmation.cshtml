@@ -1,0 +1,203 @@
+﻿@model WebApplicationTest.Models.ViewModels.OrderConfirmationViewModel
+
+@{
+    Layout = null;
+
+    var transaction = Model.Transaction;
+
+    var culture = System.Globalization.CultureInfo.GetCultureInfo("en-US");
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Order Confirmation - The Flaming Shop</title>
+
+    <link href="~/css/header.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/general.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/footer.css" rel="stylesheet" asp-append-version="true" />
+    <link href="~/css/order-confirmation.css" rel="stylesheet" asp-append-version="true" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
+</head>
+
+<body class="order-confirmation-body">
+
+    <header class="header">
+        <partial name="_HeaderPartial" />
+    </header>
+
+    <main class="order-confirmation-main">
+
+        <div class="order-confirmation-container">
+
+            <div class="confirmation-header">
+
+                <div class="confirmation-success-icon">
+                    <i class="fa-solid fa-check"></i>
+                </div>
+
+                <h1>Thank You for Your Purchase!</h1>
+
+                <p>
+                    Your order has been successfully placed!
+                    Thank you for shopping at The Flaming Shop.
+                </p>
+
+                <span class="confirmation-order-number">
+                    Order #@transaction.ID
+                </span>
+
+            </div>
+
+            <div class="confirmation-section">
+
+                <h2>
+                    <i class="fa-solid fa-receipt"></i>
+                    Order Information
+                </h2>
+
+                <div class="confirmation-info-grid">
+
+                    <div>
+                        <span>Order Date</span>
+                        <strong>@transaction.TransactionDate.ToString("MMMM dd, yyyy - hh:mm tt")</strong>
+                    </div>
+
+                    <div>
+                        <span>Payment Method</span>
+                        <strong>@transaction.PaymentType</strong>
+                    </div>
+
+                    <div>
+                        <span>Items Purchased</span>
+                        <strong>@transaction.ItemsBought</strong>
+                    </div>
+
+                    <div>
+                        <span>Total Paid</span>
+                        <strong>@transaction.Total.ToString("C2", culture)</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="confirmation-section">
+
+                <h2>
+                    <i class="fa-solid fa-box-open"></i>
+                    Purchased Products
+                </h2>
+
+                <div class="confirmation-products">
+
+                    @foreach (var item in Model.TransactionItems)
+                    {
+                        <div class="confirmation-product">
+
+                            <div class="confirmation-product-info">
+
+                                <h3>@(item.Product?.Name ?? "Product unavailable")</h3>
+
+                                <p>Quantity: @item.Quantity</p>
+
+                                <p>Shipping: @item.ShippingOption</p>
+
+                            </div>
+
+                            <div class="confirmation-product-price">
+                                Shipping: @item.ShippingCost.ToString("C2", culture)
+                            </div>
+
+                        </div>
+                    }
+
+                </div>
+
+                <div class="confirmation-total">
+                    <span>Order Total</span>
+                    <strong>@transaction.Total.ToString("C2", culture)</strong>
+                </div>
+
+            </div>
+
+            <div class="confirmation-section">
+
+                <h2>
+                    <i class="fa-solid fa-truck-fast"></i>
+                    Customer & Shipping Information
+                </h2>
+
+                <div class="confirmation-info-grid">
+
+                    <div>
+                        <span>Customer</span>
+                        <strong>@transaction.FirstName @transaction.LastName</strong>
+                    </div>
+
+                    <div>
+                        <span>Email</span>
+                        <strong>@transaction.Email</strong>
+                    </div>
+
+                    <div>
+                        <span>Phone</span>
+                        <strong>@transaction.PhoneNumber</strong>
+                    </div>
+
+                    <div>
+                        <span>Shipping Address</span>
+                        <strong>
+                            @transaction.Address,
+                            @transaction.City,
+                            @transaction.State,
+                            @transaction.Zip
+                        </strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="confirmation-disclaimer">
+                <i class="fa-solid fa-circle-info"></i>
+                This is a demonstration purchase. No real products will be shipped
+                and no actual payment has been processed.
+            </div>
+
+            <div class="confirmation-actions">
+
+                <a asp-controller="Product"
+                   asp-action="Index"
+                   class="confirmation-button primary">
+                    <i class="fa-solid fa-bag-shopping"></i>
+                    Continue Shopping
+                </a>
+
+                <a asp-controller="Transaction"
+                   asp-action="UserTransactions"
+                   asp-route-userID="@transaction.UserID"
+                   class="confirmation-button secondary">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    View My Transactions
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <div class="transaction-footer">
+        <partial name="_FooterPartial" />
+    </div>
+
+    <script src="https://kit.fontawesome.com/8da1ba04bb.js" crossorigin="anonymous"></script>
+
+</body>
+</html>
